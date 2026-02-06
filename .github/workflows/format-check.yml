@@ -1,0 +1,242 @@
+name: Code Formatting Check
+
+on:
+  pull_request:
+    branches:
+      - development
+      - main
+    paths:
+      - '**.c'
+      - '**.h'
+      - '.clang-format'
+
+jobs:
+  format-check:
+    name: Verify Code Formatting
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+      checks: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install clang-format
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format
+
+      - name: Verify clang-format version
+        run: clang-format --version
+
+      - name: Check C/H files formatting
+        id: format-check
+        run: |
+          echo "Checking code formatting with clang-format..."
+          
+          # Find all C and H files
+          FILES=$(find Src Inc tests -type f \( -name "*.c" -o -name "*.h" \) 2>/dev/null | grep -v ".git" || true)
+          
+          if [ -z "$FILES" ]; then
+            echo "No C/H files found"
+            exit 0
+          fi
+          
+          NEEDS_FORMATTING=false
+          UNFORMATTED_FILES=""
+          
+          for file in $FILES; do
+            # Create a formatted version
+            clang-format "$file" > "${file}.formatted"
+            
+            # Compare original with formatted
+            if ! diff -q "$file" "${file}.formatted" > /dev/null; then
+              NEEDS_FORMATTING=true
+              UNFORMATTED_FILES="$UNFORMATTED_FILES\n  - $file"
+              echo "❌ File needs formatting: $file"
+            else
+              echo "✅ File is properly formatted: $file"
+            fi
+            
+            # Cleanup
+            rm "${file}.formatted"
+          done
+          
+          if [ "$NEEDS_FORMATTING" = true ]; then
+            echo "formatting_needed=true" >> $GITHUB_OUTPUT
+            echo -e "\n📋 Files that need formatting:$UNFORMATTED_FILES"
+            exit 1
+          else
+            echo "formatting_needed=false" >> $GITHUB_OUTPUT
+            echo "✅ All files are properly formatted!"
+          fi
+
+      - name: Display formatting differences
+        if: failure() && steps.format-check.outputs.formatting_needed == 'true'
+        run: |
+          echo "📝 To fix formatting issues, run:"
+          echo ""
+          echo "  clang-format -i Src/*.c Src/*.h Inc/*.h tests/*.c"
+          echo ""
+          echo "Or with a single file:"
+          echo "  clang-format -i <filename>"
+          echo ""
+          echo "Or preview changes without modifying:"
+          echo "  clang-format --dry-run <filename>"
+
+      - name: Comment on PR with formatting instructions
+        if: failure() && steps.format-check.outputs.formatting_needed == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const issue_number = context.issue.number;
+            
+            const comment = `## ⚠️ Code Formatting Issues Detected
+
+Your pull request has code formatting issues that need to be fixed.
+
+### How to Fix
+
+**Option 1: Automatic Formatting**
+\`\`\`bash
+# Format all C/H files
+clang-format -i Src/*.c Src/*.h Inc/*.h tests/*.c
+
+# Or format specific files
+clang-format -i <filename>
+
+# Commit and push
+git add .
+git commit -m "style: apply clang-format"
+git push
+\`\`\`
+
+**Option 2: Check Formatting**
+\`\`\`bash
+# Preview changes without modifying
+clang-format --dry-run <filename>
+
+# Show what would change
+clang-format --output-replacements-xml <filename>
+\`\`\`
+
+### Configuration
+The formatting is configured in \`.clang-format\` based on:
+- ✅ CERT C Coding Standard
+- ✅ Embedded Systems Best Practices
+- ✅ ISO-TP-C Project Standards
+
+### What Gets Checked
+- ✅ Indentation (4 spaces)
+- ✅ Line length (max 100 characters)
+- ✅ Brace placement (Allman style)
+- ✅ Spacing around operators
+- ✅ Pointer alignment (\`type *var\`, not \`type* var\`)
+- ✅ Comment alignment
+- ✅ Line endings (LF)
+
+### References
+- [Clang Format Documentation](https://clang.llvm.org/docs/ClangFormat/)
+- [CERT C Coding Standard](https://wiki.sei.cmu.edu/confluence/display/c/)
+- [EditorConfig](https://editorconfig.org)`;
+            
+            github.rest.issues.createComment({
+              issue_number: issue_number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  format-fix:
+    name: Auto-fix Formatting (Optional)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Install clang-format
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format
+
+      - name: Auto-format code
+        id: auto-format
+        run: |
+          # Find all C and H files
+          FILES=$(find Src Inc tests -type f \( -name "*.c" -o -name "*.h" \) 2>/dev/null | grep -v ".git" || true)
+          
+          if [ -z "$FILES" ]; then
+            echo "No C/H files found"
+            exit 0
+          fi
+          
+          FORMATTED_COUNT=0
+          for file in $FILES; do
+            # Create formatted version
+            clang-format "$file" > "${file}.formatted"
+            
+            # Check if different
+            if ! diff -q "$file" "${file}.formatted" > /dev/null; then
+              mv "${file}.formatted" "$file"
+              FORMATTED_COUNT=$((FORMATTED_COUNT + 1))
+              echo "Formatted: $file"
+            else
+              rm "${file}.formatted"
+            fi
+          done
+          
+          echo "formatted_count=$FORMATTED_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Commit formatting changes
+        if: steps.auto-format.outputs.formatted_count > 0
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Actions"
+          git add Src/*.{c,h} Inc/*.h tests/*.{c,h}
+          git commit -m "style: apply clang-format
+
+- Auto-formatted ${{ steps.auto-format.outputs.formatted_count }} files
+- Ensures compliance with CERT C Coding Standard
+- Configuration: .clang-format"
+          git push
+
+      - name: Report success
+        if: steps.auto-format.outputs.formatted_count == 0
+        run: |
+          echo "✅ All files are properly formatted!"
+
+---
+
+# ==============================================================================
+# MANUAL FORMATTING COMMANDS
+# ==============================================================================
+#
+# To manually format files before committing:
+#
+# Format all C files:
+#   clang-format -i Src/*.c Inc/*.h tests/*.c
+#
+# Format a single file:
+#   clang-format -i src/isotp.c
+#
+# Check formatting without modifying:
+#   clang-format --dry-run src/isotp.c
+#
+# Show formatting diff:
+#   clang-format --output-replacements-xml src/isotp.c
+#
+# ==============================================================================

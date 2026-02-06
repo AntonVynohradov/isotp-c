@@ -1,0 +1,48 @@
+name: Build and Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+      - development   
+  pull_request:
+    branches:
+      - main
+      - development
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+          pip install mkdocs mkdocs-material mkdoxy mkdocs-autorefs
+
+      - name: Deploying documentation
+        run: |
+          mkdocs gh-deploy
+
+  
+

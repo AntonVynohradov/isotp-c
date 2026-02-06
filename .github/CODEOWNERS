@@ -1,0 +1,75 @@
+# GitHub Collaborators (Code Owners)
+
+## Overview
+This file specifies code owners for different parts of the ISO-TP-C project. GitHub uses this file to determine who should review pull requests.
+
+## Syntax
+```
+path/to/file_or_directory @username1 @username2
+# or
+path/to/file_or_directory @org/team
+```
+
+## Code Owners Configuration
+
+### Root and Configuration Files
+All configuration and build files should be reviewed by maintainers:
+```
+# Build configuration
+/CMakeLists.txt @maintainer
+Makefile @maintainer
+/.github/ @maintainer
+/vars.mk @maintainer
+
+# Documentation
+/README.md @maintainer
+/LICENSE @maintainer
+```
+
+### Source Code
+Core ISO-TP implementation requires careful review:
+```
+# Core library source
+/Src/ @maintainer
+/Inc/ @maintainer
+```
+
+### Tests
+Test code should be reviewed for coverage and correctness:
+```
+# Unit and integration tests
+/tests/ @maintainer
+
+# Test configuration
+*.test.yml @maintainer
+```
+
+### Documentation
+Documentation changes should maintain consistency:
+```
+# API documentation
+/docs/ @maintainer
+
+# Code review guidelines
+.copilot-instructions.md @maintainer
+.github/BRANCH_PROTECTION_SETUP.md @maintainer
+.github/pull_request_template.md @maintainer
+```
+
+---
+
+**Note:** Replace `@maintainer` with your actual GitHub username or organization team.
+
+Example with actual usernames:
+```
+/Src/ @john-dev
+/Inc/ @john-dev
+/tests/ @test-team
+/docs/ @documentation-team
+/.github/ @john-dev
+```
+
+---
+
+**Document Version:** 1.0  
+**Last Updated:** February 2026
