@@ -11,7 +11,7 @@ on:
       - development
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -39,6 +39,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
           pip install mkdocs mkdocs-material mkdoxy mkdocs-autorefs
+
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Deploying documentation
         run: |
