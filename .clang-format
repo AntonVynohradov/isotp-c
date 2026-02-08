@@ -11,6 +11,7 @@ TabWidth: 4
 # Indentation
 IndentCaseLabels: true
 IndentGotoLabels: false
+IndentExternBlock: NoIndent
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false

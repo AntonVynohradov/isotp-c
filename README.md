@@ -155,9 +155,9 @@ int main(void) {
 
 ```
 isotp-c/
-├── Src/                    # Source implementation files
+├── src/                    # Source implementation files
 │   └── isotp.c
-├── Inc/                    # Public header files
+├── inc/                    # Public header files
 │   ├── isotp_config.h
 │   ├── isotp_defines.h
 │   └── isotp_user.h

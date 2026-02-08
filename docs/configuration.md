@@ -19,4 +19,4 @@ Configure user-defined callbacks in `isotp_user.h` for:
 
 ## More Information
 
-See `Inc/isotp_config.h` for detailed configuration parameters.
+See `inc/isotp_config.h` for detailed configuration parameters.

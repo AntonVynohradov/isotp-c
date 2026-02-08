@@ -62,36 +62,36 @@ extern "C"
 {
 #endif
 
-    /**
-     * @brief   User implemented, print debug message
-     * @param   message - Debug message format string
-     * @return  None
-     */
-    void isotp_user_debug(const char* message, ...);
+/**
+ * @brief   User implemented, print debug message
+ * @param   message - Debug message format string
+ * @return  None
+ */
+void isotp_user_debug(const char* message, ...);
 
-    /**
-     * @brief   User implemented, send CAN message (should return ISOTP_RET_OK when
-     * success)
-     * @param   arbitration_id - CAN message arbitration ID
-     * @param   data - Pointer to message data buffer
-     * @param   size - Size of message data in bytes
-     * @return  ISOTP_RET_OK on success, ISOTP_RET_NOSPACE if transfer should be
-     * retried later, or ISOTP_RET_ERROR on failure
-     */
-    int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size
+/**
+ * @brief   User implemented, send CAN message (should return ISOTP_RET_OK when
+ * success)
+ * @param   arbitration_id - CAN message arbitration ID
+ * @param   data - Pointer to message data buffer
+ * @param   size - Size of message data in bytes
+ * @return  ISOTP_RET_OK on success, ISOTP_RET_NOSPACE if transfer should be
+ * retried later, or ISOTP_RET_ERROR on failure
+ */
+int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size
 #ifdef ISO_TP_USER_SEND_CAN_ARG
-                            ,
-                            void* arg
+                        ,
+                        void* arg
 #endif
-    );
+);
 
-    /**
-     * @brief   User implemented, gets the amount of time passed since the last call
-     * in microseconds
-     * @param   None
-     * @return  Time elapsed in microseconds
-     */
-    uint32_t isotp_user_get_us(void);
+/**
+ * @brief   User implemented, gets the amount of time passed since the last call
+ * in microseconds
+ * @param   None
+ * @return  Time elapsed in microseconds
+ */
+uint32_t isotp_user_get_us(void);
 
 #ifdef __cplusplus
 }
