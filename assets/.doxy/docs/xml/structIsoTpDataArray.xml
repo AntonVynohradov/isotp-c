@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structIsoTpDataArray" kind="struct" language="C++" prot="public">
+    <compoundname>IsoTpDataArray</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structIsoTpDataArray_1ab174d82a15cba18e73c121d00754ba55" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t IsoTpDataArray::ptr[8]</definition>
+        <argsstring>[8]</argsstring>
+        <name>ptr</name>
+        <qualifiedname>IsoTpDataArray::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Inc/isotp_defines.h" line="272" column="13" bodyfile="Inc/isotp_defines.h" bodystart="272" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Inc/isotp_defines.h" line="270" column="1" bodyfile="Inc/isotp_defines.h" bodystart="271" bodyend="273"/>
+    <listofallmembers>
+      <member refid="structIsoTpDataArray_1ab174d82a15cba18e73c121d00754ba55" prot="public" virt="non-virtual"><scope>IsoTpDataArray</scope><name>ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
