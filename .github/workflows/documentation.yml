@@ -11,12 +11,10 @@ on:
       - development
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: write 
 
 concurrency:
-  group: "pages"
+  group: "Documentation"
   cancel-in-progress: false
 
 jobs:
