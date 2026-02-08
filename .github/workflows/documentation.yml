@@ -3,13 +3,7 @@ name: Build and Deploy Documentation
 on:
   push:
     branches:
-      - main
-      - development   
-  pull_request:
-    branches:
-      - main
-      - development
-
+      - main      
 permissions:
   contents: write 
 
