@@ -66,7 +66,7 @@ extern "C"
  */
 typedef struct IsoTpLink
 {
-    /* sender paramters */
+    /* sender parameters */
     uint32_t send_arbitration_id; /* used to reply consecutive frame */
 
     /* message buffer */
@@ -87,7 +87,7 @@ typedef struct IsoTpLink
     int32_t send_protocol_result;
     uint8_t send_status;
 
-    /* receiver paramters */
+    /* receiver parameters */
     uint32_t receive_arbitration_id;
 
     /* message buffer */
@@ -191,7 +191,7 @@ int isotp_send(IsoTpLink* link, const uint8_t payload[], uint32_t size);
 int isotp_send_with_id(IsoTpLink* link, uint32_t id, const uint8_t payload[], uint32_t size);
 
 /**
- * @brief Receives and parses the received data and copies the parsed data in to the internal
+ * @brief Receives and parses the received data and copies the parsed data into the internal
  * buffer.
  * @param link The @link IsoTpLink @endlink instance used to transceive data.
  * @param payload A pointer to an area in memory where the raw data is copied from.

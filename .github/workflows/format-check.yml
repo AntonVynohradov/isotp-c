@@ -37,7 +37,7 @@ jobs:
         id: format-check
         run: |
           echo "Checking code formatting with clang-format..."
-          FILES=$(find Src Inc tests -type f \( -name "*.c" -o -name "*.h" \) 2>/dev/null || true)
+          FILES=$(find . -type f \( -name "*.c" -o -name "*.h" \) 2>/dev/null || true)
 
           if [ -z "$FILES" ]; then
             echo "No C/H files found"
@@ -90,7 +90,7 @@ jobs:
       - name: Auto-format code
         id: auto-format
         run: |
-          FILES=$(find Src Inc tests -type f \( -name "*.c" -o -name "*.h" \) 2>/dev/null || true)
+          FILES=$(find . -type f \( -name "*.c" -o -name "*.h" \) 2>/dev/null || true)
 
           if [ -z "$FILES" ]; then
             echo "No C/H files found"
