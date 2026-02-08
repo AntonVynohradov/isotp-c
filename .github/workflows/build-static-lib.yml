@@ -1,0 +1,28 @@
+name: Build Static Library
+
+on:
+  push:
+    branches:
+      - main      
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure (Release preset)
+        run: cmake --preset "ISO-TP[Release]" -B "build"
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Upload static library
+        uses: actions/upload-artifact@v4
+        with:
+          name: isotp-static-lib
+          path: build/libisotp.a

@@ -25,14 +25,14 @@
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.wordBasedSuggestions": false
+    "editor.wordBasedSuggestions": "off"
   },
 
   "[h]": {
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.wordBasedSuggestions": false
+    "editor.wordBasedSuggestions": "off"
   },
 
   "[cmake]": {
