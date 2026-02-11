@@ -62,7 +62,7 @@
 /**************************************************************
  * OS specific defines
  *************************************************************/
-#ifdef _WIN32
+#ifdef _MSC_VER
 #define ISOTP_PACKED_STRUCT(content) \
     __pragma(pack(push, 1)) typedef struct content __pragma(pack(pop))
 
