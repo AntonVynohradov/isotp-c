@@ -54,14 +54,54 @@ list(APPEND ISOTP_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/src/isotp.c
 )
 
-set_source_files_properties(ISOTP_SOURCES LANGUAGE C)
+set_source_files_properties(${ISOTP_SOURCES} PROPERTIES LANGUAGE C)
 
 # ==============================================================================
-# STATIC LIBRARY TARGET
+# PROJECT CONFIGURATION
+# ==============================================================================
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    list(APPEND COMPILE_DEFINITIONS "ISOTP_DEBUG")
+endif()
+
+set(ISOTP_LIBRARY_TYPE "STATIC")                # Default to static library; can be overridden by user
+set(ISOTP_INTERFACE_TYPE "PUBLIC")              # Default to public interface; can be overridden by user
+
+# ==============================================================================
+# UNIT TESTS
+# ==============================================================================
+
+if(ISOTP_UNIT_TESTS)
+    
+    list(REMOVE_ITEM ISOTP_SOURCES
+        # Add any source files that should be excluded from the main library when unit tests are enabled
+    )
+
+    list(APPEND ISOTP_UNIT_TEST_SOURCES
+        # Add unit test source files here, e.g.:
+    )
+
+    list(APPEND ISOTP_UNIT_TEST_HEADERS
+        # Add unit test header files here, e.g.:
+    )
+
+    list(APPEND ISOTP_HEADERS ${ISOTP_UNIT_TEST_HEADERS})
+    list(APPEND ISOTP_SOURCES ${ISOTP_UNIT_TEST_SOURCES})
+
+    set(ISOTP_LIBRARY_TYPE "INTERFACE") 
+    set(ISOTP_INTERFACE_TYPE "INTERFACE")
+
+endif()
+
+# ==============================================================================
+# LIBRARY TARGET
 # ==============================================================================
 
 set(ISOTP_C  "isotp" ) 
-add_library(${ISOTP_C} STATIC ${ISOTP_SOURCES})
-target_include_directories(${ISOTP_C} PRIVATE ${ISOTP_HEADERS})
-target_compile_definitions(${ISOTP_C} PRIVATE ${COMPILE_DEFINITIONS})
-target_compile_options(${ISOTP_C} PRIVATE ${COMPILE_OPTIONS})
+add_library(${ISOTP_C} ${ISOTP_LIBRARY_TYPE} ${ISOTP_SOURCES})
+target_include_directories(${ISOTP_C} ${ISOTP_INTERFACE_TYPE}  ${ISOTP_HEADERS})
+target_compile_definitions(${ISOTP_C} ${ISOTP_INTERFACE_TYPE} ${COMPILE_DEFINITIONS})
+
+if(COMPILE_OPTIONS) # Add any additional compile options if defined
+    target_compile_options(${ISOTP_C} ${ISOTP_INTERFACE_TYPE} ${COMPILE_OPTIONS})   
+endif()

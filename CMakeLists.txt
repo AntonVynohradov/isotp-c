@@ -34,14 +34,12 @@ list(APPEND CMAKE_MODULE_PATH
 # INCLUDE DIRECTORIES
 # ==============================================================================
 
-include(isotp) # Include the main ISO-TP CMake configuration
 
 # ==============================================================================
 # PROJECT CONFIGURATION
 # ==============================================================================
 
-project(ISOTP
-    VERSION ${ISOTP_VERSION}
+project(ISOTP    
     DESCRIPTION "ISO 15765-2 Protocol Implementation"
     LANGUAGES C
     )
@@ -63,6 +61,7 @@ set(CMAKE_C_FLAGS_RELEASE "-Wall -Wextra -Wpedantic -O2 -DNDEBUG")
 # LIBRARY/EXECUTABLE TARGETS
 # ==============================================================================
 
+include(isotp) # The static library target is defined in cmake/isotp.cmake
 
 # ==============================================================================
 # DEPENDENCIES

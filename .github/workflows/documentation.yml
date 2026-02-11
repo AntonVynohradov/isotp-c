@@ -1,18 +1,17 @@
 name: Build and Deploy Documentation
 
 on:
-  push:
-    branches:
-      - main      
-permissions:
+ workflow_run:
+    workflows: ["Build Static Library"]
+    types:
+      - completed   
+      
+permissions:  
   contents: write 
 
-concurrency:
-  group: "Documentation"
-  cancel-in-progress: false
-
 jobs:
-  build:
+  documentation:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     
     steps:
@@ -20,6 +19,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          tags: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -39,7 +39,4 @@ jobs:
 
       - name: Deploying documentation
         run: |
-          mkdocs gh-deploy
-
-  
-
+          mkdocs gh-deploy 
