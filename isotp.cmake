@@ -64,9 +64,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     list(APPEND COMPILE_DEFINITIONS "ISOTP_DEBUG")
 endif()
 
-set(ISOTP_LIBRARY_TYPE "STATIC")                # Default to static library; can be overridden by user
-set(ISOTP_INTERFACE_TYPE "PUBLIC")              # Default to public interface; can be overridden by user
-
 # ==============================================================================
 # UNIT TESTS
 # ==============================================================================
@@ -77,19 +74,24 @@ if(ISOTP_UNIT_TESTS)
         # Add any source files that should be excluded from the main library when unit tests are enabled
     )
 
-    list(APPEND ISOTP_UNIT_TEST_SOURCES
-        # Add unit test source files here, e.g.:
-    )
+    list(APPEND ISOTP_UNIT_TEST_SOURCES       
+        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_destroy_link.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_init_link.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_on_can_message.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_poll.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_receive.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send_with_id.cpp     
+        ${CMAKE_CURRENT_LIST_DIR}/tests/isotp_test_mocks.cpp     
+
+    )    
 
     list(APPEND ISOTP_UNIT_TEST_HEADERS
-        # Add unit test header files here, e.g.:
+        ${CMAKE_CURRENT_LIST_DIR}/tests/
     )
 
     list(APPEND ISOTP_HEADERS ${ISOTP_UNIT_TEST_HEADERS})
-    list(APPEND ISOTP_SOURCES ${ISOTP_UNIT_TEST_SOURCES})
-
-    set(ISOTP_LIBRARY_TYPE "INTERFACE") 
-    set(ISOTP_INTERFACE_TYPE "INTERFACE")
+    list(APPEND ISOTP_SOURCES ${ISOTP_UNIT_TEST_SOURCES})   
 
 endif()
 
@@ -98,10 +100,10 @@ endif()
 # ==============================================================================
 
 set(ISOTP_C  "isotp" ) 
-add_library(${ISOTP_C} ${ISOTP_LIBRARY_TYPE} ${ISOTP_SOURCES})
-target_include_directories(${ISOTP_C} ${ISOTP_INTERFACE_TYPE}  ${ISOTP_HEADERS})
-target_compile_definitions(${ISOTP_C} ${ISOTP_INTERFACE_TYPE} ${COMPILE_DEFINITIONS})
+add_library(${ISOTP_C} STATIC ${ISOTP_SOURCES})
+target_include_directories(${ISOTP_C} PUBLIC  ${ISOTP_HEADERS})
+target_compile_definitions(${ISOTP_C} PUBLIC ${COMPILE_DEFINITIONS})
 
 if(COMPILE_OPTIONS) # Add any additional compile options if defined
-    target_compile_options(${ISOTP_C} ${ISOTP_INTERFACE_TYPE} ${COMPILE_OPTIONS})   
+    target_compile_options(${ISOTP_C} PUBLIC ${COMPILE_OPTIONS})   
 endif()

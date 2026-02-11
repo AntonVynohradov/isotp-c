@@ -1,0 +1,78 @@
+/*******************************************************************************
+# * ISO-TP-C: ISO 15765-2 Protocol Implementation
+# *
+# * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
+# * Description: Test doubles for ISO-TP user callbacks.
+# *
+# * Author:      Anton Vynohradov
+# * Email:       avynohradovair@gmail.com
+# * 
+# * License:     MIT License
+# *
+# * Copyright (c) 2026 Anton Vynohradov
+# *
+# * Permission is hereby granted, free of charge, to any person obtaining a copy
+# * of this software and associated documentation files (the "Software"), to deal
+# * in the Software without restriction, including without limitation the rights
+# * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# * copies of the Software, and to permit persons to whom the Software is
+# * furnished to do so, subject to the following conditions:
+# *
+# * The above copyright notice and this permission notice shall be included in
+# * all copies or substantial portions of the Software.
+# *
+# * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# * THE SOFTWARE.
+# *
+# * SPDX-License-Identifier: MIT
+# ******************************************************************************/
+
+#include "isotp_test_support.h"
+
+MockCanState g_can_state = {0};
+uint32_t g_now_us = 0;
+int g_debug_call_count = 0;
+
+void reset_mocks()
+{
+    std::memset(&g_can_state, 0, sizeof(g_can_state));
+    g_can_state.return_value = ISOTP_RET_OK;
+    g_now_us = 0;
+    g_debug_call_count = 0;
+}
+
+extern "C" {
+void isotp_user_debug(const char* message, ...)
+{
+    (void) message;
+    g_debug_call_count++;
+}
+
+int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size)
+{
+    g_can_state.last_id = arbitration_id;
+    g_can_state.last_size = size;
+    g_can_state.call_count++;
+    std::memset(g_can_state.last_data, 0, sizeof(g_can_state.last_data));
+    if (data != NULL)
+    {
+        uint8_t copy_len = size;
+        if (copy_len > sizeof(g_can_state.last_data))
+        {
+            copy_len = sizeof(g_can_state.last_data);
+        }
+        std::memcpy(g_can_state.last_data, data, copy_len);
+    }
+    return g_can_state.return_value;
+}
+
+uint32_t isotp_user_get_us(void)
+{
+    return g_now_us;
+}
+}

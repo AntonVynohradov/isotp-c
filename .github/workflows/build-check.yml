@@ -16,8 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          tags: true
+          fetch-depth: 0          
       
       - name: Configure (Debug preset)
         run: cmake --preset "ISO-TP[Debug]" -B "build/ISO-TP[Debug]"
