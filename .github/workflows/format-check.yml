@@ -6,9 +6,9 @@ on:
       - development
       - main
     paths:
-      - '**.c'
-      - '**.h'
-      - '.clang-format'
+      - "**.c"
+      - "**.h"
+      - ".clang-format"
 
 jobs:
   format-check:

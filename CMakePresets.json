@@ -20,7 +20,15 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"                
             }
-        }       
+        },
+        {
+            "name": "ISO-TP[UnitTests]",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "ISOTP_UNIT_TESTS": "ON"
+            }
+        }            
         
     ]
 }

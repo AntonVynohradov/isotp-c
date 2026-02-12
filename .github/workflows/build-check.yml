@@ -3,7 +3,7 @@ name: Check Building Static Library
 on:
   push:
     branches:
-      - development      
+      - development
   pull_request:
     branches:
       - development
@@ -17,8 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          tags: true
-      
+
       - name: Configure (Debug preset)
         run: cmake --preset "ISO-TP[Debug]" -B "build/ISO-TP[Debug]"
 
