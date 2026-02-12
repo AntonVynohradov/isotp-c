@@ -25,7 +25,7 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-list(APPEND CMAKE_MODULE_PATH 
+list(APPEND CMAKE_MODULE_PATH
 
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
@@ -34,7 +34,7 @@ list(APPEND CMAKE_MODULE_PATH
 # PROJECT CONFIGURATION
 # ==============================================================================
 
-project(ISOTP    
+project(ISOTP
     DESCRIPTION "ISO 15765-2 Protocol Implementation"
     LANGUAGES C
     )
@@ -49,61 +49,82 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
 # Compiler warning flags
-set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -Wpedantic -g") #-Wconversion 
+set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -Wpedantic -g") #-Wconversion
 set(CMAKE_C_FLAGS_RELEASE "-Wall -Wextra -Wpedantic -O2 -DNDEBUG")
 
 # ==============================================================================
 # LIBRARY/EXECUTABLE TARGETS
 # ==============================================================================
 
-# Unit tests are optional and can be enabled with a CMake option 
+# Unit tests are optional and can be enabled with a CMake option
 option(ISOTP_UNIT_TESTS "Enable ISO-TP unit tests" OFF)
 
 # The static library target is defined in cmake/isotp.cmake
-include(isotp) 
+include(isotp)
 
 # ==============================================================================
 # UNIT TESTS
 # ==============================================================================
 
 if(ISOTP_UNIT_TESTS)
-   
+
     # == Google Test Integration ==
 
-    find_package(GTest REQUIRED)    
+    find_package(GTest REQUIRED)
     include(GoogleTest)
     include(CTest)
 
-    enable_language(CXX)    
+    enable_language(CXX)
     enable_testing()
 
-    # =============================  
-   
+    # =============================
+
     set(ISOTP_GTEST ${CMAKE_PROJECT_NAME}_gtest)
 
-    add_executable(${ISOTP_GTEST}
-        ${CMAKE_CURRENT_LIST_DIR}/tests/isotp_test_mocks.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_destroy_link.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_init_link.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_on_can_message.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_poll.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_receive.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send_with_id.cpp
-    )
+    add_executable(${ISOTP_GTEST} ${ISOTP_SOURCES} )
 
     set_target_properties(${ISOTP_GTEST} PROPERTIES
         CXX_STANDARD 17
         CXX_STANDARD_REQUIRED ON
-    )
+        )
 
-    target_link_libraries(${ISOTP_GTEST} 
-                        GTest::GTest                         
+    if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+        target_compile_options(${ISOTP_GTEST} PRIVATE -O0 -g --coverage)
+        target_link_options(${ISOTP_GTEST} PRIVATE --coverage)
+    endif()
+
+    target_link_libraries(${ISOTP_GTEST}
+                        GTest::GTest
                         GTest::Main
                         isotp
                         )
 
     gtest_discover_tests(${ISOTP_GTEST} PROPERTIES LABELS "unit")
+
+
+    find_program(GCOVR_EXECUTABLE gcovr)
+    if(GCOVR_EXECUTABLE)
+        set(COVERAGE_OUTPUT_DIR ${CMAKE_BINARY_DIR}/Coverage)
+        add_custom_target(coverage
+            COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}
+            COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${COVERAGE_OUTPUT_DIR}
+            COMMAND ${GCOVR_EXECUTABLE}
+                -r ${CMAKE_SOURCE_DIR}
+                --object-directory ${CMAKE_BINARY_DIR}
+                --filter ${CMAKE_SOURCE_DIR}/src
+                --exclude ${CMAKE_SOURCE_DIR}/tests
+                --lcov ${COVERAGE_OUTPUT_DIR}/coverage.info
+                --html-details=${COVERAGE_OUTPUT_DIR}/coverage.html
+                --print-summary
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            USES_TERMINAL
+            )
+    else()
+        add_custom_target(coverage
+            COMMAND ${CMAKE_COMMAND} -E echo "gcovr not found. Install gcovr to generate coverage reports."
+            )
+    endif()
 
 endif()
 

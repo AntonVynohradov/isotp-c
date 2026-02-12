@@ -23,7 +23,7 @@
 # CMAKE CONFIGURATION
 # ==============================================================================
 
-list(APPEND CMAKE_MODULE_PATH 
+list(APPEND CMAKE_MODULE_PATH
 
     ${CMAKE_CURRENT_LIST_DIR}/cmake
 )
@@ -64,34 +64,40 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     list(APPEND COMPILE_DEFINITIONS "ISOTP_DEBUG")
 endif()
 
+set(ISOTP_LIBRARY_TYPE "STATIC")        # Default to static library, can be overridden by CMake presets
+set(ISOTP_LIBRARY_INTERFACE "PUBLIC")   # Interface target name for consumers of the library
+
 # ==============================================================================
 # UNIT TESTS
 # ==============================================================================
 
 if(ISOTP_UNIT_TESTS)
-    
+
     list(REMOVE_ITEM ISOTP_SOURCES
         # Add any source files that should be excluded from the main library when unit tests are enabled
     )
 
-    list(APPEND ISOTP_UNIT_TEST_SOURCES       
+    list(APPEND ISOTP_UNIT_TEST_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_destroy_link.cpp
         ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_init_link.cpp
         ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_on_can_message.cpp
         ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_poll.cpp
         ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_receive.cpp
         ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send_with_id.cpp     
-        ${CMAKE_CURRENT_LIST_DIR}/tests/isotp_test_mocks.cpp     
+        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send_with_id.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/isotp_test_mocks.cpp
 
-    )    
+    )
 
     list(APPEND ISOTP_UNIT_TEST_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/tests/
     )
 
     list(APPEND ISOTP_HEADERS ${ISOTP_UNIT_TEST_HEADERS})
-    list(APPEND ISOTP_SOURCES ${ISOTP_UNIT_TEST_SOURCES})   
+    list(APPEND ISOTP_SOURCES ${ISOTP_UNIT_TEST_SOURCES})
+
+    set(ISOTP_LIBRARY_TYPE "INTERFACE")         # Use an interface library for unit tests to avoid linking issues
+    set(ISOTP_LIBRARY_INTERFACE "INTERFACE")    # Interface target name for unit tests, consumers will link against this target
 
 endif()
 
@@ -99,11 +105,11 @@ endif()
 # LIBRARY TARGET
 # ==============================================================================
 
-set(ISOTP_C  "isotp" ) 
-add_library(${ISOTP_C} STATIC ${ISOTP_SOURCES})
-target_include_directories(${ISOTP_C} PUBLIC  ${ISOTP_HEADERS})
-target_compile_definitions(${ISOTP_C} PUBLIC ${COMPILE_DEFINITIONS})
+set(ISOTP_C  "isotp" )
+add_library(${ISOTP_C} ${ISOTP_LIBRARY_TYPE} ${ISOTP_SOURCES})
+target_include_directories(${ISOTP_C} ${ISOTP_LIBRARY_INTERFACE}  ${ISOTP_HEADERS})
+target_compile_definitions(${ISOTP_C} ${ISOTP_LIBRARY_INTERFACE} ${COMPILE_DEFINITIONS})
 
 if(COMPILE_OPTIONS) # Add any additional compile options if defined
-    target_compile_options(${ISOTP_C} PUBLIC ${COMPILE_OPTIONS})   
+    target_compile_options(${ISOTP_C} ${ISOTP_LIBRARY_INTERFACE} ${COMPILE_OPTIONS})
 endif()

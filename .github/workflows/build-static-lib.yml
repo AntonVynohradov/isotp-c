@@ -3,8 +3,8 @@ name: Build Static Library
 on:
   push:
     branches:
-      - main     
-      
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0         
+          fetch-depth: 0
 
       - name: Configure (Release preset)
         run: cmake --preset "ISO-TP[Release]" -B "build/ISO-TP[Release]"
