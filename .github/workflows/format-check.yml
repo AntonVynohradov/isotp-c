@@ -5,10 +5,6 @@ on:
     branches:
       - development
       - main
-    paths:
-      - "**.c"
-      - "**.h"
-      - ".clang-format"
 
 jobs:
   format-check:
