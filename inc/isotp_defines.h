@@ -5,7 +5,7 @@
  * Description: Internal protocol definitions and type structures for ISO-TP
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *

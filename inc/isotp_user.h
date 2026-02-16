@@ -5,7 +5,7 @@
  * Description: User callback interfaces and platform abstraction layer
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *

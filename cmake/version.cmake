@@ -5,7 +5,7 @@
 # Description: Brief description of this CMake file purpose
 #
 # Author:      Anton Vynohradov
-# Email:       avynohradovair@gmail.com
+# Email:       avynohradov@systemfromscratch.com
 # License:     MIT License
 # Copyright:   (c) 2026 Anton Vynohradov
 #
@@ -33,7 +33,7 @@ execute_process(
 )
 
 if(NOT ISOTP_GIT_DESCRIBE_RESULT EQUAL 0 OR ISOTP_GIT_TAG STREQUAL "")
-    message(FATAL_ERROR "git describe failed or returned no tag; Error: ${ISOTP_GIT_DESCRIBE_ERROR}")    
+    message(FATAL_ERROR "git describe failed or returned no tag; Error: ${ISOTP_GIT_DESCRIBE_ERROR}")
 endif()
 
 # ==============================================================================
@@ -47,15 +47,15 @@ string(REGEX MATCH "^[Vv]([0-9]+)\\.([0-9]+)\\.([0-9]+)$" ISOTP_VERSION_MATCH "$
 # ==============================================================================
 
 if(ISOTP_VERSION_MATCH)
-    
+
     set(ISOTP_VERSION_MAJOR "${CMAKE_MATCH_1}")
     set(ISOTP_VERSION_MINOR "${CMAKE_MATCH_2}")
     set(ISOTP_VERSION_PATCH "${CMAKE_MATCH_3}")
 
     set(ISOTP_VERSION "${ISOTP_VERSION_MAJOR}.${ISOTP_VERSION_MINOR}.${ISOTP_VERSION_PATCH}")
-    
+
     message( STATUS "ISO-TP library is version: ${ISOTP_VERSION}" )
-    
+
 endif()
 
 

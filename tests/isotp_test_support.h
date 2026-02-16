@@ -5,7 +5,7 @@
  * Description: Test support utilities and mocks.
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *

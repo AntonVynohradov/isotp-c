@@ -5,7 +5,7 @@
  * Description: Unit tests for isotp_poll.
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *
