@@ -1,19 +1,20 @@
 site_name: ISO-TP C Implementation
 site_description: ISO-TP protocol implementation in C
 site_author: Anton Vynohradov
+repo_url: https://github.com/AntonVynohradov/isotp-c
+edit_uri: ""
 site_url: https://AntonVynohradov.github.io/isotp-c/
 
 nav:
   - Home: index.md
-  - Guide: guide.md
-  - API Reference: api.md
+  - Getting Started: guide.md
   - Configuration: configuration.md
+  - API Reference: api.md
+  - Examples:
+      - Linux SocketCAN: examples/linux_socket.md
 
 theme:
-  name: material
-  palette:
-    primary: blue
-    accent: light blue
+  name: readthedocs
   features:
     - navigation.instant
     - navigation.top
@@ -25,12 +26,12 @@ plugins:
   - autorefs
   - mkdoxy:
       projects:
-        docs: 
-          src-dirs: inc src 
-          full-doc: True 
-          doxy-cfg: 
-            FILE_PATTERNS: "*.c *.h*" 
-            RECURSIVE: True 
+        docs:
+          src-dirs: . inc src
+          full-doc: True
+          doxy-cfg:
+            FILE_PATTERNS: "*.c *.h*"
+            RECURSIVE: True
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -43,11 +44,3 @@ markdown_extensions:
       permalink: true
   - admonition
   - tables
-
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/AntonVynohradov/isotp-c
-
-docs_dir: docs
-site_dir: site

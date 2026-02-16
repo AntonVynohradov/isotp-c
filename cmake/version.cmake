@@ -2,7 +2,8 @@
 # ISO-TP-C: ISO 15765-2 Protocol Implementation
 #
 # Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
-# Description: Brief description of this CMake file purpose
+# Description: The version.cmake file is responsible for extracting the version information from Git tags
+#              and configuring the version macros for the ISO-TP library.
 #
 # Author:      Anton Vynohradov
 # Email:       avynohradov@systemfromscratch.com
