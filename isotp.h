@@ -5,7 +5,7 @@
  * Description: Core ISO-TP protocol header with link management and message handling
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *

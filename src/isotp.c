@@ -5,7 +5,7 @@
  * Description: Core ISO-TP protocol implementation with multi-frame support
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *

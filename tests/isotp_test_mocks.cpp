@@ -5,7 +5,7 @@
  * Description: Test doubles for ISO-TP user callbacks.
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *

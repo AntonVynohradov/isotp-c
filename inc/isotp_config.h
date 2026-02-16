@@ -5,7 +5,7 @@
  * Description: ISO-TP configuration parameters and feature toggles
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *

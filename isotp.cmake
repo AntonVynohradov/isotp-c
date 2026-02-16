@@ -5,7 +5,7 @@
 # Description: Brief description of this CMake file purpose
 #
 # Author:      Anton Vynohradov
-# Email:       avynohradovair@gmail.com
+# Email:       avynohradov@systemfromscratch.com
 # License:     MIT License
 # Copyright:   (c) 2026 Anton Vynohradov
 #
