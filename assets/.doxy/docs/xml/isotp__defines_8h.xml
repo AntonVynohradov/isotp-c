@@ -1,0 +1,729 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="isotp__defines_8h" kind="file" language="C++">
+    <compoundname>isotp_defines.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includedby refid="isotp_8h" local="yes">isotp.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>inc/isotp_defines.h</label>
+        <link refid="isotp__defines_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>inc/isotp_defines.h</label>
+        <link refid="isotp__defines_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>tests/isotp_test_support.h</label>
+        <link refid="isotp__test__support_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structIsoTpPciType" prot="public">IsoTpPciType</innerclass>
+    <innerclass refid="structIsoTpSingleFrame" prot="public">IsoTpSingleFrame</innerclass>
+    <innerclass refid="structIsoTpFirstFrameShort" prot="public">IsoTpFirstFrameShort</innerclass>
+    <innerclass refid="structIsoTpConsecutiveFrame" prot="public">IsoTpConsecutiveFrame</innerclass>
+    <innerclass refid="structIsoTpFlowControl" prot="public">IsoTpFlowControl</innerclass>
+    <innerclass refid="structIsoTpDataArray" prot="public">IsoTpDataArray</innerclass>
+    <innerclass refid="structIsoTpCanMessage" prot="public">IsoTpCanMessage</innerclass>
+    <sectiondef kind="user-defined">
+      <header>Defines and macros</header>
+      <memberdef kind="define" id="isotp__defines_8h_1a0a8ad699f5a5cbe825175885503d2687" prot="public" static="no">
+        <name>LE32TOH</name>
+        <param><defname>le</defname></param>
+        <initializer>    ((uint32_t) (((le) &lt;&lt; 24) | (((le) &amp; 0x0000FF00) &lt;&lt; 8) | (((le) &amp; 0x00FF0000) &gt;&gt; 8) \
+                 | ((le) &gt;&gt; 24)))</initializer>
+        <briefdescription>
+<para>Compiler-specific defines. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>OS-specific defines.</para>
+<para>Convert a 32-bit value from little-endian to host byte order. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="108" column="9" bodyfile="inc/isotp_defines.h" bodystart="108" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1ac1c9185705f9f0099f31fe121873a2f0" prot="public" static="no">
+        <name>ISOTP_RET_OK</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Internal return codes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="113" column="9" bodyfile="inc/isotp_defines.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1ac1379a8e6c8d0fdf72a0cf1659c19c63" prot="public" static="no">
+        <name>ISOTP_RET_ERROR</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="114" column="9" bodyfile="inc/isotp_defines.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1abb0e84440b0f6841e1813bebc0e38d41" prot="public" static="no">
+        <name>ISOTP_RET_INPROGRESS</name>
+        <initializer>-2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="115" column="9" bodyfile="inc/isotp_defines.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a5be6766b09e02fce2adafe1c4ab3d566" prot="public" static="no">
+        <name>ISOTP_RET_OVERFLOW</name>
+        <initializer>-3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="116" column="9" bodyfile="inc/isotp_defines.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a944099bea0cb25ea92b4239ab14eaf8a" prot="public" static="no">
+        <name>ISOTP_RET_WRONG_SN</name>
+        <initializer>-4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="117" column="9" bodyfile="inc/isotp_defines.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a4de727bba4c13daf6dc126cb0fbbb7b0" prot="public" static="no">
+        <name>ISOTP_RET_NO_DATA</name>
+        <initializer>-5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="118" column="9" bodyfile="inc/isotp_defines.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a942214c69ba569da2e4672e46ab2b978" prot="public" static="no">
+        <name>ISOTP_RET_TIMEOUT</name>
+        <initializer>-6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="119" column="9" bodyfile="inc/isotp_defines.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1aa97c3c9c9ebfe137ef5b9cd507a86ea1" prot="public" static="no">
+        <name>ISOTP_RET_LENGTH</name>
+        <initializer>-7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="120" column="9" bodyfile="inc/isotp_defines.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a1133429a3796f97d2f857038c75b1dd4" prot="public" static="no">
+        <name>ISOTP_RET_NOSPACE</name>
+        <initializer>-8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="121" column="9" bodyfile="inc/isotp_defines.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1ae4dfc16ad3ec2a38c70589afa3a30c5a" prot="public" static="no">
+        <name>IsoTpTimeAfter</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <initializer>((int32_t) ((int32_t) (b) - (int32_t) (a)) &lt; 0)</initializer>
+        <briefdescription>
+<para>Returns true if time <computeroutput>a</computeroutput> is after time <computeroutput>b</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="124" column="9" bodyfile="inc/isotp_defines.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a3e38ef698206ae8104d03c87ff9b1452" prot="public" static="no">
+        <name>ISOTP_INVALID_BS</name>
+        <initializer>0xFFFF</initializer>
+        <briefdescription>
+<para>Invalid block size marker. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="127" column="9" bodyfile="inc/isotp_defines.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1ad803ec6faf434a321a4c607a1cb297ff" prot="public" static="no">
+        <name>ISOTP_MAX_ERROR_MSG_SIZE</name>
+        <initializer>128</initializer>
+        <briefdescription>
+<para>Max number of characters allowed in an error message. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="130" column="9" bodyfile="inc/isotp_defines.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a521da3ace0713dc72fceaa1164f847a6" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_OK</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Network layer result codes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="457" column="9" bodyfile="inc/isotp_defines.h" bodystart="457" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1af995265cc014713c0abc4045cca71042" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_TIMEOUT_A</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="458" column="9" bodyfile="inc/isotp_defines.h" bodystart="458" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a7bb56d213b660bda032f5e720b59b572" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_TIMEOUT_BS</name>
+        <initializer>-2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="459" column="9" bodyfile="inc/isotp_defines.h" bodystart="459" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a5c793347e804332176b91759634ec596" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_TIMEOUT_CR</name>
+        <initializer>-3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="460" column="9" bodyfile="inc/isotp_defines.h" bodystart="460" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1afef7d0359ea1f0df60a3106910139343" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_WRONG_SN</name>
+        <initializer>-4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="461" column="9" bodyfile="inc/isotp_defines.h" bodystart="461" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1ac7bacf2f291bf2dd51d427e71e033723" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_INVALID_FS</name>
+        <initializer>-5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="462" column="9" bodyfile="inc/isotp_defines.h" bodystart="462" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a3a99bf9a61cbc550737d2b3837986904" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_UNEXP_PDU</name>
+        <initializer>-6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="463" column="9" bodyfile="inc/isotp_defines.h" bodystart="463" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a9e149313524a11fa01bf65f55d6f3d0c" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_WFT_OVRN</name>
+        <initializer>-7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="464" column="9" bodyfile="inc/isotp_defines.h" bodystart="464" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a11873e9b53831a6829f92645b2d90c01" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_BUFFER_OVFLW</name>
+        <initializer>-8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="465" column="9" bodyfile="inc/isotp_defines.h" bodystart="465" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__defines_8h_1a5ceadcb6faa3a2e24c961418a9a66caf" prot="public" static="no">
+        <name>ISOTP_PROTOCOL_RESULT_ERROR</name>
+        <initializer>-9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="466" column="9" bodyfile="inc/isotp_defines.h" bodystart="466" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="enum" id="isotp__defines_8h_1a5d522a44d5fa55ae10277dc20229aea8" prot="public" static="no" strong="no">
+        <type></type>
+        <name>IsoTpSendStatusTypes</name>
+        <enumvalue id="isotp__defines_8h_1a5d522a44d5fa55ae10277dc20229aea8aca2393a6d2ec014afacc774e6a782474" prot="public">
+          <name>ISOTP_SEND_STATUS_IDLE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1a5d522a44d5fa55ae10277dc20229aea8ae39a5976104b98a29938c0871c2d57c5" prot="public">
+          <name>ISOTP_SEND_STATUS_INPROGRESS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1a5d522a44d5fa55ae10277dc20229aea8a6464b4160fd233e0409260693bb807df" prot="public">
+          <name>ISOTP_SEND_STATUS_ERROR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>ISOTP sender status. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="133" column="1" bodyfile="inc/isotp_defines.h" bodystart="134" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="enum" id="isotp__defines_8h_1a0e9567c06522ba8a4367b6550a86373f" prot="public" static="no" strong="no">
+        <type></type>
+        <name>IsoTpReceiveStatusTypes</name>
+        <enumvalue id="isotp__defines_8h_1a0e9567c06522ba8a4367b6550a86373faab71d743714034cea2a8d71f6a29aa87" prot="public">
+          <name>ISOTP_RECEIVE_STATUS_IDLE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1a0e9567c06522ba8a4367b6550a86373facf4d7e7f101b85109806f4d5f9817396" prot="public">
+          <name>ISOTP_RECEIVE_STATUS_INPROGRESS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1a0e9567c06522ba8a4367b6550a86373fa351478bdeed4c36a6abbd6aa8a2042ed" prot="public">
+          <name>ISOTP_RECEIVE_STATUS_FULL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>ISOTP receiver status. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="141" column="1" bodyfile="inc/isotp_defines.h" bodystart="142" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="enum" id="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9e" prot="public" static="no" strong="no">
+        <type></type>
+        <name>IsoTpProtocolControlInformation</name>
+        <enumvalue id="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9ea715113323abb761072b325e7b84f5e67" prot="public">
+          <name>ISOTP_PCI_TYPE_SINGLE</name>
+          <initializer>= 0x0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9ea9a09b4ee08e3149604e112af1e86cb98" prot="public">
+          <name>ISOTP_PCI_TYPE_FIRST_FRAME</name>
+          <initializer>= 0x1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9ea23b6fd773b2af79b50ccd239e2805d92" prot="public">
+          <name>TSOTP_PCI_TYPE_CONSECUTIVE_FRAME</name>
+          <initializer>= 0x2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9ead2969068be8fe483474c72d6bbab8c05" prot="public">
+          <name>ISOTP_PCI_TYPE_FLOW_CONTROL_FRAME</name>
+          <initializer>= 0x3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9ea2ed631f9201c701645143e13543d87f3" prot="public">
+          <name>ISOTP_PCI_TYPE_CONSECUTIVE_FRAME</name>
+          <initializer>= 0x2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Typo fix; keep broken value for compatibility. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Protocol-specific defines. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Protocol Control Information (PCI) types for identifying ISO-TP frames. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="432" column="1" bodyfile="inc/isotp_defines.h" bodystart="433" bodyend="440"/>
+      </memberdef>
+      <memberdef kind="enum" id="isotp__defines_8h_1abfb4c49663905566949e8645a499c5e5" prot="public" static="no" strong="no">
+        <type></type>
+        <name>IsoTpFlowStatus</name>
+        <enumvalue id="isotp__defines_8h_1abfb4c49663905566949e8645a499c5e5a8ae18c5d518b202b8c304eca1e1ff956" prot="public">
+          <name>PCI_FLOW_STATUS_CONTINUE</name>
+          <initializer>= 0x0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1abfb4c49663905566949e8645a499c5e5a2e5c5eebbc0d5f72a8a60bd9f1f4a7bf" prot="public">
+          <name>PCI_FLOW_STATUS_WAIT</name>
+          <initializer>= 0x1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="isotp__defines_8h_1abfb4c49663905566949e8645a499c5e5a0b977f9f19a6436c4a172904e17e933d" prot="public">
+          <name>PCI_FLOW_STATUS_OVERFLOW</name>
+          <initializer>= 0x2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Protocol Control Information (PCI) flow control identifiers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="446" column="1" bodyfile="inc/isotp_defines.h" bodystart="447" bodyend="451"/>
+      </memberdef>
+      <memberdef kind="function" id="isotp__defines_8h_1a43e3fa16bbb146f1e4fe7f8cd2ab7d3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ISOTP_PACKED_STRUCT</definition>
+        <argsstring>({ uint8_t set_to_zero_high :4;uint8_t type :4;uint8_t set_to_zero_low;uint32_t FF_DL;uint8_t data[2];} IsoTpFirstFrameLong)</argsstring>
+        <name>ISOTP_PACKED_STRUCT</name>
+        <param>
+          <type>{ uint8_t set_to_zero_high :4;uint8_t type :4;uint8_t set_to_zero_low;uint32_t FF_DL;uint8_t data[2];}</type>
+          <declname>IsoTpFirstFrameLong</declname>
+          <briefdescription><para>Must be zero. PCI type. Must be zero. First-frame data length. Payload bytes. </para>
+</briefdescription>
+        </param>
+        <briefdescription>
+<para>First frame (long) layout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting filename=".text"><codeline><highlight class="normal">+-------------------------+-----------------------+---------+---------+---------+---------+</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>byte<sp/>#0<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>byte<sp/>#1<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>byte<sp/>#2<sp/>|<sp/>byte<sp/>#3<sp/>|<sp/>byte<sp/>#4<sp/>|<sp/>byte<sp/>#5<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">+-------------------------+-----------+-----------+---------+---------+---------+---------+</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>nibble<sp/>#0<sp/><sp/><sp/>|<sp/>nibble<sp/>#1<sp/>|<sp/>nibble<sp/>#2<sp/>|<sp/>nibble<sp/>#3<sp/>|<sp/>...<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal">+-------------+-----------+-----------+-----------+---------------------------------------+</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>PCIType<sp/>=<sp/>1<sp/>|<sp/>unused=0<sp/><sp/>|<sp/>escape<sp/>sequence<sp/>=<sp/>0<sp/><sp/><sp/>|<sp/>FF_DL<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal">+-------------+-----------+-----------------------+---------------------------------------+</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="337" column="1" declfile="inc/isotp_defines.h" declline="337" declcolumn="1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Internal protocol definitions and type structures for ISO-TP. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Project: ISO-TP-C - Embedded-Grade Refactoring &amp; Optimization Author: Anton Vynohradov Email: <ulink url="mailto:avynohradov@systemfromscratch.com">avynohradov@systemfromscratch.com</ulink></para>
+<para><simplesect kind="copyright"><para>Copyright (c) 2026 Anton Vynohradov @license MIT License</para>
+</simplesect>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</para>
+<para>SPDX-License-Identifier: MIT </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTPC_USER_DEFINITIONS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTPC_USER_DEFINITIONS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__GNUC__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__BYTE_ORDER__<sp/>==<sp/>__ORDER_LITTLE_ENDIAN__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_BYTE_ORDER_LITTLE_ENDIAN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>__BYTE_ORDER__<sp/>==<sp/>__ORDER_BIG_ENDIAN__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;unsupported<sp/>byte<sp/>ordering&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PACKED_STRUCT(content)<sp/>typedef<sp/>struct<sp/>__attribute__((packed))<sp/>content</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>_MSC_VER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PACKED_STRUCT(content)<sp/>\</highlight></codeline>
+<codeline lineno="95"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>__pragma(pack(push,<sp/>1))<sp/>typedef<sp/>struct<sp/>content<sp/>__pragma(pack(pop))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>snprintf<sp/>_snprintf</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;windows.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_BYTE_ORDER_LITTLE_ENDIAN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__builtin_bswap8<sp/>_byteswap_uint8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__builtin_bswap16<sp/>_byteswap_uint16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__builtin_bswap32<sp/>_byteswap_uint32</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__builtin_bswap64<sp/>_byteswap_uint64</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="isotp__defines_8h_1a0a8ad699f5a5cbe825175885503d2687" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LE32TOH(le)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="109"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>((uint32_t)<sp/>(((le)<sp/>&lt;&lt;<sp/>24)<sp/>|<sp/>(((le)<sp/>&amp;<sp/>0x0000FF00)<sp/>&lt;&lt;<sp/>8)<sp/>|<sp/>(((le)<sp/>&amp;<sp/>0x00FF0000)<sp/>&gt;&gt;<sp/>8)<sp/>\</highlight></codeline>
+<codeline lineno="110"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>((le)<sp/>&gt;&gt;<sp/>24)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="isotp__defines_8h_1ac1c9185705f9f0099f31fe121873a2f0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_OK<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_ERROR<sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_INPROGRESS<sp/>-2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_OVERFLOW<sp/>-3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_WRONG_SN<sp/>-4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_NO_DATA<sp/>-5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_TIMEOUT<sp/>-6</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_LENGTH<sp/>-7</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RET_NOSPACE<sp/>-8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124" refid="isotp__defines_8h_1ae4dfc16ad3ec2a38c70589afa3a30c5a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>IsoTpTimeAfter(a,<sp/>b)<sp/>((int32_t)<sp/>((int32_t)<sp/>(b)<sp/>-<sp/>(int32_t)<sp/>(a))<sp/>&lt;<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127" refid="isotp__defines_8h_1a3e38ef698206ae8104d03c87ff9b1452" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_INVALID_BS<sp/>0xFFFF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130" refid="isotp__defines_8h_1ad803ec6faf434a321a4c607a1cb297ff" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_MAX_ERROR_MSG_SIZE<sp/>128</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133" refid="isotp__defines_8h_1a5d522a44d5fa55ae10277dc20229aea8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_SEND_STATUS_IDLE,</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_SEND_STATUS_INPROGRESS,</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_SEND_STATUS_ERROR,</highlight></codeline>
+<codeline lineno="138"><highlight class="normal">}<sp/><ref refid="isotp__defines_8h_1a5d522a44d5fa55ae10277dc20229aea8" kindref="member">IsoTpSendStatusTypes</ref>;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141" refid="isotp__defines_8h_1a0e9567c06522ba8a4367b6550a86373f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_RECEIVE_STATUS_IDLE,</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_RECEIVE_STATUS_INPROGRESS,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_RECEIVE_STATUS_FULL,</highlight></codeline>
+<codeline lineno="146"><highlight class="normal">}<sp/><ref refid="isotp__defines_8h_1a0e9567c06522ba8a4367b6550a86373f" kindref="member">IsoTpReceiveStatusTypes</ref>;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ISOTP_BYTE_ORDER_LITTLE_ENDIAN)</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>reserve_1<sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>type<sp/>:<sp/>4;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>reserve_2[7];<sp/><sp/></highlight></codeline>
+<codeline lineno="168"><highlight class="normal">}<sp/><ref refid="structIsoTpPciType" kindref="compound">IsoTpPciType</ref>;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>SF_DL<sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>type<sp/>:<sp/>4;<sp/><sp/></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>data[7];<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="188"><highlight class="normal">}<sp/><ref refid="structIsoTpSingleFrame" kindref="compound">IsoTpSingleFrame</ref>;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>FF_DL_high<sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>type<sp/>:<sp/>4;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>FF_DL_low;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>data[6];<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="209"><highlight class="normal">}<sp/><ref refid="structIsoTpFirstFrameShort" kindref="compound">IsoTpFirstFrameShort</ref>;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><ref refid="isotp__defines_8h_1a43e3fa16bbb146f1e4fe7f8cd2ab7d3c" kindref="member">ISOTP_PACKED_STRUCT</ref>({</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>set_to_zero_high<sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>type<sp/>:<sp/>4;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>set_to_zero_low;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>FF_DL;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>data[2];<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="230"><highlight class="normal">}<sp/>IsoTpFirstFrameLong);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>SN<sp/>:<sp/>4;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>type<sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>data[7];<sp/><sp/></highlight></codeline>
+<codeline lineno="250"><highlight class="normal">}<sp/><ref refid="structIsoTpConsecutiveFrame" kindref="compound">IsoTpConsecutiveFrame</ref>;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>FS<sp/>:<sp/>4;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>type<sp/>:<sp/>4;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>BS;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>STmin;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>reserve[5];<sp/></highlight></codeline>
+<codeline lineno="272"><highlight class="normal">}<sp/><ref refid="structIsoTpFlowControl" kindref="compound">IsoTpFlowControl</ref>;</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276" refid="structIsoTpPciType" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="278" refid="structIsoTpPciType_1a1e36e1fdcbb30e6b43d9b5c479ad0517" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpPciType_1a1e36e1fdcbb30e6b43d9b5c479ad0517" kindref="member">type</ref><sp/>:<sp/>4;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="279" refid="structIsoTpPciType_1a91538fce7053c837f82894125b008d96" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpPciType_1a91538fce7053c837f82894125b008d96" kindref="member">reserve_1</ref><sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="280" refid="structIsoTpPciType_1a506cdc696fa79b6641380d8ba8addf84" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>reserve_2[7];<sp/><sp/></highlight></codeline>
+<codeline lineno="281"><highlight class="normal">}<sp/><ref refid="structIsoTpPciType" kindref="compound">IsoTpPciType</ref>;</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296" refid="structIsoTpSingleFrame" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="298" refid="structIsoTpSingleFrame_1a55e4049c818005edd70f3f69863afb1c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpSingleFrame_1a55e4049c818005edd70f3f69863afb1c" kindref="member">type</ref><sp/>:<sp/>4;<sp/><sp/></highlight></codeline>
+<codeline lineno="299" refid="structIsoTpSingleFrame_1a651470fd7823fc746b3cf0c99a0a3027" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpSingleFrame_1a651470fd7823fc746b3cf0c99a0a3027" kindref="member">SF_DL</ref><sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="300" refid="structIsoTpSingleFrame_1a47a6f2ae1b6389cd94b1abfc61753ef7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>data[7];<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="301"><highlight class="normal">}<sp/><ref refid="structIsoTpSingleFrame" kindref="compound">IsoTpSingleFrame</ref>;</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"></highlight></codeline>
+<codeline lineno="316" refid="structIsoTpFirstFrameShort" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="318" refid="structIsoTpFirstFrameShort_1acd8af061a9ea3772963014fa9859512d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpFirstFrameShort_1acd8af061a9ea3772963014fa9859512d" kindref="member">FF_DL_high</ref><sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="319" refid="structIsoTpFirstFrameShort_1ae4e0fc640bcda40e9f952247c99434e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpFirstFrameShort_1ae4e0fc640bcda40e9f952247c99434e6" kindref="member">type</ref><sp/>:<sp/>4;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="320" refid="structIsoTpFirstFrameShort_1adc5aa181e62d6b344743d3d821db7469" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpFirstFrameShort_1adc5aa181e62d6b344743d3d821db7469" kindref="member">FF_DL_low</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="321" refid="structIsoTpFirstFrameShort_1acd1e14dce23a32ed1127c430883ac9e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>data[6];<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="322"><highlight class="normal">}<sp/><ref refid="structIsoTpFirstFrameShort" kindref="compound">IsoTpFirstFrameShort</ref>;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight></codeline>
+<codeline lineno="337" refid="isotp__defines_8h_1a43e3fa16bbb146f1e4fe7f8cd2ab7d3c" refkind="member"><highlight class="normal"><ref refid="isotp__defines_8h_1a43e3fa16bbb146f1e4fe7f8cd2ab7d3c" kindref="member">ISOTP_PACKED_STRUCT</ref>({</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>set_to_zero_high<sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>type<sp/>:<sp/>4;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>set_to_zero_low;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>FF_DL;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>data[2];<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="343"><highlight class="normal">}<sp/>IsoTpFirstFrameLong);</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="358" refid="structIsoTpConsecutiveFrame" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="359"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="360" refid="structIsoTpConsecutiveFrame_1a752c4107ddb42cb80de379f574df09a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpConsecutiveFrame_1a752c4107ddb42cb80de379f574df09a0" kindref="member">type</ref><sp/>:<sp/>4;<sp/></highlight></codeline>
+<codeline lineno="361" refid="structIsoTpConsecutiveFrame_1ac5d8c1901d36ed25bb4f4e246bba7813" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpConsecutiveFrame_1ac5d8c1901d36ed25bb4f4e246bba7813" kindref="member">SN</ref><sp/>:<sp/>4;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="362" refid="structIsoTpConsecutiveFrame_1a4a1811df08e43686ae9a7ec7b40e4519" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>data[7];<sp/><sp/></highlight></codeline>
+<codeline lineno="363"><highlight class="normal">}<sp/><ref refid="structIsoTpConsecutiveFrame" kindref="compound">IsoTpConsecutiveFrame</ref>;</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="378" refid="structIsoTpFlowControl" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="379"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="380" refid="structIsoTpFlowControl_1a990b0d190e6f64db9910e83aa517f3f6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpFlowControl_1a990b0d190e6f64db9910e83aa517f3f6" kindref="member">type</ref><sp/>:<sp/>4;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="381" refid="structIsoTpFlowControl_1a8b61934e9160b54fd665a93e73f1ba6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpFlowControl_1a8b61934e9160b54fd665a93e73f1ba6f" kindref="member">FS</ref><sp/>:<sp/>4;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="382" refid="structIsoTpFlowControl_1a3b74550d3302046549f423844323da11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpFlowControl_1a3b74550d3302046549f423844323da11" kindref="member">BS</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="383" refid="structIsoTpFlowControl_1a67b55715dbc94012525e57e1189f0151" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpFlowControl_1a67b55715dbc94012525e57e1189f0151" kindref="member">STmin</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="384" refid="structIsoTpFlowControl_1af9420a597c735fadfdff023d79dbfc7b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>reserve[5];<sp/></highlight></codeline>
+<codeline lineno="385"><highlight class="normal">}<sp/><ref refid="structIsoTpFlowControl" kindref="compound">IsoTpFlowControl</ref>;</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"></highlight></codeline>
+<codeline lineno="387"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight></codeline>
+<codeline lineno="389" refid="structIsoTpDataArray" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="390"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>ptr[8];</highlight></codeline>
+<codeline lineno="392"><highlight class="normal">}<sp/><ref refid="structIsoTpDataArray" kindref="compound">IsoTpDataArray</ref>;</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"></highlight></codeline>
+<codeline lineno="394" refid="structIsoTpCanMessage" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="395"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">union</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structIsoTpPciType" kindref="compound">IsoTpPciType</ref><sp/>common;</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structIsoTpSingleFrame" kindref="compound">IsoTpSingleFrame</ref><sp/>single_frame;</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structIsoTpFirstFrameShort" kindref="compound">IsoTpFirstFrameShort</ref><sp/>first_frame_short;</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IsoTpFirstFrameLong<sp/>first_frame_long;</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structIsoTpConsecutiveFrame" kindref="compound">IsoTpConsecutiveFrame</ref><sp/>consecutive_frame;</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structIsoTpFlowControl" kindref="compound">IsoTpFlowControl</ref><sp/>flow_control;</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structIsoTpDataArray" kindref="compound">IsoTpDataArray</ref><sp/>data_array;</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/>as;</highlight></codeline>
+<codeline lineno="406"><highlight class="normal">}<sp/><ref refid="structIsoTpCanMessage" kindref="compound">IsoTpCanMessage</ref>;</highlight></codeline>
+<codeline lineno="407"><highlight class="normal"></highlight></codeline>
+<codeline lineno="410"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ISO_TP_TRANSMIT_COMPLETE_CALLBACK</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*isotp_tx_done_cb)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>link,<sp/>uint32_t<sp/>tx_size,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>user_arg);</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="418"><highlight class="normal"></highlight></codeline>
+<codeline lineno="419"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ISO_TP_RECEIVE_COMPLETE_CALLBACK</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*isotp_rx_done_cb)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>link,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>data,<sp/>uint32_t<sp/>size,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>user_arg);</highlight></codeline>
+<codeline lineno="426"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight></codeline>
+<codeline lineno="432" refid="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9e" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="433"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="434"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_PCI_TYPE_SINGLE<sp/>=<sp/>0x0,</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_PCI_TYPE_FIRST_FRAME<sp/>=<sp/>0x1,</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"><sp/><sp/><sp/><sp/>TSOTP_PCI_TYPE_CONSECUTIVE_FRAME<sp/>=<sp/>0x2,</highlight></codeline>
+<codeline lineno="437"><highlight class="normal"><sp/><sp/><sp/><sp/>ISOTP_PCI_TYPE_FLOW_CONTROL_FRAME<sp/>=<sp/>0x3,</highlight></codeline>
+<codeline lineno="438"><highlight class="normal"></highlight></codeline>
+<codeline lineno="439" refid="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9ea2ed631f9201c701645143e13543d87f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9ea2ed631f9201c701645143e13543d87f3" kindref="member">ISOTP_PCI_TYPE_CONSECUTIVE_FRAME</ref><sp/>=<sp/>0x2,<sp/></highlight></codeline>
+<codeline lineno="440"><highlight class="normal">}<sp/><ref refid="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9e" kindref="member">IsoTpProtocolControlInformation</ref>;</highlight></codeline>
+<codeline lineno="441"><highlight class="normal"></highlight></codeline>
+<codeline lineno="446" refid="isotp__defines_8h_1abfb4c49663905566949e8645a499c5e5" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="447"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/>PCI_FLOW_STATUS_CONTINUE<sp/>=<sp/>0x0,</highlight></codeline>
+<codeline lineno="449"><highlight class="normal"><sp/><sp/><sp/><sp/>PCI_FLOW_STATUS_WAIT<sp/>=<sp/>0x1,</highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/>PCI_FLOW_STATUS_OVERFLOW<sp/>=<sp/>0x2</highlight></codeline>
+<codeline lineno="451"><highlight class="normal">}<sp/><ref refid="isotp__defines_8h_1abfb4c49663905566949e8645a499c5e5" kindref="member">IsoTpFlowStatus</ref>;</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"></highlight></codeline>
+<codeline lineno="457" refid="isotp__defines_8h_1a521da3ace0713dc72fceaa1164f847a6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_OK<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="458"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_TIMEOUT_A<sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="459"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_TIMEOUT_BS<sp/>-2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="460"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_TIMEOUT_CR<sp/>-3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="461"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_WRONG_SN<sp/>-4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="462"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_INVALID_FS<sp/>-5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="463"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_UNEXP_PDU<sp/>-6</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="464"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_WFT_OVRN<sp/>-7</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="465"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_BUFFER_OVFLW<sp/>-8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="466"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_RESULT_ERROR<sp/>-9</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="467"><highlight class="normal"></highlight></codeline>
+<codeline lineno="484"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ISOTPC_USER_DEFINITIONS_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="inc/isotp_defines.h"/>
+  </compounddef>
+</doxygen>

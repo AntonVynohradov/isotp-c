@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="isotp__config_8h" kind="file" language="C++">
+    <compoundname>isotp_config.h</compoundname>
+    <includedby refid="isotp_8h" local="yes">isotp.h</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>inc/isotp_config.h</label>
+        <link refid="isotp__config_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>tests/isotp_test_support.h</label>
+        <link refid="isotp__test__support_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="user-defined">
+      <header>Defines and macros</header>
+      <memberdef kind="define" id="isotp__config_8h_1af072643adea3e9b1c6ada72ed3719cd4" prot="public" static="no">
+        <name>ISO_TP_DEFAULT_BLOCK_SIZE</name>
+        <initializer>(8)</initializer>
+        <briefdescription>
+<para>Max number of messages the receiver can receive at one time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This value is affected by CAN driver queue length. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="84" column="9" bodyfile="inc/isotp_config.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__config_8h_1a463ecc5478d019176922a9432ff77872" prot="public" static="no">
+        <name>ISO_TP_DEFAULT_ST_MIN_US</name>
+        <initializer>(0)</initializer>
+        <briefdescription>
+<para>Minimum time gap allowed between consecutive frame N_PDUs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="92" column="9" bodyfile="inc/isotp_config.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__config_8h_1a3fb13612ba78a1686ce010329272f9a4" prot="public" static="no">
+        <name>ISO_TP_MAX_WFT_NUMBER</name>
+        <initializer>(1)</initializer>
+        <briefdescription>
+<para>Number of FC N_PDU WTs that can be transmitted by the receiver in a row. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="100" column="9" bodyfile="inc/isotp_config.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__config_8h_1ad660a5ee13292128752d4fe01fde3efd" prot="public" static="no">
+        <name>ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</name>
+        <initializer>(100000)</initializer>
+        <briefdescription>
+<para>Default timeout while waiting for a response during a multi-frame transfer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="109" column="9" bodyfile="inc/isotp_config.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="isotp__config_8h_1a3f1d019698d743a8ae627b3225b65f55" prot="public" static="no">
+        <name>ISO_TP_FRAME_PADDING_VALUE</name>
+        <initializer>(0xAA)</initializer>
+        <briefdescription>
+<para>Padding byte value when ISO_TP_FRAME_PADDING is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="125" column="9" bodyfile="inc/isotp_config.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>ISO-TP configuration parameters and feature toggles. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Project: ISO-TP-C - Embedded-Grade Refactoring &amp; Optimization Author: Anton Vynohradov Email: <ulink url="mailto:avynohradov@systemfromscratch.com">avynohradov@systemfromscratch.com</ulink></para>
+<para><simplesect kind="copyright"><para>Copyright (c) 2026 Anton Vynohradov @license MIT License</para>
+</simplesect>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</para>
+<para>SPDX-License-Identifier: MIT </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTPC_CONFIG_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTPC_CONFIG_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISO_TP_DEFAULT_BLOCK_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="isotp__config_8h_1af072643adea3e9b1c6ada72ed3719cd4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISO_TP_DEFAULT_BLOCK_SIZE<sp/>(8)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISO_TP_DEFAULT_ST_MIN_US</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="isotp__config_8h_1a463ecc5478d019176922a9432ff77872" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISO_TP_DEFAULT_ST_MIN_US<sp/>(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISO_TP_MAX_WFT_NUMBER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="isotp__config_8h_1a3fb13612ba78a1686ce010329272f9a4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISO_TP_MAX_WFT_NUMBER<sp/>(1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109" refid="isotp__config_8h_1ad660a5ee13292128752d4fe01fde3efd" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US<sp/>(100000)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>#define<sp/>ISO_TP_FRAME_PADDING<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISO_TP_FRAME_PADDING_VALUE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125" refid="isotp__config_8h_1a3f1d019698d743a8ae627b3225b65f55" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISO_TP_FRAME_PADDING_VALUE<sp/>(0xAA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>#define<sp/>ISO_TP_USER_SEND_CAN_ARG<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>#define<sp/>ISO_TP_TRANSMIT_COMPLETE_CALLBACK<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>#define<sp/>ISO_TP_RECEIVE_COMPLETE_CALLBACK<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ISOTPC_CONFIG_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="inc/isotp_config.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/group__isotp__user/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Group isotp_user - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Group isotp_user";
+        var mkdocs_page_input_path = "docs/group__isotp__user.md";
+        var mkdocs_page_url = "/isotp-c/docs/group__isotp__user/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Group isotp_user</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="group-isotp_user">Group isotp_user<a class="headerlink" href="#group-isotp_user" title="Permanent link">&para;</a></h1>
+<p><a href="../modules/"><strong>Modules</strong></a> <strong>&gt;</strong> <a href="./"><strong>isotp_user</strong></a></p>
+<p><em>User-implemented callbacks and platform hooks.</em> <a href="#detailed-description">More...</a></p>
+<h2 id="public-functions">Public Functions<a class="headerlink" href="#public-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-isotp_user_debug"><strong>isotp_user_debug</strong></a> (const char * message, ...) <br><em>User implemented, print debug message.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#function-isotp_user_get_us"><strong>isotp_user_get_us</strong></a> (void) <br><em>User implemented, return a monotonically increasing timebase in microseconds.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_user_send_can"><strong>isotp_user_send_can</strong></a> (const uint32_t arbitration_id, const uint8_t * data, const uint8_t size) <br><em>User implemented, send CAN message.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description<a class="headerlink" href="#detailed-description" title="Permanent link">&para;</a></h2>
+<p>This group defines the platform abstraction points required by the ISO-TP core. Applications must provide these functions to integrate with their CAN driver, timing source, and optional debug output.</p>
+<p>**
+**</p>
+<ul>
+<li>Debug output hook: <a href="./#function-isotp_user_debug"><strong>isotp_user_debug</strong></a>. </li>
+<li>CAN transmit hook: <a href="./#function-isotp_user_send_can"><strong>isotp_user_send_can</strong></a> (optionally with ISO_TP_USER_SEND_CAN_ARG). </li>
+<li>Time source hook: <a href="./#function-isotp_user_get_us"><strong>isotp_user_get_us</strong></a>. </li>
+</ul>
+<h2 id="public-functions-documentation">Public Functions Documentation<a class="headerlink" href="#public-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-isotp_user_debug">function isotp_user_debug<a class="headerlink" href="#function-isotp_user_debug" title="Permanent link">&para;</a></h3>
+<p><em>User implemented, print debug message.</em> 
+<div class="highlight"><pre><span></span><code>void isotp_user_debug (
+    const char * message,
+    ...
+) 
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>message</code> Debug message format string.</li>
+</ul>
+<p>User implemented, print debug message.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>message</code> The message to print. </li>
+</ul>
+<hr>
+
+<h3 id="function-isotp_user_get_us">function isotp_user_get_us<a class="headerlink" href="#function-isotp_user_get_us" title="Permanent link">&para;</a></h3>
+<p><em>User implemented, return a monotonically increasing timebase in microseconds.</em> 
+<div class="highlight"><pre><span></span><code>uint32_t isotp_user_get_us (
+    void
+) 
+</code></pre></div></p>
+<p>This function must provide a free-running timestamp in microseconds that increases monotonically over time. The ISO-TP core uses this value for timeout and delay calculations by performing arithmetic on the returned timestamp (for example, adding a timeout interval to it).</p>
+<p>Natural wrap-around of the 32-bit counter is allowed and will be handled by the ISO-TP core, but the value must not jump backwards except for such wrap-around.</p>
+<p><strong>Returns:</strong></p>
+<p>Current timebase value in microseconds.</p>
+<p>User implemented, return a monotonically increasing timebase in microseconds.</p>
+<p><strong>Returns:</strong></p>
+<p>uint32_t Current time in microseconds </p>
+<hr>
+
+<h3 id="function-isotp_user_send_can">function isotp_user_send_can<a class="headerlink" href="#function-isotp_user_send_can" title="Permanent link">&para;</a></h3>
+<p><em>User implemented, send CAN message.</em> 
+<div class="highlight"><pre><span></span><code>int isotp_user_send_can (
+    const uint32_t arbitration_id,
+    const uint8_t * data,
+    const uint8_t size
+) 
+</code></pre></div></p>
+<p>Should return ISOTP_RET_OK on success. </p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>arbitration_id</code> CAN message arbitration ID. </li>
+<li><code>data</code> Pointer to message data buffer. </li>
+<li><code>size</code> Size of message data in bytes. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, ISOTP_RET_NOSPACE if transfer should be retried later, or ISOTP_RET_ERROR on failure.</p>
+<p>User implemented, send CAN message.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>arbitration_id</code> The CAN ID to send with. </li>
+<li><code>data</code> Pointer to the data buffer to send. </li>
+<li><code>size</code> Size of the data buffer (max 8 bytes). </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>int ISOTP_RET_OK on success, ISOTP_RET_ERROR on failure. </p>
+<hr>
+
+<hr />
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

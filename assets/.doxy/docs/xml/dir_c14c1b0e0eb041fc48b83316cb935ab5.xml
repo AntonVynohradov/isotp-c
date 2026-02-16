@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_c14c1b0e0eb041fc48b83316cb935ab5" kind="dir">
+    <compoundname>example/linux_socket</compoundname>
+    <innerfile refid="linux__socket_8c">linux_socket.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="example/linux_socket/"/>
+  </compounddef>
+</doxygen>

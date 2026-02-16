@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/isotp__defines_8h_source/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File isotp_defines.h - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File isotp_defines.h";
+        var mkdocs_page_input_path = "docs/isotp__defines_8h_source.md";
+        var mkdocs_page_url = "/isotp-c/docs/isotp__defines_8h_source/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File isotp_defines.h</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-isotp_definesh">File isotp_defines.h<a class="headerlink" href="#file-isotp_definesh" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>File List</strong></a> <strong>&gt;</strong> <a href="../dir_bfccd401955b95cf8c75461437045ac0/"><strong>inc</strong></a> <strong>&gt;</strong> <a href="../isotp__defines_8h/"><strong>isotp_defines.h</strong></a></p>
+<p><a href="../isotp__defines_8h/">Go to the documentation of this file</a></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef ISOTPC_USER_DEFINITIONS_H</span>
+<span class="cp">#define ISOTPC_USER_DEFINITIONS_H</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__</span>
+<span class="cp">#define ISOTP_BYTE_ORDER_LITTLE_ENDIAN</span>
+<span class="cp">#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__</span>
+<span class="cp">#else</span>
+<span class="cp">#error &quot;unsupported byte ordering&quot;</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#define ISOTP_PACKED_STRUCT(content) typedef struct __attribute__((packed)) content</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef _MSC_VER</span>
+<span class="cp">#define ISOTP_PACKED_STRUCT(content) \</span>
+<span class="cp">    __pragma(pack(push, 1)) typedef struct content __pragma(pack(pop))</span>
+
+<span class="cp">#define snprintf _snprintf</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;windows.h&gt;</span>
+<span class="cp">#define ISOTP_BYTE_ORDER_LITTLE_ENDIAN</span>
+<span class="cp">#define __builtin_bswap8 _byteswap_uint8</span>
+<span class="cp">#define __builtin_bswap16 _byteswap_uint16</span>
+<span class="cp">#define __builtin_bswap32 _byteswap_uint32</span>
+<span class="cp">#define __builtin_bswap64 _byteswap_uint64</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#define LE32TOH(le)                                                                     \</span>
+<span class="cp">    ((uint32_t) (((le) &lt;&lt; 24) | (((le) &amp; 0x0000FF00) &lt;&lt; 8) | (((le) &amp; 0x00FF0000) &gt;&gt; 8) \</span>
+<span class="cp">                 | ((le) &gt;&gt; 24)))</span>
+
+<span class="cp">#define ISOTP_RET_OK 0</span>
+<span class="cp">#define ISOTP_RET_ERROR -1</span>
+<span class="cp">#define ISOTP_RET_INPROGRESS -2</span>
+<span class="cp">#define ISOTP_RET_OVERFLOW -3</span>
+<span class="cp">#define ISOTP_RET_WRONG_SN -4</span>
+<span class="cp">#define ISOTP_RET_NO_DATA -5</span>
+<span class="cp">#define ISOTP_RET_TIMEOUT -6</span>
+<span class="cp">#define ISOTP_RET_LENGTH -7</span>
+<span class="cp">#define ISOTP_RET_NOSPACE -8</span>
+
+<span class="cp">#define IsoTpTimeAfter(a, b) ((int32_t) ((int32_t) (b) - (int32_t) (a)) &lt; 0)</span>
+
+<span class="cp">#define ISOTP_INVALID_BS 0xFFFF</span>
+
+<span class="cp">#define ISOTP_MAX_ERROR_MSG_SIZE 128</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ISOTP_SEND_STATUS_IDLE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ISOTP_SEND_STATUS_INPROGRESS</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ISOTP_SEND_STATUS_ERROR</span><span class="p">,</span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpSendStatusTypes</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ISOTP_RECEIVE_STATUS_IDLE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ISOTP_RECEIVE_STATUS_INPROGRESS</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ISOTP_RECEIVE_STATUS_FULL</span><span class="p">,</span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpReceiveStatusTypes</span><span class="p">;</span>
+
+<span class="cp">#if defined(ISOTP_BYTE_ORDER_LITTLE_ENDIAN)</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reserve_1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reserve_2</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span><span class="w">  </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpPciType</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">SF_DL</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">  </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span><span class="w">   </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpSingleFrame</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">FF_DL_high</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">       </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">FF_DL_low</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span><span class="w">        </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpFirstFrameShort</span><span class="p">;</span>
+
+<span class="n">ISOTP_PACKED_STRUCT</span><span class="p">({</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">set_to_zero_high</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">             </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">set_to_zero_low</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">FF_DL</span><span class="p">;</span><span class="w">               </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w">              </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpFirstFrameLong</span><span class="p">);</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">SN</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span><span class="w">  </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpConsecutiveFrame</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">FS</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">     </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">BS</span><span class="p">;</span><span class="w">         </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">STmin</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reserve</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpFlowControl</span><span class="p">;</span>
+
+<span class="cp">#else</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reserve_1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reserve_2</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span><span class="w">  </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpPciType</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">  </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">SF_DL</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span><span class="w">   </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpSingleFrame</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">FF_DL_high</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">       </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">FF_DL_low</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span><span class="w">        </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpFirstFrameShort</span><span class="p">;</span>
+
+<span class="n">ISOTP_PACKED_STRUCT</span><span class="p">({</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">set_to_zero_high</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">             </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">set_to_zero_low</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">FF_DL</span><span class="p">;</span><span class="w">               </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w">              </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpFirstFrameLong</span><span class="p">);</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">SN</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span><span class="w">  </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpConsecutiveFrame</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">FS</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">     </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">BS</span><span class="p">;</span><span class="w">         </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">STmin</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reserve</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpFlowControl</span><span class="p">;</span>
+
+<span class="cp">#endif</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ptr</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpDataArray</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">union</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">IsoTpPciType</span><span class="w"> </span><span class="n">common</span><span class="p">;</span>
+<span class="w">        </span><span class="n">IsoTpSingleFrame</span><span class="w"> </span><span class="n">single_frame</span><span class="p">;</span>
+<span class="w">        </span><span class="n">IsoTpFirstFrameShort</span><span class="w"> </span><span class="n">first_frame_short</span><span class="p">;</span>
+<span class="w">        </span><span class="n">IsoTpFirstFrameLong</span><span class="w"> </span><span class="n">first_frame_long</span><span class="p">;</span>
+<span class="w">        </span><span class="n">IsoTpConsecutiveFrame</span><span class="w"> </span><span class="n">consecutive_frame</span><span class="p">;</span>
+<span class="w">        </span><span class="n">IsoTpFlowControl</span><span class="w"> </span><span class="n">flow_control</span><span class="p">;</span>
+<span class="w">        </span><span class="n">IsoTpDataArray</span><span class="w"> </span><span class="n">data_array</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">as</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="p">;</span>
+
+<span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">isotp_tx_done_cb</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tx_size</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">user_arg</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">isotp_rx_done_cb</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">user_arg</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ISOTP_PCI_TYPE_SINGLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ISOTP_PCI_TYPE_FIRST_FRAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">TSOTP_PCI_TYPE_CONSECUTIVE_FRAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ISOTP_PCI_TYPE_FLOW_CONTROL_FRAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x3</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">ISOTP_PCI_TYPE_CONSECUTIVE_FRAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2</span><span class="p">,</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpProtocolControlInformation</span><span class="p">;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">PCI_FLOW_STATUS_CONTINUE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PCI_FLOW_STATUS_WAIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PCI_FLOW_STATUS_OVERFLOW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2</span>
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpFlowStatus</span><span class="p">;</span>
+
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_OK 0</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_TIMEOUT_A -1</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_TIMEOUT_BS -2</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_TIMEOUT_CR -3</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_WRONG_SN -4</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_INVALID_FS -5</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_UNEXP_PDU -6</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_WFT_OVRN -7</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_BUFFER_OVFLW -8</span>
+<span class="cp">#define ISOTP_PROTOCOL_RESULT_ERROR -9</span>
+
+<span class="cp">#endif </span><span class="cm">/* ISOTPC_USER_DEFINITIONS_H */</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

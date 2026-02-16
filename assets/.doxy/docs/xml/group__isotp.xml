@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="group__isotp" kind="group">
+    <compoundname>isotp</compoundname>
+    <title>ISO-TP API</title>
+    <innerclass refid="structIsoTpLink" prot="public">IsoTpLink</innerclass>
+    <innergroup refid="group__isotp__config">Configuration</innergroup>
+    <innergroup refid="group__isotp__defines">Protocol definitions</innergroup>
+    <innergroup refid="group__isotp__user">User hooks</innergroup>
+    <sectiondef kind="user-defined">
+      <header>Type definitions</header>
+      <memberdef kind="typedef" id="group__isotp_1ga218c16d1a14a719db9e6bed682607e1e" prot="public" static="no">
+        <type>struct <ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref></type>
+        <definition>typedef struct IsoTpLink IsoTpLink</definition>
+        <argsstring></argsstring>
+        <name>IsoTpLink</name>
+        <briefdescription>
+<para>Link state for a single ISO-TP connection. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data stored in this struct is used internally and may be used by software programs using this library. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="134" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Public function declarations</header>
+      <memberdef kind="function" id="group__isotp_1ga33d058c31be466471bec77f79c89fe00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_init_link</definition>
+        <argsstring>(IsoTpLink *link, uint32_t sendid, uint8_t *sendbuf, uint32_t sendbufsize, uint8_t *recvbuf, uint32_t recvbufsize)</argsstring>
+        <name>isotp_init_link</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>sendid</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>sendbuf</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>sendbufsize</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>recvbuf</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>recvbufsize</declname>
+        </param>
+        <briefdescription>
+<para>Initialises the ISO-TP library. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <programlisting><codeline><highlight class="normal">IsoTpLink<sp/></highlight></codeline>
+</programlisting> instance used for transceiving data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sendid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID used to send data to other CAN nodes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sendbuf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to an area in memory which can be used as a buffer for data to be sent. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sendbufsize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the buffer area. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>recvbuf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to an area in memory which can be used as a buffer for data to be received. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>recvbufsize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the buffer area. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="153" column="6" bodyfile="src/isotp.c" bodystart="804" bodyend="827" declfile="isotp.h" declline="153" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp_1gab899edec17137039c752907dbc6c28b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_destroy_link</definition>
+        <argsstring>(IsoTpLink *link)</argsstring>
+        <name>isotp_destroy_link</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>Destroys the ISO-TP link and releases associated resources. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <programlisting><codeline><highlight class="normal">IsoTpLink<sp/></highlight></codeline>
+</programlisting> instance to destroy. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="161" column="6" bodyfile="src/isotp.c" bodystart="829" bodyend="849" declfile="isotp.h" declline="161" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp_1ga9305b87c0a30798a70a9c0f9c10f70a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_poll</definition>
+        <argsstring>(IsoTpLink *link)</argsstring>
+        <name>isotp_poll</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>Polling function; call this function periodically to handle timeouts, send consecutive frames, etc. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <programlisting><codeline><highlight class="normal">IsoTpLink<sp/></highlight></codeline>
+</programlisting> instance used. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="169" column="6" bodyfile="src/isotp.c" bodystart="851" bodyend="919" declfile="isotp.h" declline="169" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp_1ga860db76a76581b5c4e069d3a48a3484f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_on_can_message</definition>
+        <argsstring>(IsoTpLink *link, const uint8_t *data, uint8_t len)</argsstring>
+        <name>isotp_on_can_message</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+<para>Handles incoming CAN messages. Determines whether an incoming message is a valid ISO-TP frame or not and handles it accordingly. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <programlisting><codeline><highlight class="normal">IsoTpLink<sp/></highlight></codeline>
+</programlisting> instance used for transceiving data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data received via CAN. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length of the data received. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="180" column="6" bodyfile="src/isotp.c" bodystart="578" bodyend="770" declfile="isotp.h" declline="180" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp_1ga2f6c44f2d4bd1574e1bc283d5df0464e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_send</definition>
+        <argsstring>(IsoTpLink *link, const uint8_t payload[], uint32_t size)</argsstring>
+        <name>isotp_send</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>payload</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Sends ISO-TP frames via CAN, using the ID set in the initialising function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Single-frame messages will be sent immediately when calling this function. Multi-frame messages will be sent consecutively when calling isotp_poll.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <programlisting><codeline><highlight class="normal">IsoTpLink<sp/></highlight></codeline>
+</programlisting> instance used for transceiving data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The payload to be sent. (Up to 4095 bytes). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the payload to be sent.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Possible return values:<itemizedlist>
+<listitem><para><programlisting><codeline><highlight class="normal">ISOTP_RET_OVERFLOW<sp/></highlight></codeline>
+</programlisting></para>
+</listitem><listitem><para><programlisting><codeline><highlight class="normal">ISOTP_RET_INPROGRESS<sp/></highlight></codeline>
+</programlisting></para>
+</listitem><listitem><para><programlisting><codeline><highlight class="normal">ISOTP_RET_OK<sp/></highlight></codeline>
+</programlisting></para>
+</listitem><listitem><para>The return value of the user shim function <ref refid="group__isotp__user_1ga1443c22c029ba979ab39e47c47037f33" kindref="member">isotp_user_send_can()</ref>. </para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="198" column="5" bodyfile="src/isotp.c" bodystart="503" bodyend="506" declfile="isotp.h" declline="198" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_send_with_id</definition>
+        <argsstring>(IsoTpLink *link, uint32_t id, const uint8_t payload[], uint32_t size)</argsstring>
+        <name>isotp_send_with_id</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>payload</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>See <ref refid="group__isotp_1ga2f6c44f2d4bd1574e1bc283d5df0464e" kindref="member">isotp_send</ref>, with the exception that this function is used only for functional addressing. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="204" column="5" bodyfile="src/isotp.c" bodystart="508" bodyend="576" declfile="isotp.h" declline="204" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp_1ga45661b91ddfb5e9d273f5d7ca2381ca4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_receive</definition>
+        <argsstring>(IsoTpLink *link, uint8_t *payload, const uint32_t payload_size, uint32_t *out_size)</argsstring>
+        <name>isotp_receive</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>payload_size</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>out_size</declname>
+        </param>
+        <briefdescription>
+<para>Receives and parses the received data and copies the parsed data into the internal buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> instance used to transceive data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to an area in memory where the raw data is copied from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the received (raw) CAN data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to a variable which will contain the size of the actual (parsed) data.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Possible return values:<itemizedlist>
+<listitem><para><ref refid="isotp__defines_8h_1ac1c9185705f9f0099f31fe121873a2f0" kindref="member">ISOTP_RET_OK</ref></para>
+</listitem><listitem><para><ref refid="_1a4de727bba4c13daf6dc126cb0fbbb7b0" kindref="member">ISOTP_RET_NO_DATA</ref> </para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="219" column="5" bodyfile="src/isotp.c" bodystart="772" bodyend="802" declfile="isotp.h" declline="219" declcolumn="5"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Public API for ISO-TP link management and message handling. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This module groups the public interface and its supporting submodules: <ref refid="group__isotp__config" kindref="compound">Configuration</ref>, <ref refid="group__isotp__defines" kindref="compound">Protocol definitions</ref>, and <ref refid="group__isotp__user" kindref="compound">User hooks</ref>.</para>
+<para>This group defines the public interface for initializing links, sending and receiving messages, handling incoming CAN frames, and polling the protocol state machine. It also exposes optional callback registration when enabled in configuration.</para>
+<para><simplesect kind="par"><title>Public interface includes:</title><para><itemizedlist>
+<listitem><para>Link lifecycle: <ref refid="group__isotp_1ga33d058c31be466471bec77f79c89fe00" kindref="member">isotp_init_link</ref>, <ref refid="group__isotp_1gab899edec17137039c752907dbc6c28b6" kindref="member">isotp_destroy_link</ref>. </para>
+</listitem>
+<listitem><para>Message flow: <ref refid="group__isotp_1ga2f6c44f2d4bd1574e1bc283d5df0464e" kindref="member">isotp_send</ref>, <ref refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kindref="member">isotp_send_with_id</ref>, <ref refid="group__isotp_1ga860db76a76581b5c4e069d3a48a3484f" kindref="member">isotp_on_can_message</ref>, <ref refid="group__isotp_1ga45661b91ddfb5e9d273f5d7ca2381ca4" kindref="member">isotp_receive</ref>, <ref refid="group__isotp_1ga9305b87c0a30798a70a9c0f9c10f70a4" kindref="member">isotp_poll</ref>. </para>
+</listitem>
+<listitem><para>Link data model: <ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>. </para>
+</listitem>
+<listitem><para>Optional callbacks: isotp_set_tx_done_cb, isotp_set_rx_done_cb. </para>
+</listitem>
+</itemizedlist>
+</para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

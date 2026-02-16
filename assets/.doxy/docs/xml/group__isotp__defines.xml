@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="group__isotp__defines" kind="group">
+    <compoundname>isotp_defines</compoundname>
+    <title>Protocol definitions</title>
+    <briefdescription>
+<para>Internal protocol definitions and type structures. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This group contains the low-level building blocks used by the ISO-TP core (frame layouts, PCI types, status codes, and timing helpers). These definitions describe how CAN frames are encoded/decoded and provide enums and constants that drive the state machine in isotp.c.</para>
+<para><simplesect kind="par"><title>Elements in this group include:</title><para><itemizedlist>
+<listitem><para>Frame layout structs: <ref refid="structIsoTpSingleFrame" kindref="compound">IsoTpSingleFrame</ref>, <ref refid="structIsoTpFirstFrameShort" kindref="compound">IsoTpFirstFrameShort</ref>, IsoTpFirstFrameLong, <ref refid="structIsoTpConsecutiveFrame" kindref="compound">IsoTpConsecutiveFrame</ref>, <ref refid="structIsoTpFlowControl" kindref="compound">IsoTpFlowControl</ref>. </para>
+</listitem>
+<listitem><para>Frame container: <ref refid="structIsoTpCanMessage" kindref="compound">IsoTpCanMessage</ref> and <ref refid="structIsoTpDataArray" kindref="compound">IsoTpDataArray</ref>. </para>
+</listitem>
+<listitem><para>PCI type and flow status enums: <ref refid="isotp__defines_8h_1ad1201454433ee0961eeb21b315bbba9e" kindref="member">IsoTpProtocolControlInformation</ref>, <ref refid="isotp__defines_8h_1abfb4c49663905566949e8645a499c5e5" kindref="member">IsoTpFlowStatus</ref>. </para>
+</listitem>
+<listitem><para>Return codes and protocol result codes: <ref refid="isotp__defines_8h_1ac1c9185705f9f0099f31fe121873a2f0" kindref="member">ISOTP_RET_OK</ref>, ISOTP_RET_ERROR, ISOTP_RET_INPROGRESS, ISOTP_RET_OVERFLOW, ISOTP_RET_WRONG_SN, ISOTP_RET_NO_DATA, ISOTP_RET_TIMEOUT, ISOTP_RET_LENGTH, ISOTP_RET_NOSPACE, <ref refid="isotp__defines_8h_1a521da3ace0713dc72fceaa1164f847a6" kindref="member">ISOTP_PROTOCOL_RESULT_OK</ref>, ISOTP_PROTOCOL_RESULT_TIMEOUT_A, ISOTP_PROTOCOL_RESULT_TIMEOUT_BS, ISOTP_PROTOCOL_RESULT_TIMEOUT_CR, ISOTP_PROTOCOL_RESULT_WRONG_SN, ISOTP_PROTOCOL_RESULT_INVALID_FS, ISOTP_PROTOCOL_RESULT_UNEXP_PDU, ISOTP_PROTOCOL_RESULT_WFT_OVRN, ISOTP_PROTOCOL_RESULT_BUFFER_OVFLW, ISOTP_PROTOCOL_RESULT_ERROR. </para>
+</listitem>
+<listitem><para>Byte order and packing helpers: ISOTP_BYTE_ORDER_LITTLE_ENDIAN, <ref refid="isotp__defines_8h_1a43e3fa16bbb146f1e4fe7f8cd2ab7d3c" kindref="member">ISOTP_PACKED_STRUCT</ref>, <ref refid="isotp__defines_8h_1a0a8ad699f5a5cbe825175885503d2687" kindref="member">LE32TOH</ref>. </para>
+</listitem>
+<listitem><para>Status types and helpers: <ref refid="isotp__defines_8h_1a5d522a44d5fa55ae10277dc20229aea8" kindref="member">IsoTpSendStatusTypes</ref>, <ref refid="isotp__defines_8h_1a0e9567c06522ba8a4367b6550a86373f" kindref="member">IsoTpReceiveStatusTypes</ref>, <ref refid="isotp__defines_8h_1ae4dfc16ad3ec2a38c70589afa3a30c5a" kindref="member">IsoTpTimeAfter</ref>, <ref refid="isotp__defines_8h_1a3e38ef698206ae8104d03c87ff9b1452" kindref="member">ISOTP_INVALID_BS</ref>, <ref refid="isotp__defines_8h_1ad803ec6faf434a321a4c607a1cb297ff" kindref="member">ISOTP_MAX_ERROR_MSG_SIZE</ref>. </para>
+</listitem>
+</itemizedlist>
+</para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/structIsoTpLink/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Struct IsoTpLink - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Struct IsoTpLink";
+        var mkdocs_page_input_path = "docs/structIsoTpLink.md";
+        var mkdocs_page_url = "/isotp-c/docs/structIsoTpLink/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Struct IsoTpLink</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="struct-isotplink">Struct IsoTpLink<a class="headerlink" href="#struct-isotplink" title="Permanent link">&para;</a></h1>
+<p><a href="../annotated/"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="./"><strong>IsoTpLink</strong></a></p>
+<p><em>Link state for a single ISO-TP connection.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;isotp.h&gt;</code></li>
+</ul>
+<h2 id="public-attributes">Public Attributes<a class="headerlink" href="#public-attributes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-receive_arbitration_id"><strong>receive_arbitration_id</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#variable-receive_bs_count"><strong>receive_bs_count</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-receive_buf_size"><strong>receive_buf_size</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t *</td>
+<td style="text-align: left;"><a href="#variable-receive_buffer"><strong>receive_buffer</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-receive_offset"><strong>receive_offset</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-receive_protocol_result"><strong>receive_protocol_result</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-receive_size"><strong>receive_size</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#variable-receive_sn"><strong>receive_sn</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#variable-receive_status"><strong>receive_status</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-receive_timer_cr"><strong>receive_timer_cr</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-send_arbitration_id"><strong>send_arbitration_id</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-send_bs_remain"><strong>send_bs_remain</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-send_buf_size"><strong>send_buf_size</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t *</td>
+<td style="text-align: left;"><a href="#variable-send_buffer"><strong>send_buffer</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-send_offset"><strong>send_offset</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">int32_t</td>
+<td style="text-align: left;"><a href="#variable-send_protocol_result"><strong>send_protocol_result</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-send_size"><strong>send_size</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#variable-send_sn"><strong>send_sn</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-send_st_min_us"><strong>send_st_min_us</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#variable-send_status"><strong>send_status</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-send_timer_bs"><strong>send_timer_bs</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#variable-send_timer_st"><strong>send_timer_st</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#variable-send_wtf_count"><strong>send_wtf_count</strong></a>  <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description<a class="headerlink" href="#detailed-description" title="Permanent link">&para;</a></h2>
+<p>The data stored in this struct is used internally and may be used by software programs using this library. </p>
+<h2 id="public-attributes-documentation">Public Attributes Documentation<a class="headerlink" href="#public-attributes-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="variable-receive_arbitration_id">variable receive_arbitration_id<a class="headerlink" href="#variable-receive_arbitration_id" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_arbitration_id</span><span class="p">;</span>
+</code></pre></div>
+<p>Arbitration ID used for reception. </p>
+<hr>
+
+<h3 id="variable-receive_bs_count">variable receive_bs_count<a class="headerlink" href="#variable-receive_bs_count" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_bs_count</span><span class="p">;</span>
+</code></pre></div>
+<p>Max number of FC.Wait frames to send. </p>
+<hr>
+
+<h3 id="variable-receive_buf_size">variable receive_buf_size<a class="headerlink" href="#variable-receive_buf_size" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_buf_size</span><span class="p">;</span>
+</code></pre></div>
+<p>Receive buffer size in bytes. </p>
+<hr>
+
+<h3 id="variable-receive_buffer">variable receive_buffer<a class="headerlink" href="#variable-receive_buffer" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_buffer</span><span class="p">;</span>
+</code></pre></div>
+<p>Receive buffer base pointer. </p>
+<hr>
+
+<h3 id="variable-receive_offset">variable receive_offset<a class="headerlink" href="#variable-receive_offset" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_offset</span><span class="p">;</span>
+</code></pre></div>
+<p>Current receive offset in bytes. </p>
+<hr>
+
+<h3 id="variable-receive_protocol_result">variable receive_protocol_result<a class="headerlink" href="#variable-receive_protocol_result" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_protocol_result</span><span class="p">;</span>
+</code></pre></div>
+<p>Last protocol result code for receiver. </p>
+<hr>
+
+<h3 id="variable-receive_size">variable receive_size<a class="headerlink" href="#variable-receive_size" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_size</span><span class="p">;</span>
+</code></pre></div>
+<p>Total received size in bytes. </p>
+<hr>
+
+<h3 id="variable-receive_sn">variable receive_sn<a class="headerlink" href="#variable-receive_sn" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_sn</span><span class="p">;</span>
+</code></pre></div>
+<p>Expected sequence number. </p>
+<hr>
+
+<h3 id="variable-receive_status">variable receive_status<a class="headerlink" href="#variable-receive_status" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_status</span><span class="p">;</span>
+</code></pre></div>
+<p>Receiver status. </p>
+<hr>
+
+<h3 id="variable-receive_timer_cr">variable receive_timer_cr<a class="headerlink" href="#variable-receive_timer_cr" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">receive_timer_cr</span><span class="p">;</span>
+</code></pre></div>
+<p>Timer until next ConsecutiveFrame is expected. </p>
+<hr>
+
+<h3 id="variable-send_arbitration_id">variable send_arbitration_id<a class="headerlink" href="#variable-send_arbitration_id" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_arbitration_id</span><span class="p">;</span>
+</code></pre></div>
+<p>Arbitration ID used for consecutive frames. </p>
+<hr>
+
+<h3 id="variable-send_bs_remain">variable send_bs_remain<a class="headerlink" href="#variable-send_bs_remain" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_bs_remain</span><span class="p">;</span>
+</code></pre></div>
+<p>Remaining block size. </p>
+<hr>
+
+<h3 id="variable-send_buf_size">variable send_buf_size<a class="headerlink" href="#variable-send_buf_size" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_buf_size</span><span class="p">;</span>
+</code></pre></div>
+<p>Send buffer size in bytes. </p>
+<hr>
+
+<h3 id="variable-send_buffer">variable send_buffer<a class="headerlink" href="#variable-send_buffer" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_buffer</span><span class="p">;</span>
+</code></pre></div>
+<p>Send buffer base pointer. </p>
+<hr>
+
+<h3 id="variable-send_offset">variable send_offset<a class="headerlink" href="#variable-send_offset" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_offset</span><span class="p">;</span>
+</code></pre></div>
+<p>Current send offset in bytes. </p>
+<hr>
+
+<h3 id="variable-send_protocol_result">variable send_protocol_result<a class="headerlink" href="#variable-send_protocol_result" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_protocol_result</span><span class="p">;</span>
+</code></pre></div>
+<p>Last protocol result code for sender. </p>
+<hr>
+
+<h3 id="variable-send_size">variable send_size<a class="headerlink" href="#variable-send_size" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_size</span><span class="p">;</span>
+</code></pre></div>
+<p>Total size to send in bytes. </p>
+<hr>
+
+<h3 id="variable-send_sn">variable send_sn<a class="headerlink" href="#variable-send_sn" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_sn</span><span class="p">;</span>
+</code></pre></div>
+<p>Current sequence number. </p>
+<hr>
+
+<h3 id="variable-send_st_min_us">variable send_st_min_us<a class="headerlink" href="#variable-send_st_min_us" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_st_min_us</span><span class="p">;</span>
+</code></pre></div>
+<p>Minimum separation time in microseconds. </p>
+<hr>
+
+<h3 id="variable-send_status">variable send_status<a class="headerlink" href="#variable-send_status" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_status</span><span class="p">;</span>
+</code></pre></div>
+<p>Sender status. </p>
+<hr>
+
+<h3 id="variable-send_timer_bs">variable send_timer_bs<a class="headerlink" href="#variable-send_timer_bs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_timer_bs</span><span class="p">;</span>
+</code></pre></div>
+<p>Timer until next FlowControl is expected. </p>
+<hr>
+
+<h3 id="variable-send_timer_st">variable send_timer_st<a class="headerlink" href="#variable-send_timer_st" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_timer_st</span><span class="p">;</span>
+</code></pre></div>
+<p>Timestamp of last consecutive frame send. </p>
+<hr>
+
+<h3 id="variable-send_wtf_count">variable send_wtf_count<a class="headerlink" href="#variable-send_wtf_count" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">::</span><span class="n">send_wtf_count</span><span class="p">;</span>
+</code></pre></div>
+<p>Max number of FC.Wait frames to send. </p>
+<hr>
+
+<hr />
+<p>The documentation for this class was generated from the following file <code>isotp.h</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

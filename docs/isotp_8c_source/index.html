@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/isotp_8c_source/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File isotp.c - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File isotp.c";
+        var mkdocs_page_input_path = "docs/isotp_8c_source.md";
+        var mkdocs_page_url = "/isotp-c/docs/isotp_8c_source/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File isotp.c</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-isotpc">File isotp.c<a class="headerlink" href="#file-isotpc" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>File List</strong></a> <strong>&gt;</strong> <a href="../dir_68267d1309a1af8e8297ef4c3efbcdba/"><strong>src</strong></a> <strong>&gt;</strong> <a href="../isotp_8c/"><strong>isotp.c</strong></a></p>
+<p><a href="../isotp_8c/">Go to the documentation of this file</a></p>
+<div class="highlight"><pre><span></span><code><span class="cm">/*******************************************************************************</span>
+<span class="cm"> * ISO-TP-C: ISO 15765-2 Protocol Implementation</span>
+<span class="cm"> *</span>
+<span class="cm"> * Project:     ISO-TP-C - Embedded-Grade Refactoring &amp; Optimization</span>
+<span class="cm"> * Description: Core ISO-TP protocol implementation with multi-frame support</span>
+<span class="cm"> *</span>
+<span class="cm"> * Author:      Anton Vynohradov</span>
+<span class="cm"> * Email:       avynohradov@systemfromscratch.com</span>
+<span class="cm"> *</span>
+<span class="cm"> * License:     MIT License</span>
+<span class="cm"> *</span>
+<span class="cm"> * Copyright (c) 2026 Anton Vynohradov</span>
+<span class="cm"> *</span>
+<span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="cm"> * of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="cm"> * in the Software without restriction, including without limitation the rights</span>
+<span class="cm"> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="cm"> * copies of the Software, and to permit persons to whom the Software is</span>
+<span class="cm"> * furnished to do so, subject to the following conditions:</span>
+<span class="cm"> *</span>
+<span class="cm"> * The above copyright notice and this permission notice shall be included in</span>
+<span class="cm"> * all copies or substantial portions of the Software.</span>
+<span class="cm"> *</span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="cm"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="cm"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="cm"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="cm"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="cm"> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="cm"> * THE SOFTWARE.</span>
+<span class="cm"> *</span>
+<span class="cm"> * SPDX-License-Identifier: MIT</span>
+<span class="cm"> ******************************************************************************/</span>
+
+<span class="cm">/* ==============================================================================</span>
+<span class="cm"> * INCLUDES</span>
+<span class="cm"> * =============================================================================*/</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;assert.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;isotp.h&quot;</span>
+
+<span class="cm">/* ==============================================================================</span>
+<span class="cm"> * DEFINES &amp; MACROS</span>
+<span class="cm"> * =============================================================================*/</span>
+
+<span class="cm">/* ==============================================================================</span>
+<span class="cm"> * PRIVATE TYPE DEFINITIONS</span>
+<span class="cm"> * =============================================================================*/</span>
+
+<span class="cm">/* ==============================================================================</span>
+<span class="cm"> * PRIVATE VARIABLES (static)</span>
+<span class="cm"> * =============================================================================*/</span>
+
+<span class="cm">/* ==============================================================================</span>
+<span class="cm"> * PRIVATE FUNCTION DECLARATIONS (static)</span>
+<span class="cm"> * =============================================================================*/</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">isotp_us_to_st_min</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">us</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">isotp_st_min_to_us</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">st_min</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_flow_control</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">flow_status</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">block_size</span><span class="p">,</span>
+<span class="w">                                   </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">st_min_us</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_single_frame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_first_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_consecutive_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive_single_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive_first_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive_consecutive_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span>
+<span class="w">                                           </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive_flow_control_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="cm">/* ==============================================================================</span>
+<span class="cm"> * PRIVATE FUNCTION IMPLEMENTATIONS</span>
+<span class="cm"> * =============================================================================*/</span>
+
+<span class="cm">/* st_min to microsecond */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">isotp_us_to_st_min</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">us</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ISO 15765-2:2016 defines STmin encoding:</span>
+<span class="w">    </span><span class="c1">// 0x00..0x7F: value in milliseconds (0..127 ms)</span>
+<span class="w">    </span><span class="c1">// 0xF1..0xF9: value in 100 microsecond steps (100..900 us)</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">STMIN_MS_MAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">127000</span><span class="p">;</span><span class="w">  </span><span class="c1">// 127 ms in us</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">STMIN_US_MIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w">     </span><span class="c1">// 100 us</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">STMIN_US_MAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">900</span><span class="p">;</span><span class="w">     </span><span class="c1">// 900 us</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">STMIN_US_BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">;</span><span class="w">    </span><span class="c1">// base for 100us steps</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">us</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">STMIN_MS_MAX</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">us</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">STMIN_US_MIN</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">us</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">STMIN_US_MAX</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">STMIN_US_BASE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">us</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">us</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000u</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* st_min to usec  */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">isotp_st_min_to_us</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">st_min</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ISO 15765-2:2016 defines STmin encoding:</span>
+<span class="w">    </span><span class="c1">// 0x00..0x7F: value in milliseconds (0..127 ms)</span>
+<span class="w">    </span><span class="c1">// 0xF1..0xF9: value in 100 microsecond steps (100..900 us)</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">STMIN_MS_MAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x7F</span><span class="p">;</span><span class="w">       </span><span class="c1">// 127 ms</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">STMIN_US_MIN_CODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xF1</span><span class="p">;</span><span class="w">  </span><span class="c1">// 100 us</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">STMIN_US_MAX_CODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xF9</span><span class="p">;</span><span class="w">  </span><span class="c1">// 900 us</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">STMIN_US_BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">;</span><span class="w">      </span><span class="c1">// base for 100us steps</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">US_PER_MS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">US_STEP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">st_min</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">STMIN_MS_MAX</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">st_min</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">US_PER_MS</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">st_min</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">STMIN_US_MIN_CODE</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">st_min</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">STMIN_US_MAX_CODE</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">st_min</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STMIN_US_BASE</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">US_STEP</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_flow_control</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">flow_status</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">block_size</span><span class="p">,</span>
+<span class="w">                                   </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">st_min_us</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">));</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* setup message  */</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PCI_TYPE_FLOW_CONTROL_FRAME</span><span class="p">;</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">FS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flow_status</span><span class="p">;</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">BS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">block_size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">STmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_us_to_st_min</span><span class="p">(</span><span class="n">st_min_us</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* send message */</span>
+<span class="cp">#ifdef ISO_TP_FRAME_PADDING</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memset</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">reserve</span><span class="p">,</span><span class="w"> </span><span class="n">ISO_TP_FRAME_PADDING_VALUE</span><span class="p">,</span>
+<span class="w">                  </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">reserve</span><span class="p">));</span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_send_can</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_arbitration_id</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">data_array</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">size</span>
+<span class="cp">#if defined(ISO_TP_USER_SEND_CAN_ARG)</span>
+<span class="w">                              </span><span class="p">,</span>
+<span class="w">                              </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">user_send_can_arg</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_single_frame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">  </span><span class="c1">// Prevent unused variable warning</span>
+
+<span class="w">    </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* multi frame message length must greater than 7  */</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* setup message  */</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PCI_TYPE_SINGLE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">SF_DL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">;</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* send message */</span>
+<span class="cp">#ifdef ISO_TP_FRAME_PADDING</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memset</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">,</span><span class="w"> </span><span class="n">ISO_TP_FRAME_PADDING_VALUE</span><span class="p">,</span>
+<span class="w">                  </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">);</span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_send_can</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_arbitration_id</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">data_array</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">size</span>
+<span class="cp">#if defined(ISO_TP_USER_SEND_CAN_ARG)</span>
+<span class="w">                              </span><span class="p">,</span>
+<span class="w">                              </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">user_send_can_arg</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_first_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* multi frame message length must greater than 7  */</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4095</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* setup &#39;short&#39; message */</span>
+<span class="w">        </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PCI_TYPE_FIRST_FRAME</span><span class="p">;</span>
+<span class="w">        </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">FF_DL_low</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">;</span>
+<span class="w">        </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">FF_DL_high</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mh">0x0F</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">));</span>
+<span class="w">        </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buffer</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">data</span><span class="p">));</span>
+
+<span class="w">        </span><span class="cm">/* send &#39;short&#39; message */</span>
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_send_can</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">data_array</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="cp">#if defined(ISO_TP_USER_SEND_CAN_ARG)</span>
+<span class="w">                                                                     </span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">user_send_can_arg</span>
+<span class="cp">#endif</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_offset</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span><span class="w">  </span><span class="c1">// ISO15765-2:2016</span>
+<span class="w">        </span><span class="cm">/* setup &#39;long&#39; message */</span>
+<span class="w">        </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">set_to_zero_high</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">set_to_zero_low</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PCI_TYPE_FIRST_FRAME</span><span class="p">;</span>
+<span class="w">        </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">FF_DL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LE32TOH</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buffer</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">data</span><span class="p">));</span>
+
+<span class="w">        </span><span class="cm">/* send &#39;long&#39; message */</span>
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_send_can</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">data_array</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="cp">#if defined(ISO_TP_USER_SEND_CAN_ARG)</span>
+<span class="w">                                                                     </span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">user_send_can_arg</span>
+<span class="cp">#endif</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_offset</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_sn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_consecutive_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">data_length</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* multi frame message length must greater than 7  */</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* setup message  */</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PCI_TYPE_CONSECUTIVE_FRAME</span><span class="p">;</span>
+<span class="w">    </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">SN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_sn</span><span class="p">;</span>
+<span class="w">    </span><span class="n">data_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">data_length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">data</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">data_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buffer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_offset</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">data_length</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* send message */</span>
+<span class="cp">#ifdef ISO_TP_FRAME_PADDING</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memset</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data_length</span><span class="p">,</span><span class="w"> </span><span class="n">ISO_TP_FRAME_PADDING_VALUE</span><span class="p">,</span>
+<span class="w">                  </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">data_length</span><span class="p">);</span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_send_can</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_arbitration_id</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">data_array</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">size</span>
+<span class="cp">#if defined(ISO_TP_USER_SEND_CAN_ARG)</span>
+<span class="w">                              </span><span class="p">,</span>
+<span class="w">                              </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">user_send_can_arg</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_offset</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">data_length</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">++</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_sn</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mh">0x0F</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_sn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive_single_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* check data length */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">SF_DL</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">SF_DL</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;Single-frame length too small.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_LENGTH</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* copying data */</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">data</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">SF_DL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">single_frame</span><span class="p">.</span><span class="n">SF_DL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive_first_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">is_long_packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">payload_length</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;First frame should be 8 bytes in length.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_LENGTH</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* check data length */</span>
+<span class="w">    </span><span class="n">payload_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">FF_DL_high</span><span class="p">;</span>
+<span class="w">    </span><span class="n">payload_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">payload_length</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">FF_DL_low</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* if length is ZERO we get a long message &gt; 4095bytes of payload */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">payload_length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">is_long_packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">payload_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LE32TOH</span><span class="p">(</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">FF_DL</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* should not use multiple frame transmition */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">payload_length</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;Should not use multiple frame transmission.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_LENGTH</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">payload_length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buf_size</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;Multi-frame response too large for receiving buffer.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_OVERFLOW</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* copying data */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_long_packet</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">data</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">data</span><span class="p">));</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_long</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">data</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">data</span><span class="p">));</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">first_frame_short</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">payload_length</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_sn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive_consecutive_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span>
+<span class="w">                                           </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">remaining_bytes</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* check sn */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_sn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">SN</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_WRONG_SN</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* check data length */</span>
+<span class="w">    </span><span class="n">remaining_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">remaining_bytes</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">data</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">remaining_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">remaining_bytes</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;Consecutive frame too short.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_LENGTH</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* copying data */</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buffer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_offset</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">consecutive_frame</span><span class="p">.</span><span class="n">data</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">remaining_bytes</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_offset</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">remaining_bytes</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">++</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_sn</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mh">0x0F</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_sn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive_flow_control_frame</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* unused args */</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">link</span><span class="p">;</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* check message length */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;Flow control frame too short.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_LENGTH</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* ==============================================================================</span>
+<span class="cm"> * PUBLIC FUNCTION IMPLEMENTATIONS</span>
+<span class="cm"> * =============================================================================*/</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">payload</span><span class="p">[],</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">isotp_send_with_id</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_arbitration_id</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_with_id</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">payload</span><span class="p">[],</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0x0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;Link is null!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_ERROR</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buf_size</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;Message size too large. Increase ISO_TP_MAX_MESSAGE_SIZE to set &quot;</span>
+<span class="w">                         </span><span class="s">&quot;a larger buffer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">message</span><span class="p">[</span><span class="n">ISOTP_MAX_ERROR_MSG_SIZE</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">        </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">writtenChars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snprintf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">ISOTP_MAX_ERROR_MSG_SIZE</span><span class="p">,</span>
+<span class="w">                                        </span><span class="s">&quot;Attempted to send %u bytes; max size is %u!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                                        </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buf_size</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assert</span><span class="p">(</span><span class="n">writtenChars</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">ISOTP_MAX_ERROR_MSG_SIZE</span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">writtenChars</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_OVERFLOW</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_SEND_STATUS_INPROGRESS</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">isotp_user_debug</span><span class="p">(</span><span class="s">&quot;Abort previous message, transmission in progress.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_INPROGRESS</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* copy into local buffer */</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">memcpy</span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* send single frame */</span>
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_send_single_frame</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb_arg</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* send multi-frame */</span>
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_send_first_frame</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/* init multi-frame control flags */</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_bs_remain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_st_min_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_wtf_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">();</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_OK</span><span class="p">;</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_SEND_STATUS_INPROGRESS</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_on_can_message</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">data_array</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+<span class="w">    </span><span class="n">memset</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">data_array</span><span class="p">.</span><span class="n">ptr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">data_array</span><span class="p">.</span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">type</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">ISOTP_PCI_TYPE_SINGLE</span><span class="p">:</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* update protocol result */</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RECEIVE_STATUS_INPROGRESS</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_UNEXP_PDU</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_OK</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="cm">/* handle message */</span>
+<span class="w">            </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_receive_single_frame</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="cm">/* change status */</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_FULL</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">ISOTP_PCI_TYPE_FIRST_FRAME</span><span class="p">:</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* update protocol result */</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RECEIVE_STATUS_INPROGRESS</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_UNEXP_PDU</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_OK</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="cm">/* handle message */</span>
+<span class="w">            </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_receive_first_frame</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="w">            </span><span class="cm">/* if overflow happened */</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OVERFLOW</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="cm">/* update protocol result */</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_BUFFER_OVFLW</span><span class="p">;</span>
+<span class="w">                </span><span class="cm">/* change status */</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_IDLE</span><span class="p">;</span>
+<span class="w">                </span><span class="cm">/* send error message */</span>
+<span class="w">                </span><span class="n">isotp_send_flow_control</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">PCI_FLOW_STATUS_OVERFLOW</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="cm">/* if receive successful */</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="cm">/* change status */</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_INPROGRESS</span><span class="p">;</span>
+<span class="w">                </span><span class="cm">/* send fc frame */</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_BLOCK_SIZE</span><span class="p">;</span>
+<span class="w">                </span><span class="n">isotp_send_flow_control</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">PCI_FLOW_STATUS_CONTINUE</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="p">,</span>
+<span class="w">                                        </span><span class="n">ISO_TP_DEFAULT_ST_MIN_US</span><span class="p">);</span>
+<span class="w">                </span><span class="cm">/* refresh timer cs */</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_timer_cr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">ISOTP_PCI_TYPE_CONSECUTIVE_FRAME</span><span class="p">:</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* check if in receiving status */</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RECEIVE_STATUS_INPROGRESS</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_UNEXP_PDU</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="cm">/* handle message */</span>
+<span class="w">            </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_receive_consecutive_frame</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="w">            </span><span class="cm">/* if wrong sn */</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_WRONG_SN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_WRONG_SN</span><span class="p">;</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_IDLE</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="cm">/* if success */</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="cm">/* refresh timer cs */</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_timer_cr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+
+<span class="w">                </span><span class="cm">/* receive finished */</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_offset</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_FULL</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="cm">/* send fc when bs reaches limit */</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">--</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_BLOCK_SIZE</span><span class="p">;</span>
+<span class="w">                        </span><span class="n">isotp_send_flow_control</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">PCI_FLOW_STATUS_CONTINUE</span><span class="p">,</span>
+<span class="w">                                                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="p">,</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_ST_MIN_US</span><span class="p">);</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">ISOTP_PCI_TYPE_FLOW_CONTROL_FRAME</span><span class="p">:</span>
+<span class="w">            </span><span class="cm">/* handle fc frame only when sending in progress  */</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_SEND_STATUS_INPROGRESS</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="cm">/* handle message */</span>
+<span class="w">            </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_receive_flow_control_frame</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="cm">/* refresh bs timer */</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+
+<span class="w">                </span><span class="cm">/* overflow */</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">PCI_FLOW_STATUS_OVERFLOW</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">FS</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_BUFFER_OVFLW</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_SEND_STATUS_ERROR</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="cm">/* wait */</span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">PCI_FLOW_STATUS_WAIT</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">FS</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_wtf_count</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                    </span><span class="cm">/* wait exceed allowed count */</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_wtf_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ISO_TP_MAX_WFT_NUMBER</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_WFT_OVRN</span><span class="p">;</span>
+<span class="w">                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_SEND_STATUS_ERROR</span><span class="p">;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="cm">/* permit send */</span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">PCI_FLOW_STATUS_CONTINUE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">FS</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">BS</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_bs_remain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_INVALID_BS</span><span class="p">;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="k">else</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_bs_remain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">BS</span><span class="p">;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">message_st_min_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_st_min_to_us</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">STmin</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_st_min_us</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                        </span><span class="n">message_st_min_us</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_ST_MIN_US</span><span class="w"> </span><span class="o">?</span>
+<span class="w">                            </span><span class="nl">message_st_min_us</span><span class="w"> </span><span class="p">:</span>
+<span class="w">                            </span><span class="n">ISO_TP_DEFAULT_ST_MIN_US</span><span class="p">;</span><span class="w">  </span><span class="c1">// prefer as much st_min as possible</span>
+<span class="w">                                                       </span><span class="c1">// for stability?</span>
+<span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_wtf_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">default</span><span class="o">:</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="cp">#ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK</span>
+<span class="w">    </span><span class="cm">/* Notify user via callback if registered */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_FULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb_arg</span><span class="p">);</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_IDLE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">payload_size</span><span class="p">,</span>
+<span class="w">                  </span><span class="kt">uint32_t</span><span class="o">*</span><span class="w"> </span><span class="n">out_size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">copylen</span><span class="p">;</span>
+
+<span class="cp">#ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK</span>
+<span class="w">    </span><span class="cm">/* If callback is registered, isotp_receive should not be used */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_ERROR</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Callback mode active, use callback instead */</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RECEIVE_STATUS_FULL</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_NO_DATA</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">copylen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">copylen</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">payload_size</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">copylen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">payload_size</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">copylen</span><span class="p">);</span>
+<span class="w">    </span><span class="o">*</span><span class="n">out_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copylen</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_IDLE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ISOTP_RET_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_init_link</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">sendid</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">sendbuf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">sendbufsize</span><span class="p">,</span>
+<span class="w">                     </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">recvbuf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">recvbufsize</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">memset</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">link</span><span class="p">));</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_IDLE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_SEND_STATUS_IDLE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_arbitration_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sendid</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sendbuf</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_buf_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sendbufsize</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recvbuf</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buf_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recvbufsize</span><span class="p">;</span>
+
+<span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb_arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb_arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_destroy_link</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Clear callbacks</span>
+<span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb_arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb_arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+<span class="w">    </span><span class="c1">// Reset link state (optional, but good practice)</span>
+<span class="w">    </span><span class="n">memset</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_poll</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* only polling when operation in progress */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_SEND_STATUS_INPROGRESS</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* continue send data */</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="cm">/* send data if bs_remain is invalid or bs_remain large than zero */</span>
+<span class="w">            </span><span class="p">(</span><span class="n">ISOTP_INVALID_BS</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_bs_remain</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_bs_remain</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">            </span><span class="cm">/* and if st_min is zero or go beyond interval time */</span>
+<span class="w">            </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_st_min_us</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">IsoTpTimeAfter</span><span class="p">(</span><span class="n">isotp_user_get_us</span><span class="p">(),</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_st</span><span class="p">)))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_send_consecutive_frame</span><span class="p">(</span><span class="n">link</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_INVALID_BS</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_bs_remain</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_bs_remain</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_st_min_us</span><span class="p">;</span>
+
+<span class="w">                </span><span class="cm">/* check if send finish */</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_offset</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_SEND_STATUS_IDLE</span><span class="p">;</span>
+<span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_size</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb_arg</span><span class="p">);</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_NOSPACE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="cm">/* shim reported that it isn&#39;t able to send a frame at present, retry on</span>
+<span class="cm">                 * next call</span>
+<span class="cm">                 */</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_SEND_STATUS_ERROR</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* check timeout */</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">IsoTpTimeAfter</span><span class="p">(</span><span class="n">isotp_user_get_us</span><span class="p">(),</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_TIMEOUT_BS</span><span class="p">;</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_SEND_STATUS_ERROR</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* only polling when operation in progress */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RECEIVE_STATUS_INPROGRESS</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* check timeout */</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_timer_cr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">IsoTpTimeAfter</span><span class="p">(</span><span class="n">isotp_user_get_us</span><span class="p">(),</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_timer_cr</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_TIMEOUT_CR</span><span class="p">;</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_IDLE</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_set_tx_done_cb</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">isotp_tx_done_cb</span><span class="w"> </span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cb</span><span class="p">;</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb_arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_set_rx_done_cb</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">isotp_rx_done_cb</span><span class="w"> </span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cb</span><span class="p">;</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">rx_done_cb_arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="group__isotp__config" kind="group">
+    <compoundname>isotp_config</compoundname>
+    <title>Configuration</title>
+    <briefdescription>
+<para>Build-time configuration for ISO-TP. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Configuration parameters in this group control protocol behavior as exposed by the API in <ref refid="isotp_8h" kindref="compound">isotp.h</ref> and implemented in isotp.c. They cover limits and timing used when sending and receiving single- and multi-frame messages, including block size (BS), minimum separation time (ST_min), and response timeouts. They also enable optional features such as frame padding, an extra argument for isotp_user_send_can, and callbacks for transmit and receive completion.</para>
+<para><simplesect kind="par"><title>Configuration elements in this group:</title><para><itemizedlist>
+<listitem><para><ref refid="isotp__config_8h_1af072643adea3e9b1c6ada72ed3719cd4" kindref="member">ISO_TP_DEFAULT_BLOCK_SIZE</ref> : default receiver block size (BS). </para>
+</listitem>
+<listitem><para><ref refid="isotp__config_8h_1a463ecc5478d019176922a9432ff77872" kindref="member">ISO_TP_DEFAULT_ST_MIN_US</ref> : default minimum separation time (ST_min) in us. </para>
+</listitem>
+<listitem><para><ref refid="isotp__config_8h_1a3fb13612ba78a1686ce010329272f9a4" kindref="member">ISO_TP_MAX_WFT_NUMBER</ref> : maximum number of FC.Wait frames in a row. </para>
+</listitem>
+<listitem><para><ref refid="isotp__config_8h_1ad660a5ee13292128752d4fe01fde3efd" kindref="member">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</ref> : response timeout during multi-frame transfer. </para>
+</listitem>
+<listitem><para>ISO_TP_FRAME_PADDING : enable frame padding for ISO-TP frames. </para>
+</listitem>
+<listitem><para><ref refid="isotp__config_8h_1a3f1d019698d743a8ae627b3225b65f55" kindref="member">ISO_TP_FRAME_PADDING_VALUE</ref> : padding byte value when padding is enabled. </para>
+</listitem>
+<listitem><para>ISO_TP_USER_SEND_CAN_ARG : add a user argument to <ref refid="group__isotp__user_1ga1443c22c029ba979ab39e47c47037f33" kindref="member">isotp_user_send_can</ref>. </para>
+</listitem>
+<listitem><para>ISO_TP_TRANSMIT_COMPLETE_CALLBACK : enable transmit complete callback support. </para>
+</listitem>
+<listitem><para>ISO_TP_RECEIVE_COMPLETE_CALLBACK: enable receive complete callback support. </para>
+</listitem>
+</itemizedlist>
+</para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

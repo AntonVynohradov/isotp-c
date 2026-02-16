@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/structIsoTpCanMessage/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Struct IsoTpCanMessage - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Struct IsoTpCanMessage";
+        var mkdocs_page_input_path = "docs/structIsoTpCanMessage.md";
+        var mkdocs_page_url = "/isotp-c/docs/structIsoTpCanMessage/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Struct IsoTpCanMessage</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="struct-isotpcanmessage">Struct IsoTpCanMessage<a class="headerlink" href="#struct-isotpcanmessage" title="Permanent link">&para;</a></h1>
+<p><a href="../annotated/"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="./"><strong>IsoTpCanMessage</strong></a></p>
+<h2 id="public-attributes">Public Attributes<a class="headerlink" href="#public-attributes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">union <a href="./"><strong>IsoTpCanMessage</strong></a></td>
+<td style="text-align: left;"><a href="#variable-as"><strong>as</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structIsoTpPciType/"><strong>IsoTpPciType</strong></a></td>
+<td style="text-align: left;"><a href="#variable-common"><strong>common</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structIsoTpConsecutiveFrame/"><strong>IsoTpConsecutiveFrame</strong></a></td>
+<td style="text-align: left;"><a href="#variable-consecutive_frame"><strong>consecutive_frame</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structIsoTpDataArray/"><strong>IsoTpDataArray</strong></a></td>
+<td style="text-align: left;"><a href="#variable-data_array"><strong>data_array</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">IsoTpFirstFrameLong</td>
+<td style="text-align: left;"><a href="#variable-first_frame_long"><strong>first_frame_long</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structIsoTpFirstFrameShort/"><strong>IsoTpFirstFrameShort</strong></a></td>
+<td style="text-align: left;"><a href="#variable-first_frame_short"><strong>first_frame_short</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structIsoTpFlowControl/"><strong>IsoTpFlowControl</strong></a></td>
+<td style="text-align: left;"><a href="#variable-flow_control"><strong>flow_control</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structIsoTpSingleFrame/"><strong>IsoTpSingleFrame</strong></a></td>
+<td style="text-align: left;"><a href="#variable-single_frame"><strong>single_frame</strong></a>  <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes-documentation">Public Attributes Documentation<a class="headerlink" href="#public-attributes-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="variable-as">variable as<a class="headerlink" href="#variable-as" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">union</span><span class="w"> </span><span class="nc">IsoTpCanMessage</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">::</span><span class="n">as</span><span class="p">;</span>
+</code></pre></div>
+<hr>
+
+<h3 id="variable-common">variable common<a class="headerlink" href="#variable-common" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">IsoTpPciType</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">::</span><span class="n">common</span><span class="p">;</span>
+</code></pre></div>
+<hr>
+
+<h3 id="variable-consecutive_frame">variable consecutive_frame<a class="headerlink" href="#variable-consecutive_frame" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">IsoTpConsecutiveFrame</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">::</span><span class="n">consecutive_frame</span><span class="p">;</span>
+</code></pre></div>
+<hr>
+
+<h3 id="variable-data_array">variable data_array<a class="headerlink" href="#variable-data_array" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">IsoTpDataArray</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">::</span><span class="n">data_array</span><span class="p">;</span>
+</code></pre></div>
+<hr>
+
+<h3 id="variable-first_frame_long">variable first_frame_long<a class="headerlink" href="#variable-first_frame_long" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">IsoTpFirstFrameLong</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">::</span><span class="n">first_frame_long</span><span class="p">;</span>
+</code></pre></div>
+<hr>
+
+<h3 id="variable-first_frame_short">variable first_frame_short<a class="headerlink" href="#variable-first_frame_short" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">IsoTpFirstFrameShort</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">::</span><span class="n">first_frame_short</span><span class="p">;</span>
+</code></pre></div>
+<hr>
+
+<h3 id="variable-flow_control">variable flow_control<a class="headerlink" href="#variable-flow_control" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">IsoTpFlowControl</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">::</span><span class="n">flow_control</span><span class="p">;</span>
+</code></pre></div>
+<hr>
+
+<h3 id="variable-single_frame">variable single_frame<a class="headerlink" href="#variable-single_frame" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">IsoTpSingleFrame</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="o">::</span><span class="n">single_frame</span><span class="p">;</span>
+</code></pre></div>
+<hr>
+
+<hr />
+<p>The documentation for this class was generated from the following file <code>inc/isotp_defines.h</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structIsoTpSingleFrame" kind="struct" language="C++" prot="public">
+    <compoundname>IsoTpSingleFrame</compoundname>
+    <includes refid="isotp__defines_8h" local="no">isotp_defines.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structIsoTpSingleFrame_1a55e4049c818005edd70f3f69863afb1c" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t IsoTpSingleFrame::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>IsoTpSingleFrame::type</qualifiedname>
+        <bitfield> 4</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>PCI type. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="298" column="13" bodyfile="inc/isotp_defines.h" bodystart="298" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpSingleFrame_1a651470fd7823fc746b3cf0c99a0a3027" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t IsoTpSingleFrame::SF_DL</definition>
+        <argsstring></argsstring>
+        <name>SF_DL</name>
+        <qualifiedname>IsoTpSingleFrame::SF_DL</qualifiedname>
+        <bitfield> 4</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Single-frame data length. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="299" column="13" bodyfile="inc/isotp_defines.h" bodystart="299" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpSingleFrame_1a47a6f2ae1b6389cd94b1abfc61753ef7" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t IsoTpSingleFrame::data[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>data</name>
+        <qualifiedname>IsoTpSingleFrame::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Payload bytes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="300" column="13" bodyfile="inc/isotp_defines.h" bodystart="300" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Single frame layout. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><programlisting filename=".text"><codeline><highlight class="normal">+-------------------------+-----+</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>byte<sp/>#0<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>...<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">+-------------------------+-----+</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>nibble<sp/>#0<sp/><sp/><sp/>|<sp/>nibble<sp/>#1<sp/>|<sp/>...<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">+-------------+-----------+<sp/>...<sp/>+</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>PCIType<sp/>=<sp/>0<sp/>|<sp/>SF_DL<sp/><sp/><sp/><sp/><sp/>|<sp/>...<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">+-------------+-----------+-----+</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="inc/isotp_defines.h" line="296" column="1" bodyfile="inc/isotp_defines.h" bodystart="297" bodyend="301"/>
+    <listofallmembers>
+      <member refid="structIsoTpSingleFrame_1a47a6f2ae1b6389cd94b1abfc61753ef7" prot="public" virt="non-virtual"><scope>IsoTpSingleFrame</scope><name>data</name></member>
+      <member refid="structIsoTpSingleFrame_1a651470fd7823fc746b3cf0c99a0a3027" prot="public" virt="non-virtual"><scope>IsoTpSingleFrame</scope><name>SF_DL</name></member>
+      <member refid="structIsoTpSingleFrame_1a55e4049c818005edd70f3f69863afb1c" prot="public" virt="non-virtual"><scope>IsoTpSingleFrame</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

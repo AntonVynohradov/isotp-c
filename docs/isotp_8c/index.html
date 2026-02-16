@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/isotp_8c/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File isotp.c - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File isotp.c";
+        var mkdocs_page_input_path = "docs/isotp_8c.md";
+        var mkdocs_page_url = "/isotp-c/docs/isotp_8c/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File isotp.c</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-isotpc">File isotp.c<a class="headerlink" href="#file-isotpc" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="../dir_68267d1309a1af8e8297ef4c3efbcdba/"><strong>src</strong></a> <strong>&gt;</strong> <a href="./"><strong>isotp.c</strong></a></p>
+<p><a href="../isotp_8c_source/">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;assert.h&gt;</code></li>
+<li><code>#include &lt;stdint.h&gt;</code></li>
+<li><code>#include "isotp.h"</code></li>
+</ul>
+<h2 id="public-static-functions">Public Static Functions<a class="headerlink" href="#public-static-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_receive_consecutive_frame"><strong>isotp_receive_consecutive_frame</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, const <a href="../structIsoTpCanMessage/"><strong>IsoTpCanMessage</strong></a> * message, uint8_t len) <br><em>Receive ISO-TP consecutive frame.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_receive_first_frame"><strong>isotp_receive_first_frame</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, <a href="../structIsoTpCanMessage/"><strong>IsoTpCanMessage</strong></a> * message, uint8_t len) <br><em>Receive ISO-TP first frame of multi-frame message.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_receive_flow_control_frame"><strong>isotp_receive_flow_control_frame</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, <a href="../structIsoTpCanMessage/"><strong>IsoTpCanMessage</strong></a> * message, uint8_t len) <br><em>Receive ISO-TP flow control frame.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_receive_single_frame"><strong>isotp_receive_single_frame</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, const <a href="../structIsoTpCanMessage/"><strong>IsoTpCanMessage</strong></a> * message, uint8_t len) <br><em>Receive ISO-TP single frame.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_send_consecutive_frame"><strong>isotp_send_consecutive_frame</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link) <br><em>Send ISO-TP consecutive frame.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_send_first_frame"><strong>isotp_send_first_frame</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint32_t id) <br><em>Send ISO-TP first frame of multi-frame message.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_send_flow_control"><strong>isotp_send_flow_control</strong></a> (const <a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint8_t flow_status, uint8_t block_size, uint32_t st_min_us) <br><em>Send ISO-TP flow control frame.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_send_single_frame"><strong>isotp_send_single_frame</strong></a> (const <a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint32_t id) <br><em>Send ISO-TP single frame.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint32_t</td>
+<td style="text-align: left;"><a href="#function-isotp_st_min_to_us"><strong>isotp_st_min_to_us</strong></a> (uint8_t st_min) <br><em>Convert ST_min encoding format to microseconds.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#function-isotp_us_to_st_min"><strong>isotp_us_to_st_min</strong></a> (uint32_t us) <br><em>Convert microseconds to ST_min encoding format.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation<a class="headerlink" href="#public-static-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-isotp_receive_consecutive_frame">function isotp_receive_consecutive_frame<a class="headerlink" href="#function-isotp_receive_consecutive_frame" title="Permanent link">&para;</a></h3>
+<p><em>Receive ISO-TP consecutive frame.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">isotp_receive_consecutive_frame</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsoTpLink</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> - ISO-TP link instance </li>
+<li><code>message</code> - Received CAN message </li>
+<li><code>len</code> - Message length in bytes </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, error code on failure </p>
+<hr>
+
+<h3 id="function-isotp_receive_first_frame">function isotp_receive_first_frame<a class="headerlink" href="#function-isotp_receive_first_frame" title="Permanent link">&para;</a></h3>
+<p><em>Receive ISO-TP first frame of multi-frame message.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">isotp_receive_first_frame</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsoTpLink</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span>
+<span class="w">    </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> - ISO-TP link instance </li>
+<li><code>message</code> - Received CAN message </li>
+<li><code>len</code> - Message length in bytes </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, error code on failure </p>
+<hr>
+
+<h3 id="function-isotp_receive_flow_control_frame">function isotp_receive_flow_control_frame<a class="headerlink" href="#function-isotp_receive_flow_control_frame" title="Permanent link">&para;</a></h3>
+<p><em>Receive ISO-TP flow control frame.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">isotp_receive_flow_control_frame</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsoTpLink</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span>
+<span class="w">    </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> - ISO-TP link instance </li>
+<li><code>message</code> - Received CAN message </li>
+<li><code>len</code> - Message length in bytes </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, error code on failure </p>
+<hr>
+
+<h3 id="function-isotp_receive_single_frame">function isotp_receive_single_frame<a class="headerlink" href="#function-isotp_receive_single_frame" title="Permanent link">&para;</a></h3>
+<p><em>Receive ISO-TP single frame.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">isotp_receive_single_frame</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsoTpLink</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpCanMessage</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">message</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> - ISO-TP link instance </li>
+<li><code>message</code> - Received CAN message </li>
+<li><code>len</code> - Message length in bytes </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, error code on failure </p>
+<hr>
+
+<h3 id="function-isotp_send_consecutive_frame">function isotp_send_consecutive_frame<a class="headerlink" href="#function-isotp_send_consecutive_frame" title="Permanent link">&para;</a></h3>
+<p><em>Send ISO-TP consecutive frame.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">isotp_send_consecutive_frame</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsoTpLink</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">link</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> - ISO-TP link instance </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, error code on failure </p>
+<hr>
+
+<h3 id="function-isotp_send_first_frame">function isotp_send_first_frame<a class="headerlink" href="#function-isotp_send_first_frame" title="Permanent link">&para;</a></h3>
+<p><em>Send ISO-TP first frame of multi-frame message.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">isotp_send_first_frame</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsoTpLink</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> - ISO-TP link instance </li>
+<li><code>id</code> - CAN arbitration ID </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, error code on failure </p>
+<hr>
+
+<h3 id="function-isotp_send_flow_control">function isotp_send_flow_control<a class="headerlink" href="#function-isotp_send_flow_control" title="Permanent link">&para;</a></h3>
+<p><em>Send ISO-TP flow control frame.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">isotp_send_flow_control</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">flow_status</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">block_size</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">st_min_us</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> - ISO-TP link instance </li>
+<li><code>flow_status</code> - Flow control status </li>
+<li><code>block_size</code> - Block size for flow control </li>
+<li><code>st_min_us</code> - Minimum separation time in microseconds </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, error code on failure </p>
+<hr>
+
+<h3 id="function-isotp_send_single_frame">function isotp_send_single_frame<a class="headerlink" href="#function-isotp_send_single_frame" title="Permanent link">&para;</a></h3>
+<p><em>Send ISO-TP single frame.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">isotp_send_single_frame</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> - ISO-TP link instance </li>
+<li><code>id</code> - CAN arbitration ID </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>ISOTP_RET_OK on success, error code on failure </p>
+<hr>
+
+<h3 id="function-isotp_st_min_to_us">function isotp_st_min_to_us<a class="headerlink" href="#function-isotp_st_min_to_us" title="Permanent link">&para;</a></h3>
+<p><em>Convert ST_min encoding format to microseconds.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">isotp_st_min_to_us</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">st_min</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>st_min</code> - Encoded ST_min value </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>Time in microseconds </p>
+<hr>
+
+<h3 id="function-isotp_us_to_st_min">function isotp_us_to_st_min<a class="headerlink" href="#function-isotp_us_to_st_min" title="Permanent link">&para;</a></h3>
+<p><em>Convert microseconds to ST_min encoding format.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">isotp_us_to_st_min</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">us</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>us</code> - Time in microseconds </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>Encoded ST_min value </p>
+<hr>
+
+<hr />
+<p>The documentation for this class was generated from the following file <code>src/isotp.c</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

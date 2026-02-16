@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/linux__socket_8c/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File linux_socket.c - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File linux_socket.c";
+        var mkdocs_page_input_path = "docs/linux__socket_8c.md";
+        var mkdocs_page_url = "/isotp-c/docs/linux__socket_8c/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File linux_socket.c</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-linux_socketc">File linux_socket.c<a class="headerlink" href="#file-linux_socketc" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="../dir_cfafba98a580ce4b62f8a6fa96d7cbb0/"><strong>example</strong></a> <strong>&gt;</strong> <a href="../dir_c14c1b0e0eb041fc48b83316cb935ab5/"><strong>linux_socket</strong></a> <strong>&gt;</strong> <a href="./"><strong>linux_socket.c</strong></a></p>
+<p><a href="../linux__socket_8c_source/">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;stdio.h&gt;</code></li>
+<li><code>#include &lt;stdlib.h&gt;</code></li>
+<li><code>#include &lt;stdbool.h&gt;</code></li>
+<li><code>#include &lt;string.h&gt;</code></li>
+<li><code>#include &lt;unistd.h&gt;</code></li>
+<li><code>#include &lt;time.h&gt;</code></li>
+<li><code>#include &lt;stdarg.h&gt;</code></li>
+<li><code>#include &lt;net/if.h&gt;</code></li>
+<li><code>#include &lt;sys/ioctl.h&gt;</code></li>
+<li><code>#include &lt;sys/socket.h&gt;</code></li>
+<li><code>#include &lt;linux/can.h&gt;</code></li>
+<li><code>#include &lt;linux/can/raw.h&gt;</code></li>
+<li><code>#include &lt;isotp.h&gt;</code></li>
+</ul>
+<h2 id="public-static-attributes">Public Static Attributes<a class="headerlink" href="#public-static-attributes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-_socket"><strong>_socket</strong></a>  <br><em>SocketCAN file descriptor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#variable-g_isotprecvbuf"><strong>g_isotpRecvBuf</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;">uint8_t</td>
+<td style="text-align: left;"><a href="#variable-g_isotpsendbuf"><strong>g_isotpSendBuf</strong></a>  <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a></td>
+<td style="text-align: left;"><a href="#variable-g_link"><strong>g_link</strong></a>  <br><em>ISO-TP link instance, allocated statically in RAM.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions<a class="headerlink" href="#public-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-main"><strong>main</strong></a> (int argc, char ** argv) <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="macros">Macros<a class="headerlink" href="#macros" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-sec_to_us"><strong>SEC_TO_US</strong></a> (sec) <code>((sec) \* 1000000)</code><br><em>Macro to convert seconds to microseconds.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-_can_interface"><strong>_CAN_INTERFACE</strong></a>  <code>"slcan0"</code><br><em>CAN interface to use (e.g., "can0", "slcan0", etc.)</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-_isotp_bufsize"><strong>_ISOTP_BUFSIZE</strong></a>  <code>(128)</code><br><em>Buffer size for ISO-TP messages (must be &gt;= 4095 for full ISO-TP support)/*#end#*</em>  <em>/.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-_isotp_can_id"><strong>_ISOTP_CAN_ID</strong></a>  <code>(0x0C1)</code><br><em>CAN ID to use for sending ISO-TP messages (must match the receiver's expected ID)/*#end#*</em>  <em>/.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-attributes-documentation">Public Static Attributes Documentation<a class="headerlink" href="#public-static-attributes-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="variable-_socket">variable _socket<a class="headerlink" href="#variable-_socket" title="Permanent link">&para;</a></h3>
+<p><em>SocketCAN file descriptor.</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">_socket</span><span class="p">;</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="variable-g_isotprecvbuf">variable g_isotpRecvBuf<a class="headerlink" href="#variable-g_isotprecvbuf" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">g_isotpRecvBuf</span><span class="p">[</span><span class="n">_ISOTP_BUFSIZE</span><span class="p">];</span>
+</code></pre></div>
+<p>Buffer for receiving ISO-TP messages, allocated statically in RAM </p>
+<hr>
+
+<h3 id="variable-g_isotpsendbuf">variable g_isotpSendBuf<a class="headerlink" href="#variable-g_isotpsendbuf" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">g_isotpSendBuf</span><span class="p">[</span><span class="n">_ISOTP_BUFSIZE</span><span class="p">];</span>
+</code></pre></div>
+<p>Buffer for sending ISO-TP messages, allocated statically in RAM </p>
+<hr>
+
+<h3 id="variable-g_link">variable g_link<a class="headerlink" href="#variable-g_link" title="Permanent link">&para;</a></h3>
+<p><em>ISO-TP link instance, allocated statically in RAM.</em> 
+<div class="highlight"><pre><span></span><code><span class="n">IsoTpLink</span><span class="w"> </span><span class="n">g_link</span><span class="p">;</span>
+</code></pre></div></p>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation<a class="headerlink" href="#public-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-main">function main<a class="headerlink" href="#function-main" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+<hr>
+<h2 id="macro-definition-documentation">Macro Definition Documentation<a class="headerlink" href="#macro-definition-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="define-sec_to_us">define SEC_TO_US<a class="headerlink" href="#define-sec_to_us" title="Permanent link">&para;</a></h3>
+<p><em>Macro to convert seconds to microseconds.</em> 
+<div class="highlight"><pre><span></span><code><span class="cp">#define SEC_TO_US (</span>
+<span class="w">    </span><span class="n">sec</span>
+<span class="p">)</span><span class="w"> </span><span class="err">`</span><span class="p">((</span><span class="n">sec</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000000</span><span class="p">)</span><span class="err">`</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="define-_can_interface">define _CAN_INTERFACE<a class="headerlink" href="#define-_can_interface" title="Permanent link">&para;</a></h3>
+<p><em>CAN interface to use (e.g., "can0", "slcan0", etc.)</em> 
+<div class="highlight"><pre><span></span><code><span class="cp">#define _CAN_INTERFACE `&quot;slcan0&quot;`</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="define-_isotp_bufsize">define _ISOTP_BUFSIZE<a class="headerlink" href="#define-_isotp_bufsize" title="Permanent link">&para;</a></h3>
+<p><em>Buffer size for ISO-TP messages (must be &gt;= 4095 for full ISO-TP support)/*#end#*</em>  <em>/.</em>
+<div class="highlight"><pre><span></span><code><span class="cp">#define _ISOTP_BUFSIZE `(128)`</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="define-_isotp_can_id">define _ISOTP_CAN_ID<a class="headerlink" href="#define-_isotp_can_id" title="Permanent link">&para;</a></h3>
+<p><em>CAN ID to use for sending ISO-TP messages (must match the receiver's expected ID)/*#end#*</em>  <em>/.</em>
+<div class="highlight"><pre><span></span><code><span class="cp">#define _ISOTP_CAN_ID `(0x0C1)`</span>
+</code></pre></div></p>
+<hr>
+
+<hr />
+<p>The documentation for this class was generated from the following file <code>example/linux_socket/linux_socket.c</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

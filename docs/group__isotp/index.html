@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/group__isotp/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Group isotp - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Group isotp";
+        var mkdocs_page_input_path = "docs/group__isotp.md";
+        var mkdocs_page_url = "/isotp-c/docs/group__isotp/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Group isotp</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="group-isotp">Group isotp<a class="headerlink" href="#group-isotp" title="Permanent link">&para;</a></h1>
+<p><a href="../modules/"><strong>Modules</strong></a> <strong>&gt;</strong> <a href="./"><strong>isotp</strong></a></p>
+<p><em>Public API for ISO-TP link management and message handling.</em> <a href="#detailed-description">More...</a></p>
+<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">module</td>
+<td style="text-align: left;"><a href="../group__isotp__config/"><strong>Configuration</strong></a> <br><em>Build-time configuration for ISO-TP.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">module</td>
+<td style="text-align: left;"><a href="../group__isotp__defines/"><strong>Protocol definitions</strong></a> <br><em>Internal protocol definitions and type structures.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">module</td>
+<td style="text-align: left;"><a href="../group__isotp__user/"><strong>User hooks</strong></a> <br><em>User-implemented callbacks and platform hooks.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> <br><em>Link state for a single ISO-TP connection.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types">Public Types<a class="headerlink" href="#public-types" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef struct <a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a></td>
+<td style="text-align: left;"><a href="#typedef-isotplink"><strong>IsoTpLink</strong></a>  <br><em>Link state for a single ISO-TP connection.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions<a class="headerlink" href="#public-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-isotp_destroy_link"><strong>isotp_destroy_link</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link) <br><em>Destroys the ISO-TP link and releases associated resources.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-isotp_init_link"><strong>isotp_init_link</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint32_t sendid, uint8_t * sendbuf, uint32_t sendbufsize, uint8_t * recvbuf, uint32_t recvbufsize) <br><em>Initialises the ISO-TP library.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-isotp_on_can_message"><strong>isotp_on_can_message</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, const uint8_t * data, uint8_t len) <br><em>Handles incoming CAN messages. Determines whether an incoming message is a valid ISO-TP frame or not and handles it accordingly.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-isotp_poll"><strong>isotp_poll</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link) <br><em>Polling function; call this function periodically to handle timeouts, send consecutive frames, etc.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_receive"><strong>isotp_receive</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint8_t * payload, const uint32_t payload_size, uint32_t * out_size) <br><em>Receives and parses the received data and copies the parsed data into the internal buffer.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_send"><strong>isotp_send</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, const uint8_t payload, uint32_t size) <br><em>Sends ISO-TP frames via CAN, using the ID set in the initialising function.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-isotp_send_with_id"><strong>isotp_send_with_id</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint32_t id, const uint8_t payload, uint32_t size) <br><em>See</em> <a href="./#function-isotp_send"><em><strong>isotp_send</strong></em></a> <em>, with the exception that this function is used only for functional addressing.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description<a class="headerlink" href="#detailed-description" title="Permanent link">&para;</a></h2>
+<p>This module groups the public interface and its supporting submodules: <a href="../group__isotp__config/"><strong>Configuration</strong></a>, <a href="../group__isotp__defines/"><strong>Protocol definitions</strong></a>, and <a href="../group__isotp__user/"><strong>User hooks</strong></a>.</p>
+<p>This group defines the public interface for initializing links, sending and receiving messages, handling incoming CAN frames, and polling the protocol state machine. It also exposes optional callback registration when enabled in configuration.</p>
+<p>**
+**</p>
+<ul>
+<li>Link lifecycle: <a href="./#function-isotp_init_link"><strong>isotp_init_link</strong></a>, <a href="./#function-isotp_destroy_link"><strong>isotp_destroy_link</strong></a>. </li>
+<li>Message flow: <a href="./#function-isotp_send"><strong>isotp_send</strong></a>, <a href="./#function-isotp_send_with_id"><strong>isotp_send_with_id</strong></a>, <a href="./#function-isotp_on_can_message"><strong>isotp_on_can_message</strong></a>, <a href="./#function-isotp_receive"><strong>isotp_receive</strong></a>, <a href="./#function-isotp_poll"><strong>isotp_poll</strong></a>. </li>
+<li>Link data model: <a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a>. </li>
+<li>Optional callbacks: isotp_set_tx_done_cb, isotp_set_rx_done_cb. </li>
+</ul>
+<h2 id="public-types-documentation">Public Types Documentation<a class="headerlink" href="#public-types-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="typedef-isotplink">typedef IsoTpLink<a class="headerlink" href="#typedef-isotplink" title="Permanent link">&para;</a></h3>
+<p><em>Link state for a single ISO-TP connection.</em> 
+<div class="highlight"><pre><span></span><code>typedef struct IsoTpLink IsoTpLink;
+</code></pre></div></p>
+<p>The data stored in this struct is used internally and may be used by software programs using this library. </p>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation<a class="headerlink" href="#public-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-isotp_destroy_link">function isotp_destroy_link<a class="headerlink" href="#function-isotp_destroy_link" title="Permanent link">&para;</a></h3>
+<p><em>Destroys the ISO-TP link and releases associated resources.</em> 
+<div class="highlight"><pre><span></span><code>void isotp_destroy_link (
+    IsoTpLink * link
+) 
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> The 
+<div class="highlight"><pre><span></span><code>IsoTpLink 
+</code></pre></div>
+ instance to destroy. </li>
+</ul>
+<hr>
+
+<h3 id="function-isotp_init_link">function isotp_init_link<a class="headerlink" href="#function-isotp_init_link" title="Permanent link">&para;</a></h3>
+<p><em>Initialises the ISO-TP library.</em> 
+<div class="highlight"><pre><span></span><code>void isotp_init_link (
+    IsoTpLink * link,
+    uint32_t sendid,
+    uint8_t * sendbuf,
+    uint32_t sendbufsize,
+    uint8_t * recvbuf,
+    uint32_t recvbufsize
+) 
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> The 
+<div class="highlight"><pre><span></span><code>IsoTpLink 
+</code></pre></div>
+ instance used for transceiving data. </li>
+<li><code>sendid</code> The ID used to send data to other CAN nodes. </li>
+<li><code>sendbuf</code> A pointer to an area in memory which can be used as a buffer for data to be sent. </li>
+<li><code>sendbufsize</code> The size of the buffer area. </li>
+<li><code>recvbuf</code> A pointer to an area in memory which can be used as a buffer for data to be received. </li>
+<li><code>recvbufsize</code> The size of the buffer area. </li>
+</ul>
+<hr>
+
+<h3 id="function-isotp_on_can_message">function isotp_on_can_message<a class="headerlink" href="#function-isotp_on_can_message" title="Permanent link">&para;</a></h3>
+<p><em>Handles incoming CAN messages. Determines whether an incoming message is a valid ISO-TP frame or not and handles it accordingly.</em> 
+<div class="highlight"><pre><span></span><code>void isotp_on_can_message (
+    IsoTpLink * link,
+    const uint8_t * data,
+    uint8_t len
+) 
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> The 
+<div class="highlight"><pre><span></span><code>IsoTpLink 
+</code></pre></div>
+ instance used for transceiving data. </li>
+<li><code>data</code> The data received via CAN. </li>
+<li><code>len</code> The length of the data received. </li>
+</ul>
+<hr>
+
+<h3 id="function-isotp_poll">function isotp_poll<a class="headerlink" href="#function-isotp_poll" title="Permanent link">&para;</a></h3>
+<p><em>Polling function; call this function periodically to handle timeouts, send consecutive frames, etc.</em> 
+<div class="highlight"><pre><span></span><code>void isotp_poll (
+    IsoTpLink * link
+) 
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> The 
+<div class="highlight"><pre><span></span><code>IsoTpLink 
+</code></pre></div>
+ instance used. </li>
+</ul>
+<hr>
+
+<h3 id="function-isotp_receive">function isotp_receive<a class="headerlink" href="#function-isotp_receive" title="Permanent link">&para;</a></h3>
+<p><em>Receives and parses the received data and copies the parsed data into the internal buffer.</em> 
+<div class="highlight"><pre><span></span><code>int isotp_receive (
+    IsoTpLink * link,
+    uint8_t * payload,
+    const uint32_t payload_size,
+    uint32_t * out_size
+) 
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> The <a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> instance used to transceive data. </li>
+<li><code>payload</code> A pointer to an area in memory where the raw data is copied from. </li>
+<li><code>payload_size</code> The size of the received (raw) CAN data. </li>
+<li><code>out_size</code> A reference to a variable which will contain the size of the actual (parsed) data.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>Possible return values:
+* <a href="../isotp__defines_8h/#define-isotp_ret_ok"><strong>ISOTP_RET_OK</strong></a>
+* ISOTP_RET_NO_DATA </p>
+<hr>
+
+<h3 id="function-isotp_send">function isotp_send<a class="headerlink" href="#function-isotp_send" title="Permanent link">&para;</a></h3>
+<p><em>Sends ISO-TP frames via CAN, using the ID set in the initialising function.</em> 
+<div class="highlight"><pre><span></span><code>int isotp_send (
+    IsoTpLink * link,
+    const uint8_t payload,
+    uint32_t size
+) 
+</code></pre></div></p>
+<p>Single-frame messages will be sent immediately when calling this function. Multi-frame messages will be sent consecutively when calling isotp_poll.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> The 
+<div class="highlight"><pre><span></span><code>IsoTpLink 
+</code></pre></div>
+ instance used for transceiving data. </li>
+<li><code>payload</code> The payload to be sent. (Up to 4095 bytes). </li>
+<li><code>size</code> The size of the payload to be sent.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>Possible return values:
+* 
+<div class="highlight"><pre><span></span><code>ISOTP_RET_OVERFLOW 
+</code></pre></div></p>
+<ul>
+<li>
+<div class="highlight"><pre><span></span><code>ISOTP_RET_INPROGRESS 
+</code></pre></div>
+</li>
+<li>
+<div class="highlight"><pre><span></span><code>ISOTP_RET_OK 
+</code></pre></div>
+</li>
+<li>
+<p>The return value of the user shim function <a href="../group__isotp__user/#function-isotp_user_send_can"><strong>isotp_user_send_can()</strong></a>. </p>
+</li>
+</ul>
+<hr>
+
+<h3 id="function-isotp_send_with_id">function isotp_send_with_id<a class="headerlink" href="#function-isotp_send_with_id" title="Permanent link">&para;</a></h3>
+<p><em>See</em> <a href="./#function-isotp_send"><em><strong>isotp_send</strong></em></a> <em>, with the exception that this function is used only for functional addressing.</em>
+<div class="highlight"><pre><span></span><code>int isotp_send_with_id (
+    IsoTpLink * link,
+    uint32_t id,
+    const uint8_t payload,
+    uint32_t size
+) 
+</code></pre></div></p>
+<hr>
+
+<hr />
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

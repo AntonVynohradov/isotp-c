@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="isotp_8h" kind="file" language="C++">
+    <compoundname>isotp.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="isotp__config_8h" local="yes">isotp_config.h</includes>
+    <includes refid="isotp__defines_8h" local="yes">isotp_defines.h</includes>
+    <includes refid="isotp__user_8h" local="yes">isotp_user.h</includes>
+    <includedby refid="linux__socket_8c" local="no">example/linux_socket/linux_socket.c</includedby>
+    <includedby refid="isotp_8c" local="yes">src/isotp.c</includedby>
+    <includedby refid="isotp__test__support_8h" local="yes">tests/isotp_test_support.h</includedby>
+    <incdepgraph>
+      <node id="7">
+        <label>isotp_config.h</label>
+        <link refid="isotp__config_8h"/>
+      </node>
+      <node id="8">
+        <label>isotp_defines.h</label>
+        <link refid="isotp__defines_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>isotp_user.h</label>
+        <link refid="isotp__user_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="4">
+        <label>stddef.h</label>
+      </node>
+      <node id="2">
+        <label>stdint.h</label>
+      </node>
+      <node id="5">
+        <label>stdio.h</label>
+      </node>
+      <node id="6">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tests/isotp_test_support.h</label>
+        <link refid="isotp__test__support_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structIsoTpLink" prot="public">IsoTpLink</innerclass>
+    <sectiondef kind="user-defined">
+      <header>Type definitions</header>
+      <member refid="group__isotp_1ga218c16d1a14a719db9e6bed682607e1e" kind="typedef"><name>IsoTpLink</name></member>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Public function declarations</header>
+      <member refid="group__isotp_1ga33d058c31be466471bec77f79c89fe00" kind="function"><name>isotp_init_link</name></member>
+      <member refid="group__isotp_1gab899edec17137039c752907dbc6c28b6" kind="function"><name>isotp_destroy_link</name></member>
+      <member refid="group__isotp_1ga9305b87c0a30798a70a9c0f9c10f70a4" kind="function"><name>isotp_poll</name></member>
+      <member refid="group__isotp_1ga860db76a76581b5c4e069d3a48a3484f" kind="function"><name>isotp_on_can_message</name></member>
+      <member refid="group__isotp_1ga2f6c44f2d4bd1574e1bc283d5df0464e" kind="function"><name>isotp_send</name></member>
+      <member refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kind="function"><name>isotp_send_with_id</name></member>
+      <member refid="group__isotp_1ga45661b91ddfb5e9d273f5d7ca2381ca4" kind="function"><name>isotp_receive</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>Core ISO-TP protocol API with link management and message handling. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Project: ISO-TP-C - Embedded-Grade Refactoring &amp; Optimization Author: Anton Vynohradov Email: <ulink url="mailto:avynohradov@systemfromscratch.com">avynohradov@systemfromscratch.com</ulink></para>
+<para><simplesect kind="copyright"><para>Copyright (c) 2026 Anton Vynohradov @license MIT License</para>
+</simplesect>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</para>
+<para>SPDX-License-Identifier: MIT </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTPC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTPC_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="isotp__config_8h" kindref="compound">isotp_config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="isotp__defines_8h" kindref="compound">isotp_defines.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="isotp__user_8h" kindref="compound">isotp_user.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="structIsoTpLink" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref></highlight></codeline>
+<codeline lineno="84"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>sender<sp/>parameters<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86" refid="structIsoTpLink_1af3db90e0d0237b277ca35326a5fe8c51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1af3db90e0d0237b277ca35326a5fe8c51" kindref="member">send_arbitration_id</ref>;<sp/></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>message<sp/>buffer<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89" refid="structIsoTpLink_1a9d7ecabcdde98a37026f1b42944ba562" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t*<sp/><ref refid="structIsoTpLink_1a9d7ecabcdde98a37026f1b42944ba562" kindref="member">send_buffer</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="90" refid="structIsoTpLink_1a9a31b93d04b0718f30221606fc5ebe74" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1a9a31b93d04b0718f30221606fc5ebe74" kindref="member">send_buf_size</ref>;<sp/></highlight></codeline>
+<codeline lineno="91" refid="structIsoTpLink_1ad849b9854fe9e5aa5646b0ee4a14e0ed" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1ad849b9854fe9e5aa5646b0ee4a14e0ed" kindref="member">send_size</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="92" refid="structIsoTpLink_1ac28b2694ae688b9f8f617c4c87cc99a6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1ac28b2694ae688b9f8f617c4c87cc99a6" kindref="member">send_offset</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>multi-frame<sp/>flags<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="structIsoTpLink_1a29aac83968d4d2a848058b2f29dffde6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpLink_1a29aac83968d4d2a848058b2f29dffde6" kindref="member">send_sn</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="96" refid="structIsoTpLink_1a3002b6ab60185d5fc3dffc24e015c3cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1a3002b6ab60185d5fc3dffc24e015c3cf" kindref="member">send_bs_remain</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="97" refid="structIsoTpLink_1a6d2af80a9fab6b13a3057f5f38cb0f6b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1a6d2af80a9fab6b13a3057f5f38cb0f6b" kindref="member">send_st_min_us</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="98" refid="structIsoTpLink_1ad1fb7b66b84eba87cd1d399ed46540df" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpLink_1ad1fb7b66b84eba87cd1d399ed46540df" kindref="member">send_wtf_count</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="99" refid="structIsoTpLink_1a650da742012c832a6d347d625121a928" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1a650da742012c832a6d347d625121a928" kindref="member">send_timer_st</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="100" refid="structIsoTpLink_1aa8a8d9dca555fa1d682c82009553a096" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1aa8a8d9dca555fa1d682c82009553a096" kindref="member">send_timer_bs</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="101" refid="structIsoTpLink_1a0284f025dfcae0d1aafb55cea8f1db52" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32_t<sp/><ref refid="structIsoTpLink_1a0284f025dfcae0d1aafb55cea8f1db52" kindref="member">send_protocol_result</ref>;<sp/></highlight></codeline>
+<codeline lineno="102" refid="structIsoTpLink_1a5660d314f0dc45eca78c7cf73dce270f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpLink_1a5660d314f0dc45eca78c7cf73dce270f" kindref="member">send_status</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>receiver<sp/>parameters<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="structIsoTpLink_1ac3eedc03b95e1777675943b52dc60ae0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1ac3eedc03b95e1777675943b52dc60ae0" kindref="member">receive_arbitration_id</ref>;<sp/></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>message<sp/>buffer<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="structIsoTpLink_1a608efe45032a4b43d81548ff0c95a595" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t*<sp/><ref refid="structIsoTpLink_1a608efe45032a4b43d81548ff0c95a595" kindref="member">receive_buffer</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="109" refid="structIsoTpLink_1a5f0e4327a1252d88ea45d3b8472f15d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1a5f0e4327a1252d88ea45d3b8472f15d6" kindref="member">receive_buf_size</ref>;<sp/></highlight></codeline>
+<codeline lineno="110" refid="structIsoTpLink_1a5c7d1ac427f1909e1c457d804d8d5c7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1a5c7d1ac427f1909e1c457d804d8d5c7c" kindref="member">receive_size</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="111" refid="structIsoTpLink_1a19cd189c1256f72ad03d5d29f66c9909" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1a19cd189c1256f72ad03d5d29f66c9909" kindref="member">receive_offset</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>multi-frame<sp/>control<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="structIsoTpLink_1a45e85759f0cb6233642417b659f5b9c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpLink_1a45e85759f0cb6233642417b659f5b9c3" kindref="member">receive_sn</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="115" refid="structIsoTpLink_1aed423731d755e3761d13d609124423d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpLink_1aed423731d755e3761d13d609124423d4" kindref="member">receive_bs_count</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="116" refid="structIsoTpLink_1a190ec0d5c27f7d5692fcac3ebb757acd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structIsoTpLink_1a190ec0d5c27f7d5692fcac3ebb757acd" kindref="member">receive_timer_cr</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="117" refid="structIsoTpLink_1adb9d8ee67af1d25b98ef354737a6a63f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structIsoTpLink_1adb9d8ee67af1d25b98ef354737a6a63f" kindref="member">receive_protocol_result</ref>;<sp/></highlight></codeline>
+<codeline lineno="118" refid="structIsoTpLink_1a8fac6df5654d42047b22cfeabb40ba15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structIsoTpLink_1a8fac6df5654d42047b22cfeabb40ba15" kindref="member">receive_status</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ISO_TP_USER_SEND_CAN_ARG)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>user_send_can_arg;<sp/></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ISO_TP_TRANSMIT_COMPLETE_CALLBACK</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>isotp_tx_done_cb<sp/>tx_done_cb;<sp/></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>tx_done_cb_arg;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ISO_TP_RECEIVE_COMPLETE_CALLBACK</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>isotp_rx_done_cb<sp/>rx_done_cb;<sp/></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>rx_done_cb_arg;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="group__isotp_1ga218c16d1a14a719db9e6bed682607e1e" refkind="member"><highlight class="normal">}<sp/><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__isotp_1ga33d058c31be466471bec77f79c89fe00" kindref="member">isotp_init_link</ref>(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link,<sp/>uint32_t<sp/>sendid,<sp/>uint8_t*<sp/>sendbuf,<sp/>uint32_t<sp/>sendbufsize,</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t*<sp/>recvbuf,<sp/>uint32_t<sp/>recvbufsize);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__isotp_1gab899edec17137039c752907dbc6c28b6" kindref="member">isotp_destroy_link</ref>(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__isotp_1ga9305b87c0a30798a70a9c0f9c10f70a4" kindref="member">isotp_poll</ref>(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__isotp_1ga860db76a76581b5c4e069d3a48a3484f" kindref="member">isotp_on_can_message</ref>(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>data,<sp/>uint8_t<sp/>len);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp_1ga2f6c44f2d4bd1574e1bc283d5df0464e" kindref="member">isotp_send</ref>(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>payload[],<sp/>uint32_t<sp/>size);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kindref="member">isotp_send_with_id</ref>(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link,<sp/>uint32_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>payload[],<sp/>uint32_t<sp/>size);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp_1ga45661b91ddfb5e9d273f5d7ca2381ca4" kindref="member">isotp_receive</ref>(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link,<sp/>uint8_t*<sp/>payload,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>payload_size,</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t*<sp/>out_size);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ISO_TP_TRANSMIT_COMPLETE_CALLBACK</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>isotp_set_tx_done_cb(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link,<sp/>isotp_tx_done_cb<sp/>cb,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>arg);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ISO_TP_RECEIVE_COMPLETE_CALLBACK</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>isotp_set_rx_done_cb(<ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref>*<sp/>link,<sp/>isotp_rx_done_cb<sp/>cb,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>arg);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ISOTPC_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="isotp.h"/>
+  </compounddef>
+</doxygen>

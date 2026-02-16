@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structMockCanState" kind="struct" language="C++" prot="public">
+    <compoundname>MockCanState</compoundname>
+    <includes refid="isotp__test__support_8h" local="no">isotp_test_support.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structMockCanState_1a904a97480372008054bf97f64a0c0eb5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MockCanState::last_id</definition>
+        <argsstring></argsstring>
+        <name>last_id</name>
+        <qualifiedname>MockCanState::last_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/isotp_test_support.h" line="66" column="14" bodyfile="tests/isotp_test_support.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structMockCanState_1ab06e211f63b1501102ea31969a72aad0" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t MockCanState::last_data[8]</definition>
+        <argsstring>[8]</argsstring>
+        <name>last_data</name>
+        <qualifiedname>MockCanState::last_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/isotp_test_support.h" line="67" column="13" bodyfile="tests/isotp_test_support.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structMockCanState_1a5c2b1ea64a417da32c41227fe8fa9c8d" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t MockCanState::last_size</definition>
+        <argsstring></argsstring>
+        <name>last_size</name>
+        <qualifiedname>MockCanState::last_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/isotp_test_support.h" line="68" column="13" bodyfile="tests/isotp_test_support.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structMockCanState_1aa71eb6c9fdfc01f07a805f808adc8b8d" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int MockCanState::return_value</definition>
+        <argsstring></argsstring>
+        <name>return_value</name>
+        <qualifiedname>MockCanState::return_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/isotp_test_support.h" line="69" column="9" bodyfile="tests/isotp_test_support.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structMockCanState_1adc0dcc8bcb2819ec2a3314c8d4f808dd" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int MockCanState::call_count</definition>
+        <argsstring></argsstring>
+        <name>call_count</name>
+        <qualifiedname>MockCanState::call_count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/isotp_test_support.h" line="70" column="9" bodyfile="tests/isotp_test_support.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Mock CAN state structure for testing purposes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/isotp_test_support.h" line="64" column="1" bodyfile="tests/isotp_test_support.h" bodystart="65" bodyend="71"/>
+    <listofallmembers>
+      <member refid="structMockCanState_1adc0dcc8bcb2819ec2a3314c8d4f808dd" prot="public" virt="non-virtual"><scope>MockCanState</scope><name>call_count</name></member>
+      <member refid="structMockCanState_1ab06e211f63b1501102ea31969a72aad0" prot="public" virt="non-virtual"><scope>MockCanState</scope><name>last_data</name></member>
+      <member refid="structMockCanState_1a904a97480372008054bf97f64a0c0eb5" prot="public" virt="non-virtual"><scope>MockCanState</scope><name>last_id</name></member>
+      <member refid="structMockCanState_1a5c2b1ea64a417da32c41227fe8fa9c8d" prot="public" virt="non-virtual"><scope>MockCanState</scope><name>last_size</name></member>
+      <member refid="structMockCanState_1aa71eb6c9fdfc01f07a805f808adc8b8d" prot="public" virt="non-virtual"><scope>MockCanState</scope><name>return_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

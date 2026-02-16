@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/isotp_8h_source/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File isotp.h - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File isotp.h";
+        var mkdocs_page_input_path = "docs/isotp_8h_source.md";
+        var mkdocs_page_url = "/isotp-c/docs/isotp_8h_source/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File isotp.h</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-isotph">File isotp.h<a class="headerlink" href="#file-isotph" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>File List</strong></a> <strong>&gt;</strong> <a href="../isotp_8h/"><strong>isotp.h</strong></a></p>
+<p><a href="../isotp_8h/">Go to the documentation of this file</a></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef ISOTPC_H</span>
+<span class="cp">#define ISOTPC_H</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stddef.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="cp">#ifdef __cplusplus</span>
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span>
+<span class="p">{</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;isotp_config.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;isotp_defines.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;isotp_user.h&quot;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">IsoTpLink</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* sender parameters */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">send_arbitration_id</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="cm">/* message buffer */</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">send_buffer</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">send_buf_size</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">send_size</span><span class="p">;</span><span class="w">     </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">send_offset</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="cm">/* multi-frame flags */</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">send_sn</span><span class="p">;</span><span class="w">              </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">send_bs_remain</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">send_st_min_us</span><span class="p">;</span><span class="w">      </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">send_wtf_count</span><span class="p">;</span><span class="w">       </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">send_timer_st</span><span class="p">;</span><span class="w">       </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">send_timer_bs</span><span class="p">;</span><span class="w">       </span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">send_protocol_result</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">send_status</span><span class="p">;</span><span class="w">          </span>
+<span class="w">    </span><span class="cm">/* receiver parameters */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">receive_arbitration_id</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="cm">/* message buffer */</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">receive_buffer</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">receive_buf_size</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">receive_size</span><span class="p">;</span><span class="w">     </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">receive_offset</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="cm">/* multi-frame control */</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">receive_sn</span><span class="p">;</span><span class="w">          </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">receive_bs_count</span><span class="p">;</span><span class="w">    </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">receive_timer_cr</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">receive_protocol_result</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">receive_status</span><span class="p">;</span><span class="w">      </span>
+<span class="cp">#if defined(ISO_TP_USER_SEND_CAN_ARG)</span>
+<span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">user_send_can_arg</span><span class="p">;</span><span class="w"> </span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
+<span class="w">    </span><span class="n">isotp_tx_done_cb</span><span class="w"> </span><span class="n">tx_done_cb</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">tx_done_cb_arg</span><span class="p">;</span><span class="w">        </span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK</span>
+<span class="w">    </span><span class="n">isotp_rx_done_cb</span><span class="w"> </span><span class="n">rx_done_cb</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">rx_done_cb_arg</span><span class="p">;</span><span class="w">        </span>
+<span class="cp">#endif</span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">IsoTpLink</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_init_link</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">sendid</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">sendbuf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">sendbufsize</span><span class="p">,</span>
+<span class="w">                     </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">recvbuf</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">recvbufsize</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_destroy_link</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_poll</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_on_can_message</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">payload</span><span class="p">[],</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">isotp_send_with_id</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">payload</span><span class="p">[],</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">isotp_receive</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">payload_size</span><span class="p">,</span>
+<span class="w">                  </span><span class="kt">uint32_t</span><span class="o">*</span><span class="w"> </span><span class="n">out_size</span><span class="p">);</span>
+
+<span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_set_tx_done_cb</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">isotp_tx_done_cb</span><span class="w"> </span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">arg</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_set_rx_done_cb</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">isotp_rx_done_cb</span><span class="w"> </span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">arg</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef __cplusplus</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#endif </span><span class="cm">/* ISOTPC_H */</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

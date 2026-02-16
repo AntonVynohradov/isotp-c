@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structIsoTpCanMessage" kind="struct" language="C++" prot="public">
+    <compoundname>IsoTpCanMessage</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structIsoTpCanMessage_1a281207e7a3c13f45a36bf81176651b50" prot="public" static="no" mutable="no">
+        <type><ref refid="structIsoTpPciType" kindref="compound">IsoTpPciType</ref></type>
+        <definition>IsoTpPciType IsoTpCanMessage::common</definition>
+        <argsstring></argsstring>
+        <name>common</name>
+        <qualifiedname>IsoTpCanMessage::common</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="398" column="22" bodyfile="inc/isotp_defines.h" bodystart="398" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpCanMessage_1a8d60fb5b98558f701604c85bd7057c02" prot="public" static="no" mutable="no">
+        <type><ref refid="structIsoTpSingleFrame" kindref="compound">IsoTpSingleFrame</ref></type>
+        <definition>IsoTpSingleFrame IsoTpCanMessage::single_frame</definition>
+        <argsstring></argsstring>
+        <name>single_frame</name>
+        <qualifiedname>IsoTpCanMessage::single_frame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="399" column="26" bodyfile="inc/isotp_defines.h" bodystart="399" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpCanMessage_1a84544b63ae640dd96cc6ccc946d251e7" prot="public" static="no" mutable="no">
+        <type><ref refid="structIsoTpFirstFrameShort" kindref="compound">IsoTpFirstFrameShort</ref></type>
+        <definition>IsoTpFirstFrameShort IsoTpCanMessage::first_frame_short</definition>
+        <argsstring></argsstring>
+        <name>first_frame_short</name>
+        <qualifiedname>IsoTpCanMessage::first_frame_short</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="400" column="30" bodyfile="inc/isotp_defines.h" bodystart="400" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpCanMessage_1a3bc1864049f96e8ca3abded57db291fc" prot="public" static="no" mutable="no">
+        <type>IsoTpFirstFrameLong</type>
+        <definition>IsoTpFirstFrameLong IsoTpCanMessage::first_frame_long</definition>
+        <argsstring></argsstring>
+        <name>first_frame_long</name>
+        <qualifiedname>IsoTpCanMessage::first_frame_long</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="401" column="29" bodyfile="inc/isotp_defines.h" bodystart="401" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpCanMessage_1a83b45a3869af6f1543ed6fbe4ec05ac0" prot="public" static="no" mutable="no">
+        <type><ref refid="structIsoTpConsecutiveFrame" kindref="compound">IsoTpConsecutiveFrame</ref></type>
+        <definition>IsoTpConsecutiveFrame IsoTpCanMessage::consecutive_frame</definition>
+        <argsstring></argsstring>
+        <name>consecutive_frame</name>
+        <qualifiedname>IsoTpCanMessage::consecutive_frame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="402" column="31" bodyfile="inc/isotp_defines.h" bodystart="402" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpCanMessage_1ab51df5abc2717db59792b3857f801161" prot="public" static="no" mutable="no">
+        <type><ref refid="structIsoTpFlowControl" kindref="compound">IsoTpFlowControl</ref></type>
+        <definition>IsoTpFlowControl IsoTpCanMessage::flow_control</definition>
+        <argsstring></argsstring>
+        <name>flow_control</name>
+        <qualifiedname>IsoTpCanMessage::flow_control</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="403" column="26" bodyfile="inc/isotp_defines.h" bodystart="403" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpCanMessage_1a13d069259871e3d94a631c3984af433f" prot="public" static="no" mutable="no">
+        <type><ref refid="structIsoTpDataArray" kindref="compound">IsoTpDataArray</ref></type>
+        <definition>IsoTpDataArray IsoTpCanMessage::data_array</definition>
+        <argsstring></argsstring>
+        <name>data_array</name>
+        <qualifiedname>IsoTpCanMessage::data_array</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="404" column="24" bodyfile="inc/isotp_defines.h" bodystart="404" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpCanMessage_1aa9432d850b140117cc40ea6f6d333f7f" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structIsoTpCanMessage" kindref="compound">IsoTpCanMessage</ref></type>
+        <definition>union IsoTpCanMessage IsoTpCanMessage::as</definition>
+        <argsstring></argsstring>
+        <name>as</name>
+        <qualifiedname>IsoTpCanMessage::as</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defines.h" line="405" column="8"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>IsoTpCanMessage</label>
+        <link refid="structIsoTpCanMessage"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>common</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>single_frame</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>first_frame_short</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>consecutive_frame</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>flow_control</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>data_array</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>IsoTpConsecutiveFrame</label>
+        <link refid="structIsoTpConsecutiveFrame"/>
+      </node>
+      <node id="7">
+        <label>IsoTpDataArray</label>
+        <link refid="structIsoTpDataArray"/>
+      </node>
+      <node id="4">
+        <label>IsoTpFirstFrameShort</label>
+        <link refid="structIsoTpFirstFrameShort"/>
+      </node>
+      <node id="6">
+        <label>IsoTpFlowControl</label>
+        <link refid="structIsoTpFlowControl"/>
+      </node>
+      <node id="2">
+        <label>IsoTpPciType</label>
+        <link refid="structIsoTpPciType"/>
+      </node>
+      <node id="3">
+        <label>IsoTpSingleFrame</label>
+        <link refid="structIsoTpSingleFrame"/>
+      </node>
+    </collaborationgraph>
+    <location file="inc/isotp_defines.h" line="394" column="1" bodyfile="inc/isotp_defines.h" bodystart="395" bodyend="406"/>
+    <listofallmembers>
+      <member refid="structIsoTpCanMessage_1aa9432d850b140117cc40ea6f6d333f7f" prot="public" virt="non-virtual"><scope>IsoTpCanMessage</scope><name>as</name></member>
+      <member refid="structIsoTpCanMessage_1a281207e7a3c13f45a36bf81176651b50" prot="public" virt="non-virtual"><scope>IsoTpCanMessage</scope><name>common</name></member>
+      <member refid="structIsoTpCanMessage_1a83b45a3869af6f1543ed6fbe4ec05ac0" prot="public" virt="non-virtual"><scope>IsoTpCanMessage</scope><name>consecutive_frame</name></member>
+      <member refid="structIsoTpCanMessage_1a13d069259871e3d94a631c3984af433f" prot="public" virt="non-virtual"><scope>IsoTpCanMessage</scope><name>data_array</name></member>
+      <member refid="structIsoTpCanMessage_1a3bc1864049f96e8ca3abded57db291fc" prot="public" virt="non-virtual"><scope>IsoTpCanMessage</scope><name>first_frame_long</name></member>
+      <member refid="structIsoTpCanMessage_1a84544b63ae640dd96cc6ccc946d251e7" prot="public" virt="non-virtual"><scope>IsoTpCanMessage</scope><name>first_frame_short</name></member>
+      <member refid="structIsoTpCanMessage_1ab51df5abc2717db59792b3857f801161" prot="public" virt="non-virtual"><scope>IsoTpCanMessage</scope><name>flow_control</name></member>
+      <member refid="structIsoTpCanMessage_1a8d60fb5b98558f701604c85bd7057c02" prot="public" virt="non-virtual"><scope>IsoTpCanMessage</scope><name>single_frame</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

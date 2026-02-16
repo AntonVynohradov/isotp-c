@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/group__isotp__defines/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Group isotp_defines - ISO-TP C Implementation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Group isotp_defines";
+        var mkdocs_page_input_path = "docs/group__isotp__defines.md";
+        var mkdocs_page_url = "/isotp-c/docs/group__isotp__defines/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP C Implementation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Group isotp_defines</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="group-isotp_defines">Group isotp_defines<a class="headerlink" href="#group-isotp_defines" title="Permanent link">&para;</a></h1>
+<p><a href="../modules/"><strong>Modules</strong></a> <strong>&gt;</strong> <a href="./"><strong>isotp_defines</strong></a></p>
+<p><em>Internal protocol definitions and type structures.</em> <a href="#detailed-description">More...</a></p>
+<h2 id="detailed-description">Detailed Description<a class="headerlink" href="#detailed-description" title="Permanent link">&para;</a></h2>
+<p>This group contains the low-level building blocks used by the ISO-TP core (frame layouts, PCI types, status codes, and timing helpers). These definitions describe how CAN frames are encoded/decoded and provide enums and constants that drive the state machine in isotp.c.</p>
+<p>**
+**</p>
+<ul>
+<li>Frame layout structs: <a href="../structIsoTpSingleFrame/"><strong>IsoTpSingleFrame</strong></a>, <a href="../structIsoTpFirstFrameShort/"><strong>IsoTpFirstFrameShort</strong></a>, IsoTpFirstFrameLong, <a href="../structIsoTpConsecutiveFrame/"><strong>IsoTpConsecutiveFrame</strong></a>, <a href="../structIsoTpFlowControl/"><strong>IsoTpFlowControl</strong></a>. </li>
+<li>Frame container: <a href="../structIsoTpCanMessage/"><strong>IsoTpCanMessage</strong></a> and <a href="../structIsoTpDataArray/"><strong>IsoTpDataArray</strong></a>. </li>
+<li>PCI type and flow status enums: <a href="../isotp__defines_8h/#enum-isotpprotocolcontrolinformation"><strong>IsoTpProtocolControlInformation</strong></a>, <a href="../isotp__defines_8h/#enum-isotpflowstatus"><strong>IsoTpFlowStatus</strong></a>. </li>
+<li>Return codes and protocol result codes: <a href="../isotp__defines_8h/#define-isotp_ret_ok"><strong>ISOTP_RET_OK</strong></a>, ISOTP_RET_ERROR, ISOTP_RET_INPROGRESS, ISOTP_RET_OVERFLOW, ISOTP_RET_WRONG_SN, ISOTP_RET_NO_DATA, ISOTP_RET_TIMEOUT, ISOTP_RET_LENGTH, ISOTP_RET_NOSPACE, <a href="../isotp__defines_8h/#define-isotp_protocol_result_ok"><strong>ISOTP_PROTOCOL_RESULT_OK</strong></a>, ISOTP_PROTOCOL_RESULT_TIMEOUT_A, ISOTP_PROTOCOL_RESULT_TIMEOUT_BS, ISOTP_PROTOCOL_RESULT_TIMEOUT_CR, ISOTP_PROTOCOL_RESULT_WRONG_SN, ISOTP_PROTOCOL_RESULT_INVALID_FS, ISOTP_PROTOCOL_RESULT_UNEXP_PDU, ISOTP_PROTOCOL_RESULT_WFT_OVRN, ISOTP_PROTOCOL_RESULT_BUFFER_OVFLW, ISOTP_PROTOCOL_RESULT_ERROR. </li>
+<li>Byte order and packing helpers: ISOTP_BYTE_ORDER_LITTLE_ENDIAN, <a href="../isotp__defines_8h/#function-isotp_packed_struct"><strong>ISOTP_PACKED_STRUCT</strong></a>, <a href="../isotp__defines_8h/#define-le32toh"><strong>LE32TOH</strong></a>. </li>
+<li>Status types and helpers: <a href="../isotp__defines_8h/#enum-isotpsendstatustypes"><strong>IsoTpSendStatusTypes</strong></a>, <a href="../isotp__defines_8h/#enum-isotpreceivestatustypes"><strong>IsoTpReceiveStatusTypes</strong></a>, <a href="../isotp__defines_8h/#define-isotptimeafter"><strong>IsoTpTimeAfter</strong></a>, <a href="../isotp__defines_8h/#define-isotp_invalid_bs"><strong>ISOTP_INVALID_BS</strong></a>, <a href="../isotp__defines_8h/#define-isotp_max_error_msg_size"><strong>ISOTP_MAX_ERROR_MSG_SIZE</strong></a>. </li>
+</ul>
+<hr />
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
