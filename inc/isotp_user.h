@@ -1,15 +1,13 @@
-/*******************************************************************************
- * ISO-TP-C: ISO 15765-2 Protocol Implementation
+/**
+ * @file isotp_user.h
+ * @brief User callback interfaces and platform abstraction layer.
  *
- * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: User callback interfaces and platform abstraction layer
+ * Project: ISO-TP-C - Embedded-Grade Refactoring & Optimization
+ * Author: Anton Vynohradov
+ * Email: avynohradov@systemfromscratch.com
  *
- * Author:      Anton Vynohradov
- * Email:       avynohradov@systemfromscratch.com
- *
- * License:     MIT License
- *
- * Copyright (c) 2026 Anton Vynohradov
+ * @copyright Copyright (c) 2026 Anton Vynohradov
+ * @license MIT License
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,32 +28,49 @@
  * THE SOFTWARE.
  *
  * SPDX-License-Identifier: MIT
- ******************************************************************************/
+ */
+
+/**
+ * @defgroup isotp_user User hooks
+ * @ingroup isotp
+ * @brief User-implemented callbacks and platform hooks.
+ *
+ * This group defines the platform abstraction points required by the ISO-TP
+ * core. Applications must provide these functions to integrate with their
+ * CAN driver, timing source, and optional debug output.
+ *
+ * @par Elements in this group include:
+ * @li Debug output hook: @ref isotp_user_debug.
+ * @li CAN transmit hook: @ref isotp_user_send_can (optionally with
+ *     @ref ISO_TP_USER_SEND_CAN_ARG).
+ * @li Time source hook: @ref isotp_user_get_us.
+ * @{
+ */
 
 #ifndef ISOTPC_USER_H
 #define ISOTPC_USER_H
 
-/* ==============================================================================
- * INCLUDES
- * =============================================================================*/
+/** @name Includes */
+/** @{ */
 
 #include <stdint.h>
 
-/* ==============================================================================
- * DEFINES & MACROS
- * =============================================================================*/
+/** @} */
 
-/* ==============================================================================
- * TYPE DEFINITIONS
- * =============================================================================*/
+/** @name Defines and macros */
+/** @{ */
+/** @} */
 
-/* ==============================================================================
- * GLOBAL VARIABLES (extern declarations)
- * =============================================================================*/
+/** @name Type definitions */
+/** @{ */
+/** @} */
 
-/* ==============================================================================
- * PUBLIC FUNCTION DECLARATIONS
- * =============================================================================*/
+/** @name Global variables */
+/** @{ */
+/** @} */
+
+/** @name Public function declarations */
+/** @{ */
 
 #ifdef __cplusplus
 extern "C"
@@ -63,20 +78,19 @@ extern "C"
 #endif
 
 /**
- * @brief   User implemented, print debug message
- * @param   message - Debug message format string
- * @return  None
+ * @brief User implemented, print debug message.
+ * @param message Debug message format string.
  */
 void isotp_user_debug(const char* message, ...);
 
 /**
- * @brief   User implemented, send CAN message (should return ISOTP_RET_OK when
- * success)
- * @param   arbitration_id - CAN message arbitration ID
- * @param   data - Pointer to message data buffer
- * @param   size - Size of message data in bytes
- * @return  ISOTP_RET_OK on success, ISOTP_RET_NOSPACE if transfer should be
- * retried later, or ISOTP_RET_ERROR on failure
+ * @brief User implemented, send CAN message.
+ * @details Should return ISOTP_RET_OK on success.
+ * @param arbitration_id CAN message arbitration ID.
+ * @param data Pointer to message data buffer.
+ * @param size Size of message data in bytes.
+ * @return ISOTP_RET_OK on success, ISOTP_RET_NOSPACE if transfer should be retried later,
+ *         or ISOTP_RET_ERROR on failure.
  */
 int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size
 #ifdef ISO_TP_USER_SEND_CAN_ARG
@@ -86,15 +100,27 @@ int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, cons
 );
 
 /**
- * @brief   User implemented, gets the amount of time passed since the last call
- * in microseconds
- * @param   None
- * @return  Time elapsed in microseconds
+ * @brief User implemented, return a monotonically increasing timebase in microseconds.
+ *
+ * This function must provide a free-running timestamp in microseconds that
+ * increases monotonically over time. The ISO-TP core uses this value for
+ * timeout and delay calculations by performing arithmetic on the returned
+ * timestamp (for example, adding a timeout interval to it).
+ *
+ * Natural wrap-around of the 32-bit counter is allowed and will be handled
+ * by the ISO-TP core, but the value must not jump backwards except for such
+ * wrap-around.
+ *
+ * @return Current timebase value in microseconds.
  */
 uint32_t isotp_user_get_us(void);
+
+/** @} */
 
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */
 
 #endif /* ISOTPC_USER_H */

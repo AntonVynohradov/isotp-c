@@ -1,8 +1,8 @@
 ################################################################################
 # ISO-TP-C: ISO 15765-2 Protocol Implementation
 #
-# Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
-# Description: This CMake file configures the build for the ISO-TP-C project.
+# Project:     LinuxSocketExample - Example application demonstrating ISO-TP-C usage with Linux SocketCAN
+# Description: This CMake file configures the build for the LinuxSocketExample project.
 #
 # Author:      Anton Vynohradov
 # Email:       avynohradov@systemfromscratch.com
@@ -26,16 +26,15 @@
 cmake_minimum_required(VERSION 3.20)
 
 list(APPEND CMAKE_MODULE_PATH
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../
 )
 
 # ==============================================================================
 # PROJECT CONFIGURATION
 # ==============================================================================
 
-project(ISOTP
-    DESCRIPTION "ISO 15765-2 Protocol Implementation"
+project(LinuxSocketExample
+    DESCRIPTION "Example application demonstrating ISO-TP-C usage with Linux SocketCAN"
     LANGUAGES C
     )
 
@@ -49,30 +48,19 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
 # Compiler warning flags
-set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -Wpedantic -g") #TODO: -Wconversion
+set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -Wpedantic -g")
 set(CMAKE_C_FLAGS_RELEASE "-Wall -Wextra -Wpedantic -O2 -DNDEBUG")
 
 # ==============================================================================
 # LIBRARY/EXECUTABLE TARGETS
 # ==============================================================================
 
-# Unit tests are optional and can be enabled with a CMake option
-option(ISOTP_UNIT_TESTS "Enable ISO-TP unit tests" OFF)
-
-# The static library target is defined in cmake/isotp.cmake
+# Include the main library target for ISO-TP-C
 include(isotp)
 
 # ==============================================================================
-# UNIT TESTS
+# EXAMPLE APPLICATION
 # ==============================================================================
 
-if(ISOTP_UNIT_TESTS)
-    # This file contains the configuration for unit tests, including GTest integration and test discovery.
-    include( unit_tests)
-endif()
-
-# ==============================================================================
-# INSTALLATION
-# ==============================================================================
-
-# install(TARGETS PROJECT_NAME ...)
+add_executable(${CMAKE_PROJECT_NAME} linux_socket.c)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE isotp )

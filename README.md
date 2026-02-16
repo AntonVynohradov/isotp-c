@@ -8,18 +8,18 @@ This is an **active refactoring fork** of [SimonCahill/isotp-c](https://github.c
 
 🚧 **REFACTORING IN PROGRESS** 🚧
 
-This fork is dedicated to elevating the ISO-TP-C library to production-grade quality standards for embedded systems through comprehensive refactoring, optimization, testing, and documentation initiatives.
+This fork is dedicated to elevating the ISO-TP-C library to production-grade quality for embedded systems through comprehensive refactoring, optimization, testing, and documentation.
 
 ---
 
 ## About ISO-TP
 
-ISO 15765-2, or **ISO-TP**, is an international standard for transporting data packets over a CAN-Bus. It enables the transmission of messages exceeding the eight-byte maximum payload of standard CAN frames by segmenting longer messages into multiple frames with metadata for reassembly.
+ISO 15765-2, or **ISO-TP**, is an international standard for transporting data packets over a CAN bus. It enables the transmission of messages exceeding the 8-byte maximum payload of standard CAN frames by segmenting longer messages into multiple frames with metadata for reassembly.
 
 **Key Capabilities:**
-- Support for up to 4095 bytes of payload per message packet
+- Support for up to 4095 bytes of payload per message
 - Single and multiple frame transmission
-- Full-duplex operation mode
+- Full-duplex operation
 - Platform-agnostic design using dependency injection
 
 ---
@@ -83,22 +83,17 @@ We acknowledge and appreciate the contributions of all original authors and main
 
 ### Prerequisites
 - C compiler (GCC, LLVM, or MSVC)
-- CMake 3.10+ (recommended) or Make
-- Optional: Python 3.x for testing and documentation generation
+- CMake 3.20+ (required)
+- Optional: Python 3.x for testing and documentation (MkDocs)
 
 ### Build Options
 
-#### Using CMake (Recommended)
+#### Using CMake (Required)
 ```bash
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
-```
-
-#### Using Make
-```bash
-make all
 ```
 
 #### Configuration Options
@@ -119,24 +114,24 @@ static IsoTpLink link;
 
 int main(void) {
     /* Initialize the link */
-    isotp_init_link(&link, 0x7TT, tx_buffer, sizeof(tx_buffer), 
+    isotp_init_link(&link, 0x7E0, tx_buffer, sizeof(tx_buffer),
                     rx_buffer, sizeof(rx_buffer));
-    
+
     while (1) {
         /* Handle incoming CAN messages */
         uint32_t can_id;
         uint8_t data[8];
         uint8_t len;
-        
+
         if (can_receive(&can_id, data, &len) == RET_OK) {
-            if (can_id == 0x7RR) {
+            if (can_id == 0x7E8) {
                 isotp_on_can_message(&link, data, len);
             }
         }
-        
+
         /* Process link state */
         isotp_poll(&link);
-        
+
         /* Handle received messages */
         uint8_t payload[4095];
         uint32_t payload_len;
@@ -144,7 +139,7 @@ int main(void) {
             process_message(payload, payload_len);
         }
     }
-    
+
     return 0;
 }
 ```
@@ -161,11 +156,28 @@ isotp-c/
 │   ├── isotp_config.h
 │   ├── isotp_defines.h
 │   └── isotp_user.h
-├── tests/                  # Unit tests (under development)
-├── docs/                   # Documentation (under development)
+├── tests/                  # Unit tests
+├── docs/                   # Documentation
+│   ├── api.md
+│   ├── configuration.md
+│   ├── guide.md
+│   ├── index.md
+│   ├── LICENSE.md
+│   └── examples/
+│       └── linux_socket.md
+├── example/                # Example applications
+│   └── linux_socket/
+│       ├── CMakeLists.txt
+│       └── linux_socket.c
+├── cmake/                  # CMake helpers
+│   ├── unit_tests.cmake
+│   └── version.cmake
 ├── CMakeLists.txt
-├── Makefile
+├── CMakePresets.json
+├── isotp.cmake
+├── isotp.h
 ├── LICENSE
+├── mkdocs.yml
 └── README.md
 ```
 
@@ -206,6 +218,6 @@ For questions or issues related to:
 
 ---
 
-**Last Updated:** February 2026  
-**Status:** Active Development  
+**Last Updated:** February 2026
+**Status:** Active Development
 **Target Release:** TBD
