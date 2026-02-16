@@ -47,8 +47,6 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-set(CMAKE_GENERATOR "Unix Makefiles") # Force Unix Makefiles generator for better compatibility with Linux build environments
-
 # Compiler warning flags
 set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -Wpedantic -g")
 set(CMAKE_C_FLAGS_RELEASE "-Wall -Wextra -Wpedantic -O2 -DNDEBUG")

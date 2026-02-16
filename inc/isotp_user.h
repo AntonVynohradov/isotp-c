@@ -100,8 +100,18 @@ int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, cons
 );
 
 /**
- * @brief User implemented, get elapsed time since the last call in microseconds.
- * @return Time elapsed in microseconds.
+ * @brief User implemented, return a monotonically increasing timebase in microseconds.
+ *
+ * This function must provide a free-running timestamp in microseconds that
+ * increases monotonically over time. The ISO-TP core uses this value for
+ * timeout and delay calculations by performing arithmetic on the returned
+ * timestamp (for example, adding a timeout interval to it).
+ *
+ * Natural wrap-around of the 32-bit counter is allowed and will be handled
+ * by the ISO-TP core, but the value must not jump backwards except for such
+ * wrap-around.
+ *
+ * @return Current timebase value in microseconds.
  */
 uint32_t isotp_user_get_us(void);
 

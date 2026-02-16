@@ -83,12 +83,12 @@ We acknowledge and appreciate the contributions of all original authors and main
 
 ### Prerequisites
 - C compiler (GCC, LLVM, or MSVC)
-- CMake 3.10+ (recommended)
+- CMake 3.20+ (required)
 - Optional: Python 3.x for testing and documentation (MkDocs)
 
 ### Build Options
 
-#### Using CMake (Recommended)
+#### Using CMake (Required)
 ```bash
 mkdir build
 cd build
@@ -114,7 +114,7 @@ static IsoTpLink link;
 
 int main(void) {
     /* Initialize the link */
-    isotp_init_link(&link, 0x7TT, tx_buffer, sizeof(tx_buffer),
+    isotp_init_link(&link, 0x7E0, tx_buffer, sizeof(tx_buffer),
                     rx_buffer, sizeof(rx_buffer));
 
     while (1) {
@@ -124,7 +124,7 @@ int main(void) {
         uint8_t len;
 
         if (can_receive(&can_id, data, &len) == RET_OK) {
-            if (can_id == 0x7RR) {
+            if (can_id == 0x7E8) {
                 isotp_on_can_message(&link, data, len);
             }
         }

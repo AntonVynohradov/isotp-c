@@ -42,6 +42,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
+#include <stdarg.h>
 
 #include <net/if.h>
 #include <sys/ioctl.h>
@@ -75,7 +76,7 @@
  * PRIVATE VARIABLES (static)
  * =============================================================================*/
 
-static IsoTpLink* g_link = NULL;  ///< Pointer to the ISO-TP link, allocated statically in RAM
+static IsoTpLink g_link;  ///< ISO-TP link instance, allocated statically in RAM
 
 static uint8_t g_isotpRecvBuf[_ISOTP_BUFSIZE];  ///< Buffer for receiving ISO-TP messages, allocated
                                                 ///< statically in RAM
@@ -93,14 +94,14 @@ static int _socket;  ///< SocketCAN file descriptor
  *
  * @return uint32_t Current time in microseconds
  */
-static uint32_t isotp_user_get_us(void);
+uint32_t isotp_user_get_us(void);
 
 /**
  * @brief Print a debug message.
  *
  * @param message The message to print.
  */
-static void isotp_user_debug(const char* message);
+void isotp_user_debug(const char* message, ...);
 
 /**
  * @brief Send a CAN message.
@@ -110,20 +111,31 @@ static void isotp_user_debug(const char* message);
  * @param size Size of the data buffer (max 8 bytes).
  * @return int ISOTP_RET_OK on success, ISOTP_RET_ERROR on failure.
  */
-static int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data,
-                               const uint8_t size);
+int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size
+#ifdef ISO_TP_USER_SEND_CAN_ARG
+                        ,
+                        void* arg
+#endif
+);
 
 /* ==============================================================================
  * PRIVATE FUNCTION IMPLEMENTATIONS
  * =============================================================================*/
 
-static void isotp_user_debug(const char* message)
+void isotp_user_debug(const char* message, ...)
 {
-    fprintf(stderr, "%s", message);
+    va_list args;
+    va_start(args, message);
+    vfprintf(stderr, message, args);
+    va_end(args);
 }
 
-static int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data,
-                               const uint8_t size)
+int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size
+#ifdef ISO_TP_USER_SEND_CAN_ARG
+                        ,
+                        void* arg
+#endif
+)
 {
     int ret = ISOTP_RET_ERROR;
 
@@ -134,6 +146,9 @@ static int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* dat
 
     memcpy(frame.data, data, size);
 
+#ifdef ISO_TP_USER_SEND_CAN_ARG
+    (void) arg;
+#endif
     ssize_t ret_size = write(_socket, &frame, sizeof(struct can_frame));
 
     if (ret_size == sizeof(struct can_frame))
@@ -144,14 +159,13 @@ static int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* dat
     return ret; /* TODO: Check return value */
 }
 
-static uint32_t isotp_user_get_us(void)
+uint32_t isotp_user_get_us(void)
 {
     uint64_t microsecond;
     struct timespec ts;
-    int return_code = timespec_get(&ts, TIME_UTC);
-    if (return_code == 0)
+    if (clock_gettime(CLOCK_MONOTONIC, &ts) != 0)
     {
-        perror("Failed to obtain timestamp.");
+        perror("Failed to obtain monotonic timestamp.");
         microsecond = UINT64_MAX;  // use this to indicate error
     }
     else
@@ -201,13 +215,8 @@ int main(int argc, char** argv)
 
     /* Init ISOTP lib */
     /* Initialize link, ISOTP_CAN_ID is the CAN ID you send with */
-    g_link = isotp_init_link(_ISOTP_CAN_ID, g_isotpSendBuf, sizeof(g_isotpSendBuf), g_isotpRecvBuf,
-                             sizeof(g_isotpRecvBuf));
-    if (g_link == NULL)
-    {
-        perror("ISOTP");
-        return 1;
-    }
+    isotp_init_link(&g_link, _ISOTP_CAN_ID, g_isotpSendBuf, sizeof(g_isotpSendBuf), g_isotpRecvBuf,
+                    sizeof(g_isotpRecvBuf));
 
     while (true)
     {
@@ -218,30 +227,43 @@ int main(int argc, char** argv)
             break;
         }
 
-        int ret = isotp_on_can_message(g_link, frame.data, frame.can_dlc);
-        if (ret == ISOTP_RET_OK)
+        uint32_t arbitration_id = frame.can_id & CAN_EFF_MASK;
+        if (arbitration_id != _ISOTP_CAN_ID)
         {
-            isotp_poll(g_link);
+            continue;
+        }
 
-            if (g_link->receive_status == ISOTP_RECEIVE_STATUS_FULL)
+        isotp_on_can_message(&g_link, frame.data, frame.can_dlc);
+        isotp_poll(&g_link);
+
+        if (g_link.receive_status == ISOTP_RECEIVE_STATUS_FULL)
+        {
+            uint8_t payload[_ISOTP_BUFSIZE] = {0};
+            uint32_t out_size = 0;
+            int ret = isotp_receive(&g_link, payload, sizeof(payload), &out_size);
+            if (ret == ISOTP_RET_OK)
             {
-                uint8_t payload[_ISOTP_BUFSIZE] = {0};
-                uint16_t out_size = 0;
-                ret = isotp_receive(g_link, payload, sizeof(payload), &out_size);
-                if (ret == ISOTP_RET_OK)
+                bool is_eff = (frame.can_id & CAN_EFF_FLAG) != 0U;
+                uint32_t can_id = frame.can_id & (is_eff ? CAN_EFF_MASK : CAN_SFF_MASK);
+
+                if (is_eff)
                 {
-                    printf("0x%03X [%d] ", frame.can_id, out_size);
-
-                    for (i = 0; i < out_size; i++)
-                        printf("%02X ", payload[i]);
-
-                    printf("\r\n");
+                    printf("0x%08X [%d] ", can_id, out_size);
                 }
+                else
+                {
+                    printf("0x%03X [%d] ", can_id, out_size);
+                }
+
+                for (i = 0; i < out_size; i++)
+                    printf("%02X ", payload[i]);
+
+                printf("\r\n");
             }
         }
     }
 
-    free(g_link);
+    isotp_destroy_link(&g_link);
 
     if (close(_socket) < 0)
     {
