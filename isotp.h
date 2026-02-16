@@ -1,15 +1,13 @@
-/*******************************************************************************
- * ISO-TP-C: ISO 15765-2 Protocol Implementation
+/**
+ * @file isotp.h
+ * @brief Core ISO-TP protocol API with link management and message handling.
  *
- * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: Core ISO-TP protocol header with link management and message handling
+ * Project: ISO-TP-C - Embedded-Grade Refactoring & Optimization
+ * Author: Anton Vynohradov
+ * Email: avynohradov@systemfromscratch.com
  *
- * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
- *
- * License:     MIT License
- *
- * Copyright (c) 2026 Anton Vynohradov
+ * @copyright Copyright (c) 2026 Anton Vynohradov
+ * @license MIT License
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,14 +28,31 @@
  * THE SOFTWARE.
  *
  * SPDX-License-Identifier: MIT
- ******************************************************************************/
+ */
+
+/**
+ * @addtogroup isotp ISO-TP API
+ * @brief Public API for ISO-TP link management and message handling.
+ *
+ * @details This group defines the public interface for initializing links, sending
+ * and receiving messages, handling incoming CAN frames, and polling the
+ * protocol state machine. It also exposes optional callback registration
+ * when enabled in configuration.
+ *
+ * @par Public interface includes:
+ * @li Link lifecycle: @ref isotp_init_link, @ref isotp_destroy_link.
+ * @li Message flow: @ref isotp_send, @ref isotp_send_with_id,
+ *     @ref isotp_on_can_message, @ref isotp_receive, @ref isotp_poll.
+ * @li Link data model: @ref IsoTpLink.
+ * @li Optional callbacks: @ref isotp_set_tx_done_cb, @ref isotp_set_rx_done_cb.
+ * @{
+ */
 
 #ifndef ISOTPC_H
 #define ISOTPC_H
 
-/* ==============================================================================
- * INCLUDES
- * =============================================================================*/
+/** @name Includes */
+/** @{ */
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -54,76 +69,74 @@ extern "C"
 #include "isotp_defines.h"
 #include "isotp_user.h"
 
+/** @} */
 
-/* ==============================================================================
- * TYPE DEFINITIONS
- * =============================================================================*/
+
+/** @name Type definitions */
+/** @{ */
 
 /**
- * @brief Struct containing the data for linking an application to a CAN instance.
- * The data stored in this struct is used internally and may be used by software programs
- * using this library.
+ * @brief Link state for a single ISO-TP connection.
+ * @details The data stored in this struct is used internally and may be used by
+ *          software programs using this library.
  */
 typedef struct IsoTpLink
 {
     /* sender parameters */
-    uint32_t send_arbitration_id; /* used to reply consecutive frame */
+    uint32_t send_arbitration_id; /**< Arbitration ID used for consecutive frames. */
 
     /* message buffer */
-    uint8_t* send_buffer;
-    uint32_t send_buf_size;
-    uint32_t send_size;
-    uint32_t send_offset;
+    uint8_t* send_buffer;   /**< Send buffer base pointer. */
+    uint32_t send_buf_size; /**< Send buffer size in bytes. */
+    uint32_t send_size;     /**< Total size to send in bytes. */
+    uint32_t send_offset;   /**< Current send offset in bytes. */
 
     /* multi-frame flags */
-    uint8_t send_sn;
-    uint32_t send_bs_remain; /* Remaining block size */
-    uint32_t send_st_min_us; /* Separation Time between consecutive frames */
-    uint8_t send_wtf_count;  /* Maximum number of FC.Wait frame transmissions  */
-    uint32_t send_timer_st;  /* Last time send consecutive frame */
-    uint32_t send_timer_bs;  /* Time until reception of the next FlowControl N_PDU
-                                start at sending FF, CF, receive FC
-                                end at receive FC */
-    int32_t send_protocol_result;
-    uint8_t send_status;
+    uint8_t send_sn;              /**< Current sequence number. */
+    uint32_t send_bs_remain;      /**< Remaining block size. */
+    uint32_t send_st_min_us;      /**< Minimum separation time in microseconds. */
+    uint8_t send_wtf_count;       /**< Max number of FC.Wait frames to send. */
+    uint32_t send_timer_st;       /**< Timestamp of last consecutive frame send. */
+    uint32_t send_timer_bs;       /**< Timer until next FlowControl is expected. */
+    int32_t send_protocol_result; /**< Last protocol result code for sender. */
+    uint8_t send_status;          /**< Sender status. */
 
     /* receiver parameters */
-    uint32_t receive_arbitration_id;
+    uint32_t receive_arbitration_id; /**< Arbitration ID used for reception. */
 
     /* message buffer */
-    uint8_t* receive_buffer;
-    uint32_t receive_buf_size;
-    uint32_t receive_size;
-    uint32_t receive_offset;
+    uint8_t* receive_buffer;   /**< Receive buffer base pointer. */
+    uint32_t receive_buf_size; /**< Receive buffer size in bytes. */
+    uint32_t receive_size;     /**< Total received size in bytes. */
+    uint32_t receive_offset;   /**< Current receive offset in bytes. */
 
     /* multi-frame control */
-    uint8_t receive_sn;
-    uint8_t receive_bs_count;  /* Maximum number of FC.Wait frame transmissions  */
-    uint32_t receive_timer_cr; /* Time until transmission of the next ConsecutiveFrame N_PDU
-                         start at sending FC, receive CF
-                         end at receive FC */
-    int receive_protocol_result;
-    uint8_t receive_status;
+    uint8_t receive_sn;          /**< Expected sequence number. */
+    uint8_t receive_bs_count;    /**< Max number of FC.Wait frames to send. */
+    uint32_t receive_timer_cr;   /**< Timer until next ConsecutiveFrame is expected. */
+    int receive_protocol_result; /**< Last protocol result code for receiver. */
+    uint8_t receive_status;      /**< Receiver status. */
 
 #if defined(ISO_TP_USER_SEND_CAN_ARG)
-    void* user_send_can_arg;
+    void* user_send_can_arg; /**< User argument for `isotp_user_send_can`. */
 #endif
 
 #ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK
-    isotp_tx_done_cb tx_done_cb; /* User callback for transmission complete */
-    void* tx_done_cb_arg;        /* User argument for callback */
+    isotp_tx_done_cb tx_done_cb; /**< User callback for transmission complete. */
+    void* tx_done_cb_arg;        /**< User argument for callback. */
 #endif
 
 #ifdef ISO_TP_RECEIVE_COMPLETE_CALLBACK
-    isotp_rx_done_cb rx_done_cb; /* User callback for receive complete */
-    void* rx_done_cb_arg;        /* User argument for callback */
+    isotp_rx_done_cb rx_done_cb; /**< User callback for receive complete. */
+    void* rx_done_cb_arg;        /**< User argument for callback. */
 #endif
 
 } IsoTpLink;
 
-/* ==============================================================================
- * PUBLIC FUNCTION DECLARATIONS
- * =============================================================================*/
+/** @} */
+
+/** @name Public function declarations */
+/** @{ */
 
 /**
  * @brief Initialises the ISO-TP library.
@@ -228,8 +241,12 @@ void isotp_set_tx_done_cb(IsoTpLink* link, isotp_tx_done_cb cb, void* arg);
 void isotp_set_rx_done_cb(IsoTpLink* link, isotp_rx_done_cb cb, void* arg);
 #endif
 
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */
 
 #endif /* ISOTPC_H */

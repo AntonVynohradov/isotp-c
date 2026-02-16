@@ -2,10 +2,10 @@
  * ISO-TP-C: ISO 15765-2 Protocol Implementation
  *
  * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: User callback interfaces and platform abstraction layer
+ * Description: Unit tests for isotp_send.
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *
@@ -32,69 +32,97 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
-#ifndef ISOTPC_USER_H
-#define ISOTPC_USER_H
-
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
 
-#include <stdint.h>
+#include <gtest/gtest.h>
+
+#include "isotp_test_support.h"
 
 /* ==============================================================================
  * DEFINES & MACROS
  * =============================================================================*/
 
-/* ==============================================================================
- * TYPE DEFINITIONS
- * =============================================================================*/
+/* Macros and constants for this test file */
 
 /* ==============================================================================
- * GLOBAL VARIABLES (extern declarations)
+ * PRIVATE TYPE DEFINITIONS
  * =============================================================================*/
+
+/* Local type definitions */
 
 /* ==============================================================================
- * PUBLIC FUNCTION DECLARATIONS
+ * PRIVATE VARIABLES (static)
  * =============================================================================*/
 
-#ifdef __cplusplus
-extern "C"
+/* static variables */
+
+/* ==============================================================================
+ * PRIVATE FUNCTION DECLARATIONS (static)
+ * =============================================================================*/
+
+/* static helpers */
+
+/* ==============================================================================
+ * PRIVATE FUNCTION IMPLEMENTATIONS
+ * =============================================================================*/
+
+/* static helper implementations */
+
+/* ==============================================================================
+ * UNIT TEST IMPLEMENTATIONS
+ * =============================================================================*/
+
+TEST(IsotpSend, UsesLinkArbitrationId)
 {
-#endif
+    reset_mocks();
 
-/**
- * @brief   User implemented, print debug message
- * @param   message - Debug message format string
- * @return  None
- */
-void isotp_user_debug(const char* message, ...);
+    IsoTpLink link;
+    uint8_t sendbuf[16] = {0};
+    uint8_t recvbuf[16] = {0};
+    const uint8_t payload[3] = {0x11, 0x22, 0x33};
 
-/**
- * @brief   User implemented, send CAN message (should return ISOTP_RET_OK when
- * success)
- * @param   arbitration_id - CAN message arbitration ID
- * @param   data - Pointer to message data buffer
- * @param   size - Size of message data in bytes
- * @return  ISOTP_RET_OK on success, ISOTP_RET_NOSPACE if transfer should be
- * retried later, or ISOTP_RET_ERROR on failure
- */
-int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size
-#ifdef ISO_TP_USER_SEND_CAN_ARG
-                        ,
-                        void* arg
-#endif
-);
+    isotp_init_link(&link, 0x7DFu, sendbuf, sizeof(sendbuf), recvbuf, sizeof(recvbuf));
 
-/**
- * @brief   User implemented, gets the amount of time passed since the last call
- * in microseconds
- * @param   None
- * @return  Time elapsed in microseconds
- */
-uint32_t isotp_user_get_us(void);
+    int ret = isotp_send(&link, payload, sizeof(payload));
 
-#ifdef __cplusplus
+    EXPECT_EQ(ret, ISOTP_RET_OK);
+    EXPECT_EQ(g_can_state.call_count, 1);
+    EXPECT_EQ(g_can_state.last_id, 0x7DFu);
 }
-#endif
 
-#endif /* ISOTPC_USER_H */
+TEST(IsotpSend, OversizeReturnsOverflow)
+{
+    reset_mocks();
+
+    IsoTpLink link;
+    uint8_t sendbuf[4] = {0};
+    uint8_t recvbuf[4] = {0};
+    const uint8_t payload[5] = {1, 2, 3, 4, 5};
+
+    isotp_init_link(&link, 0x7DFu, sendbuf, sizeof(sendbuf), recvbuf, sizeof(recvbuf));
+
+    int ret = isotp_send(&link, payload, sizeof(payload));
+
+    EXPECT_EQ(ret, ISOTP_RET_OVERFLOW);
+    EXPECT_EQ(g_can_state.call_count, 0);
+}
+
+TEST(IsotpSend, InProgressReturnsInProgress)
+{
+    reset_mocks();
+
+    IsoTpLink link;
+    uint8_t sendbuf[8] = {0};
+    uint8_t recvbuf[8] = {0};
+    const uint8_t payload[3] = {1, 2, 3};
+
+    isotp_init_link(&link, 0x7DFu, sendbuf, sizeof(sendbuf), recvbuf, sizeof(recvbuf));
+    link.send_status = ISOTP_SEND_STATUS_INPROGRESS;
+
+    int ret = isotp_send(&link, payload, sizeof(payload));
+
+    EXPECT_EQ(ret, ISOTP_RET_INPROGRESS);
+    EXPECT_EQ(g_can_state.call_count, 0);
+}

@@ -1,0 +1,31 @@
+name: Check Building Static Library
+
+on:
+  push:
+    branches:
+      - development
+  pull_request:
+    branches:
+      - development
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure (Debug preset)
+        run: cmake --preset "ISO-TP[Debug]" -B "build/ISO-TP[Debug]"
+
+      - name: Build
+        run: cmake --build "build/ISO-TP[Debug]"
+
+      - name: Configure (Release preset)
+        run: cmake --preset "ISO-TP[Release]" -B "build/ISO-TP[Release]"
+
+      - name: Build
+        run: cmake --build "build/ISO-TP[Release]"

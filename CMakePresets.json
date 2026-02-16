@@ -1,0 +1,34 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "default",
+            "hidden": true,
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/${presetName}"   
+        },       
+        {
+            "name": "ISO-TP[Debug]",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"               
+            }
+        },
+        {
+            "name": "ISO-TP[Release]",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"                
+            }
+        },
+        {
+            "name": "ISO-TP[UnitTests]",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "ISOTP_UNIT_TESTS": "ON"
+            }
+        }            
+        
+    ]
+}

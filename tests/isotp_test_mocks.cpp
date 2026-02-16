@@ -2,10 +2,10 @@
  * ISO-TP-C: ISO 15765-2 Protocol Implementation
  *
  * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: ISO-TP configuration parameters and feature toggles
+ * Description: Test doubles for ISO-TP user callbacks.
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *
@@ -32,76 +32,78 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
-#ifndef ISOTPC_CONFIG_H
-#define ISOTPC_CONFIG_H
-
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
+
+#include "isotp_test_support.h"
 
 /* ==============================================================================
  * DEFINES & MACROS
  * =============================================================================*/
 
-/* Max number of messages the receiver can receive at one time, this value
- * is affected by can driver queue length
- */
-#ifndef ISO_TP_DEFAULT_BLOCK_SIZE
-#define ISO_TP_DEFAULT_BLOCK_SIZE 8
-#endif
-
-/* The STmin parameter value specifies the minimum time gap allowed between
- * the transmission of consecutive frame network protocol data units
- */
-#ifndef ISO_TP_DEFAULT_ST_MIN_US
-#define ISO_TP_DEFAULT_ST_MIN_US 0
-#endif
-
-/* This parameter indicate how many FC N_PDU WTs can be transmitted by the
- * receiver in a row.
- */
-#ifndef ISO_TP_MAX_WFT_NUMBER
-#define ISO_TP_MAX_WFT_NUMBER 1
-#endif
-
-/* Private: The default timeout to use when waiting for a response during a
- * multi-frame send or receive.
- */
-#ifndef ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US
-#define ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US 100000
-#endif
-
-/* Private: Determines if by default, padding is added to ISO-TP message frames.
- */
-/* #define ISO_TP_FRAME_PADDING */
-
-/* Private: Value to use when padding frames if enabled by ISO_TP_FRAME_PADDING
- */
-#ifndef ISO_TP_FRAME_PADDING_VALUE
-#define ISO_TP_FRAME_PADDING_VALUE 0xAA
-#endif
-
-/* Private: Determines if by default, an additional argument is present in the
- * definition of isotp_user_send_can.
- */
-/* #define ISO_TP_USER_SEND_CAN_ARG */
-
-/* Enable support for transmission complete callback */
-/* #define ISO_TP_TRANSMIT_COMPLETE_CALLBACK */
-
-/* Enable support for receive complete callback */
-/* #define ISO_TP_RECEIVE_COMPLETE_CALLBACK */
-
 /* ==============================================================================
- * TYPE DEFINITIONS
+ * PRIVATE TYPE DEFINITIONS
  * =============================================================================*/
 
 /* ==============================================================================
- * GLOBAL VARIABLES (extern declarations)
+ * PUBLIC VARIABLES
  * =============================================================================*/
+
+MockCanState g_can_state = {0};
+uint32_t g_now_us = 0;
+int g_debug_call_count = 0;
 
 /* ==============================================================================
- * PUBLIC FUNCTION DECLARATIONS
+ * PRIVATE FUNCTION DECLARATIONS (static)
  * =============================================================================*/
 
-#endif /* ISOTPC_CONFIG_H */
+
+/* ==============================================================================
+ * PRIVATE FUNCTION IMPLEMENTATIONS
+ * =============================================================================*/
+
+
+/* ==============================================================================
+ * PUBLIC FUNCTION IMPLEMENTATIONS
+ * =============================================================================*/
+
+void reset_mocks()
+{
+    std::memset(&g_can_state, 0, sizeof(g_can_state));
+    g_can_state.return_value = ISOTP_RET_OK;
+    g_now_us = 0;
+    g_debug_call_count = 0;
+}
+
+extern "C"
+{
+void isotp_user_debug(const char* message, ...)
+{
+    (void) message;
+    g_debug_call_count++;
+}
+
+int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size)
+{
+    g_can_state.last_id = arbitration_id;
+    g_can_state.last_size = size;
+    g_can_state.call_count++;
+    std::memset(g_can_state.last_data, 0, sizeof(g_can_state.last_data));
+    if (data != NULL)
+    {
+        uint8_t copy_len = size;
+        if (copy_len > sizeof(g_can_state.last_data))
+        {
+            copy_len = sizeof(g_can_state.last_data);
+        }
+        std::memcpy(g_can_state.last_data, data, copy_len);
+    }
+    return g_can_state.return_value;
+}
+
+uint32_t isotp_user_get_us(void)
+{
+    return g_now_us;
+}
+}

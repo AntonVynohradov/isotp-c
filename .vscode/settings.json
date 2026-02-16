@@ -1,6 +1,5 @@
 {
   "// Auto Snippet Configuration": "Automatically insert file headers and templates using Gruntfuggly",
-  
   "// Note": "Pattern matching configuration - snippet names must match exactly in snippet files",
   "autoSnippet.snippets": [
     {
@@ -12,42 +11,30 @@
       "snippet": "isotp_source"
     },
     {
-      "pattern": "**/CMakeLists.txt",
-      "snippet": "isotp_cmake"
+      "pattern": "**/gtest_*.cpp",
+      "snippet": "isotp_gtest"
     },
     {
       "pattern": "**/*.cmake",
       "snippet": "isotp_cmake"
     }
   ],
-
-  "[c]": {
-    "editor.defaultFormatter": "xaver.clang-format",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "editor.wordBasedSuggestions": false
-  },
-
-  "[h]": {
-    "editor.defaultFormatter": "xaver.clang-format",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "editor.wordBasedSuggestions": false
-  },
-
-  "[cmake]": {
-    "editor.formatOnSave": false,
-    "editor.defaultFormatter": "ms-vscode.cmake-tools"
-  },
-
   "// C/C++ Intellisense": "Configure C code analysis",
   "C_Cpp.default.cStandard": "c99",
   "C_Cpp.default.intelliSenseEngine": "Tag Parser",
-
-  "// Recommended Extensions": [
+  "[c]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "editor.formatOnSave": true,
+  "extensions.recommendations": [
     "ms-vscode.cpptools",
     "xaver.clang-format",
     "ms-vscode.cmake-tools",
     "gruntfuggly.auto-snippet"
-  ]
+  ],
+  "editor.trimWhitespaceOnDelete": true,
+  "files.trimTrailingWhitespace": true
 }

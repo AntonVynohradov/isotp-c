@@ -5,7 +5,7 @@
  * Description: Core ISO-TP protocol implementation with multi-frame support
  *
  * Author:      Anton Vynohradov
- * Email:       avynohradovair@gmail.com
+ * Email:       avynohradov@systemfromscratch.com
  *
  * License:     MIT License
  *
@@ -496,9 +496,9 @@ static int isotp_receive_flow_control_frame(IsoTpLink* link, IsoTpCanMessage* me
     return ISOTP_RET_OK;
 }
 
-///////////////////////////////////////////////////////
-///                 PUBLIC FUNCTIONS                ///
-///////////////////////////////////////////////////////
+/* ==============================================================================
+ * PUBLIC FUNCTION IMPLEMENTATIONS
+ * =============================================================================*/
 
 int isotp_send(IsoTpLink* link, const uint8_t payload[], uint32_t size)
 {
