@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: isotp-static-lib
-          path: build/ISO-TP[Release]/libisotp.a
+          path: build/ISO-TP\[Release\]/libisotp.a

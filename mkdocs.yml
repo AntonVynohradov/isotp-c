@@ -12,6 +12,7 @@ nav:
   - API Reference: api.md
   - Examples:
       - Linux SocketCAN: examples/linux_socket.md
+      - Python API: examples/python_api.md
 
 theme:
   name: readthedocs
@@ -27,7 +28,7 @@ plugins:
   - mkdoxy:
       projects:
         docs:
-          src-dirs: . inc src
+          src-dirs: .
           full-doc: True
           doxy-cfg:
             FILE_PATTERNS: "*.c *.h*"

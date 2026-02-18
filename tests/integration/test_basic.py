@@ -2,7 +2,9 @@
 # ISO-TP-C: ISO 15765-2 Protocol Implementation
 #
 # Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
-# Description: The git ignore file for the ISO-TP-C project, specifying files and directories to be ignored by Git.
+# Description: A high-performance, embedded-grade implementation of the ISO 15765-2 (ISO-TP) protocol in C,
+#              designed for automotive and industrial applications. This project focuses on refactoring and optimizing
+#              the codebase to achieve maximum efficiency, reliability, and maintainability while adhering to the ISO-TP standard.
 #
 # Author:      Anton Vynohradov
 # Email:       avynohradov@systemfromscratch.com
@@ -32,9 +34,21 @@
 # SPDX-License-Identifier: MIT
 #*****************************************************************************
 
-# The build directory is ignored to prevent committing build artifacts
-build
 
-# The PyTest cache and Python bytecode cache directories
-__pycache__
-.pytest_cache
+# =============================================================================
+# IMPORTS
+# =============================================================================
+
+import pyisotp
+import pytest
+
+# =============================================================================
+# FUNCTION PROTOTYPES
+# =============================================================================
+
+def test_single_frame_roundtrip():
+    link = pyisotp.init(0x700, 1024, 1024)
+    pyisotp.send(link, b"\x01\x02\x03")
+    pyisotp.poll(link)
+    resp = pyisotp.receive(link, 1024)
+    assert resp == b"\x01\x02\x03"
