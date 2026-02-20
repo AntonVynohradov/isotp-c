@@ -35,6 +35,12 @@
 #*****************************************************************************
 
 
+"""! @file conftest.py
+@brief Pytest fixtures for ISO-TP integration tests.
+@details Provides common setup/teardown for mock CAN state.
+@note The fixture runs automatically for each integration test.
+"""
+
 # =============================================================================
 # IMPORTS
 # =============================================================================
@@ -46,9 +52,11 @@ import pytest
 # FUNCTION PROTOTYPES
 # =============================================================================
 
-def test_single_frame_roundtrip():
-    link = pyisotp.init(0x700, 1024, 1024)
-    pyisotp.send(link, b"\x01\x02\x03")
-    pyisotp.poll(link)
-    resp = pyisotp.receive(link, 1024)
-    assert resp == b"\x01\x02\x03"
+@pytest.fixture(autouse=True)
+def reset_mock_can_state():
+    """! @brief Ensure mock CAN state is reset around each test.
+    @details Disables FC mocks before and after each test run.
+    """
+    pyisotp.mock_disable_fc(False)
+    yield
+    pyisotp.mock_disable_fc(False)

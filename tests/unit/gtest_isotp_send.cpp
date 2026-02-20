@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file gtest_isotp_send.cpp
+ * @brief Unit tests for isotp_send.
+ * @details Verifies arbitration ID usage and error returns.
+ */
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -74,6 +80,7 @@
  * UNIT TEST IMPLEMENTATIONS
  * =============================================================================*/
 
+/** @brief Uses link arbitration ID for sending. */
 TEST(IsotpSend, UsesLinkArbitrationId)
 {
     reset_mocks();
@@ -92,6 +99,7 @@ TEST(IsotpSend, UsesLinkArbitrationId)
     EXPECT_EQ(g_can_state.last_id, 0x7DFu);
 }
 
+/** @brief Oversize payload returns overflow. */
 TEST(IsotpSend, OversizeReturnsOverflow)
 {
     reset_mocks();
@@ -109,6 +117,7 @@ TEST(IsotpSend, OversizeReturnsOverflow)
     EXPECT_EQ(g_can_state.call_count, 0);
 }
 
+/** @brief In-progress send returns in-progress. */
 TEST(IsotpSend, InProgressReturnsInProgress)
 {
     reset_mocks();

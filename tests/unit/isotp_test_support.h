@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file isotp_test_support.h
+ * @brief Test support utilities and mocks.
+ * @details Declares mock state and helper APIs for unit tests.
+ */
+
 #ifndef ISOTP_TEST_SUPPORT_H
 #define ISOTP_TEST_SUPPORT_H
 
@@ -58,8 +64,8 @@ extern "C"
  * =============================================================================*/
 
 /**
- * @brief Mock CAN state structure for testing purposes
- *
+ * @brief Mock CAN state structure for testing purposes.
+ * @details Captures the last transmitted CAN frame and counts calls.
  */
 struct MockCanState
 {
@@ -83,8 +89,8 @@ extern int g_debug_call_count;    ///< Global state for counting debug calls
  * =============================================================================*/
 
 /**
- * @brief Reset all mock state to initial values, should be called before each test.
- *
+ * @brief Reset all mock state to initial values.
+ * @details Should be called before each test to avoid cross-test leakage.
  */
 void reset_mocks();
 

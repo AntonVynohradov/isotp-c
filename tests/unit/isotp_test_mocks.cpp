@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file isotp_test_mocks.cpp
+ * @brief Test doubles for ISO-TP user callbacks.
+ * @details Provides mock time and CAN send implementations.
+ */
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -68,6 +74,7 @@ int g_debug_call_count = 0;
  * PUBLIC FUNCTION IMPLEMENTATIONS
  * =============================================================================*/
 
+/** @brief Reset all mock state to defaults. */
 void reset_mocks()
 {
     std::memset(&g_can_state, 0, sizeof(g_can_state));
@@ -78,12 +85,14 @@ void reset_mocks()
 
 extern "C"
 {
+/** @brief Count debug calls without formatting output. */
 void isotp_user_debug(const char* message, ...)
 {
     (void) message;
     g_debug_call_count++;
 }
 
+/** @brief Capture last CAN frame data and return configured status. */
 int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size)
 {
     g_can_state.last_id = arbitration_id;
@@ -102,6 +111,7 @@ int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, cons
     return g_can_state.return_value;
 }
 
+/** @brief Return mock time in microseconds. */
 uint32_t isotp_user_get_us(void)
 {
     return g_now_us;

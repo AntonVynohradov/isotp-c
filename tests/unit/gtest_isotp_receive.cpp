@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file gtest_isotp_receive.cpp
+ * @brief Unit tests for isotp_receive.
+ * @details Covers empty receive, full copy, and truncation paths.
+ */
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -74,6 +80,7 @@
  * UNIT TEST IMPLEMENTATIONS
  * =============================================================================*/
 
+/** @brief No data returns ISOTP_RET_NO_DATA. */
 TEST(IsotpReceive, NoDataReturnsNoData)
 {
     IsoTpLink link;
@@ -91,6 +98,7 @@ TEST(IsotpReceive, NoDataReturnsNoData)
     EXPECT_EQ(out_size, 0u);
 }
 
+/** @brief Full payload copy resets receive state. */
 TEST(IsotpReceive, CopiesPayloadAndResetsState)
 {
     IsoTpLink link;
@@ -118,6 +126,7 @@ TEST(IsotpReceive, CopiesPayloadAndResetsState)
     EXPECT_EQ(link.receive_status, ISOTP_RECEIVE_STATUS_IDLE);
 }
 
+/** @brief Small output buffer triggers partial copy. */
 TEST(IsotpReceive, CopiesPartialPayloadWhenBufferTooSmall)
 {
     IsoTpLink link;

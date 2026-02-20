@@ -35,10 +35,8 @@
 #*****************************************************************************
 
 
-"""! @file test_multi_frame.py
-@brief Integration tests for multi-frame ISO-TP transfers.
-@details Covers boundary sizes, timeouts, and sequence handling.
-@note Time advances rely on mock time helpers in the binding.
+"""! @file test_api_endpoints.py
+@brief Integration smoke tests for public API endpoints.
 """
 
 # =============================================================================
@@ -52,6 +50,7 @@ import pytest
 # FUNCTION PROTOTYPES
 # =============================================================================
 
+
 def _poll_until_receive(link, payload_size, steps, advance_ms=0):
     """! @brief Poll the link until a response is received or steps are exhausted.
     @param link ISO-TP link handle.
@@ -59,7 +58,6 @@ def _poll_until_receive(link, payload_size, steps, advance_ms=0):
     @param steps Maximum number of poll iterations.
     @param advance_ms Optional time advance per step in milliseconds.
     @return Received payload bytes or None when nothing is received.
-    @details Optionally advances the mock time between polls.
     """
     resp = None
     for _ in range(steps):
@@ -76,17 +74,15 @@ def _make_payload(size):
     """! @brief Build a deterministic payload of a given size.
     @param size Number of bytes to generate.
     @return Payload bytes.
-    @details Uses a simple modulo pattern for repeatability.
     """
     return bytes((idx % 256 for idx in range(size)))
 
 
 def _ff_frame(payload_size, payload):
-    """! @brief Build a First Frame (FF) for an ISO-TP transfer.
+    """! @brief Build a First Frame (FF) for an ISO-TP multi-frame transfer.
     @param payload_size Total payload size.
     @param payload Payload bytes to embed in FF.
     @return CAN frame bytes representing the FF.
-    @details Encodes the 0x10 PCI with 12-bit length.
     """
     ff_dl_high = (payload_size >> 8) & 0x0F
     ff_dl_low = payload_size & 0xFF
@@ -98,112 +94,89 @@ def _cf_frame(sn, payload):
     @param sn Sequence number (0-15).
     @param payload Payload bytes to embed in CF.
     @return CAN frame bytes representing the CF.
-    @details Encodes the 0x20 PCI with SN.
     """
     return bytes([0x20 | (sn & 0x0F)]) + payload[:7]
 
 
-def test_multi_frame_roundtrip():
-    """! @brief Verify multi-frame roundtrip delivery.
-    @details Ensures payload integrity across segmented transfer.
-    """
+def test_api_endpoints_smoke():
+    """! @brief Verify basic API calls and protocol result handling."""
     link = pyisotp.init(0x700, 1024, 1024)
-    payload = b"\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C"
+
+    assert isinstance(pyisotp.ISOTP_PROTOCOL_RESULT_TIMEOUT_BS, int)
+
+    pyisotp.time_reset()
+    pyisotp.time_set(1)
+    pyisotp.time_advance(1)
+
+    payload = b"\x01\x02\x03"
     pyisotp.send(link, payload)
-    resp = _poll_until_receive(link, 1024, 3)
-    assert resp == payload
-
-
-@pytest.mark.parametrize("size", [8, 9, 14, 15])
-def test_multi_frame_boundary_sizes(size):
-    """! @brief Verify multi-frame behavior around boundary sizes.
-    @param size Payload size under test.
-    @details Exercises sizes near the SF/FF boundary.
-    """
-    link = pyisotp.init(0x700, 2048, 2048)
-    payload = _make_payload(size)
-    pyisotp.send(link, payload)
-    resp = _poll_until_receive(link, 2048, 5)
-    assert resp == payload
-
-
-def test_multi_frame_max_payload():
-    """! @brief Verify maximum payload size roundtrip.
-    @details Uses a large payload to stress segmentation and reassembly.
-    """
-    link = pyisotp.init(0x700, 4096, 4096)
-    payload = _make_payload(4095)
-    pyisotp.send(link, payload)
-    resp = _poll_until_receive(link, 4096, 800)
-    assert resp == payload
-
-
-def test_multi_frame_bs_one_stmin():
-    """! @brief Verify block size 1 with STmin pacing.
-    @details Advances time between frames to satisfy STmin.
-    """
-    link = pyisotp.init(0x700, 1024, 1024)
-    pyisotp.set_fc_params(link, 1, 5)
-    payload = _make_payload(30)
-    pyisotp.send(link, payload)
-    resp = _poll_until_receive(link, 1024, 20, advance_ms=1)
-    assert resp == payload
-
-
-def test_multi_frame_bs_unlimited_stmin():
-    """! @brief Verify unlimited block size with STmin pacing.
-    @details Exercises BS=0 with STmin delay.
-    """
-    link = pyisotp.init(0x700, 1024, 1024)
-    pyisotp.set_fc_params(link, 0, 5)
-    payload = _make_payload(30)
-    pyisotp.send(link, payload)
-    resp = _poll_until_receive(link, 1024, 20, advance_ms=1)
-    assert resp == payload
-
-
-def test_multi_frame_timeout_n_bs():
-    """! @brief Verify N_Bs timeout during multi-frame send.
-    @details Disables FC to force sender block-size timeout.
-    """
-    link = pyisotp.init(0x700, 1024, 1024)
-    pyisotp.set_timeouts(link, 50, 50)
-    pyisotp.mock_disable_fc(True)
-
-    pyisotp.send(link, _make_payload(30))
-    for _ in range(51):
-        pyisotp.time_advance(1)
-        pyisotp.poll(link)
-
-    assert pyisotp.get_last_protocol_result(link) == pyisotp.ISOTP_PROTOCOL_RESULT_TIMEOUT_BS
-
-
-def test_multi_frame_timeout_n_cr():
-    """! @brief Verify N_Cr timeout during multi-frame receive.
-    @details Drops incoming frames to force receiver timeout.
-    """
-    link = pyisotp.init(0x700, 1024, 1024)
-    pyisotp.set_timeouts(link, 50, 10)
-    pyisotp.send(link, _make_payload(20))
     pyisotp.poll(link)
+    resp = pyisotp.receive(link, 1024)
+    assert resp == payload
 
     pyisotp.mock_enable_drop(True)
-    for _ in range(11):
+    pyisotp.send(link, payload)
+    pyisotp.poll(link)
+    resp = pyisotp.receive(link, 1024)
+    assert resp is None
+    pyisotp.mock_enable_drop(False)
+
+    pyisotp.mock_disable_fc(True)
+    pyisotp.time_set(0)
+    pyisotp.send(link, bytes(range(12)))
+    for _ in range(101):
         pyisotp.time_advance(1)
         pyisotp.poll(link)
 
     assert (
-        pyisotp.get_last_receive_protocol_result(link)
-        == pyisotp.ISOTP_PROTOCOL_RESULT_TIMEOUT_CR
+        pyisotp.get_last_protocol_result(link)
+        == pyisotp.ISOTP_PROTOCOL_RESULT_TIMEOUT_BS
     )
-    pyisotp.mock_enable_drop(False)
+    pyisotp.mock_disable_fc(False)
 
 
-def test_multi_frame_unexpected_cf():
-    """! @brief Verify unexpected CF is reported.
-    @details Injects a CF when receiver is idle.
-    """
-    link = pyisotp.init(0x700, 512, 512)
+def test_api_endpoints_smoke_multi_frame():
+    """! @brief Verify multi-frame send/receive path."""
+    link = pyisotp.init(0x700, 1024, 1024)
+    payload = _make_payload(20)
+
+    pyisotp.send(link, payload)
+    resp = _poll_until_receive(link, 1024, 5)
+    assert resp == payload
+
+
+def test_api_endpoints_return_codes():
+    """! @brief Validate return codes for overflow and in-progress sends."""
+    link = pyisotp.init(0x700, 16, 16)
+    payload = _make_payload(20)
+
+    ret = pyisotp.send(link, payload)
+    assert ret == pyisotp.ISOTP_RET_OVERFLOW
+
+    payload = _make_payload(12)
+    first = pyisotp.send(link, payload)
+    second = pyisotp.send(link, payload)
+
+    assert first == 0
+    assert second == pyisotp.ISOTP_RET_INPROGRESS
+
+
+def test_api_endpoints_validation_errors():
+    """! @brief Validate input checks and error signaling in API."""
+    with pytest.raises(ValueError):
+        pyisotp.init(0x700, 0, 16)
+
+    link = pyisotp.init(0x700, 64, 64)
+    with pytest.raises(ValueError):
+        pyisotp.receive(link, 0)
+
+    with pytest.raises(ValueError):
+        pyisotp.set_fc_params(link, 256, 0)
+
+
+def test_api_endpoints_inject_unexpected_cf():
+    """! @brief Validate unexpected CF injection handling."""
+    link = pyisotp.init(0x700, 64, 64)
     pyisotp.inject_can(link, _cf_frame(1, b"\xAA" * 7))
 
     assert (
@@ -212,11 +185,9 @@ def test_multi_frame_unexpected_cf():
     )
 
 
-def test_multi_frame_wrong_sn():
-    """! @brief Verify wrong sequence number is reported.
-    @details Injects a CF with unexpected SN after FF.
-    """
-    link = pyisotp.init(0x700, 512, 512)
+def test_api_endpoints_inject_wrong_sn():
+    """! @brief Validate wrong sequence number handling."""
+    link = pyisotp.init(0x700, 64, 64)
     payload = _make_payload(20)
     pyisotp.inject_can(link, _ff_frame(len(payload), payload))
     pyisotp.inject_can(link, _cf_frame(5, payload[6:13]))

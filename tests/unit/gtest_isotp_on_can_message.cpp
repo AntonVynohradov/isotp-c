@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file gtest_isotp_on_can_message.cpp
+ * @brief Unit tests for isotp_on_can_message.
+ * @details Covers SF/FF/CF parsing and error handling paths.
+ */
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -74,6 +80,7 @@
  * UNIT TEST IMPLEMENTATIONS
  * =============================================================================*/
 
+/** @brief Single-frame payload fills the receive buffer. */
 TEST(IsotpOnCanMessage, SingleFrameSetsReceiveBuffer)
 {
     reset_mocks();
@@ -99,6 +106,7 @@ TEST(IsotpOnCanMessage, SingleFrameSetsReceiveBuffer)
     EXPECT_EQ(link.receive_buffer[1], 0x22);
 }
 
+/** @brief Invalid CAN DLC is ignored. */
 TEST(IsotpOnCanMessage, InvalidLengthIsIgnored)
 {
     reset_mocks();
@@ -123,6 +131,7 @@ TEST(IsotpOnCanMessage, InvalidLengthIsIgnored)
     EXPECT_EQ(g_can_state.call_count, 0);
 }
 
+/** @brief SF length error while in-progress yields unexpected PDU. */
 TEST(IsotpOnCanMessage, SingleFrameInProgressLengthErrorSetsUnexpected)
 {
     reset_mocks();
@@ -146,6 +155,7 @@ TEST(IsotpOnCanMessage, SingleFrameInProgressLengthErrorSetsUnexpected)
     EXPECT_EQ(link.receive_status, ISOTP_RECEIVE_STATUS_INPROGRESS);
 }
 
+/** @brief FF overflow triggers FC overflow response. */
 TEST(IsotpOnCanMessage, FirstFrameOverflowSendsFlowControlOverflow)
 {
     reset_mocks();
@@ -179,6 +189,7 @@ TEST(IsotpOnCanMessage, FirstFrameOverflowSendsFlowControlOverflow)
     EXPECT_EQ(std::memcmp(g_can_state.last_data, expected.as.data_array.ptr, 3), 0);
 }
 
+/** @brief FF starts reception and sends FC continue. */
 TEST(IsotpOnCanMessage, FirstFrameOkStartsReceptionAndSendsFlowControl)
 {
     reset_mocks();
@@ -223,6 +234,7 @@ TEST(IsotpOnCanMessage, FirstFrameOkStartsReceptionAndSendsFlowControl)
     EXPECT_EQ(std::memcmp(g_can_state.last_data, expected.as.data_array.ptr, 3), 0);
 }
 
+/** @brief CF while idle is reported as unexpected PDU. */
 TEST(IsotpOnCanMessage, ConsecutiveFrameUnexpectedWhenIdle)
 {
     reset_mocks();
@@ -245,6 +257,7 @@ TEST(IsotpOnCanMessage, ConsecutiveFrameUnexpectedWhenIdle)
     EXPECT_EQ(link.receive_status, ISOTP_RECEIVE_STATUS_IDLE);
 }
 
+/** @brief Wrong SN in CF sets protocol error. */
 TEST(IsotpOnCanMessage, ConsecutiveFrameWrongSnSetsError)
 {
     reset_mocks();
@@ -270,6 +283,7 @@ TEST(IsotpOnCanMessage, ConsecutiveFrameWrongSnSetsError)
     EXPECT_EQ(link.receive_status, ISOTP_RECEIVE_STATUS_IDLE);
 }
 
+/** @brief Final CF completes the receive buffer. */
 TEST(IsotpOnCanMessage, ConsecutiveFrameCompletesReceive)
 {
     reset_mocks();

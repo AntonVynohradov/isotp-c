@@ -114,7 +114,8 @@ static int mock_receive(uint32_t* id, uint8_t* data, uint8_t* len);
  * @param id CAN ID to send.
  * @param data Pointer to the CAN data to send.
  * @param len Length of the CAN data to send.
- * @return int 0 on success, -1 if the queue is full or if drop is enabled.
+ * @return int 0 on success (including when drop is enabled and a frame is discarded), -1 if the
+ * queue is full.
  */
 static int mock_send(uint32_t id, const uint8_t* data, uint8_t len);
 

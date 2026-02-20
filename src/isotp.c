@@ -566,7 +566,7 @@ int isotp_send_with_id(IsoTpLink* link, uint32_t id, const uint8_t payload[], ui
             link->send_st_min_us = 0;
             link->send_wtf_count = 0;
             link->send_timer_st = isotp_user_get_us();
-            link->send_timer_bs = isotp_user_get_us() + ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US;
+            link->send_timer_bs = isotp_user_get_us() + link->param_n_bs_us;
             link->send_protocol_result = ISOTP_PROTOCOL_RESULT_OK;
             link->send_status = ISOTP_SEND_STATUS_INPROGRESS;
         }
@@ -645,11 +645,11 @@ void isotp_on_can_message(IsoTpLink* link, const uint8_t* data, uint8_t len)
                 /* change status */
                 link->receive_status = ISOTP_RECEIVE_STATUS_INPROGRESS;
                 /* send fc frame */
-                link->receive_bs_count = ISO_TP_DEFAULT_BLOCK_SIZE;
+                link->receive_bs_count = link->param_block_size;
                 isotp_send_flow_control(link, PCI_FLOW_STATUS_CONTINUE, link->receive_bs_count,
-                                        ISO_TP_DEFAULT_ST_MIN_US);
+                                        link->param_st_min_us);
                 /* refresh timer cs */
-                link->receive_timer_cr = isotp_user_get_us() + ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US;
+                link->receive_timer_cr = isotp_user_get_us() + link->param_n_cr_us;
             }
 
             break;
@@ -678,7 +678,7 @@ void isotp_on_can_message(IsoTpLink* link, const uint8_t* data, uint8_t len)
             if (ISOTP_RET_OK == ret)
             {
                 /* refresh timer cs */
-                link->receive_timer_cr = isotp_user_get_us() + ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US;
+                link->receive_timer_cr = isotp_user_get_us() + link->param_n_cr_us;
 
                 /* receive finished */
                 if (link->receive_offset >= link->receive_size)
@@ -688,11 +688,11 @@ void isotp_on_can_message(IsoTpLink* link, const uint8_t* data, uint8_t len)
                 else
                 {
                     /* send fc when bs reaches limit */
-                    if (0 == --link->receive_bs_count)
+                    if (link->receive_bs_count > 0 && 0 == --link->receive_bs_count)
                     {
-                        link->receive_bs_count = ISO_TP_DEFAULT_BLOCK_SIZE;
+                        link->receive_bs_count = link->param_block_size;
                         isotp_send_flow_control(link, PCI_FLOW_STATUS_CONTINUE,
-                                                link->receive_bs_count, ISO_TP_DEFAULT_ST_MIN_US);
+                                                link->receive_bs_count, link->param_st_min_us);
                     }
                 }
             }
@@ -712,7 +712,7 @@ void isotp_on_can_message(IsoTpLink* link, const uint8_t* data, uint8_t len)
             if (ISOTP_RET_OK == ret)
             {
                 /* refresh bs timer */
-                link->send_timer_bs = isotp_user_get_us() + ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US;
+                link->send_timer_bs = isotp_user_get_us() + link->param_n_bs_us;
 
                 /* overflow */
                 if (PCI_FLOW_STATUS_OVERFLOW == message.as.flow_control.FS)
@@ -813,6 +813,11 @@ void isotp_init_link(IsoTpLink* link, uint32_t sendid, uint8_t* sendbuf, uint32_
     link->receive_buffer = recvbuf;
     link->receive_buf_size = recvbufsize;
 
+    link->param_n_bs_us = ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US;
+    link->param_n_cr_us = ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US;
+    link->param_st_min_us = ISO_TP_DEFAULT_ST_MIN_US;
+    link->param_block_size = ISO_TP_DEFAULT_BLOCK_SIZE;
+
 #ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK
     link->tx_done_cb = NULL;
     link->tx_done_cb_arg = NULL;
@@ -846,6 +851,28 @@ void isotp_destroy_link(IsoTpLink* link)
 
     // Reset link state (optional, but good practice)
     memset(link, 0, sizeof(IsoTpLink));
+}
+
+void isotp_set_timeouts(IsoTpLink* link, uint32_t n_bs_us, uint32_t n_cr_us)
+{
+    if (link == NULL)
+    {
+        return;
+    }
+
+    link->param_n_bs_us = n_bs_us;
+    link->param_n_cr_us = n_cr_us;
+}
+
+void isotp_set_fc_params(IsoTpLink* link, uint8_t block_size, uint32_t st_min_us)
+{
+    if (link == NULL)
+    {
+        return;
+    }
+
+    link->param_block_size = block_size;
+    link->param_st_min_us = st_min_us;
 }
 
 void isotp_poll(IsoTpLink* link)

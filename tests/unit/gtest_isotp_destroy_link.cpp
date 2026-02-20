@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file gtest_isotp_destroy_link.cpp
+ * @brief Unit tests for isotp_destroy_link.
+ * @details Validates link cleanup and null safety.
+ */
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -74,6 +80,7 @@
  * UNIT TEST IMPLEMENTATIONS
  * =============================================================================*/
 
+/** @brief Link memory is zeroed after destroy. */
 TEST(IsotpDestroyLink, ClearsState)
 {
     IsoTpLink link;
@@ -87,6 +94,7 @@ TEST(IsotpDestroyLink, ClearsState)
     EXPECT_EQ(std::memcmp(&link, &zeroed, sizeof(link)), 0);
 }
 
+/** @brief Null link is treated as a no-op. */
 TEST(IsotpDestroyLink, NullIsNoOp)
 {
     EXPECT_NO_FATAL_FAILURE(isotp_destroy_link(NULL));

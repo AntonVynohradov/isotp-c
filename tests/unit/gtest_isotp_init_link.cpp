@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file gtest_isotp_init_link.cpp
+ * @brief Unit tests for isotp_init_link.
+ * @details Verifies fields are initialized from provided buffers and IDs.
+ */
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -74,6 +80,7 @@
  * UNIT TEST IMPLEMENTATIONS
  * =============================================================================*/
 
+/** @brief Initializes link fields from inputs. */
 TEST(IsotpInitLink, InitializesFields)
 {
     IsoTpLink link;

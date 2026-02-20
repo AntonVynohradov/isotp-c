@@ -23,8 +23,8 @@ cmake --build build
 
 The build outputs a Python extension module:
 
-- Windows: `build/isotp_python_api.pyd`
-- Linux: `build/isotp_python_api.so` (or the platform-specific Python extension suffix)
+- Windows: `build/pyisotp.pyd`
+- Linux: `build/pyisotp.so` (or the platform-specific Python extension suffix)
 
 ## Use
 
@@ -61,9 +61,11 @@ print(payload)
 The module exposes mock utilities used by tests:
 
 - `pyisotp.mock_enable_drop(enable)` - enable or disable frame dropping.
+- `pyisotp.mock_disable_fc(enable)` - enable or disable flow control handling for testing.
 - `pyisotp.time_advance(ms)` - advance virtual time in milliseconds.
 - `pyisotp.time_set(ms)` - set virtual time in milliseconds.
 - `pyisotp.time_reset()` - reset virtual time to zero.
+- `pyisotp.get_last_protocol_result(link)` - get the last protocol result for a link.
 
 ## Test
 
