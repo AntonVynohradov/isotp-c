@@ -117,6 +117,12 @@ typedef struct IsoTpLink
     int receive_protocol_result; /**< Last protocol result code for receiver. */
     uint8_t receive_status;      /**< Receiver status. */
 
+    /* timing and flow control parameters */
+    uint32_t param_n_bs_us;   /**< N_Bs timeout in microseconds. */
+    uint32_t param_n_cr_us;   /**< N_Cr timeout in microseconds. */
+    uint32_t param_st_min_us; /**< STmin in microseconds. */
+    uint8_t param_block_size; /**< Block size (BS) for FlowControl. */
+
 #if defined(ISO_TP_USER_SEND_CAN_ARG)
     void* user_send_can_arg; /**< User argument for `isotp_user_send_can`. */
 #endif
@@ -218,6 +224,24 @@ int isotp_send_with_id(IsoTpLink* link, uint32_t id, const uint8_t payload[], ui
  */
 int isotp_receive(IsoTpLink* link, uint8_t* payload, const uint32_t payload_size,
                   uint32_t* out_size);
+
+/**
+ * @brief Sets timing parameters for waiting on FlowControl and ConsecutiveFrame.
+ *
+ * @param link The @code IsoTpLink @endcode instance used for transceiving data.
+ * @param n_bs_us Timeout for N_Bs in microseconds.
+ * @param n_cr_us Timeout for N_Cr in microseconds.
+ */
+void isotp_set_timeouts(IsoTpLink* link, uint32_t n_bs_us, uint32_t n_cr_us);
+
+/**
+ * @brief Sets FlowControl parameters used by the receiver.
+ *
+ * @param link The @code IsoTpLink @endcode instance used for transceiving data.
+ * @param block_size Block size (BS) for FlowControl. Zero means unlimited.
+ * @param st_min_us Minimum separation time (STmin) in microseconds.
+ */
+void isotp_set_fc_params(IsoTpLink* link, uint8_t block_size, uint32_t st_min_us);
 
 #ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK
 /**

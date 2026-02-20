@@ -78,19 +78,19 @@ if(ISOTP_UNIT_TESTS)
     )
 
     list(APPEND ISOTP_UNIT_TEST_SOURCES
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_destroy_link.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_init_link.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_on_can_message.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_poll.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_receive.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/gtest_isotp_send_with_id.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/tests/isotp_test_mocks.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit/gtest_isotp_destroy_link.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit/gtest_isotp_init_link.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit/gtest_isotp_on_can_message.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit/gtest_isotp_poll.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit/gtest_isotp_receive.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit/gtest_isotp_send.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit/gtest_isotp_send_with_id.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit/isotp_test_mocks.cpp
 
     )
 
     list(APPEND ISOTP_UNIT_TEST_HEADERS
-        ${CMAKE_CURRENT_LIST_DIR}/tests/
+        ${CMAKE_CURRENT_LIST_DIR}/tests/unit
     )
 
     list(APPEND ISOTP_HEADERS ${ISOTP_UNIT_TEST_HEADERS})

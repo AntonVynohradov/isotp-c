@@ -2,7 +2,7 @@
  * ISO-TP-C: ISO 15765-2 Protocol Implementation
  *
  * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: Test support utilities and mocks.
+ * Description: Test doubles for ISO-TP user callbacks.
  *
  * Author:      Anton Vynohradov
  * Email:       avynohradov@systemfromscratch.com
@@ -32,60 +32,88 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
-#ifndef ISOTP_TEST_SUPPORT_H
-#define ISOTP_TEST_SUPPORT_H
+/**
+ * @file isotp_test_mocks.cpp
+ * @brief Test doubles for ISO-TP user callbacks.
+ * @details Provides mock time and CAN send implementations.
+ */
 
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
 
-#include <cstdint>
-#include <cstddef>
-#include <cstring>
-
-extern "C"
-{
-#include "isotp.h"
-}
+#include "isotp_test_support.h"
 
 /* ==============================================================================
  * DEFINES & MACROS
  * =============================================================================*/
 
-
 /* ==============================================================================
- * TYPE DEFINITIONS
+ * PRIVATE TYPE DEFINITIONS
  * =============================================================================*/
 
-/**
- * @brief Mock CAN state structure for testing purposes
- *
- */
-struct MockCanState
+/* ==============================================================================
+ * PUBLIC VARIABLES
+ * =============================================================================*/
+
+MockCanState g_can_state = {0};
+uint32_t g_now_us = 0;
+int g_debug_call_count = 0;
+
+/* ==============================================================================
+ * PRIVATE FUNCTION DECLARATIONS (static)
+ * =============================================================================*/
+
+
+/* ==============================================================================
+ * PRIVATE FUNCTION IMPLEMENTATIONS
+ * =============================================================================*/
+
+
+/* ==============================================================================
+ * PUBLIC FUNCTION IMPLEMENTATIONS
+ * =============================================================================*/
+
+/** @brief Reset all mock state to defaults. */
+void reset_mocks()
 {
-    uint32_t last_id;
-    uint8_t last_data[8];
-    uint8_t last_size;
-    int return_value;
-    int call_count;
-};
+    std::memset(&g_can_state, 0, sizeof(g_can_state));
+    g_can_state.return_value = ISOTP_RET_OK;
+    g_now_us = 0;
+    g_debug_call_count = 0;
+}
 
-/* ==============================================================================
- * GLOBAL VARIABLES (extern declarations)
- * =============================================================================*/
+extern "C"
+{
+/** @brief Count debug calls without formatting output. */
+void isotp_user_debug(const char* message, ...)
+{
+    (void) message;
+    g_debug_call_count++;
+}
 
-extern MockCanState g_can_state;  ///< Global state for CAN send mock
-extern uint32_t g_now_us;         ///< Global state for current time in microseconds
-extern int g_debug_call_count;    ///< Global state for counting debug calls
+/** @brief Capture last CAN frame data and return configured status. */
+int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size)
+{
+    g_can_state.last_id = arbitration_id;
+    g_can_state.last_size = size;
+    g_can_state.call_count++;
+    std::memset(g_can_state.last_data, 0, sizeof(g_can_state.last_data));
+    if (data != NULL)
+    {
+        uint8_t copy_len = size;
+        if (copy_len > sizeof(g_can_state.last_data))
+        {
+            copy_len = sizeof(g_can_state.last_data);
+        }
+        std::memcpy(g_can_state.last_data, data, copy_len);
+    }
+    return g_can_state.return_value;
+}
 
-/* ==============================================================================
- * PUBLIC FUNCTION DECLARATIONS
- * =============================================================================*/
-
-/**
- * @brief Reset all mock state to initial values, should be called before each test.
- *
- */
-void reset_mocks();
-
-#endif  // ISOTP_TEST_SUPPORT_H
+/** @brief Return mock time in microseconds. */
+uint32_t isotp_user_get_us(void)
+{
+    return g_now_us;
+}
+}

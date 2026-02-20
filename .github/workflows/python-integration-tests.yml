@@ -1,0 +1,29 @@
+name: Python Integration Tests
+
+on:
+  workflow_run:
+    workflows: ["Check Building Static Library"]
+    types:
+      - completed
+
+jobs:
+  unit-tests:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Configure (Python C API)
+        run: cd examples/python_api && cmake -G "Unix Makefiles" -B build -DISOTP_INTEGRATION_TESTS=ON
+
+      - name: Build (Integration Tests)
+        run: cmake --build build --target integration_tests

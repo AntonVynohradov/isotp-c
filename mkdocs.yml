@@ -1,4 +1,4 @@
-site_name: ISO-TP C Implementation
+site_name: ISO-TP (ISO 15765-2)
 site_description: ISO-TP protocol implementation in C
 site_author: Anton Vynohradov
 repo_url: https://github.com/AntonVynohradov/isotp-c
@@ -10,8 +10,12 @@ nav:
   - Getting Started: guide.md
   - Configuration: configuration.md
   - API Reference: api.md
+  - License: LICENSE.md
   - Examples:
       - Linux SocketCAN: examples/linux_socket.md
+      - Python API: examples/python_api.md
+  - Integration Tests:
+      - ISO-15765 Project Structure: iso_15765_project_structure.md
 
 theme:
   name: readthedocs
@@ -27,10 +31,10 @@ plugins:
   - mkdoxy:
       projects:
         docs:
-          src-dirs: . inc src
+          src-dirs: .
           full-doc: True
           doxy-cfg:
-            FILE_PATTERNS: "*.c *.h*"
+            FILE_PATTERNS: "*.c *.h* *.cpp *.py"
             RECURSIVE: True
 
 markdown_extensions:
