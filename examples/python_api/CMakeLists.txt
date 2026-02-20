@@ -97,7 +97,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${ISOTP_PYTHON_API_HEAD
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE isotp Python3::Python)
 
 if(NOT WIN32)
-    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE _POSIX_C_SOURCE=199309L)
+    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE _POSIX_C_SOURCE=200809L)
 endif()
 
 if(WIN32)
