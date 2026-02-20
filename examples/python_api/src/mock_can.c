@@ -40,10 +40,6 @@
  * INCLUDES
  * =============================================================================*/
 
-#ifndef _WIN32
-#define _POSIX_C_SOURCE 199309L
-#endif
-
 #include "mock_can.h"
 #include "can_driver.h"
 #include <string.h>
