@@ -459,8 +459,7 @@ static PyObject* py_time_set(PyObject* self, PyObject* args)
     {
         if (value > (UINT32_MAX / 1000U))
         {
-            PyErr_SetString(PyExc_OverflowError,
-                            "value too large to convert to microseconds");
+            PyErr_SetString(PyExc_OverflowError, "value too large to convert to microseconds");
             return NULL;
         }
 
@@ -519,8 +518,7 @@ static PyObject* py_set_timeouts(PyObject* self, PyObject* args)
     {
         if ((n_bs_ms > (UINT32_MAX / 1000U)) || (n_cr_ms > (UINT32_MAX / 1000U)))
         {
-            PyErr_SetString(PyExc_OverflowError,
-                            "timeout too large to convert to microseconds");
+            PyErr_SetString(PyExc_OverflowError, "timeout too large to convert to microseconds");
             return NULL;
         }
 
@@ -551,8 +549,7 @@ static PyObject* py_set_fc_params(PyObject* self, PyObject* args)
 
         if (st_min_ms > (UINT32_MAX / 1000U))
         {
-            PyErr_SetString(PyExc_OverflowError,
-                            "st_min_ms too large to convert to microseconds");
+            PyErr_SetString(PyExc_OverflowError, "st_min_ms too large to convert to microseconds");
             return NULL;
         }
 
