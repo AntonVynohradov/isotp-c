@@ -435,6 +435,12 @@ static PyObject* py_time_advance(PyObject* self, PyObject* args)
 
     if (PyArg_ParseTuple(args, "I", &delta_ms))
     {
+        if (delta_ms > (UINT32_MAX / 1000U))
+        {
+            PyErr_SetString(PyExc_OverflowError, "delta_ms too large to convert to microseconds");
+            return NULL;
+        }
+
         uint32_t delta_us = (delta_ms * 1000U);
 
         mock_time_advance(delta_us);
@@ -451,6 +457,13 @@ static PyObject* py_time_set(PyObject* self, PyObject* args)
 
     if (PyArg_ParseTuple(args, "I", &value))
     {
+        if (value > (UINT32_MAX / 1000U))
+        {
+            PyErr_SetString(PyExc_OverflowError,
+                            "value too large to convert to microseconds");
+            return NULL;
+        }
+
         mock_time_set(value * 1000U);
 
         Py_RETURN_NONE;
@@ -504,6 +517,13 @@ static PyObject* py_set_timeouts(PyObject* self, PyObject* args)
 
     if (PyArg_ParseTuple(args, "OII", &py_link, &n_bs_ms, &n_cr_ms))
     {
+        if ((n_bs_ms > (UINT32_MAX / 1000U)) || (n_cr_ms > (UINT32_MAX / 1000U)))
+        {
+            PyErr_SetString(PyExc_OverflowError,
+                            "timeout too large to convert to microseconds");
+            return NULL;
+        }
+
         IsoTpLink* link = PyCapsule_GetPointer(py_link, "IsoTpLink");
         if (link != NULL)
         {
@@ -526,6 +546,13 @@ static PyObject* py_set_fc_params(PyObject* self, PyObject* args)
         if (block_size > 0xFF)
         {
             PyErr_SetString(PyExc_ValueError, "block_size must be <= 255");
+            return NULL;
+        }
+
+        if (st_min_ms > (UINT32_MAX / 1000U))
+        {
+            PyErr_SetString(PyExc_OverflowError,
+                            "st_min_ms too large to convert to microseconds");
             return NULL;
         }
 

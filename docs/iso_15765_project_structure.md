@@ -1,4 +1,3 @@
-i sprawdzone, a gdzie sa luki w implementacji lub testach.
 # ISO-15765: Project Structure and Integration Test Coverage
 
 This document describes the project structure for ISO-15765 (ISO-TP) tests and

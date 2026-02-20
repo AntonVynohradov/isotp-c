@@ -57,6 +57,10 @@ def reset_mock_can_state():
     """! @brief Ensure mock CAN state is reset around each test.
     @details Disables FC mocks before and after each test run.
     """
+    pyisotp.mock_enable_drop(False)
     pyisotp.mock_disable_fc(False)
+    pyisotp.time_reset()
     yield
+    pyisotp.mock_enable_drop(False)
     pyisotp.mock_disable_fc(False)
+    pyisotp.time_reset()

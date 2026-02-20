@@ -855,24 +855,20 @@ void isotp_destroy_link(IsoTpLink* link)
 
 void isotp_set_timeouts(IsoTpLink* link, uint32_t n_bs_us, uint32_t n_cr_us)
 {
-    if (link == NULL)
+    if (link != NULL)
     {
-        return;
+        link->param_n_bs_us = n_bs_us;
+        link->param_n_cr_us = n_cr_us;
     }
-
-    link->param_n_bs_us = n_bs_us;
-    link->param_n_cr_us = n_cr_us;
 }
 
 void isotp_set_fc_params(IsoTpLink* link, uint8_t block_size, uint32_t st_min_us)
 {
-    if (link == NULL)
+    if (link != NULL)
     {
-        return;
+        link->param_block_size = block_size;
+        link->param_st_min_us = st_min_us;
     }
-
-    link->param_block_size = block_size;
-    link->param_st_min_us = st_min_us;
 }
 
 void isotp_poll(IsoTpLink* link)
@@ -895,7 +891,7 @@ void isotp_poll(IsoTpLink* link)
                 {
                     link->send_bs_remain -= 1;
                 }
-                link->send_timer_bs = isotp_user_get_us() + ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US;
+                link->send_timer_bs = isotp_user_get_us() + link->param_n_bs_us;
                 link->send_timer_st = isotp_user_get_us() + link->send_st_min_us;
 
                 /* check if send finish */
