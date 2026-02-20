@@ -3,7 +3,7 @@
 ## How to use
 
 This example shows how to build and use the ISO-TP-C Python C extension module
-from the `example/python_api` directory.
+from the `examples/python_api` directory.
 
 ## Requirements
 
@@ -13,10 +13,10 @@ from the `example/python_api` directory.
 
 ## Build
 
-From the `example/python_api` directory:
+From the `examples/python_api` directory:
 
 ```bash
-cd example/python_api
+cd examples/python_api
 cmake -G "Unix Makefiles" -B build
 cmake --build build
 ```
@@ -75,7 +75,7 @@ Integration tests are optional and use the Python module. Configure CMake with
 Example:
 
 ```bash
-cd example/python_api
+cd examples/python_api
 cmake -G "Unix Makefiles" -B build -DISOTP_INTEGRATION_TESTS=ON
 cmake --build build --target integration_tests
 ```

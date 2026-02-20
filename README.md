@@ -179,7 +179,7 @@ isotp-c/
 │   └── examples/
 │       ├── linux_socket.md
 │       └── python_api.md
-├── example/                # Example applications
+├── examples/                # Examples applications
 │   ├── linux_socket/
 │   │   ├── CMakeLists.txt
 │   │   └── linux_socket.c

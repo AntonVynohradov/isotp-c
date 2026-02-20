@@ -11,7 +11,7 @@ verified, and where there are gaps in implementation or tests.
 - Protocol definitions and result codes: [inc/isotp_defines.h](docs/isotp__defines_8h.md)
 - Build-time configuration (BS, STmin, timeouts, options): [inc/isotp_config.h](docs/isotp__config_8h.md)
 - Platform hooks (CAN, time, debug): [inc/isotp_user.h](docs/isotp__user_8h.md)
-- Python bindings and CAN/time mocks (test layer): [example/python_api/src](docs/pyisotp_8c.md)
+- Python bindings and CAN/time mocks (test layer): [examples/python_api/src](docs/pyisotp_8c.md)
 - Integration tests (Python): tests/integration
 - Integration test documentation: docs/integration_tests
 
@@ -74,6 +74,6 @@ Based on current integration tests, there is no visible coverage for:
 ## Notes
 
 - Integration tests are executed via Python bindings and CAN/time mocks
-  (see [example/python_api/src](docs/pyisotp_8c.md)).
+  (see [examples/python_api/src](docs/pyisotp_8c.md)).
 - This document only covers integration test coverage. Unit tests may cover
   additional areas.
