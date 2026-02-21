@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file gtest_isotp_send_with_id.cpp
+ * @brief Unit tests for isotp_send_with_id.
+ * @details Covers error handling, overflow, and multi-frame start logic.
+ */
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -74,6 +80,7 @@
  * UNIT TEST IMPLEMENTATIONS
  * =============================================================================*/
 
+/** @brief Null link returns error. */
 TEST(IsotpSendWithId, NullLinkReturnsError)
 {
     const uint8_t payload[1] = {0x00};
@@ -83,6 +90,7 @@ TEST(IsotpSendWithId, NullLinkReturnsError)
     EXPECT_EQ(ret, ISOTP_RET_ERROR);
 }
 
+/** @brief Oversize payload returns overflow without sending. */
 TEST(IsotpSendWithId, OversizeReturnsOverflow)
 {
     reset_mocks();
@@ -100,6 +108,7 @@ TEST(IsotpSendWithId, OversizeReturnsOverflow)
     EXPECT_EQ(g_can_state.call_count, 0);
 }
 
+/** @brief In-progress send returns in-progress. */
 TEST(IsotpSendWithId, InProgressReturnsInProgress)
 {
     reset_mocks();
@@ -118,6 +127,7 @@ TEST(IsotpSendWithId, InProgressReturnsInProgress)
     EXPECT_EQ(g_can_state.call_count, 0);
 }
 
+/** @brief Single-frame payload is sent with provided ID. */
 TEST(IsotpSendWithId, SingleFrameSendsPayload)
 {
     GTEST_SKIP();
@@ -147,6 +157,7 @@ TEST(IsotpSendWithId, SingleFrameSendsPayload)
     EXPECT_EQ(g_can_state.last_data[3], payload[2]);
 }
 
+/** @brief Multi-frame FF starts send and sets timers. */
 TEST(IsotpSendWithId, MultiFrameFirstFrameStartsSend)
 {
     reset_mocks();
@@ -182,6 +193,7 @@ TEST(IsotpSendWithId, MultiFrameFirstFrameStartsSend)
     EXPECT_EQ(link.send_timer_bs, g_now_us + ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US);
 }
 
+/** @brief FF send error does not start send state. */
 TEST(IsotpSendWithId, MultiFrameFirstFrameSendErrorDoesNotStart)
 {
     reset_mocks();

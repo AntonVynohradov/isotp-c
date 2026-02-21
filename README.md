@@ -1,5 +1,8 @@
 # ISO-TP-C: Embedded-Grade Refactoring & Optimization
 
+[![Build Static Library](https://github.com/AntonVynohradov/isotp-c/actions/workflows/build-static-lib.yml/badge.svg)](https://github.com/AntonVynohradov/isotp-c/actions/workflows/build-static-lib.yml)
+[![Build and Deploy Documentation](https://github.com/AntonVynohradov/isotp-c/actions/workflows/documentation.yml/badge.svg)](https://github.com/AntonVynohradov/isotp-c/actions/workflows/documentation.yml)
+
 ## Overview
 
 This is an **active refactoring fork** of [SimonCahill/isotp-c](https://github.com/SimonCahill/isotp-c), a robust C implementation of the ISO 15765-2 (ISO-TP) protocol for CAN bus communication.
@@ -156,19 +159,42 @@ isotp-c/
 │   ├── isotp_config.h
 │   ├── isotp_defines.h
 │   └── isotp_user.h
-├── tests/                  # Unit tests
+├── tests/                  # Integration and Unit tests
 ├── docs/                   # Documentation
 │   ├── api.md
 │   ├── configuration.md
 │   ├── guide.md
 │   ├── index.md
+│   ├── iso_15765_project_structure.md
 │   ├── LICENSE.md
+│   ├── integration_tests/
+│   │   ├── api_endpoints.md
+│   │   ├── api_validation.md
+│   │   ├── buffer_limits.md
+│   │   ├── cantp.md
+│   │   ├── flow_control.md
+│   │   ├── multi_frame.md
+│   │   └── timing.md
+│   ├── assets/
 │   └── examples/
-│       └── linux_socket.md
-├── example/                # Example applications
-│   └── linux_socket/
+│       ├── linux_socket.md
+│       └── python_api.md
+├── examples/                # Examples applications
+│   ├── linux_socket/
+│   │   ├── CMakeLists.txt
+│   │   └── linux_socket.c
+│   └── python_api/
 │       ├── CMakeLists.txt
-│       └── linux_socket.c
+│       ├── pyisotp.c
+│       ├── inc/
+│       │   ├── can_driver.h
+│       │   ├── mock_can.h
+│       │   └── mock_time.h
+│       └── src/
+│           ├── can_driver.c
+│           ├── isotp_user.c
+│           ├── mock_can.c
+│           └── mock_time.c
 ├── cmake/                  # CMake helpers
 │   ├── unit_tests.cmake
 │   └── version.cmake

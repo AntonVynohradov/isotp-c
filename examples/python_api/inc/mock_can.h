@@ -2,7 +2,10 @@
  * ISO-TP-C: ISO 15765-2 Protocol Implementation
  *
  * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: Unit tests for isotp_init_link.
+ * Description: The mock CAN driver implementation for testing purposes. This file provides a simple
+ *              in-memory queue to simulate CAN communication, allowing for testing of the ISO-TP
+ *              implementation without requiring actual CAN hardware. It supports basic send and
+ *              receive operations, as well as optional frame dropping and artificial delays.
  *
  * Author:      Anton Vynohradov
  * Email:       avynohradov@systemfromscratch.com
@@ -32,67 +35,67 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+#ifndef MOCK_CAN_H
+#define MOCK_CAN_H
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
 
-#include <gtest/gtest.h>
+#include <stdint.h>
 
-#include "isotp_test_support.h"
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 /* ==============================================================================
  * DEFINES & MACROS
  * =============================================================================*/
 
-/* Macros and constants for this test file */
+/* Define your macros and constants here */
 
 /* ==============================================================================
- * PRIVATE TYPE DEFINITIONS
+ * TYPE DEFINITIONS
  * =============================================================================*/
 
-/* Local type definitions */
+/* Define your types, enums, and structs here */
 
 /* ==============================================================================
- * PRIVATE VARIABLES (static)
+ * GLOBAL VARIABLES (extern declarations)
  * =============================================================================*/
 
-/* static variables */
+/* extern declarations for global variables */
 
 /* ==============================================================================
- * PRIVATE FUNCTION DECLARATIONS (static)
+ * PUBLIC FUNCTION DECLARATIONS
  * =============================================================================*/
 
-/* static helpers */
+/**
+ * @brief  Initializes the mock CAN driver and sets it as the active driver.
+ */
+void mock_can_init(void);
 
-/* ==============================================================================
- * PRIVATE FUNCTION IMPLEMENTATIONS
- * =============================================================================*/
+/**
+ * @brief  Enables or disables frame dropping in the mock CAN driver.
+ * @param  enable - 1 to enable frame dropping, 0 to disable.
+ */
+void mock_can_enable_drop(int enable);
 
-/* static helper implementations */
+/**
+ * @brief  Disables sending FlowControl frames in the mock CAN driver.
+ * @param  enable - 1 to disable FlowControl frames, 0 to allow them.
+ */
+void mock_can_disable_fc(int enable);
 
-/* ==============================================================================
- * UNIT TEST IMPLEMENTATIONS
- * =============================================================================*/
+/**
+ * @brief  Sets the artificial delay for the mock CAN driver.
+ * @param  delay - Delay in milliseconds.
+ */
+void mock_can_set_delay_ms(int delay);
 
-TEST(IsotpInitLink, InitializesFields)
-{
-    IsoTpLink link;
-    uint8_t sendbuf[32] = {0};
-    uint8_t recvbuf[48] = {0};
-
-    std::memset(&link, 0xA5, sizeof(link));
-
-    isotp_init_link(&link, 0x123u, sendbuf, sizeof(sendbuf), recvbuf, sizeof(recvbuf));
-
-    EXPECT_EQ(link.send_arbitration_id, 0x123u);
-    EXPECT_EQ(link.send_buffer, sendbuf);
-    EXPECT_EQ(link.send_buf_size, sizeof(sendbuf));
-    EXPECT_EQ(link.receive_buffer, recvbuf);
-    EXPECT_EQ(link.receive_buf_size, sizeof(recvbuf));
-    EXPECT_EQ(link.send_status, ISOTP_SEND_STATUS_IDLE);
-    EXPECT_EQ(link.receive_status, ISOTP_RECEIVE_STATUS_IDLE);
-    EXPECT_EQ(link.send_size, 0u);
-    EXPECT_EQ(link.receive_size, 0u);
-    EXPECT_EQ(link.send_offset, 0u);
-    EXPECT_EQ(link.receive_offset, 0u);
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* MOCK_CAN_H */

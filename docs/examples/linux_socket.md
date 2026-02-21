@@ -13,7 +13,7 @@ steps and a short explanation of what the program does.
 
 ## Example configuration
 
-In example/linux_socket/linux_socket.c the key parameters are defined:
+In examples/linux_socket/linux_socket.c the key parameters are defined:
 
 - `_CAN_INTERFACE` - CAN interface name (e.g., `can0`, `slcan0`).
 - `_ISOTP_CAN_ID` - CAN ID used for ISO-TP transmission.
@@ -21,10 +21,10 @@ In example/linux_socket/linux_socket.c the key parameters are defined:
 
 ## Build
 
-From the example directory:
+From the examples directory:
 
 ```bash
-cd example/linux_socket
+cd examples/linux_socket
 cmake -G "Unix Makefiles" -B build
 cmake --build build
 ```

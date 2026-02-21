@@ -1,5 +1,8 @@
 # ISO-TP C Implementation
 
+[![Build Library](https://github.com/AntonVynohradov/isotp-c/actions/workflows/build-static-lib.yml/badge.svg)](https://github.com/AntonVynohradov/isotp-c/actions/workflows/build-static-lib.yml)
+[![Build and Deploy Documentation](https://github.com/AntonVynohradov/isotp-c/actions/workflows/documentation.yml/badge.svg)](https://github.com/AntonVynohradov/isotp-c/actions/workflows/documentation.yml)
+
 ISO-TP (ISO 15765-2) protocol implementation in C for CAN communication.
 This library implements ISO-TP frame fragmentation and reassembly and provides
 a simple interface for sending and receiving messages longer than 8 bytes.

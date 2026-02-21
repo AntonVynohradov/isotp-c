@@ -2,7 +2,9 @@
 # ISO-TP-C: ISO 15765-2 Protocol Implementation
 #
 # Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
-# Description: The git ignore file for the ISO-TP-C project, specifying files and directories to be ignored by Git.
+# Description: A high-performance, embedded-grade implementation of the ISO 15765-2 (ISO-TP) protocol in C,
+#              designed for automotive and industrial applications. This project focuses on refactoring and optimizing
+#              the codebase to achieve maximum efficiency, reliability, and maintainability while adhering to the ISO-TP standard.
 #
 # Author:      Anton Vynohradov
 # Email:       avynohradov@systemfromscratch.com
@@ -32,9 +34,33 @@
 # SPDX-License-Identifier: MIT
 #*****************************************************************************
 
-# The build directory is ignored to prevent committing build artifacts
-build
 
-# The PyTest cache and Python bytecode cache directories
-__pycache__
-.pytest_cache
+"""! @file conftest.py
+@brief Pytest fixtures for ISO-TP integration tests.
+@details Provides common setup/teardown for mock CAN state.
+@note The fixture runs automatically for each integration test.
+"""
+
+# =============================================================================
+# IMPORTS
+# =============================================================================
+
+import pyisotp
+import pytest
+
+# =============================================================================
+# FUNCTION PROTOTYPES
+# =============================================================================
+
+@pytest.fixture(autouse=True)
+def reset_mock_can_state():
+    """! @brief Ensure mock CAN state is reset around each test.
+    @details Disables FC mocks before and after each test run.
+    """
+    pyisotp.mock_enable_drop(False)
+    pyisotp.mock_disable_fc(False)
+    pyisotp.time_reset()
+    yield
+    pyisotp.mock_enable_drop(False)
+    pyisotp.mock_disable_fc(False)
+    pyisotp.time_reset()

@@ -32,6 +32,12 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+/**
+ * @file gtest_isotp_poll.cpp
+ * @brief Unit tests for isotp_poll.
+ * @details Validates send/receive state updates and timeout handling.
+ */
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -74,6 +80,7 @@
  * UNIT TEST IMPLEMENTATIONS
  * =============================================================================*/
 
+/** @brief Sends the final CF and completes the send. */
 TEST(IsotpPoll, SendsConsecutiveFrameAndCompletes)
 {
     reset_mocks();
@@ -105,6 +112,7 @@ TEST(IsotpPoll, SendsConsecutiveFrameAndCompletes)
     EXPECT_EQ(g_can_state.last_size, 2u);
 }
 
+/** @brief Receive timeout sets idle and timeout result. */
 TEST(IsotpPoll, ReceiveTimeoutSetsIdle)
 {
     reset_mocks();
@@ -125,6 +133,7 @@ TEST(IsotpPoll, ReceiveTimeoutSetsIdle)
     EXPECT_EQ(link.receive_protocol_result, ISOTP_PROTOCOL_RESULT_TIMEOUT_CR);
 }
 
+/** @brief STmin delay prevents sending early. */
 TEST(IsotpPoll, SendDoesNotStartWhenStMinNotElapsed)
 {
     reset_mocks();
@@ -152,6 +161,7 @@ TEST(IsotpPoll, SendDoesNotStartWhenStMinNotElapsed)
     EXPECT_EQ(link.send_offset, 0u);
 }
 
+/** @brief NOSPACE keeps send state unchanged. */
 TEST(IsotpPoll, SendNoSpaceDoesNotChangeState)
 {
     reset_mocks();
@@ -182,6 +192,7 @@ TEST(IsotpPoll, SendNoSpaceDoesNotChangeState)
     EXPECT_EQ(link.send_timer_bs, 500u);
 }
 
+/** @brief Send error sets send status to error. */
 TEST(IsotpPoll, SendErrorSetsSendStatusError)
 {
     reset_mocks();
@@ -210,6 +221,7 @@ TEST(IsotpPoll, SendErrorSetsSendStatusError)
     EXPECT_EQ(link.send_status, ISOTP_SEND_STATUS_ERROR);
 }
 
+/** @brief Send decrements block size and advances timers. */
 TEST(IsotpPoll, SendDecrementsBlockSizeRemain)
 {
     reset_mocks();
@@ -239,6 +251,7 @@ TEST(IsotpPoll, SendDecrementsBlockSizeRemain)
     EXPECT_EQ(link.send_timer_bs, g_now_us + ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US);
 }
 
+/** @brief Send timeout sets protocol error. */
 TEST(IsotpPoll, SendTimeoutSetsError)
 {
     reset_mocks();
@@ -260,6 +273,7 @@ TEST(IsotpPoll, SendTimeoutSetsError)
     EXPECT_EQ(link.send_protocol_result, ISOTP_PROTOCOL_RESULT_TIMEOUT_BS);
 }
 
+/** @brief Zero receive timer does not trigger timeout. */
 TEST(IsotpPoll, ReceiveDoesNotTimeoutWhenTimerZero)
 {
     reset_mocks();

@@ -2,7 +2,7 @@
  * ISO-TP-C: ISO 15765-2 Protocol Implementation
  *
  * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: Unit tests for isotp_send.
+ * Description: Unit tests for isotp_init_link.
  *
  * Author:      Anton Vynohradov
  * Email:       avynohradov@systemfromscratch.com
@@ -31,6 +31,12 @@
  *
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
+
+/**
+ * @file gtest_isotp_init_link.cpp
+ * @brief Unit tests for isotp_init_link.
+ * @details Verifies fields are initialized from provided buffers and IDs.
+ */
 
 /* ==============================================================================
  * INCLUDES
@@ -74,55 +80,26 @@
  * UNIT TEST IMPLEMENTATIONS
  * =============================================================================*/
 
-TEST(IsotpSend, UsesLinkArbitrationId)
+/** @brief Initializes link fields from inputs. */
+TEST(IsotpInitLink, InitializesFields)
 {
-    reset_mocks();
-
     IsoTpLink link;
-    uint8_t sendbuf[16] = {0};
-    uint8_t recvbuf[16] = {0};
-    const uint8_t payload[3] = {0x11, 0x22, 0x33};
+    uint8_t sendbuf[32] = {0};
+    uint8_t recvbuf[48] = {0};
 
-    isotp_init_link(&link, 0x7DFu, sendbuf, sizeof(sendbuf), recvbuf, sizeof(recvbuf));
+    std::memset(&link, 0xA5, sizeof(link));
 
-    int ret = isotp_send(&link, payload, sizeof(payload));
+    isotp_init_link(&link, 0x123u, sendbuf, sizeof(sendbuf), recvbuf, sizeof(recvbuf));
 
-    EXPECT_EQ(ret, ISOTP_RET_OK);
-    EXPECT_EQ(g_can_state.call_count, 1);
-    EXPECT_EQ(g_can_state.last_id, 0x7DFu);
-}
-
-TEST(IsotpSend, OversizeReturnsOverflow)
-{
-    reset_mocks();
-
-    IsoTpLink link;
-    uint8_t sendbuf[4] = {0};
-    uint8_t recvbuf[4] = {0};
-    const uint8_t payload[5] = {1, 2, 3, 4, 5};
-
-    isotp_init_link(&link, 0x7DFu, sendbuf, sizeof(sendbuf), recvbuf, sizeof(recvbuf));
-
-    int ret = isotp_send(&link, payload, sizeof(payload));
-
-    EXPECT_EQ(ret, ISOTP_RET_OVERFLOW);
-    EXPECT_EQ(g_can_state.call_count, 0);
-}
-
-TEST(IsotpSend, InProgressReturnsInProgress)
-{
-    reset_mocks();
-
-    IsoTpLink link;
-    uint8_t sendbuf[8] = {0};
-    uint8_t recvbuf[8] = {0};
-    const uint8_t payload[3] = {1, 2, 3};
-
-    isotp_init_link(&link, 0x7DFu, sendbuf, sizeof(sendbuf), recvbuf, sizeof(recvbuf));
-    link.send_status = ISOTP_SEND_STATUS_INPROGRESS;
-
-    int ret = isotp_send(&link, payload, sizeof(payload));
-
-    EXPECT_EQ(ret, ISOTP_RET_INPROGRESS);
-    EXPECT_EQ(g_can_state.call_count, 0);
+    EXPECT_EQ(link.send_arbitration_id, 0x123u);
+    EXPECT_EQ(link.send_buffer, sendbuf);
+    EXPECT_EQ(link.send_buf_size, sizeof(sendbuf));
+    EXPECT_EQ(link.receive_buffer, recvbuf);
+    EXPECT_EQ(link.receive_buf_size, sizeof(recvbuf));
+    EXPECT_EQ(link.send_status, ISOTP_SEND_STATUS_IDLE);
+    EXPECT_EQ(link.receive_status, ISOTP_RECEIVE_STATUS_IDLE);
+    EXPECT_EQ(link.send_size, 0u);
+    EXPECT_EQ(link.receive_size, 0u);
+    EXPECT_EQ(link.send_offset, 0u);
+    EXPECT_EQ(link.receive_offset, 0u);
 }

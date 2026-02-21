@@ -2,7 +2,7 @@
  * ISO-TP-C: ISO 15765-2 Protocol Implementation
  *
  * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: Test doubles for ISO-TP user callbacks.
+ * Description: File description - briefly describe purpose of this source file
  *
  * Author:      Anton Vynohradov
  * Email:       avynohradov@systemfromscratch.com
@@ -36,23 +36,25 @@
  * INCLUDES
  * =============================================================================*/
 
-#include "isotp_test_support.h"
+#include "mock_time.h"
 
 /* ==============================================================================
  * DEFINES & MACROS
  * =============================================================================*/
 
+/* Internal macros and constants */
+
 /* ==============================================================================
  * PRIVATE TYPE DEFINITIONS
  * =============================================================================*/
 
+/* Static type definitions local to this file */
+
 /* ==============================================================================
- * PUBLIC VARIABLES
+ * PRIVATE VARIABLES (static)
  * =============================================================================*/
 
-MockCanState g_can_state = {0};
-uint32_t g_now_us = 0;
-int g_debug_call_count = 0;
+static uint32_t virtual_time = 0;  // microseconds
 
 /* ==============================================================================
  * PRIVATE FUNCTION DECLARATIONS (static)
@@ -68,42 +70,22 @@ int g_debug_call_count = 0;
  * PUBLIC FUNCTION IMPLEMENTATIONS
  * =============================================================================*/
 
-void reset_mocks()
+uint32_t mock_time_now(void)
 {
-    std::memset(&g_can_state, 0, sizeof(g_can_state));
-    g_can_state.return_value = ISOTP_RET_OK;
-    g_now_us = 0;
-    g_debug_call_count = 0;
+    return virtual_time;
 }
 
-extern "C"
+void mock_time_advance(uint32_t delta)
 {
-void isotp_user_debug(const char* message, ...)
-{
-    (void) message;
-    g_debug_call_count++;
+    virtual_time += delta;
 }
 
-int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size)
+void mock_time_set(uint32_t value)
 {
-    g_can_state.last_id = arbitration_id;
-    g_can_state.last_size = size;
-    g_can_state.call_count++;
-    std::memset(g_can_state.last_data, 0, sizeof(g_can_state.last_data));
-    if (data != NULL)
-    {
-        uint8_t copy_len = size;
-        if (copy_len > sizeof(g_can_state.last_data))
-        {
-            copy_len = sizeof(g_can_state.last_data);
-        }
-        std::memcpy(g_can_state.last_data, data, copy_len);
-    }
-    return g_can_state.return_value;
+    virtual_time = value;
 }
 
-uint32_t isotp_user_get_us(void)
+void mock_time_reset(void)
 {
-    return g_now_us;
-}
+    virtual_time = 0;
 }
