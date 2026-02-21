@@ -22,6 +22,9 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install pytest
+        run: python -m pip install --upgrade pip pytest
+
       - name: Configure (Python C API)
         run: cd examples/python_api && cmake -G "Unix Makefiles" -B build -DISOTP_INTEGRATION_TESTS=ON
 
