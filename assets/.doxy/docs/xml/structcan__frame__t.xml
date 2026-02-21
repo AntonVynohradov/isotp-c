@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcan__frame__t" kind="struct" language="C++" prot="public">
+    <compoundname>can_frame_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcan__frame__t_1a49d4261f37f08f5a11cc3fc12c56cdc3" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t can_frame_t::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>can_frame_t::id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="examples/python_api/src/mock_can.c" line="71" column="14" bodyfile="examples/python_api/src/mock_can.c" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcan__frame__t_1a0bca16a6838db8d813c5004d0262cc52" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t can_frame_t::data[CAN_MAX_DLEN]</definition>
+        <argsstring>[CAN_MAX_DLEN]</argsstring>
+        <name>data</name>
+        <qualifiedname>can_frame_t::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="examples/python_api/src/mock_can.c" line="72" column="13" bodyfile="examples/python_api/src/mock_can.c" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcan__frame__t_1a67ebf66f1dd02f3187a69818d30e7497" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t can_frame_t::len</definition>
+        <argsstring></argsstring>
+        <name>len</name>
+        <qualifiedname>can_frame_t::len</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="examples/python_api/src/mock_can.c" line="73" column="13" bodyfile="examples/python_api/src/mock_can.c" bodystart="73" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Structure representing a CAN frame in the mock driver. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="examples/python_api/src/mock_can.c" line="69" column="1" bodyfile="examples/python_api/src/mock_can.c" bodystart="70" bodyend="75"/>
+    <listofallmembers>
+      <member refid="structcan__frame__t_1a0bca16a6838db8d813c5004d0262cc52" prot="public" virt="non-virtual"><scope>can_frame_t</scope><name>data</name></member>
+      <member refid="structcan__frame__t_1a49d4261f37f08f5a11cc3fc12c56cdc3" prot="public" virt="non-virtual"><scope>can_frame_t</scope><name>id</name></member>
+      <member refid="structcan__frame__t_1a67ebf66f1dd02f3187a69818d30e7497" prot="public" virt="non-virtual"><scope>can_frame_t</scope><name>len</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_181ea403426f4b233011860116dcb1b5" kind="dir">
+    <compoundname>examples/python_api</compoundname>
+    <innerdir refid="dir_a048739b84e6d1db49a725d8f1a9c5e6">examples/python_api/inc</innerdir>
+    <innerdir refid="dir_63ad0292e4d57c8e6c47fd30f33819f0">examples/python_api/src</innerdir>
+    <innerfile refid="pyisotp_8c">pyisotp.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="examples/python_api/"/>
+  </compounddef>
+</doxygen>

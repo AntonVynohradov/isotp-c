@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacetest__api__validation" kind="namespace" language="Python">
+    <compoundname>test_api_validation</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="test__api__validation_8py_1a925f893a73ef6b99eedf6ccc20c37204" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_validation.test_init_rejects_zero_buffers</definition>
+        <argsstring>()</argsstring>
+        <name>test_init_rejects_zero_buffers</name>
+        <qualifiedname>test_api_validation.test_init_rejects_zero_buffers</qualifiedname>
+        <briefdescription>
+<para>Verify init rejects zero-length buffers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Validates both send and receive buffer size checks. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_validation.py" line="56" column="1" bodyfile="tests/integration/test_api_validation.py" bodystart="56" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__validation_8py_1a7e7b407224c35997484d468c308cb04b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_validation.test_receive_rejects_invalid_bufsize</definition>
+        <argsstring>()</argsstring>
+        <name>test_receive_rejects_invalid_bufsize</name>
+        <qualifiedname>test_api_validation.test_receive_rejects_invalid_bufsize</qualifiedname>
+        <briefdescription>
+<para>Verify receive rejects invalid buffer sizes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Ensures zero length is rejected by the binding. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_validation.py" line="67" column="1" bodyfile="tests/integration/test_api_validation.py" bodystart="67" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__validation_8py_1a6923302203a7c24e777cab3903e28845" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_validation.test_set_fc_params_rejects_large_block_size</definition>
+        <argsstring>()</argsstring>
+        <name>test_set_fc_params_rejects_large_block_size</name>
+        <qualifiedname>test_api_validation.test_set_fc_params_rejects_large_block_size</qualifiedname>
+        <briefdescription>
+<para>Verify flow control params reject oversized block size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Block size values above 255 must be rejected. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_validation.py" line="76" column="1" bodyfile="tests/integration/test_api_validation.py" bodystart="76" bodyend="83"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/test_api_validation.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

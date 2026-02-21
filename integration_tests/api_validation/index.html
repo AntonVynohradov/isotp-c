@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/integration_tests/api_validation/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>API Validation Integration Tests - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API Validation Integration Tests";
+        var mkdocs_page_input_path = "integration_tests/api_validation.md";
+        var mkdocs_page_url = "/isotp-c/integration_tests/api_validation/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">API Validation Integration Tests</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="api-validation-integration-tests">API Validation Integration Tests<a class="headerlink" href="#api-validation-integration-tests" title="Permanent link">&para;</a></h1>
+<p>This document describes API validation tests for the Python bindings.
+The suite ensures argument validation errors are raised consistently.</p>
+<h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
+<p>The tests in tests/integration/test_api_validation.py cover:</p>
+<ul>
+<li>Invalid buffer sizes when initializing a link.</li>
+<li>Invalid receive buffer size.</li>
+<li>Invalid FlowControl parameters.</li>
+</ul>
+<h2 id="test-cases">Test Cases<a class="headerlink" href="#test-cases" title="Permanent link">&para;</a></h2>
+<h3 id="test_init_rejects_zero_buffers">test_init_rejects_zero_buffers<a class="headerlink" href="#test_init_rejects_zero_buffers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: attempt to initialize with zero send or receive buffer size.</li>
+<li>Expectation: ValueError is raised.</li>
+</ul>
+<p><img alt="Init rejects zero buffers" src="../../assets/integration_tests/api_validation/init_rejects_zero_buffers.svg" /></p>
+<h3 id="test_receive_rejects_invalid_bufsize">test_receive_rejects_invalid_bufsize<a class="headerlink" href="#test_receive_rejects_invalid_bufsize" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: initialize link with valid buffers.</li>
+<li>Action: call receive with bufsize 0.</li>
+<li>Expectation: ValueError is raised.</li>
+</ul>
+<p><img alt="Receive rejects bufsize=0" src="../../assets/integration_tests/api_validation/receive_rejects_invalid_bufsize.svg" /></p>
+<h3 id="test_set_fc_params_rejects_large_block_size">test_set_fc_params_rejects_large_block_size<a class="headerlink" href="#test_set_fc_params_rejects_large_block_size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: initialize link with valid buffers.</li>
+<li>Action: call set_fc_params with block_size &gt; 255.</li>
+<li>Expectation: ValueError is raised.</li>
+</ul>
+<p><img alt="set_fc_params rejects large block size" src="../../assets/integration_tests/api_validation/set_fc_params_rejects_large_block_size.svg" /></p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>These tests validate Python API guards only.</li>
+<li>Update this document if input validation behavior changes.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

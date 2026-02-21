@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/mock__can_8c/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File mock_can.c - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File mock_can.c";
+        var mkdocs_page_input_path = "docs/mock__can_8c.md";
+        var mkdocs_page_url = "/isotp-c/docs/mock__can_8c/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File mock_can.c</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-mock_canc">File mock_can.c<a class="headerlink" href="#file-mock_canc" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="../dir_d28a4824dc47e487b107a5db32ef43c4/"><strong>examples</strong></a> <strong>&gt;</strong> <a href="../dir_181ea403426f4b233011860116dcb1b5/"><strong>python_api</strong></a> <strong>&gt;</strong> <a href="../dir_63ad0292e4d57c8e6c47fd30f33819f0/"><strong>src</strong></a> <strong>&gt;</strong> <a href="./"><strong>mock_can.c</strong></a></p>
+<p><a href="../mock__can_8c_source/">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include "mock_can.h"</code></li>
+<li><code>#include "can_driver.h"</code></li>
+<li><code>#include &lt;string.h&gt;</code></li>
+<li><code>#include &lt;unistd.h&gt;</code></li>
+</ul>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="../structcan__frame__t/"><strong>can_frame_t</strong></a> <br><em>Structure representing a CAN frame in the mock driver.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-attributes">Public Static Attributes<a class="headerlink" href="#public-static-attributes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-delay_ms"><strong>delay_ms</strong></a>   = <code>0</code><br><em>Artificial delay in milliseconds for send operations (0 for no delay)</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-disable_fc"><strong>disable_fc</strong></a>   = <code>0</code><br><em>Flag to disable FlowControl frames in the mock driver.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-drop_enabled"><strong>drop_enabled</strong></a>   = <code>0</code><br><em>Flag to enable or disable frame dropping in the mock driver.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-head"><strong>head</strong></a>   = <code>0</code><br><em>Index of the head of the queue (next frame to receive)</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="../structcan__frame__t/"><strong>can_frame_t</strong></a></td>
+<td style="text-align: left;"><a href="#variable-queue"><strong>queue</strong></a>  <br><em>Internal queue to hold CAN frames for simulation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#variable-tail"><strong>tail</strong></a>   = <code>0</code><br><em>Index of the tail of the queue (next position to send a frame)</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions<a class="headerlink" href="#public-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-mock_can_disable_fc"><strong>mock_can_disable_fc</strong></a> (int enable) <br><em>Disables sending FlowControl frames in the mock CAN driver.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-mock_can_enable_drop"><strong>mock_can_enable_drop</strong></a> (int enable) <br><em>Enables or disables frame dropping in the mock CAN driver.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-mock_can_init"><strong>mock_can_init</strong></a> (void) <br><em>Initializes the mock CAN driver and sets it as the active driver.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-mock_can_set_delay_ms"><strong>mock_can_set_delay_ms</strong></a> (int delay) <br><em>Sets the artificial delay for the mock CAN driver.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions">Public Static Functions<a class="headerlink" href="#public-static-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-mock_receive"><strong>mock_receive</strong></a> (uint32_t * id, uint8_t * data, uint8_t * len) <br><em>Mock implementation of CAN receive function.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-mock_send"><strong>mock_send</strong></a> (uint32_t id, const uint8_t * data, uint8_t len) <br><em>Mock implementation of CAN send function.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-sleep_ms"><strong>sleep_ms</strong></a> (int ms) <br><em>Sleep for a specified number of milliseconds.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="macros">Macros<a class="headerlink" href="#macros" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-can_max_dlen"><strong>CAN_MAX_DLEN</strong></a>  <code>8</code><br><em>Maximum data length for CAN frames.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">define</td>
+<td style="text-align: left;"><a href="./#define-mock_queue_size"><strong>MOCK_QUEUE_SIZE</strong></a>  <code>256</code><br><em>Size of the internal queue for simulating CAN frames.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-attributes-documentation">Public Static Attributes Documentation<a class="headerlink" href="#public-static-attributes-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="variable-delay_ms">variable delay_ms<a class="headerlink" href="#variable-delay_ms" title="Permanent link">&para;</a></h3>
+<p><em>Artificial delay in milliseconds for send operations (0 for no delay)</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">delay_ms</span><span class="p">;</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="variable-disable_fc">variable disable_fc<a class="headerlink" href="#variable-disable_fc" title="Permanent link">&para;</a></h3>
+<p><em>Flag to disable FlowControl frames in the mock driver.</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">disable_fc</span><span class="p">;</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="variable-drop_enabled">variable drop_enabled<a class="headerlink" href="#variable-drop_enabled" title="Permanent link">&para;</a></h3>
+<p><em>Flag to enable or disable frame dropping in the mock driver.</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">drop_enabled</span><span class="p">;</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="variable-head">variable head<a class="headerlink" href="#variable-head" title="Permanent link">&para;</a></h3>
+<p><em>Index of the head of the queue (next frame to receive)</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="variable-queue">variable queue<a class="headerlink" href="#variable-queue" title="Permanent link">&para;</a></h3>
+<p><em>Internal queue to hold CAN frames for simulation.</em> 
+<div class="highlight"><pre><span></span><code><span class="n">can_frame_t</span><span class="w"> </span><span class="n">queue</span><span class="p">[</span><span class="n">MOCK_QUEUE_SIZE</span><span class="p">];</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="variable-tail">variable tail<a class="headerlink" href="#variable-tail" title="Permanent link">&para;</a></h3>
+<p><em>Index of the tail of the queue (next position to send a frame)</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">tail</span><span class="p">;</span>
+</code></pre></div></p>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation<a class="headerlink" href="#public-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-mock_can_disable_fc">function mock_can_disable_fc<a class="headerlink" href="#function-mock_can_disable_fc" title="Permanent link">&para;</a></h3>
+<p><em>Disables sending FlowControl frames in the mock CAN driver.</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">mock_can_disable_fc</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">enable</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>enable</code> - 1 to disable FlowControl frames, 0 to allow them. </li>
+</ul>
+<hr>
+
+<h3 id="function-mock_can_enable_drop">function mock_can_enable_drop<a class="headerlink" href="#function-mock_can_enable_drop" title="Permanent link">&para;</a></h3>
+<p><em>Enables or disables frame dropping in the mock CAN driver.</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">mock_can_enable_drop</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">enable</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>enable</code> - 1 to enable frame dropping, 0 to disable. </li>
+</ul>
+<hr>
+
+<h3 id="function-mock_can_init">function mock_can_init<a class="headerlink" href="#function-mock_can_init" title="Permanent link">&para;</a></h3>
+<p><em>Initializes the mock CAN driver and sets it as the active driver.</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">mock_can_init</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="function-mock_can_set_delay_ms">function mock_can_set_delay_ms<a class="headerlink" href="#function-mock_can_set_delay_ms" title="Permanent link">&para;</a></h3>
+<p><em>Sets the artificial delay for the mock CAN driver.</em> 
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="n">mock_can_set_delay_ms</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">delay</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>delay</code> - Delay in milliseconds. </li>
+</ul>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation<a class="headerlink" href="#public-static-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-mock_receive">function mock_receive<a class="headerlink" href="#function-mock_receive" title="Permanent link">&para;</a></h3>
+<p><em>Mock implementation of CAN receive function.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mock_receive</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">len</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>id</code> Pointer to store the received CAN ID. </li>
+<li><code>data</code> Pointer to store the received CAN data. </li>
+<li><code>len</code> Pointer to store the length of the received CAN data. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>int 0 on success, -1 if the queue is empty. </p>
+<hr>
+
+<h3 id="function-mock_send">function mock_send<a class="headerlink" href="#function-mock_send" title="Permanent link">&para;</a></h3>
+<p><em>Mock implementation of CAN send function.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mock_send</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>id</code> CAN ID to send. </li>
+<li><code>data</code> Pointer to the CAN data to send. </li>
+<li><code>len</code> Length of the CAN data to send. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>int 0 on success (including when drop is enabled and a frame is discarded), -1 if the queue is full. </p>
+<hr>
+
+<h3 id="function-sleep_ms">function sleep_ms<a class="headerlink" href="#function-sleep_ms" title="Permanent link">&para;</a></h3>
+<p><em>Sleep for a specified number of milliseconds.</em> 
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">sleep_ms</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>ms</code> Number of milliseconds to sleep. </li>
+</ul>
+<hr>
+<h2 id="macro-definition-documentation">Macro Definition Documentation<a class="headerlink" href="#macro-definition-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="define-can_max_dlen">define CAN_MAX_DLEN<a class="headerlink" href="#define-can_max_dlen" title="Permanent link">&para;</a></h3>
+<p><em>Maximum data length for CAN frames.</em> 
+<div class="highlight"><pre><span></span><code><span class="cp">#define CAN_MAX_DLEN `8`</span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="define-mock_queue_size">define MOCK_QUEUE_SIZE<a class="headerlink" href="#define-mock_queue_size" title="Permanent link">&para;</a></h3>
+<p><em>Size of the internal queue for simulating CAN frames.</em> 
+<div class="highlight"><pre><span></span><code><span class="cp">#define MOCK_QUEUE_SIZE `256`</span>
+</code></pre></div></p>
+<hr>
+
+<hr />
+<p>The documentation for this class was generated from the following file <code>examples/python_api/src/mock_can.c</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

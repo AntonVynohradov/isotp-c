@@ -28,9 +28,57 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
+      <node id="4">
+        <label>tests/unit/gtest_isotp_destroy_link.cpp</label>
+        <link refid="gtest__isotp__destroy__link_8cpp"/>
+      </node>
+      <node id="5">
+        <label>tests/unit/gtest_isotp_init_link.cpp</label>
+        <link refid="gtest__isotp__init__link_8cpp"/>
+      </node>
+      <node id="6">
+        <label>tests/unit/gtest_isotp_on_can_message.cpp</label>
+        <link refid="gtest__isotp__on__can__message_8cpp"/>
+      </node>
+      <node id="7">
+        <label>tests/unit/gtest_isotp_poll.cpp</label>
+        <link refid="gtest__isotp__poll_8cpp"/>
+      </node>
+      <node id="8">
+        <label>tests/unit/gtest_isotp_receive.cpp</label>
+        <link refid="gtest__isotp__receive_8cpp"/>
+      </node>
+      <node id="9">
+        <label>tests/unit/gtest_isotp_send.cpp</label>
+        <link refid="gtest__isotp__send_8cpp"/>
+      </node>
+      <node id="10">
+        <label>tests/unit/gtest_isotp_send_with_id.cpp</label>
+        <link refid="gtest__isotp__send__with__id_8cpp"/>
+      </node>
+      <node id="11">
+        <label>tests/unit/isotp_test_mocks.cpp</label>
+        <link refid="isotp__test__mocks_8cpp"/>
+      </node>
       <node id="3">
-        <label>tests/isotp_test_support.h</label>
-        <link refid="isotp__test__support_8h_source"/>
+        <label>tests/unit/isotp_test_support.h</label>
+        <link refid="isotp__test__support_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="structIsoTpPciType" prot="public">IsoTpPciType</innerclass>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_7711e90abc3d4bd55823d9013a185d04" kind="dir">
+    <compoundname>tests/unit</compoundname>
+    <innerfile refid="gtest__isotp__destroy__link_8cpp">gtest_isotp_destroy_link.cpp</innerfile>
+    <innerfile refid="gtest__isotp__init__link_8cpp">gtest_isotp_init_link.cpp</innerfile>
+    <innerfile refid="gtest__isotp__on__can__message_8cpp">gtest_isotp_on_can_message.cpp</innerfile>
+    <innerfile refid="gtest__isotp__poll_8cpp">gtest_isotp_poll.cpp</innerfile>
+    <innerfile refid="gtest__isotp__receive_8cpp">gtest_isotp_receive.cpp</innerfile>
+    <innerfile refid="gtest__isotp__send_8cpp">gtest_isotp_send.cpp</innerfile>
+    <innerfile refid="gtest__isotp__send__with__id_8cpp">gtest_isotp_send_with_id.cpp</innerfile>
+    <innerfile refid="isotp__test__mocks_8cpp">isotp_test_mocks.cpp</innerfile>
+    <innerfile refid="isotp__test__support_8h">isotp_test_support.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/unit/"/>
+  </compounddef>
+</doxygen>

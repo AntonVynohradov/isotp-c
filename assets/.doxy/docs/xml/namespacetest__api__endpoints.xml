@@ -1,0 +1,288 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacetest__api__endpoints" kind="namespace" language="Python">
+    <compoundname>test_api_endpoints</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="test__api__endpoints_8py_1adb9c95b102946ee66df4bee45e7f8ca1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints._poll_until_receive</definition>
+        <argsstring>(link, payload_size, steps, advance_ms=0)</argsstring>
+        <name>_poll_until_receive</name>
+        <qualifiedname>test_api_endpoints._poll_until_receive</qualifiedname>
+        <param>
+          <type>link</type>
+          <defname>link</defname>
+        </param>
+        <param>
+          <type>payload_size</type>
+          <defname>payload_size</defname>
+        </param>
+        <param>
+          <type>steps</type>
+          <defname>steps</defname>
+        </param>
+        <param>
+          <type>advance_ms</type>
+          <defname>advance_ms</defname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Poll the link until a response is received or steps are exhausted. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISO-TP link handle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expected payload size for receive. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of poll iterations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>advance_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional time advance per step in milliseconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Received payload bytes or None when nothing is received. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="54" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="54" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1a584b15e655c4836950d4a8e5e3ab1419" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints._make_payload</definition>
+        <argsstring>(size)</argsstring>
+        <name>_make_payload</name>
+        <qualifiedname>test_api_endpoints._make_payload</qualifiedname>
+        <param>
+          <type>size</type>
+          <defname>size</defname>
+        </param>
+        <briefdescription>
+<para>Build a deterministic payload of a given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to generate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Payload bytes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="73" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="73" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1a2c89f1c51ed1d7cfad6cb32fa5f6edfd" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints._ff_frame</definition>
+        <argsstring>(payload_size, payload)</argsstring>
+        <name>_ff_frame</name>
+        <qualifiedname>test_api_endpoints._ff_frame</qualifiedname>
+        <param>
+          <type>payload_size</type>
+          <defname>payload_size</defname>
+        </param>
+        <param>
+          <type>payload</type>
+          <defname>payload</defname>
+        </param>
+        <briefdescription>
+<para>Build a First Frame (FF) for an ISO-TP multi-frame transfer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>payload_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Total payload size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Payload bytes to embed in FF. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>CAN frame bytes representing the FF. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="81" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="81" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1a3e523c6be69f099c611767b6e027e964" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints._cf_frame</definition>
+        <argsstring>(sn, payload)</argsstring>
+        <name>_cf_frame</name>
+        <qualifiedname>test_api_endpoints._cf_frame</qualifiedname>
+        <param>
+          <type>sn</type>
+          <defname>sn</defname>
+        </param>
+        <param>
+          <type>payload</type>
+          <defname>payload</defname>
+        </param>
+        <briefdescription>
+<para>Build a Consecutive Frame (CF) with a given sequence number. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sequence number (0-15). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Payload bytes to embed in CF. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>CAN frame bytes representing the CF. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="92" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="92" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1af87156dd8566941f5dafdfcd197865c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints.test_api_endpoints_smoke</definition>
+        <argsstring>()</argsstring>
+        <name>test_api_endpoints_smoke</name>
+        <qualifiedname>test_api_endpoints.test_api_endpoints_smoke</qualifiedname>
+        <briefdescription>
+<para>Verify basic API calls and protocol result handling. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="101" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="101" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1a8029a045188e03665e830fcd361bcb0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints.test_api_endpoints_smoke_multi_frame</definition>
+        <argsstring>()</argsstring>
+        <name>test_api_endpoints_smoke_multi_frame</name>
+        <qualifiedname>test_api_endpoints.test_api_endpoints_smoke_multi_frame</qualifiedname>
+        <briefdescription>
+<para>Verify multi-frame send/receive path. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="138" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="138" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1a9bc58c065b6e9e7cd40fc5c845ce90fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints.test_api_endpoints_return_codes</definition>
+        <argsstring>()</argsstring>
+        <name>test_api_endpoints_return_codes</name>
+        <qualifiedname>test_api_endpoints.test_api_endpoints_return_codes</qualifiedname>
+        <briefdescription>
+<para>Validate return codes for overflow and in-progress sends. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="148" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="148" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1ae3b6771e7048a5dcea96599be5d86f1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints.test_api_endpoints_validation_errors</definition>
+        <argsstring>()</argsstring>
+        <name>test_api_endpoints_validation_errors</name>
+        <qualifiedname>test_api_endpoints.test_api_endpoints_validation_errors</qualifiedname>
+        <briefdescription>
+<para>Validate input checks and error signaling in API. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="164" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="164" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1ac46b8e40d0b189bafd96a1f8eca5bbab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints.test_api_endpoints_inject_unexpected_cf</definition>
+        <argsstring>()</argsstring>
+        <name>test_api_endpoints_inject_unexpected_cf</name>
+        <qualifiedname>test_api_endpoints.test_api_endpoints_inject_unexpected_cf</qualifiedname>
+        <briefdescription>
+<para>Validate unexpected CF injection handling. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="177" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="177" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="test__api__endpoints_8py_1a3586f4c273a678ac7a48582085724611" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_api_endpoints.test_api_endpoints_inject_wrong_sn</definition>
+        <argsstring>()</argsstring>
+        <name>test_api_endpoints_inject_wrong_sn</name>
+        <qualifiedname>test_api_endpoints.test_api_endpoints_inject_wrong_sn</qualifiedname>
+        <briefdescription>
+<para>Validate wrong sequence number handling. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_api_endpoints.py" line="188" column="1" bodyfile="tests/integration/test_api_endpoints.py" bodystart="188" bodyend="199"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/test_api_endpoints.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

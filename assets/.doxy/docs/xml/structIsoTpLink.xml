@@ -349,6 +349,66 @@
         </inbodydescription>
         <location file="isotp.h" line="118" column="13" bodyfile="isotp.h" bodystart="118" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structIsoTpLink_1a60e8444e044deba069d28e22585bf733" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t IsoTpLink::param_n_bs_us</definition>
+        <argsstring></argsstring>
+        <name>param_n_bs_us</name>
+        <qualifiedname>IsoTpLink::param_n_bs_us</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>N_Bs timeout in microseconds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="121" column="14" bodyfile="isotp.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpLink_1a0880658f0a5c2d6efbcf3941519e2d72" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t IsoTpLink::param_n_cr_us</definition>
+        <argsstring></argsstring>
+        <name>param_n_cr_us</name>
+        <qualifiedname>IsoTpLink::param_n_cr_us</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>N_Cr timeout in microseconds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="122" column="14" bodyfile="isotp.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpLink_1aea4079acd0bf81760e3244f100855122" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t IsoTpLink::param_st_min_us</definition>
+        <argsstring></argsstring>
+        <name>param_st_min_us</name>
+        <qualifiedname>IsoTpLink::param_st_min_us</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>STmin in microseconds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="123" column="14" bodyfile="isotp.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structIsoTpLink_1a916d9a6acad323db2fdf9f68930bfc45" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t IsoTpLink::param_block_size</definition>
+        <argsstring></argsstring>
+        <name>param_block_size</name>
+        <qualifiedname>IsoTpLink::param_block_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Block size (BS) for FlowControl. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="124" column="13" bodyfile="isotp.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
 <para>Link state for a single ISO-TP connection. </para>
@@ -356,8 +416,12 @@
     <detaileddescription>
 <para>The data stored in this struct is used internally and may be used by software programs using this library. </para>
     </detaileddescription>
-    <location file="isotp.h" line="83" column="1" bodyfile="isotp.h" bodystart="84" bodyend="134"/>
+    <location file="isotp.h" line="83" column="1" bodyfile="isotp.h" bodystart="84" bodyend="140"/>
     <listofallmembers>
+      <member refid="structIsoTpLink_1a916d9a6acad323db2fdf9f68930bfc45" prot="public" virt="non-virtual"><scope>IsoTpLink</scope><name>param_block_size</name></member>
+      <member refid="structIsoTpLink_1a60e8444e044deba069d28e22585bf733" prot="public" virt="non-virtual"><scope>IsoTpLink</scope><name>param_n_bs_us</name></member>
+      <member refid="structIsoTpLink_1a0880658f0a5c2d6efbcf3941519e2d72" prot="public" virt="non-virtual"><scope>IsoTpLink</scope><name>param_n_cr_us</name></member>
+      <member refid="structIsoTpLink_1aea4079acd0bf81760e3244f100855122" prot="public" virt="non-virtual"><scope>IsoTpLink</scope><name>param_st_min_us</name></member>
       <member refid="structIsoTpLink_1ac3eedc03b95e1777675943b52dc60ae0" prot="public" virt="non-virtual"><scope>IsoTpLink</scope><name>receive_arbitration_id</name></member>
       <member refid="structIsoTpLink_1aed423731d755e3761d13d609124423d4" prot="public" virt="non-virtual"><scope>IsoTpLink</scope><name>receive_bs_count</name></member>
       <member refid="structIsoTpLink_1a5f0e4327a1252d88ea45d3b8472f15d6" prot="public" virt="non-virtual"><scope>IsoTpLink</scope><name>receive_buf_size</name></member>

@@ -36,6 +36,10 @@ _Link state for a single ISO-TP connection._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
+|  uint8\_t | [**param\_block\_size**](#variable-param_block_size)  <br> |
+|  uint32\_t | [**param\_n\_bs\_us**](#variable-param_n_bs_us)  <br> |
+|  uint32\_t | [**param\_n\_cr\_us**](#variable-param_n_cr_us)  <br> |
+|  uint32\_t | [**param\_st\_min\_us**](#variable-param_st_min_us)  <br> |
 |  uint32\_t | [**receive\_arbitration\_id**](#variable-receive_arbitration_id)  <br> |
 |  uint8\_t | [**receive\_bs\_count**](#variable-receive_bs_count)  <br> |
 |  uint32\_t | [**receive\_buf\_size**](#variable-receive_buf_size)  <br> |
@@ -112,6 +116,74 @@ The data stored in this struct is used internally and may be used by software pr
     
 ## Public Attributes Documentation
 
+
+
+
+### variable param\_block\_size 
+
+```C++
+uint8_t IsoTpLink::param_block_size;
+```
+
+
+
+Block size (BS) for FlowControl. 
+
+
+        
+
+<hr>
+
+
+
+### variable param\_n\_bs\_us 
+
+```C++
+uint32_t IsoTpLink::param_n_bs_us;
+```
+
+
+
+N\_Bs timeout in microseconds. 
+
+
+        
+
+<hr>
+
+
+
+### variable param\_n\_cr\_us 
+
+```C++
+uint32_t IsoTpLink::param_n_cr_us;
+```
+
+
+
+N\_Cr timeout in microseconds. 
+
+
+        
+
+<hr>
+
+
+
+### variable param\_st\_min\_us 
+
+```C++
+uint32_t IsoTpLink::param_st_min_us;
+```
+
+
+
+STmin in microseconds. 
+
+
+        
+
+<hr>
 
 
 

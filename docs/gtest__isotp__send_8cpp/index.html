@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/gtest__isotp__send_8cpp/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File gtest_isotp_send.cpp - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File gtest_isotp_send.cpp";
+        var mkdocs_page_input_path = "docs/gtest__isotp__send_8cpp.md";
+        var mkdocs_page_url = "/isotp-c/docs/gtest__isotp__send_8cpp/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File gtest_isotp_send.cpp</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-gtest_isotp_sendcpp">File gtest_isotp_send.cpp<a class="headerlink" href="#file-gtest_isotp_sendcpp" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="../dir_59425e443f801f1f2fd8bbe4959a3ccf/"><strong>tests</strong></a> <strong>&gt;</strong> <a href="../dir_7711e90abc3d4bd55823d9013a185d04/"><strong>unit</strong></a> <strong>&gt;</strong> <a href="./"><strong>gtest_isotp_send.cpp</strong></a></p>
+<p><a href="../gtest__isotp__send_8cpp_source/">Go to the source code of this file</a></p>
+<p><em>Unit tests for isotp_send.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;gtest/gtest.h&gt;</code></li>
+<li><code>#include "isotp_test_support.h"</code></li>
+</ul>
+<h2 id="public-functions">Public Functions<a class="headerlink" href="#public-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-test"><strong>TEST</strong></a> (IsotpSend, UsesLinkArbitrationId) <br><em>Uses link arbitration ID for sending.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-test"><strong>TEST</strong></a> (IsotpSend, OversizeReturnsOverflow) <br><em>Oversize payload returns overflow.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-test"><strong>TEST</strong></a> (IsotpSend, InProgressReturnsInProgress) <br><em>In-progress send returns in-progress.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description<a class="headerlink" href="#detailed-description" title="Permanent link">&para;</a></h2>
+<p>Verifies arbitration ID usage and error returns. </p>
+<h2 id="public-functions-documentation">Public Functions Documentation<a class="headerlink" href="#public-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-test">function TEST<a class="headerlink" href="#function-test" title="Permanent link">&para;</a></h3>
+<p><em>Uses link arbitration ID for sending.</em> 
+<div class="highlight"><pre><span></span><code><span class="n">TEST</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsotpSend</span><span class="p">,</span>
+<span class="w">    </span><span class="n">UsesLinkArbitrationId</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="function-test_1">function TEST<a class="headerlink" href="#function-test_1" title="Permanent link">&para;</a></h3>
+<p><em>Oversize payload returns overflow.</em> 
+<div class="highlight"><pre><span></span><code><span class="n">TEST</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsotpSend</span><span class="p">,</span>
+<span class="w">    </span><span class="n">OversizeReturnsOverflow</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<hr>
+
+<h3 id="function-test_2">function TEST<a class="headerlink" href="#function-test_2" title="Permanent link">&para;</a></h3>
+<p><em>In-progress send returns in-progress.</em> 
+<div class="highlight"><pre><span></span><code><span class="n">TEST</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">IsotpSend</span><span class="p">,</span>
+<span class="w">    </span><span class="n">InProgressReturnsInProgress</span>
+<span class="p">)</span><span class="w"> </span>
+</code></pre></div></p>
+<hr>
+
+<hr />
+<p>The documentation for this class was generated from the following file <code>tests/unit/gtest_isotp_send.cpp</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

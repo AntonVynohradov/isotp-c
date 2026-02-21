@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/group__isotp/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Group isotp - ISO-TP C Implementation</title>
+    <title>Group isotp - ISO-TP (ISO 15765-2)</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -55,9 +55,20 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
               <p class="caption"><span class="caption-text">Examples</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
                   </li>
               </ul>
       </div>
@@ -67,7 +78,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">ISO-TP C Implementation</a>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -175,6 +186,14 @@
 <tr>
 <td style="text-align: right;">int</td>
 <td style="text-align: left;"><a href="#function-isotp_send_with_id"><strong>isotp_send_with_id</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint32_t id, const uint8_t payload, uint32_t size) <br><em>See</em> <a href="./#function-isotp_send"><em><strong>isotp_send</strong></em></a> <em>, with the exception that this function is used only for functional addressing.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-isotp_set_fc_params"><strong>isotp_set_fc_params</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint8_t block_size, uint32_t st_min_us) <br><em>Sets FlowControl parameters used by the receiver.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-isotp_set_timeouts"><strong>isotp_set_timeouts</strong></a> (<a href="../structIsoTpLink/"><strong>IsoTpLink</strong></a> * link, uint32_t n_bs_us, uint32_t n_cr_us) <br><em>Sets timing parameters for waiting on FlowControl and ConsecutiveFrame.</em></td>
 </tr>
 </tbody>
 </table>
@@ -340,6 +359,44 @@
     uint32_t size
 ) 
 </code></pre></div></p>
+<hr>
+
+<h3 id="function-isotp_set_fc_params">function isotp_set_fc_params<a class="headerlink" href="#function-isotp_set_fc_params" title="Permanent link">&para;</a></h3>
+<p><em>Sets FlowControl parameters used by the receiver.</em> 
+<div class="highlight"><pre><span></span><code>void isotp_set_fc_params (
+    IsoTpLink * link,
+    uint8_t block_size,
+    uint32_t st_min_us
+) 
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> The 
+<div class="highlight"><pre><span></span><code>IsoTpLink 
+</code></pre></div>
+ instance used for transceiving data. </li>
+<li><code>block_size</code> Block size (BS) for FlowControl. Zero means unlimited. </li>
+<li><code>st_min_us</code> Minimum separation time (STmin) in microseconds. </li>
+</ul>
+<hr>
+
+<h3 id="function-isotp_set_timeouts">function isotp_set_timeouts<a class="headerlink" href="#function-isotp_set_timeouts" title="Permanent link">&para;</a></h3>
+<p><em>Sets timing parameters for waiting on FlowControl and ConsecutiveFrame.</em> 
+<div class="highlight"><pre><span></span><code>void isotp_set_timeouts (
+    IsoTpLink * link,
+    uint32_t n_bs_us,
+    uint32_t n_cr_us
+) 
+</code></pre></div></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>link</code> The 
+<div class="highlight"><pre><span></span><code>IsoTpLink 
+</code></pre></div>
+ instance used for transceiving data. </li>
+<li><code>n_bs_us</code> Timeout for N_Bs in microseconds. </li>
+<li><code>n_cr_us</code> Timeout for N_Cr in microseconds. </li>
+</ul>
 <hr>
 
 <hr />

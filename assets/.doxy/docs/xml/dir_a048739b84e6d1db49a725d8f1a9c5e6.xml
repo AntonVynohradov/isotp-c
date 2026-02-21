@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_a048739b84e6d1db49a725d8f1a9c5e6" kind="dir">
+    <compoundname>examples/python_api/inc</compoundname>
+    <innerfile refid="can__driver_8h">can_driver.h</innerfile>
+    <innerfile refid="mock__can_8h">mock_can.h</innerfile>
+    <innerfile refid="mock__time_8h">mock_time.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="examples/python_api/inc/"/>
+  </compounddef>
+</doxygen>

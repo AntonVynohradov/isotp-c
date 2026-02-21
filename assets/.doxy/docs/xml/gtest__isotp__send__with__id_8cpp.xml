@@ -1,0 +1,427 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="gtest__isotp__send__with__id_8cpp" kind="file" language="C++">
+    <compoundname>gtest_isotp_send_with_id.cpp</compoundname>
+    <includes local="no">gtest/gtest.h</includes>
+    <includes refid="isotp__test__support_8h" local="yes">isotp_test_support.h</includes>
+    <incdepgraph>
+      <node id="13">
+        <label>isotp_config.h</label>
+        <link refid="isotp__config_8h"/>
+      </node>
+      <node id="14">
+        <label>isotp_defines.h</label>
+        <link refid="isotp__defines_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>isotp_user.h</label>
+        <link refid="isotp__user_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>tests/unit/gtest_isotp_send_with_id.cpp</label>
+        <link refid="gtest__isotp__send__with__id_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>isotp_test_support.h</label>
+        <link refid="isotp__test__support_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cstddef</label>
+      </node>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="6">
+        <label>cstring</label>
+      </node>
+      <node id="2">
+        <label>gtest/gtest.h</label>
+      </node>
+      <node id="9">
+        <label>stdbool.h</label>
+      </node>
+      <node id="10">
+        <label>stddef.h</label>
+      </node>
+      <node id="8">
+        <label>stdint.h</label>
+      </node>
+      <node id="11">
+        <label>stdio.h</label>
+      </node>
+      <node id="12">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="gtest__isotp__send__with__id_8cpp_1ad65ed9b3e5ef5262ea76dca81d9e35cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(IsotpSendWithId, NullLinkReturnsError)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type>IsotpSendWithId</type>
+        </param>
+        <param>
+          <type>NullLinkReturnsError</type>
+        </param>
+        <briefdescription>
+<para>Null link returns error. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/unit/gtest_isotp_send_with_id.cpp" line="84" column="1" bodyfile="tests/unit/gtest_isotp_send_with_id.cpp" bodystart="84" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="gtest__isotp__send__with__id_8cpp_1a9fcdab2407c42357294e0484a7c33f0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(IsotpSendWithId, OversizeReturnsOverflow)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type>IsotpSendWithId</type>
+        </param>
+        <param>
+          <type>OversizeReturnsOverflow</type>
+        </param>
+        <briefdescription>
+<para>Oversize payload returns overflow without sending. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/unit/gtest_isotp_send_with_id.cpp" line="94" column="1" bodyfile="tests/unit/gtest_isotp_send_with_id.cpp" bodystart="94" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="gtest__isotp__send__with__id_8cpp_1a80df5ebd35154eb9b82d8eb74b558f6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(IsotpSendWithId, InProgressReturnsInProgress)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type>IsotpSendWithId</type>
+        </param>
+        <param>
+          <type>InProgressReturnsInProgress</type>
+        </param>
+        <briefdescription>
+<para>In-progress send returns in-progress. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/unit/gtest_isotp_send_with_id.cpp" line="112" column="1" bodyfile="tests/unit/gtest_isotp_send_with_id.cpp" bodystart="112" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="gtest__isotp__send__with__id_8cpp_1addb41d8a1a7121b1d76116cb75b5d6e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(IsotpSendWithId, SingleFrameSendsPayload)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type>IsotpSendWithId</type>
+        </param>
+        <param>
+          <type>SingleFrameSendsPayload</type>
+        </param>
+        <briefdescription>
+<para>Single-frame payload is sent with provided ID. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/unit/gtest_isotp_send_with_id.cpp" line="131" column="1" bodyfile="tests/unit/gtest_isotp_send_with_id.cpp" bodystart="131" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="gtest__isotp__send__with__id_8cpp_1ad2c3e07dc17ffa3e93dd6e87819b5bb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(IsotpSendWithId, MultiFrameFirstFrameStartsSend)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type>IsotpSendWithId</type>
+        </param>
+        <param>
+          <type>MultiFrameFirstFrameStartsSend</type>
+        </param>
+        <briefdescription>
+<para>Multi-frame FF starts send and sets timers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/unit/gtest_isotp_send_with_id.cpp" line="161" column="1" bodyfile="tests/unit/gtest_isotp_send_with_id.cpp" bodystart="161" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="gtest__isotp__send__with__id_8cpp_1a07a947111a6401f1f366a593e6241ee2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST</definition>
+        <argsstring>(IsotpSendWithId, MultiFrameFirstFrameSendErrorDoesNotStart)</argsstring>
+        <name>TEST</name>
+        <param>
+          <type>IsotpSendWithId</type>
+        </param>
+        <param>
+          <type>MultiFrameFirstFrameSendErrorDoesNotStart</type>
+        </param>
+        <briefdescription>
+<para>FF send error does not start send state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/unit/gtest_isotp_send_with_id.cpp" line="197" column="1" bodyfile="tests/unit/gtest_isotp_send_with_id.cpp" bodystart="197" bodyend="215"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Unit tests for isotp_send_with_id. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Covers error handling, overflow, and multi-frame start logic. </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*******************************************************************************</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>ISO-TP-C:<sp/>ISO<sp/>15765-2<sp/>Protocol<sp/>Implementation</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>Project:<sp/><sp/><sp/><sp/><sp/>ISO-TP-C<sp/>-<sp/>Embedded-Grade<sp/>Refactoring<sp/>&amp;<sp/>Optimization</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Description:<sp/>Unit<sp/>tests<sp/>for<sp/>isotp_send_with_id.</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>Author:<sp/><sp/><sp/><sp/><sp/><sp/>Anton<sp/>Vynohradov</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>Email:<sp/><sp/><sp/><sp/><sp/><sp/><sp/>avynohradov@systemfromscratch.com</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>License:<sp/><sp/><sp/><sp/><sp/>MIT<sp/>License</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2026<sp/>Anton<sp/>Vynohradov</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>Permission<sp/>is<sp/>hereby<sp/>granted,<sp/>free<sp/>of<sp/>charge,<sp/>to<sp/>any<sp/>person<sp/>obtaining<sp/>a<sp/>copy</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>of<sp/>this<sp/>software<sp/>and<sp/>associated<sp/>documentation<sp/>files<sp/>(the<sp/>&quot;Software&quot;),<sp/>to<sp/>deal</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>in<sp/>the<sp/>Software<sp/>without<sp/>restriction,<sp/>including<sp/>without<sp/>limitation<sp/>the<sp/>rights</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>to<sp/>use,<sp/>copy,<sp/>modify,<sp/>merge,<sp/>publish,<sp/>distribute,<sp/>sublicense,<sp/>and/or<sp/>sell</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>copies<sp/>of<sp/>the<sp/>Software,<sp/>and<sp/>to<sp/>permit<sp/>persons<sp/>to<sp/>whom<sp/>the<sp/>Software<sp/>is</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>furnished<sp/>to<sp/>do<sp/>so,<sp/>subject<sp/>to<sp/>the<sp/>following<sp/>conditions:</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>The<sp/>above<sp/>copyright<sp/>notice<sp/>and<sp/>this<sp/>permission<sp/>notice<sp/>shall<sp/>be<sp/>included<sp/>in</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>all<sp/>copies<sp/>or<sp/>substantial<sp/>portions<sp/>of<sp/>the<sp/>Software.</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>THE<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>&quot;AS<sp/>IS&quot;,<sp/>WITHOUT<sp/>WARRANTY<sp/>OF<sp/>ANY<sp/>KIND,<sp/>EXPRESS<sp/>OR</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>IMPLIED,<sp/>INCLUDING<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO<sp/>THE<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE<sp/>AND<sp/>NONINFRINGEMENT.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>AUTHORS<sp/>OR<sp/>COPYRIGHT<sp/>HOLDERS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>CLAIM,<sp/>DAMAGES<sp/>OR<sp/>OTHER</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>AN<sp/>ACTION<sp/>OF<sp/>CONTRACT,<sp/>TORT<sp/>OR<sp/>OTHERWISE,<sp/>ARISING<sp/>FROM,</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OUT<sp/>OF<sp/>OR<sp/>IN<sp/>CONNECTION<sp/>WITH<sp/>THE<sp/>SOFTWARE<sp/>OR<sp/>THE<sp/>USE<sp/>OR<sp/>OTHER<sp/>DEALINGS<sp/>IN</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>THE<sp/>SOFTWARE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>MIT</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>==============================================================================</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/>INCLUDES</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/>=============================================================================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;gtest/gtest.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="isotp__test__support_8h" kindref="compound">isotp_test_support.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>==============================================================================</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/>DEFINES<sp/>&amp;<sp/>MACROS</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*<sp/>=============================================================================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Macros<sp/>and<sp/>constants<sp/>for<sp/>this<sp/>test<sp/>file<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>==============================================================================</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/>PRIVATE<sp/>TYPE<sp/>DEFINITIONS</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/>=============================================================================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Local<sp/>type<sp/>definitions<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>==============================================================================</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*<sp/>PRIVATE<sp/>VARIABLES<sp/>(static)</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*<sp/>=============================================================================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>static<sp/>variables<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>==============================================================================</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*<sp/>PRIVATE<sp/>FUNCTION<sp/>DECLARATIONS<sp/>(static)</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*<sp/>=============================================================================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>static<sp/>helpers<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>==============================================================================</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/>PRIVATE<sp/>FUNCTION<sp/>IMPLEMENTATIONS</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*<sp/>=============================================================================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>static<sp/>helper<sp/>implementations<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>==============================================================================</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/>UNIT<sp/>TEST<sp/>IMPLEMENTATIONS</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/>=============================================================================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><ref refid="gtest__isotp__send__with__id_8cpp_1ad65ed9b3e5ef5262ea76dca81d9e35cd" kindref="member">TEST</ref>(IsotpSendWithId,<sp/>NullLinkReturnsError)</highlight></codeline>
+<codeline lineno="85"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>payload[1]<sp/>=<sp/>{0x00};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/><ref refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kindref="member">isotp_send_with_id</ref>(NULL,<sp/>0x123u,<sp/>payload,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(payload));</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(ret,<sp/>ISOTP_RET_ERROR);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><ref refid="gtest__isotp__send__with__id_8cpp_1ad65ed9b3e5ef5262ea76dca81d9e35cd" kindref="member">TEST</ref>(IsotpSendWithId,<sp/>OversizeReturnsOverflow)</highlight></codeline>
+<codeline lineno="95"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="isotp__test__mocks_8cpp_1ae99a60a82fe345e111d0e4aa221ab373" kindref="member">reset_mocks</ref>();</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref><sp/>link;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>sendbuf[4]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>recvbuf[4]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>payload[5]<sp/>=<sp/>{1,<sp/>2,<sp/>3,<sp/>4,<sp/>5};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp_1ga33d058c31be466471bec77f79c89fe00" kindref="member">isotp_init_link</ref>(&amp;link,<sp/>0x123u,<sp/>sendbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(sendbuf),<sp/>recvbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(recvbuf));</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/><ref refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kindref="member">isotp_send_with_id</ref>(&amp;link,<sp/>0x123u,<sp/>payload,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(payload));</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(ret,<sp/>ISOTP_RET_OVERFLOW);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.call_count,<sp/>0);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><ref refid="gtest__isotp__send__with__id_8cpp_1ad65ed9b3e5ef5262ea76dca81d9e35cd" kindref="member">TEST</ref>(IsotpSendWithId,<sp/>InProgressReturnsInProgress)</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="isotp__test__mocks_8cpp_1ae99a60a82fe345e111d0e4aa221ab373" kindref="member">reset_mocks</ref>();</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref><sp/>link;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>sendbuf[8]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>recvbuf[8]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>payload[3]<sp/>=<sp/>{1,<sp/>2,<sp/>3};</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp_1ga33d058c31be466471bec77f79c89fe00" kindref="member">isotp_init_link</ref>(&amp;link,<sp/>0x123u,<sp/>sendbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(sendbuf),<sp/>recvbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(recvbuf));</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>link.<ref refid="structIsoTpLink_1a5660d314f0dc45eca78c7cf73dce270f" kindref="member">send_status</ref><sp/>=<sp/>ISOTP_SEND_STATUS_INPROGRESS;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/><ref refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kindref="member">isotp_send_with_id</ref>(&amp;link,<sp/>0x123u,<sp/>payload,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(payload));</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(ret,<sp/>ISOTP_RET_INPROGRESS);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.call_count,<sp/>0);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><ref refid="gtest__isotp__send__with__id_8cpp_1ad65ed9b3e5ef5262ea76dca81d9e35cd" kindref="member">TEST</ref>(IsotpSendWithId,<sp/>SingleFrameSendsPayload)</highlight></codeline>
+<codeline lineno="132"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>GTEST_SKIP();</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="isotp__test__mocks_8cpp_1ae99a60a82fe345e111d0e4aa221ab373" kindref="member">reset_mocks</ref>();</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref><sp/>link;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>sendbuf[8]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>recvbuf[8]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>payload[3]<sp/>=<sp/>{0xAA,<sp/>0xBB,<sp/>0xCC};</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp_1ga33d058c31be466471bec77f79c89fe00" kindref="member">isotp_init_link</ref>(&amp;link,<sp/>0x123u,<sp/>sendbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(sendbuf),<sp/>recvbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(recvbuf));</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/><ref refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kindref="member">isotp_send_with_id</ref>(&amp;link,<sp/>0x456u,<sp/>payload,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(payload));</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(ret,<sp/><ref refid="isotp__defines_8h_1ac1c9185705f9f0099f31fe121873a2f0" kindref="member">ISOTP_RET_OK</ref>);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.call_count,<sp/>1);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_id,<sp/>0x456u);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_size,<sp/>4u);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ISOTP_BYTE_ORDER_LITTLE_ENDIAN)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_data[0],<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">((ISOTP_PCI_TYPE_SINGLE<sp/>&lt;&lt;<sp/>4)<sp/>|<sp/>0x03));</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_data[0],<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">((0x03<sp/>&lt;&lt;<sp/>4)<sp/>|<sp/>ISOTP_PCI_TYPE_SINGLE));</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_data[1],<sp/>payload[0]);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_data[2],<sp/>payload[1]);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_data[3],<sp/>payload[2]);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><ref refid="gtest__isotp__send__with__id_8cpp_1ad65ed9b3e5ef5262ea76dca81d9e35cd" kindref="member">TEST</ref>(IsotpSendWithId,<sp/>MultiFrameFirstFrameStartsSend)</highlight></codeline>
+<codeline lineno="162"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="isotp__test__mocks_8cpp_1ae99a60a82fe345e111d0e4aa221ab373" kindref="member">reset_mocks</ref>();</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref><sp/>link;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>sendbuf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>recvbuf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>payload[8]<sp/>=<sp/>{0x10,<sp/>0x11,<sp/>0x12,<sp/>0x13,<sp/>0x14,<sp/>0x15,<sp/>0x16,<sp/>0x17};</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp_1ga33d058c31be466471bec77f79c89fe00" kindref="member">isotp_init_link</ref>(&amp;link,<sp/>0x123u,<sp/>sendbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(sendbuf),<sp/>recvbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(recvbuf));</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="isotp__test__mocks_8cpp_1ae8b5b165c8c2393137e698d3413e89ad" kindref="member">g_now_us</ref><sp/>=<sp/>42;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/><ref refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kindref="member">isotp_send_with_id</ref>(&amp;link,<sp/>0x456u,<sp/>payload,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(payload));</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(ret,<sp/><ref refid="isotp__defines_8h_1ac1c9185705f9f0099f31fe121873a2f0" kindref="member">ISOTP_RET_OK</ref>);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.call_count,<sp/>1);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_id,<sp/>0x456u);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_size,<sp/>8u);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structIsoTpCanMessage" kindref="compound">IsoTpCanMessage</ref><sp/>expected;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>std::memset(&amp;expected,<sp/>0,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(expected));</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>expected.as.first_frame_short.<ref refid="structIsoTpFirstFrameShort_1ae4e0fc640bcda40e9f952247c99434e6" kindref="member">type</ref><sp/>=<sp/>ISOTP_PCI_TYPE_FIRST_FRAME;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>expected.as.first_frame_short.<ref refid="structIsoTpFirstFrameShort_1acd8af061a9ea3772963014fa9859512d" kindref="member">FF_DL_high</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>expected.as.first_frame_short.<ref refid="structIsoTpFirstFrameShort_1adc5aa181e62d6b344743d3d821db7469" kindref="member">FF_DL_low</ref><sp/>=<sp/>8;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>std::memcpy(expected.as.first_frame_short.<ref refid="structIsoTpFirstFrameShort_1acd1e14dce23a32ed1127c430883ac9e9" kindref="member">data</ref>,<sp/>payload,</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(expected.as.first_frame_short.<ref refid="structIsoTpFirstFrameShort_1acd1e14dce23a32ed1127c430883ac9e9" kindref="member">data</ref>));</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(std::memcmp(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.last_data,<sp/>expected.as.data_array.ptr,<sp/>8),<sp/>0);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(link.<ref refid="structIsoTpLink_1ac28b2694ae688b9f8f617c4c87cc99a6" kindref="member">send_offset</ref>,<sp/>6u);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(link.<ref refid="structIsoTpLink_1a29aac83968d4d2a848058b2f29dffde6" kindref="member">send_sn</ref>,<sp/>1u);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(link.<ref refid="structIsoTpLink_1a5660d314f0dc45eca78c7cf73dce270f" kindref="member">send_status</ref>,<sp/>ISOTP_SEND_STATUS_INPROGRESS);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(link.<ref refid="structIsoTpLink_1a650da742012c832a6d347d625121a928" kindref="member">send_timer_st</ref>,<sp/><ref refid="isotp__test__mocks_8cpp_1ae8b5b165c8c2393137e698d3413e89ad" kindref="member">g_now_us</ref>);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(link.<ref refid="structIsoTpLink_1aa8a8d9dca555fa1d682c82009553a096" kindref="member">send_timer_bs</ref>,<sp/><ref refid="isotp__test__mocks_8cpp_1ae8b5b165c8c2393137e698d3413e89ad" kindref="member">g_now_us</ref><sp/>+<sp/><ref refid="isotp__config_8h_1ad660a5ee13292128752d4fe01fde3efd" kindref="member">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</ref>);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><ref refid="gtest__isotp__send__with__id_8cpp_1ad65ed9b3e5ef5262ea76dca81d9e35cd" kindref="member">TEST</ref>(IsotpSendWithId,<sp/>MultiFrameFirstFrameSendErrorDoesNotStart)</highlight></codeline>
+<codeline lineno="198"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="isotp__test__mocks_8cpp_1ae99a60a82fe345e111d0e4aa221ab373" kindref="member">reset_mocks</ref>();</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref><sp/>link;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>sendbuf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>recvbuf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>payload[8]<sp/>=<sp/>{0x20,<sp/>0x21,<sp/>0x22,<sp/>0x23,<sp/>0x24,<sp/>0x25,<sp/>0x26,<sp/>0x27};</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp_1ga33d058c31be466471bec77f79c89fe00" kindref="member">isotp_init_link</ref>(&amp;link,<sp/>0x123u,<sp/>sendbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(sendbuf),<sp/>recvbuf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(recvbuf));</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.return_value<sp/>=<sp/>ISOTP_RET_ERROR;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/><ref refid="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" kindref="member">isotp_send_with_id</ref>(&amp;link,<sp/>0x456u,<sp/>payload,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(payload));</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(ret,<sp/>ISOTP_RET_ERROR);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(<ref refid="isotp__test__mocks_8cpp_1ab2d59b552749188a9fd1fb9c382320e4" kindref="member">g_can_state</ref>.call_count,<sp/>1);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(link.<ref refid="structIsoTpLink_1a5660d314f0dc45eca78c7cf73dce270f" kindref="member">send_status</ref>,<sp/>ISOTP_SEND_STATUS_IDLE);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(link.<ref refid="structIsoTpLink_1ac28b2694ae688b9f8f617c4c87cc99a6" kindref="member">send_offset</ref>,<sp/>0u);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="tests/unit/gtest_isotp_send_with_id.cpp"/>
+  </compounddef>
+</doxygen>

@@ -17,7 +17,7 @@
     <includes refid="isotp_8h" local="no">isotp.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>example/linux_socket/linux_socket.c</label>
+        <label>examples/linux_socket/linux_socket.c</label>
         <link refid="linux__socket_8c"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="60" column="9" bodyfile="example/linux_socket/linux_socket.c" bodystart="60" bodyend="-1"/>
+        <location file="examples/linux_socket/linux_socket.c" line="60" column="9" bodyfile="examples/linux_socket/linux_socket.c" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="linux__socket_8c_1aee33ee372944b5cb7709060eb87acd77" prot="public" static="no">
         <name>_ISOTP_BUFSIZE</name>
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="62" column="9" bodyfile="example/linux_socket/linux_socket.c" bodystart="62" bodyend="-1"/>
+        <location file="examples/linux_socket/linux_socket.c" line="62" column="9" bodyfile="examples/linux_socket/linux_socket.c" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="linux__socket_8c_1a1f84e60fe995c3aa621b25137eb3d2f7" prot="public" static="no">
         <name>_ISOTP_CAN_ID</name>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="64" column="9" bodyfile="example/linux_socket/linux_socket.c" bodystart="64" bodyend="-1"/>
+        <location file="examples/linux_socket/linux_socket.c" line="64" column="9" bodyfile="examples/linux_socket/linux_socket.c" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="linux__socket_8c_1ad4fb94c1ab9cbc945f797df08da3fcf1" prot="public" static="no">
         <name>SEC_TO_US</name>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="67" column="9" bodyfile="example/linux_socket/linux_socket.c" bodystart="67" bodyend="-1"/>
+        <location file="examples/linux_socket/linux_socket.c" line="67" column="9" bodyfile="examples/linux_socket/linux_socket.c" bodystart="67" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="79" column="18" bodyfile="example/linux_socket/linux_socket.c" bodystart="79" bodyend="-1"/>
+        <location file="examples/linux_socket/linux_socket.c" line="79" column="18" bodyfile="examples/linux_socket/linux_socket.c" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="linux__socket_8c_1af2d3fac7d879f0a79525425a1b870bc3" prot="public" static="yes" mutable="no">
         <type>uint8_t</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="81" column="16" bodyfile="example/linux_socket/linux_socket.c" bodystart="81" bodyend="-1"/>
+        <location file="examples/linux_socket/linux_socket.c" line="81" column="16" bodyfile="examples/linux_socket/linux_socket.c" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="linux__socket_8c_1aaf1f007b7f3c111f7c4284e1a65e8ec3" prot="public" static="yes" mutable="no">
         <type>uint8_t</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="83" column="16" bodyfile="example/linux_socket/linux_socket.c" bodystart="83" bodyend="-1"/>
+        <location file="examples/linux_socket/linux_socket.c" line="83" column="16" bodyfile="examples/linux_socket/linux_socket.c" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="linux__socket_8c_1adba482ed381b10fe52a0492c2a4ed24b" prot="public" static="yes" mutable="no">
         <type>int</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="86" column="12" bodyfile="example/linux_socket/linux_socket.c" bodystart="86" bodyend="-1"/>
+        <location file="examples/linux_socket/linux_socket.c" line="86" column="12" bodyfile="examples/linux_socket/linux_socket.c" bodystart="86" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="example/linux_socket/linux_socket.c" line="185" column="5" bodyfile="example/linux_socket/linux_socket.c" bodystart="185" bodyend="275"/>
+        <location file="examples/linux_socket/linux_socket.c" line="185" column="5" bodyfile="examples/linux_socket/linux_socket.c" bodystart="185" bodyend="275"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -521,6 +521,6 @@
 <codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
 <codeline lineno="275"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="example/linux_socket/linux_socket.c"/>
+    <location file="examples/linux_socket/linux_socket.c"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/test__multi__frame_8py_source/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File test_multi_frame.py - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File test_multi_frame.py";
+        var mkdocs_page_input_path = "docs/test__multi__frame_8py_source.md";
+        var mkdocs_page_url = "/isotp-c/docs/test__multi__frame_8py_source/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File test_multi_frame.py</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-test_multi_framepy">File test_multi_frame.py<a class="headerlink" href="#file-test_multi_framepy" title="Permanent link">&para;</a></h1>
+<p><a href="../files/"><strong>File List</strong></a> <strong>&gt;</strong> <a href="../dir_9ddfaab4002c4e8cb6c25cc17bdef75b/"><strong>integration</strong></a> <strong>&gt;</strong> <a href="../test__multi__frame_8py/"><strong>test_multi_frame.py</strong></a></p>
+<p><a href="../test__multi__frame_8py/">Go to the documentation of this file</a></p>
+<div class="highlight"><pre><span></span><code><span class="c1">#******************************************************************************</span>
+<span class="c1"># ISO-TP-C: ISO 15765-2 Protocol Implementation</span>
+<span class="c1">#</span>
+<span class="c1"># Project:     ISO-TP-C - Embedded-Grade Refactoring &amp; Optimization</span>
+<span class="c1"># Description: A high-performance, embedded-grade implementation of the ISO 15765-2 (ISO-TP) protocol in C,</span>
+<span class="c1">#              designed for automotive and industrial applications. This project focuses on refactoring and optimizing</span>
+<span class="c1">#              the codebase to achieve maximum efficiency, reliability, and maintainability while adhering to the ISO-TP standard.</span>
+<span class="c1">#</span>
+<span class="c1"># Author:      Anton Vynohradov</span>
+<span class="c1"># Email:       avynohradov@systemfromscratch.com</span>
+<span class="c1">#</span>
+<span class="c1"># License:     MIT License</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2026 Anton Vynohradov</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in</span>
+<span class="c1"># all copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span>
+<span class="c1"># THE SOFTWARE.</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1">#*****************************************************************************</span>
+
+
+<span class="sd">&quot;&quot;&quot;! @file test_multi_frame.py</span>
+<span class="sd">@brief Integration tests for multi-frame ISO-TP transfers.</span>
+<span class="sd">@details Covers boundary sizes, timeouts, and sequence handling.</span>
+<span class="sd">@note Time advances rely on mock time helpers in the binding.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># IMPORTS</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyisotp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># FUNCTION PROTOTYPES</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_poll_until_receive</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">payload_size</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">advance_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Poll the link until a response is received or steps are exhausted.</span>
+<span class="sd">    @param link ISO-TP link handle.</span>
+<span class="sd">    @param payload_size Expected payload size for receive.</span>
+<span class="sd">    @param steps Maximum number of poll iterations.</span>
+<span class="sd">    @param advance_ms Optional time advance per step in milliseconds.</span>
+<span class="sd">    @return Received payload bytes or None when nothing is received.</span>
+<span class="sd">    @details Optionally advances the mock time between polls.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">advance_ms</span><span class="p">:</span>
+            <span class="n">pyisotp</span><span class="o">.</span><span class="n">time_advance</span><span class="p">(</span><span class="n">advance_ms</span><span class="p">)</span>
+        <span class="n">pyisotp</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">payload_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">resp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">resp</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_payload</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Build a deterministic payload of a given size.</span>
+<span class="sd">    @param size Number of bytes to generate.</span>
+<span class="sd">    @return Payload bytes.</span>
+<span class="sd">    @details Uses a simple modulo pattern for repeatability.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">bytes</span><span class="p">((</span><span class="n">idx</span> <span class="o">%</span> <span class="mi">256</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_ff_frame</span><span class="p">(</span><span class="n">payload_size</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Build a First Frame (FF) for an ISO-TP transfer.</span>
+<span class="sd">    @param payload_size Total payload size.</span>
+<span class="sd">    @param payload Payload bytes to embed in FF.</span>
+<span class="sd">    @return CAN frame bytes representing the FF.</span>
+<span class="sd">    @details Encodes the 0x10 PCI with 12-bit length.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ff_dl_high</span> <span class="o">=</span> <span class="p">(</span><span class="n">payload_size</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x0F</span>
+    <span class="n">ff_dl_low</span> <span class="o">=</span> <span class="n">payload_size</span> <span class="o">&amp;</span> <span class="mh">0xFF</span>
+    <span class="k">return</span> <span class="nb">bytes</span><span class="p">([</span><span class="mh">0x10</span> <span class="o">|</span> <span class="n">ff_dl_high</span><span class="p">,</span> <span class="n">ff_dl_low</span><span class="p">])</span> <span class="o">+</span> <span class="n">payload</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_cf_frame</span><span class="p">(</span><span class="n">sn</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Build a Consecutive Frame (CF) with a given sequence number.</span>
+<span class="sd">    @param sn Sequence number (0-15).</span>
+<span class="sd">    @param payload Payload bytes to embed in CF.</span>
+<span class="sd">    @return CAN frame bytes representing the CF.</span>
+<span class="sd">    @details Encodes the 0x20 PCI with SN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">bytes</span><span class="p">([</span><span class="mh">0x20</span> <span class="o">|</span> <span class="p">(</span><span class="n">sn</span> <span class="o">&amp;</span> <span class="mh">0x0F</span><span class="p">)])</span> <span class="o">+</span> <span class="n">payload</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_roundtrip</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify multi-frame roundtrip delivery.</span>
+<span class="sd">    @details Ensures payload integrity across segmented transfer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C</span><span class="s2">&quot;</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_poll_until_receive</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span> <span class="o">==</span> <span class="n">payload</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_boundary_sizes</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify multi-frame behavior around boundary sizes.</span>
+<span class="sd">    @param size Payload size under test.</span>
+<span class="sd">    @details Exercises sizes near the SF/FF boundary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">2048</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">_make_payload</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_poll_until_receive</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span> <span class="o">==</span> <span class="n">payload</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_max_payload</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify maximum payload size roundtrip.</span>
+<span class="sd">    @details Uses a large payload to stress segmentation and reassembly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">4096</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">_make_payload</span><span class="p">(</span><span class="mi">4095</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_poll_until_receive</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span> <span class="o">==</span> <span class="n">payload</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_bs_one_stmin</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify block size 1 with STmin pacing.</span>
+<span class="sd">    @details Advances time between frames to satisfy STmin.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">set_fc_params</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">_make_payload</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_poll_until_receive</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">advance_ms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span> <span class="o">==</span> <span class="n">payload</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_bs_unlimited_stmin</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify unlimited block size with STmin pacing.</span>
+<span class="sd">    @details Exercises BS=0 with STmin delay.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">set_fc_params</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">_make_payload</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_poll_until_receive</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">advance_ms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span> <span class="o">==</span> <span class="n">payload</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_timeout_n_bs</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify N_Bs timeout during multi-frame send.</span>
+<span class="sd">    @details Disables FC to force sender block-size timeout.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">set_timeouts</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">mock_disable_fc</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">_make_payload</span><span class="p">(</span><span class="mi">30</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">51</span><span class="p">):</span>
+        <span class="n">pyisotp</span><span class="o">.</span><span class="n">time_advance</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pyisotp</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">get_last_protocol_result</span><span class="p">(</span><span class="n">link</span><span class="p">)</span> <span class="o">==</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">ISOTP_PROTOCOL_RESULT_TIMEOUT_BS</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_timeout_n_cr</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify N_Cr timeout during multi-frame receive.</span>
+<span class="sd">    @details Drops incoming frames to force receiver timeout.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">set_timeouts</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">_make_payload</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">mock_enable_drop</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+        <span class="n">pyisotp</span><span class="o">.</span><span class="n">time_advance</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pyisotp</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">pyisotp</span><span class="o">.</span><span class="n">get_last_receive_protocol_result</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+        <span class="o">==</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">ISOTP_PROTOCOL_RESULT_TIMEOUT_CR</span>
+    <span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">mock_enable_drop</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_unexpected_cf</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify unexpected CF is reported.</span>
+<span class="sd">    @details Injects a CF when receiver is idle.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">inject_can</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">_cf_frame</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xAA</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mi">7</span><span class="p">))</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">pyisotp</span><span class="o">.</span><span class="n">get_last_receive_protocol_result</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+        <span class="o">==</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">ISOTP_PROTOCOL_RESULT_UNEXP_PDU</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_multi_frame_wrong_sn</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;! @brief Verify wrong sequence number is reported.</span>
+<span class="sd">    @details Injects a CF with unexpected SN after FF.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mh">0x700</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">_make_payload</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">inject_can</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">_ff_frame</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span> <span class="n">payload</span><span class="p">))</span>
+    <span class="n">pyisotp</span><span class="o">.</span><span class="n">inject_can</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">_cf_frame</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">13</span><span class="p">]))</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">pyisotp</span><span class="o">.</span><span class="n">get_last_receive_protocol_result</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+        <span class="o">==</span> <span class="n">pyisotp</span><span class="o">.</span><span class="n">ISOTP_PROTOCOL_RESULT_WRONG_SN</span>
+    <span class="p">)</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

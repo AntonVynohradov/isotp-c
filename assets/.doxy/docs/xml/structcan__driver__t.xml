@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcan__driver__t" kind="struct" language="C++" prot="public">
+    <compoundname>can_driver_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcan__driver__t_1a17b0e304705c5dcc4dccba03ffe0ecd4" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* can_driver_t::send) (uint32_t id, const uint8_t *data, uint8_t len)</definition>
+        <argsstring>)(uint32_t id, const uint8_t *data, uint8_t len)</argsstring>
+        <name>send</name>
+        <qualifiedname>can_driver_t::send</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="examples/python_api/inc/can_driver.h" line="65" column="5" bodyfile="examples/python_api/inc/can_driver.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcan__driver__t_1aa9b16d515aa48256c59572ed70ef4f5b" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* can_driver_t::receive) (uint32_t *id, uint8_t *data, uint8_t *len)</definition>
+        <argsstring>)(uint32_t *id, uint8_t *data, uint8_t *len)</argsstring>
+        <name>receive</name>
+        <qualifiedname>can_driver_t::receive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="examples/python_api/inc/can_driver.h" line="66" column="5" bodyfile="examples/python_api/inc/can_driver.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="examples/python_api/inc/can_driver.h" line="63" column="1" bodyfile="examples/python_api/inc/can_driver.h" bodystart="64" bodyend="67"/>
+    <listofallmembers>
+      <member refid="structcan__driver__t_1aa9b16d515aa48256c59572ed70ef4f5b" prot="public" virt="non-virtual"><scope>can_driver_t</scope><name>receive</name></member>
+      <member refid="structcan__driver__t_1a17b0e304705c5dcc4dccba03ffe0ecd4" prot="public" virt="non-virtual"><scope>can_driver_t</scope><name>send</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

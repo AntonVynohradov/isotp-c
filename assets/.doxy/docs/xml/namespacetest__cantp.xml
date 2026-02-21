@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacetest__cantp" kind="namespace" language="Python">
+    <compoundname>test_cantp</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="test__cantp_8py_1a6d044622110b2f9183156efc53e8bbe1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp._poll_until_receive</definition>
+        <argsstring>(link, payload_size, steps, advance_ms=0)</argsstring>
+        <name>_poll_until_receive</name>
+        <qualifiedname>test_cantp._poll_until_receive</qualifiedname>
+        <param>
+          <type>link</type>
+          <defname>link</defname>
+        </param>
+        <param>
+          <type>payload_size</type>
+          <defname>payload_size</defname>
+        </param>
+        <param>
+          <type>steps</type>
+          <defname>steps</defname>
+        </param>
+        <param>
+          <type>advance_ms</type>
+          <defname>advance_ms</defname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Poll the link until a response is received or steps are exhausted. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISO-TP link handle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expected payload size for receive. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of poll iterations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>advance_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional time advance per step in milliseconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Received payload bytes or None when nothing is received.</para>
+</simplesect>
+Optionally advances the mock time between polls. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="55" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="55" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="test__cantp_8py_1af0df7deb487c70e910f47de4d6a5d9f3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp._make_payload</definition>
+        <argsstring>(size)</argsstring>
+        <name>_make_payload</name>
+        <qualifiedname>test_cantp._make_payload</qualifiedname>
+        <param>
+          <type>size</type>
+          <defname>size</defname>
+        </param>
+        <briefdescription>
+<para>Build a deterministic payload of a given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to generate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Payload bytes.</para>
+</simplesect>
+Uses a simple modulo pattern for repeatability. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="75" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="75" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="test__cantp_8py_1a869f85afc1ccc9621226de580f086db6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp._fc_frame</definition>
+        <argsstring>(flow_status, block_size, st_min)</argsstring>
+        <name>_fc_frame</name>
+        <qualifiedname>test_cantp._fc_frame</qualifiedname>
+        <param>
+          <type>flow_status</type>
+          <defname>flow_status</defname>
+        </param>
+        <param>
+          <type>block_size</type>
+          <defname>block_size</defname>
+        </param>
+        <param>
+          <type>st_min</type>
+          <defname>st_min</defname>
+        </param>
+        <briefdescription>
+<para>Build a Flow Control (FC) frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>flow_status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flow status nibble. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Block size byte. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>st_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>STmin byte. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>CAN frame bytes representing the FC.</para>
+</simplesect>
+Encodes the 0x30 PCI for flow control. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="84" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="84" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="test__cantp_8py_1abb574c26c4d1dbe4c69157fc19595892" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp.test_wait_frame_then_continue</definition>
+        <argsstring>()</argsstring>
+        <name>test_wait_frame_then_continue</name>
+        <qualifiedname>test_cantp.test_wait_frame_then_continue</qualifiedname>
+        <briefdescription>
+<para>Verify receiver resumes after WAIT then CONTINUE FC. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>WAIT should pause transmission until CONTINUE arrives. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="104" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="104" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="test__cantp_8py_1acbd1bd756c26362f2043b7788c9c1337" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp.test_wait_frame_overrun</definition>
+        <argsstring>()</argsstring>
+        <name>test_wait_frame_overrun</name>
+        <qualifiedname>test_cantp.test_wait_frame_overrun</qualifiedname>
+        <briefdescription>
+<para>Verify WAIT frame overrun is reported. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Repeated WAIT frames exceed the limit and trigger WFT_OVRN. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="119" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="119" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="test__cantp_8py_1a21d5a28c113aeb44c600ca74c8b6e35e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp.test_cantp_timeout_n_bs</definition>
+        <argsstring>()</argsstring>
+        <name>test_cantp_timeout_n_bs</name>
+        <qualifiedname>test_cantp.test_cantp_timeout_n_bs</qualifiedname>
+        <briefdescription>
+<para>Verify N_Bs timeout is detected. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Disables FC to force a sender block-size timeout. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="136" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="136" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="test__cantp_8py_1a426a0113cad3869f529822f587c723b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp.test_cantp_timeout_n_cr</definition>
+        <argsstring>()</argsstring>
+        <name>test_cantp_timeout_n_cr</name>
+        <qualifiedname>test_cantp.test_cantp_timeout_n_cr</qualifiedname>
+        <briefdescription>
+<para>Verify N_Cr timeout is detected. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Drops incoming frames to force a receiver timeout. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="152" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="152" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="test__cantp_8py_1a8fc287ad1a3015cf3d8871fbf4a80898" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp.test_cantp_stmin_and_bs</definition>
+        <argsstring>()</argsstring>
+        <name>test_cantp_stmin_and_bs</name>
+        <qualifiedname>test_cantp.test_cantp_stmin_and_bs</qualifiedname>
+        <briefdescription>
+<para>Verify STmin and block size pacing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Advances time to satisfy STmin between frames. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="174" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="174" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="test__cantp_8py_1a5e0cb5fe5c458dd573291f3cfbf04bca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_cantp.test_cantp_unexpected_pdu</definition>
+        <argsstring>()</argsstring>
+        <name>test_cantp_unexpected_pdu</name>
+        <qualifiedname>test_cantp.test_cantp_unexpected_pdu</qualifiedname>
+        <briefdescription>
+<para>Verify unexpected PDU is reported. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Injects a CF when receiver is idle. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_cantp.py" line="188" column="1" bodyfile="tests/integration/test_cantp.py" bodystart="188" bodyend="199"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/test_cantp.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

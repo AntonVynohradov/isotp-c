@@ -13,4 +13,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**IsoTpPciType**](structIsoTpPciType.md) _CAN frame definitions._ 
 * **struct** [**IsoTpSingleFrame**](structIsoTpSingleFrame.md) _Single frame layout._ 
 * **struct** [**MockCanState**](structMockCanState.md) _Mock CAN state structure for testing purposes._ 
+* **struct** [**can\_driver\_t**](structcan__driver__t.md) 
+* **struct** [**can\_frame\_t**](structcan__frame__t.md) _Structure representing a CAN frame in the mock driver._ 
 

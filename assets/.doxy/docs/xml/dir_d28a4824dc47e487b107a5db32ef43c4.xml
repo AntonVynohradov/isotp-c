@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_d28a4824dc47e487b107a5db32ef43c4" kind="dir">
+    <compoundname>examples</compoundname>
+    <innerdir refid="dir_7880a7b12136fba6b737e09baa66bc78">examples/linux_socket</innerdir>
+    <innerdir refid="dir_181ea403426f4b233011860116dcb1b5">examples/python_api</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="examples/"/>
+  </compounddef>
+</doxygen>

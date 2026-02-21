@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacetest__timing" kind="namespace" language="Python">
+    <compoundname>test_timing</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="test__timing_8py_1a33ff95964bccb035bcb8db1662d954c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_timing.test_timeout_n_bs</definition>
+        <argsstring>()</argsstring>
+        <name>test_timeout_n_bs</name>
+        <qualifiedname>test_timing.test_timeout_n_bs</qualifiedname>
+        <briefdescription>
+<para>Verify N_Bs timeout handling. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Disables FC to force sender timeout. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_timing.py" line="55" column="1" bodyfile="tests/integration/test_timing.py" bodystart="55" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="test__timing_8py_1a4e46f62ef8195ab3054113bed66024d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_timing.test_timeout_n_cr</definition>
+        <argsstring>()</argsstring>
+        <name>test_timeout_n_cr</name>
+        <qualifiedname>test_timing.test_timeout_n_cr</qualifiedname>
+        <briefdescription>
+<para>Verify N_Cr timeout handling. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Drops incoming frames to force receiver timeout. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_timing.py" line="72" column="1" bodyfile="tests/integration/test_timing.py" bodystart="72" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="test__timing_8py_1a14faed47353067aede408d90af81dca3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_timing.test_st_min_enforced</definition>
+        <argsstring>()</argsstring>
+        <name>test_st_min_enforced</name>
+        <qualifiedname>test_timing.test_st_min_enforced</qualifiedname>
+        <briefdescription>
+<para>Verify STmin delay is enforced. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Ensures receive does not complete before STmin elapses. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_timing.py" line="94" column="1" bodyfile="tests/integration/test_timing.py" bodystart="94" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="test__timing_8py_1afcfed8c03635ea1602242bd78c712322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_timing.test_block_size_one_roundtrip</definition>
+        <argsstring>()</argsstring>
+        <name>test_block_size_one_roundtrip</name>
+        <qualifiedname>test_timing.test_block_size_one_roundtrip</qualifiedname>
+        <briefdescription>
+<para>Verify block size one roundtrip behavior. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses BS=1 to enforce FC after each CF. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_timing.py" line="121" column="1" bodyfile="tests/integration/test_timing.py" bodystart="121" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="test__timing_8py_1a3e515060c978e7b4e613e5082dba3bd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_timing.test_timeout_n_as_placeholder</definition>
+        <argsstring>()</argsstring>
+        <name>test_timeout_n_as_placeholder</name>
+        <qualifiedname>test_timing.test_timeout_n_as_placeholder</qualifiedname>
+        <briefdescription>
+<para>Placeholder for N_As timeout support. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Marked xfail until core enforces N_As. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_timing.py" line="142" column="1" bodyfile="tests/integration/test_timing.py" bodystart="142" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="test__timing_8py_1ad0bd275b1058432c62e9fc75d8351903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_timing.test_timeout_n_ar_placeholder</definition>
+        <argsstring>()</argsstring>
+        <name>test_timeout_n_ar_placeholder</name>
+        <qualifiedname>test_timing.test_timeout_n_ar_placeholder</qualifiedname>
+        <briefdescription>
+<para>Placeholder for N_Ar timeout support. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Marked xfail until core enforces N_Ar. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_timing.py" line="150" column="1" bodyfile="tests/integration/test_timing.py" bodystart="150" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="test__timing_8py_1a009df4b8aa05966a756f12eb5f6f25ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_timing.test_timeout_n_br_placeholder</definition>
+        <argsstring>()</argsstring>
+        <name>test_timeout_n_br_placeholder</name>
+        <qualifiedname>test_timing.test_timeout_n_br_placeholder</qualifiedname>
+        <briefdescription>
+<para>Placeholder for N_Br timeout support. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Marked xfail until core enforces N_Br. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_timing.py" line="158" column="1" bodyfile="tests/integration/test_timing.py" bodystart="158" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="test__timing_8py_1a6c98fe00e564d2e67233af04dfa0a7dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_timing.test_timeout_n_cs_placeholder</definition>
+        <argsstring>()</argsstring>
+        <name>test_timeout_n_cs_placeholder</name>
+        <qualifiedname>test_timing.test_timeout_n_cs_placeholder</qualifiedname>
+        <briefdescription>
+<para>Placeholder for N_Cs timeout support. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Marked xfail until core enforces N_Cs. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_timing.py" line="166" column="1" bodyfile="tests/integration/test_timing.py" bodystart="166" bodyend="171"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/test_timing.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

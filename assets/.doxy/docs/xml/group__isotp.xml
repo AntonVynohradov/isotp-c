@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="isotp.h" line="134" column="11"/>
+        <location file="isotp.h" line="140" column="11"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="user-defined">
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="isotp.h" line="153" column="6" bodyfile="src/isotp.c" bodystart="804" bodyend="827" declfile="isotp.h" declline="153" declcolumn="6"/>
+        <location file="isotp.h" line="159" column="6" bodyfile="src/isotp.c" bodystart="804" bodyend="832" declfile="isotp.h" declline="159" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__isotp_1gab899edec17137039c752907dbc6c28b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="isotp.h" line="161" column="6" bodyfile="src/isotp.c" bodystart="829" bodyend="849" declfile="isotp.h" declline="161" declcolumn="6"/>
+        <location file="isotp.h" line="167" column="6" bodyfile="src/isotp.c" bodystart="834" bodyend="854" declfile="isotp.h" declline="167" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__isotp_1ga9305b87c0a30798a70a9c0f9c10f70a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="isotp.h" line="169" column="6" bodyfile="src/isotp.c" bodystart="851" bodyend="919" declfile="isotp.h" declline="169" declcolumn="6"/>
+        <location file="isotp.h" line="175" column="6" bodyfile="src/isotp.c" bodystart="874" bodyend="942" declfile="isotp.h" declline="175" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__isotp_1ga860db76a76581b5c4e069d3a48a3484f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="isotp.h" line="180" column="6" bodyfile="src/isotp.c" bodystart="578" bodyend="770" declfile="isotp.h" declline="180" declcolumn="6"/>
+        <location file="isotp.h" line="186" column="6" bodyfile="src/isotp.c" bodystart="578" bodyend="770" declfile="isotp.h" declline="186" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__isotp_1ga2f6c44f2d4bd1574e1bc283d5df0464e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -291,7 +291,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="isotp.h" line="198" column="5" bodyfile="src/isotp.c" bodystart="503" bodyend="506" declfile="isotp.h" declline="198" declcolumn="5"/>
+        <location file="isotp.h" line="204" column="5" bodyfile="src/isotp.c" bodystart="503" bodyend="506" declfile="isotp.h" declline="204" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="group__isotp_1ga0ee9f8916a603af7a02d781e93f3a990" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="isotp.h" line="204" column="5" bodyfile="src/isotp.c" bodystart="508" bodyend="576" declfile="isotp.h" declline="204" declcolumn="5"/>
+        <location file="isotp.h" line="210" column="5" bodyfile="src/isotp.c" bodystart="508" bodyend="576" declfile="isotp.h" declline="210" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="group__isotp_1ga45661b91ddfb5e9d273f5d7ca2381ca4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -392,7 +392,113 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="isotp.h" line="219" column="5" bodyfile="src/isotp.c" bodystart="772" bodyend="802" declfile="isotp.h" declline="219" declcolumn="5"/>
+        <location file="isotp.h" line="225" column="5" bodyfile="src/isotp.c" bodystart="772" bodyend="802" declfile="isotp.h" declline="225" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp_1gaa6a3300170e3ed79b50fe28138281446" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_set_timeouts</definition>
+        <argsstring>(IsoTpLink *link, uint32_t n_bs_us, uint32_t n_cr_us)</argsstring>
+        <name>isotp_set_timeouts</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>n_bs_us</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>n_cr_us</declname>
+        </param>
+        <briefdescription>
+<para>Sets timing parameters for waiting on FlowControl and ConsecutiveFrame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <programlisting><codeline><highlight class="normal">IsoTpLink<sp/></highlight></codeline>
+</programlisting> instance used for transceiving data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n_bs_us</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Timeout for N_Bs in microseconds. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n_cr_us</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Timeout for N_Cr in microseconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="235" column="6" bodyfile="src/isotp.c" bodystart="856" bodyend="863" declfile="isotp.h" declline="235" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp_1ga9f5b16440b5395b720368c97f80fa325" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_set_fc_params</definition>
+        <argsstring>(IsoTpLink *link, uint8_t block_size, uint32_t st_min_us)</argsstring>
+        <name>isotp_set_fc_params</name>
+        <param>
+          <type><ref refid="structIsoTpLink" kindref="compound">IsoTpLink</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>block_size</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>st_min_us</declname>
+        </param>
+        <briefdescription>
+<para>Sets FlowControl parameters used by the receiver. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <programlisting><codeline><highlight class="normal">IsoTpLink<sp/></highlight></codeline>
+</programlisting> instance used for transceiving data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Block size (BS) for FlowControl. Zero means unlimited. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>st_min_us</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minimum separation time (STmin) in microseconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="244" column="6" bodyfile="src/isotp.c" bodystart="865" bodyend="872" declfile="isotp.h" declline="244" declcolumn="6"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

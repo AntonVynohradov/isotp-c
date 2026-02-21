@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**example**](dir_cfafba98a580ce4b62f8a6fa96d7cbb0.md) **>** [**linux\_socket**](dir_c14c1b0e0eb041fc48b83316cb935ab5.md) **>** [**linux\_socket.c**](linux__socket_8c.md)
+[**FileList**](files.md) **>** [**examples**](dir_d28a4824dc47e487b107a5db32ef43c4.md) **>** [**linux\_socket**](dir_7880a7b12136fba6b737e09baa66bc78.md) **>** [**linux\_socket.c**](linux__socket_8c.md)
 
 [Go to the source code of this file](linux__socket_8c_source.md)
 
@@ -254,5 +254,5 @@ _CAN ID to use for sending ISO-TP messages (must match the receiver's expected I
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `example/linux_socket/linux_socket.c`
+The documentation for this class was generated from the following file `examples/linux_socket/linux_socket.c`
 

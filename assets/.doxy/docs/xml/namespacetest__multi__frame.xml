@@ -1,0 +1,355 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacetest__multi__frame" kind="namespace" language="Python">
+    <compoundname>test_multi_frame</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="test__multi__frame_8py_1a52c1cc98851a8a19e3a37515d122f8e0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame._poll_until_receive</definition>
+        <argsstring>(link, payload_size, steps, advance_ms=0)</argsstring>
+        <name>_poll_until_receive</name>
+        <qualifiedname>test_multi_frame._poll_until_receive</qualifiedname>
+        <param>
+          <type>link</type>
+          <defname>link</defname>
+        </param>
+        <param>
+          <type>payload_size</type>
+          <defname>payload_size</defname>
+        </param>
+        <param>
+          <type>steps</type>
+          <defname>steps</defname>
+        </param>
+        <param>
+          <type>advance_ms</type>
+          <defname>advance_ms</defname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Poll the link until a response is received or steps are exhausted. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISO-TP link handle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expected payload size for receive. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of poll iterations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>advance_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional time advance per step in milliseconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Received payload bytes or None when nothing is received.</para>
+</simplesect>
+Optionally advances the mock time between polls. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="55" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="55" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1aa2cab3647606756a0aad9996f6e0a6e6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame._make_payload</definition>
+        <argsstring>(size)</argsstring>
+        <name>_make_payload</name>
+        <qualifiedname>test_multi_frame._make_payload</qualifiedname>
+        <param>
+          <type>size</type>
+          <defname>size</defname>
+        </param>
+        <briefdescription>
+<para>Build a deterministic payload of a given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to generate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Payload bytes.</para>
+</simplesect>
+Uses a simple modulo pattern for repeatability. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="75" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="75" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1a0b87d7d1fb98060e849d08546a62faed" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame._ff_frame</definition>
+        <argsstring>(payload_size, payload)</argsstring>
+        <name>_ff_frame</name>
+        <qualifiedname>test_multi_frame._ff_frame</qualifiedname>
+        <param>
+          <type>payload_size</type>
+          <defname>payload_size</defname>
+        </param>
+        <param>
+          <type>payload</type>
+          <defname>payload</defname>
+        </param>
+        <briefdescription>
+<para>Build a First Frame (FF) for an ISO-TP transfer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>payload_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Total payload size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Payload bytes to embed in FF. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>CAN frame bytes representing the FF.</para>
+</simplesect>
+Encodes the 0x10 PCI with 12-bit length. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="84" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="84" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1a9c4ff0c46cb2bfd1863fdce8821e60cd" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame._cf_frame</definition>
+        <argsstring>(sn, payload)</argsstring>
+        <name>_cf_frame</name>
+        <qualifiedname>test_multi_frame._cf_frame</qualifiedname>
+        <param>
+          <type>sn</type>
+          <defname>sn</defname>
+        </param>
+        <param>
+          <type>payload</type>
+          <defname>payload</defname>
+        </param>
+        <briefdescription>
+<para>Build a Consecutive Frame (CF) with a given sequence number. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sequence number (0-15). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Payload bytes to embed in CF. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>CAN frame bytes representing the CF.</para>
+</simplesect>
+Encodes the 0x20 PCI with SN. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="96" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="96" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1a62a2f53dd7dcba1fc7bb9530abc9ad8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_roundtrip</definition>
+        <argsstring>()</argsstring>
+        <name>test_multi_frame_roundtrip</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_roundtrip</qualifiedname>
+        <briefdescription>
+<para>Verify multi-frame roundtrip delivery. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Ensures payload integrity across segmented transfer. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="106" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="106" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1a7939ff7523ca9ebc028b8fa123863da4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_boundary_sizes</definition>
+        <argsstring>(size)</argsstring>
+        <name>test_multi_frame_boundary_sizes</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_boundary_sizes</qualifiedname>
+        <param>
+          <type>size</type>
+          <defname>size</defname>
+        </param>
+        <briefdescription>
+<para>Verify multi-frame behavior around boundary sizes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Payload size under test.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Exercises sizes near the SF/FF boundary. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="118" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="118" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1a3cd85ebbd77a5af05c227063a35d8bbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_max_payload</definition>
+        <argsstring>()</argsstring>
+        <name>test_multi_frame_max_payload</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_max_payload</qualifiedname>
+        <briefdescription>
+<para>Verify maximum payload size roundtrip. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses a large payload to stress segmentation and reassembly. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="130" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="130" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1ae258fd881c1b8e9f0de17fbbd9ae5f80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_bs_one_stmin</definition>
+        <argsstring>()</argsstring>
+        <name>test_multi_frame_bs_one_stmin</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_bs_one_stmin</qualifiedname>
+        <briefdescription>
+<para>Verify block size 1 with STmin pacing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Advances time between frames to satisfy STmin. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="141" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="141" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1ae1a74aed6d216be09b39dba681430172" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_bs_unlimited_stmin</definition>
+        <argsstring>()</argsstring>
+        <name>test_multi_frame_bs_unlimited_stmin</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_bs_unlimited_stmin</qualifiedname>
+        <briefdescription>
+<para>Verify unlimited block size with STmin pacing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Exercises BS=0 with STmin delay. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="153" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="153" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1a472998069458d4f8c04201c899c90bd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_timeout_n_bs</definition>
+        <argsstring>()</argsstring>
+        <name>test_multi_frame_timeout_n_bs</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_timeout_n_bs</qualifiedname>
+        <briefdescription>
+<para>Verify N_Bs timeout during multi-frame send. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Disables FC to force sender block-size timeout. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="165" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="165" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1abfdb729ae0e90179b0cb2dd66e65f815" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_timeout_n_cr</definition>
+        <argsstring>()</argsstring>
+        <name>test_multi_frame_timeout_n_cr</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_timeout_n_cr</qualifiedname>
+        <briefdescription>
+<para>Verify N_Cr timeout during multi-frame receive. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Drops incoming frames to force receiver timeout. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="181" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="181" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1aac6774f92972ba5e0b7d03078a92bf7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_unexpected_cf</definition>
+        <argsstring>()</argsstring>
+        <name>test_multi_frame_unexpected_cf</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_unexpected_cf</qualifiedname>
+        <briefdescription>
+<para>Verify unexpected CF is reported. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Injects a CF when receiver is idle. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="202" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="202" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="test__multi__frame_8py_1aa6953072a19f85094aaf375d056ce11f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_multi_frame.test_multi_frame_wrong_sn</definition>
+        <argsstring>()</argsstring>
+        <name>test_multi_frame_wrong_sn</name>
+        <qualifiedname>test_multi_frame.test_multi_frame_wrong_sn</qualifiedname>
+        <briefdescription>
+<para>Verify wrong sequence number is reported. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Injects a CF with unexpected SN after FF. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_multi_frame.py" line="215" column="1" bodyfile="tests/integration/test_multi_frame.py" bodystart="215" bodyend="228"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/test_multi_frame.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

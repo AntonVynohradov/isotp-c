@@ -36,15 +36,15 @@ User implemented, print debug message.</para>
 <parametername>message</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The message to print. </para>
+<para>The message to print.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-</para>
+User implemented, print debug message. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/isotp_user.h" line="84" column="6" bodyfile="example/linux_socket/linux_socket.c" bodystart="125" bodyend="131" declfile="inc/isotp_user.h" declline="84" declcolumn="6"/>
+        <location file="inc/isotp_user.h" line="84" column="6" bodyfile="examples/linux_socket/linux_socket.c" bodystart="125" bodyend="131" declfile="inc/isotp_user.h" declline="84" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__isotp__user_1ga1443c22c029ba979ab39e47c47037f33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -120,13 +120,13 @@ User implemented, send CAN message.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>int ISOTP_RET_OK on success, ISOTP_RET_ERROR on failure. </para>
+<simplesect kind="return"><para>int ISOTP_RET_OK on success, ISOTP_RET_ERROR on failure.</para>
 </simplesect>
-</para>
+User implemented, send CAN message. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/isotp_user.h" line="95" column="5" bodyfile="example/linux_socket/linux_socket.c" bodystart="133" bodyend="160" declfile="inc/isotp_user.h" declline="95" declcolumn="5"/>
+        <location file="inc/isotp_user.h" line="95" column="5" bodyfile="examples/linux_socket/linux_socket.c" bodystart="133" bodyend="160" declfile="inc/isotp_user.h" declline="95" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="group__isotp__user_1ga36dadb47afc5465d4c2fea1dedbbfcaa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -145,13 +145,13 @@ User implemented, send CAN message.</para>
 <para><simplesect kind="return"><para>Current timebase value in microseconds.</para>
 </simplesect>
 User implemented, return a monotonically increasing timebase in microseconds.</para>
-<para><simplesect kind="return"><para>uint32_t Current time in microseconds </para>
+<para><simplesect kind="return"><para>uint32_t Current time in microseconds</para>
 </simplesect>
-</para>
+User implemented, return a monotonically increasing timebase in microseconds. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="inc/isotp_user.h" line="116" column="10" bodyfile="example/linux_socket/linux_socket.c" bodystart="162" bodyend="179" declfile="inc/isotp_user.h" declline="116" declcolumn="10"/>
+        <location file="inc/isotp_user.h" line="116" column="10" bodyfile="examples/linux_socket/linux_socket.c" bodystart="162" bodyend="179" declfile="inc/isotp_user.h" declline="116" declcolumn="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

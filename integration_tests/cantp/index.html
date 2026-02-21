@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/integration_tests/cantp/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>AUTOSAR CanTp Integration Tests - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "AUTOSAR CanTp Integration Tests";
+        var mkdocs_page_input_path = "integration_tests/cantp.md";
+        var mkdocs_page_url = "/isotp-c/integration_tests/cantp/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">AUTOSAR CanTp Integration Tests</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="autosar-cantp-integration-tests">AUTOSAR CanTp Integration Tests<a class="headerlink" href="#autosar-cantp-integration-tests" title="Permanent link">&para;</a></h1>
+<p>This document describes the AUTOSAR CanTp-oriented integration tests added for the Python API.
+The suite focuses on FlowControl WAIT handling and selected CanTp timing and protocol behaviors.
+All tests are deterministic and use mock time.</p>
+<h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
+<p>The tests in tests/integration/test_cantp.py cover:</p>
+<ul>
+<li>FlowControl WAIT handling: single WAIT then CONTINUE, and WFT overrun.</li>
+<li>N_Bs and N_Cr timeouts using configurable timeouts.</li>
+<li>STmin and Block Size (BS) flow control parameters.</li>
+<li>Unexpected PDU handling (CF without FF).</li>
+</ul>
+<h2 id="helper-utilities">Helper Utilities<a class="headerlink" href="#helper-utilities" title="Permanent link">&para;</a></h2>
+<p>The test file defines helpers for clarity and reuse:</p>
+<ul>
+<li>_poll_until_receive: polls until a payload is received or steps are exhausted.</li>
+<li>_make_payload: creates deterministic payloads.</li>
+<li>_fc_frame: builds raw FlowControl frames (FS/BS/STmin).</li>
+</ul>
+<h2 id="test-cases">Test Cases<a class="headerlink" href="#test-cases" title="Permanent link">&para;</a></h2>
+<h3 id="test_wait_frame_then_continue">test_wait_frame_then_continue<a class="headerlink" href="#test_wait_frame_then_continue" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: multi-frame payload and injected FC frames.</li>
+<li>Action: inject FC Wait followed by FC Continue.</li>
+<li>Expectation: payload is transmitted and received successfully.</li>
+</ul>
+<p><img alt="WAIT then CONTINUE flow" src="../../assets/integration_tests/cantp/wait_frame_then_continue.svg" /></p>
+<h3 id="test_wait_frame_overrun">test_wait_frame_overrun<a class="headerlink" href="#test_wait_frame_overrun" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: multi-frame payload and injected FC Wait frames.</li>
+<li>Action: inject FC Wait twice (exceeding ISO_TP_MAX_WFT_NUMBER).</li>
+<li>Expectation: sender protocol result is ISOTP_PROTOCOL_RESULT_WFT_OVRN.</li>
+</ul>
+<p><img alt="WAIT frame overrun result" src="../../assets/integration_tests/cantp/wait_frame_overrun.svg" /></p>
+<h3 id="test_cantp_timeout_n_bs">test_cantp_timeout_n_bs<a class="headerlink" href="#test_cantp_timeout_n_bs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: N_Bs=30 ms, N_Cr=10 ms, FlowControl disabled.</li>
+<li>Action: send a multi-frame payload, advance mock time.</li>
+<li>Expectation: sender protocol result is ISOTP_PROTOCOL_RESULT_TIMEOUT_BS.</li>
+</ul>
+<p><img alt="N_Bs timeout result" src="../../assets/integration_tests/cantp/timeout_n_bs.svg" /></p>
+<h3 id="test_cantp_timeout_n_cr">test_cantp_timeout_n_cr<a class="headerlink" href="#test_cantp_timeout_n_cr" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: N_Bs=30 ms, N_Cr=10 ms, CAN drop enabled after FF.</li>
+<li>Action: send a multi-frame payload, advance mock time.</li>
+<li>Expectation: receiver protocol result is ISOTP_PROTOCOL_RESULT_TIMEOUT_CR.</li>
+</ul>
+<p><img alt="N_Cr timeout result" src="../../assets/integration_tests/cantp/timeout_n_cr.svg" /></p>
+<h3 id="test_cantp_stmin_and_bs">test_cantp_stmin_and_bs<a class="headerlink" href="#test_cantp_stmin_and_bs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: BS=1, STmin=5 ms.</li>
+<li>Action: send a multi-frame payload, poll with mock time.</li>
+<li>Expectation: payload is received intact.</li>
+</ul>
+<p><img alt="STmin and BS flow" src="../../assets/integration_tests/cantp/stmin_and_bs.svg" /></p>
+<h3 id="test_cantp_unexpected_pdu">test_cantp_unexpected_pdu<a class="headerlink" href="#test_cantp_unexpected_pdu" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: default link.</li>
+<li>Action: inject a CF without a prior FF.</li>
+<li>Expectation: receiver protocol result is ISOTP_PROTOCOL_RESULT_UNEXP_PDU.</li>
+</ul>
+<p><img alt="Unexpected PDU result" src="../../assets/integration_tests/cantp/unexpected_pdu.svg" /></p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Raw CAN injection uses pyisotp.inject_can.</li>
+<li>Timing uses mock time via pyisotp.time_advance.</li>
+<li>Update this document if core behavior or timeout defaults change.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

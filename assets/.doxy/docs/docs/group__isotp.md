@@ -75,6 +75,8 @@ _Public API for ISO-TP link management and message handling._ [More...](#detaile
 |  int | [**isotp\_receive**](#function-isotp_receive) ([**IsoTpLink**](structIsoTpLink.md) \* link, uint8\_t \* payload, const uint32\_t payload\_size, uint32\_t \* out\_size) <br>_Receives and parses the received data and copies the parsed data into the internal buffer._  |
 |  int | [**isotp\_send**](#function-isotp_send) ([**IsoTpLink**](structIsoTpLink.md) \* link, const uint8\_t payload, uint32\_t size) <br>_Sends ISO-TP frames via CAN, using the ID set in the initialising function._  |
 |  int | [**isotp\_send\_with\_id**](#function-isotp_send_with_id) ([**IsoTpLink**](structIsoTpLink.md) \* link, uint32\_t id, const uint8\_t payload, uint32\_t size) <br>_See_ [_**isotp\_send**_](group__isotp.md#function-isotp_send) _, with the exception that this function is used only for functional addressing._ |
+|  void | [**isotp\_set\_fc\_params**](#function-isotp_set_fc_params) ([**IsoTpLink**](structIsoTpLink.md) \* link, uint8\_t block\_size, uint32\_t st\_min\_us) <br>_Sets FlowControl parameters used by the receiver._  |
+|  void | [**isotp\_set\_timeouts**](#function-isotp_set_timeouts) ([**IsoTpLink**](structIsoTpLink.md) \* link, uint32\_t n\_bs\_us, uint32\_t n\_cr\_us) <br>_Sets timing parameters for waiting on FlowControl and ConsecutiveFrame._  |
 
 
 
@@ -414,6 +416,76 @@ int isotp_send_with_id (
 
 
 
+
+<hr>
+
+
+
+### function isotp\_set\_fc\_params 
+
+_Sets FlowControl parameters used by the receiver._ 
+```
+void isotp_set_fc_params (
+    IsoTpLink * link,
+    uint8_t block_size,
+    uint32_t st_min_us
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `link` The 
+```
+IsoTpLink 
+```
+ instance used for transceiving data. 
+* `block_size` Block size (BS) for FlowControl. Zero means unlimited. 
+* `st_min_us` Minimum separation time (STmin) in microseconds. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function isotp\_set\_timeouts 
+
+_Sets timing parameters for waiting on FlowControl and ConsecutiveFrame._ 
+```
+void isotp_set_timeouts (
+    IsoTpLink * link,
+    uint32_t n_bs_us,
+    uint32_t n_cr_us
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `link` The 
+```
+IsoTpLink 
+```
+ instance used for transceiving data. 
+* `n_bs_us` Timeout for N\_Bs in microseconds. 
+* `n_cr_us` Timeout for N\_Cr in microseconds. 
+
+
+
+
+        
 
 <hr>
 

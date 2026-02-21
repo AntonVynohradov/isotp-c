@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_9ddfaab4002c4e8cb6c25cc17bdef75b" kind="dir">
+    <compoundname>tests/integration</compoundname>
+    <innerfile refid="conftest_8py">conftest.py</innerfile>
+    <innerfile refid="test__api__endpoints_8py">test_api_endpoints.py</innerfile>
+    <innerfile refid="test__api__validation_8py">test_api_validation.py</innerfile>
+    <innerfile refid="test__buffer__limits_8py">test_buffer_limits.py</innerfile>
+    <innerfile refid="test__cantp_8py">test_cantp.py</innerfile>
+    <innerfile refid="test__flow__control_8py">test_flow_control.py</innerfile>
+    <innerfile refid="test__multi__frame_8py">test_multi_frame.py</innerfile>
+    <innerfile refid="test__timing_8py">test_timing.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/"/>
+  </compounddef>
+</doxygen>

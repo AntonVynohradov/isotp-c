@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceconftest" kind="namespace" language="Python">
+    <compoundname>conftest</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="conftest_8py_1a04fb19cd768f474e32ab61368888f715" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>conftest.reset_mock_can_state</definition>
+        <argsstring>()</argsstring>
+        <name>reset_mock_can_state</name>
+        <qualifiedname>conftest.reset_mock_can_state</qualifiedname>
+        <briefdescription>
+<para>Ensure mock CAN state is reset around each test. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Disables FC mocks before and after each test run. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/conftest.py" line="56" column="1" bodyfile="tests/integration/conftest.py" bodystart="56" bodyend="67"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/conftest.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

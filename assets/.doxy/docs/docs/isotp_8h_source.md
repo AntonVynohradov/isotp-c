@@ -58,6 +58,11 @@ typedef struct IsoTpLink
     uint32_t receive_timer_cr;   
     int receive_protocol_result; 
     uint8_t receive_status;      
+    /* timing and flow control parameters */
+    uint32_t param_n_bs_us;   
+    uint32_t param_n_cr_us;   
+    uint32_t param_st_min_us; 
+    uint8_t param_block_size; 
 #if defined(ISO_TP_USER_SEND_CAN_ARG)
     void* user_send_can_arg; 
 #endif
@@ -89,6 +94,10 @@ int isotp_send_with_id(IsoTpLink* link, uint32_t id, const uint8_t payload[], ui
 
 int isotp_receive(IsoTpLink* link, uint8_t* payload, const uint32_t payload_size,
                   uint32_t* out_size);
+
+void isotp_set_timeouts(IsoTpLink* link, uint32_t n_bs_us, uint32_t n_cr_us);
+
+void isotp_set_fc_params(IsoTpLink* link, uint8_t block_size, uint32_t st_min_us);
 
 #ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK
 void isotp_set_tx_done_cb(IsoTpLink* link, isotp_tx_done_cb cb, void* arg);

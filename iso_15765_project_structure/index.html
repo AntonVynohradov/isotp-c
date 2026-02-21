@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/iso_15765_project_structure/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>ISO-15765 Project Structure - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ISO-15765 Project Structure";
+        var mkdocs_page_input_path = "iso_15765_project_structure.md";
+        var mkdocs_page_url = "/isotp-c/iso_15765_project_structure/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">ISO-15765 Project Structure</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#project-structure-relevant-to-iso-tp-and-tests">Project Structure (Relevant to ISO-TP and Tests)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implemented-and-verified-by-integration-tests">Implemented and Verified by Integration Tests</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementation-gaps-explicitly-identified">Implementation Gaps (Explicitly Identified)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#integration-test-gaps-areas-to-expand">Integration Test Gaps (Areas to Expand)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Integration Tests</li>
+      <li class="breadcrumb-item active">ISO-15765 Project Structure</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="iso-15765-project-structure-and-integration-test-coverage">ISO-15765: Project Structure and Integration Test Coverage<a class="headerlink" href="#iso-15765-project-structure-and-integration-test-coverage" title="Permanent link">&para;</a></h1>
+<p>This document describes the project structure for ISO-15765 (ISO-TP) tests and
+the current integration test coverage. It highlights what is implemented and
+verified, and where there are gaps in implementation or tests.</p>
+<h2 id="project-structure-relevant-to-iso-tp-and-tests">Project Structure (Relevant to ISO-TP and Tests)<a class="headerlink" href="#project-structure-relevant-to-iso-tp-and-tests" title="Permanent link">&para;</a></h2>
+<ul>
+<li>ISO-TP core (protocol implementation): <a href="../docs/isotp_8c/">src/isotp.c</a></li>
+<li>Public API and link model: <a href="../docs/isotp_8h/">isotp.h</a></li>
+<li>Protocol definitions and result codes: <a href="../docs/isotp__defines_8h/">inc/isotp_defines.h</a></li>
+<li>Build-time configuration (BS, STmin, timeouts, options): <a href="../docs/isotp__config_8h/">inc/isotp_config.h</a></li>
+<li>Platform hooks (CAN, time, debug): <a href="../docs/isotp__user_8h/">inc/isotp_user.h</a></li>
+<li>Python bindings and CAN/time mocks (test layer): <a href="../docs/pyisotp_8c/">examples/python_api/src</a></li>
+<li>Integration tests (Python): tests/integration</li>
+<li>Integration test documentation: docs/integration_tests</li>
+</ul>
+<h2 id="implemented-and-verified-by-integration-tests">Implemented and Verified by Integration Tests<a class="headerlink" href="#implemented-and-verified-by-integration-tests" title="Permanent link">&para;</a></h2>
+<p>The following areas are implemented in the core and covered by integration tests:</p>
+<ul>
+<li>
+<p>API smoke + input errors + return codes</p>
+<ul>
+<li>Tests: <a href="../docs/namespacetest__api__endpoints/">tests/integration/test_api_endpoints.py</a></li>
+<li>Docs: <a href="../integration_tests/api_endpoints/">integration_tests/api_endpoints.md</a></li>
+<li>Scope: SF/MF smoke, sender N_Bs timeout, invalid args, overflow, in-progress.</li>
+</ul>
+</li>
+<li>
+<p>API validation (arguments)</p>
+<ul>
+<li>Tests: <a href="../docs/namespacetest__api__validation/">tests/integration/test_api_validation.py</a></li>
+<li>Docs: <a href="../integration_tests/api_validation/">integration_tests/api_validation.md</a></li>
+<li>Scope: zero buffers, bufsize=0, block_size &gt; 255.</li>
+</ul>
+</li>
+<li>
+<p>Buffer limits and overflow handling</p>
+<ul>
+<li>Tests: <a href="../docs/namespacetest__buffer__limits/">tests/integration/test_buffer_limits.py</a></li>
+<li>Docs: <a href="../integration_tests/buffer_limits/">integration_tests/buffer_limits.md</a></li>
+<li>Scope: ISOTP_RET_OVERFLOW, truncation on receive, ISOTP_RET_INPROGRESS.</li>
+</ul>
+</li>
+<li>
+<p>Multi-frame behavior (FF/CF, SN, BS, STmin, timeouts)</p>
+<ul>
+<li>Tests: <a href="../docs/namespacetest__multi__frame/">tests/integration/test_multi_frame.py</a></li>
+<li>Docs: <a href="../integration_tests/multi_frame/">integration_tests/multi_frame.md</a></li>
+<li>Scope: MF roundtrip, 8/9/14/15 boundaries, max payload 4095B,
+  BS=1 and BS=0, STmin, N_Bs/N_Cr timeouts, UNEXP_PDU and WRONG_SN errors.</li>
+</ul>
+</li>
+<li>
+<p>FlowControl (FS=WAIT/CONTINUE/OVERFLOW)</p>
+<ul>
+<li>AUTOSAR CanTp: <a href="../docs/namespacetest__cantp/">tests/integration/test_cantp.py</a>,</li>
+<li>Docs: <a href="../integration_tests/cantp/">integration_tests/cantp.md</a>,</li>
+<li>Tests: <a href="../docs/namespacetest__flow__control/">tests/integration/test_flow_control.py</a></li>
+<li>Docs: <a href="../integration_tests/flow_control/">integration_tests/flow_control.md</a></li>
+<li>Scope: WAIT -&gt; CONTINUE, WFT overrun, FS=Overflow, BS and STmin parameters.</li>
+</ul>
+</li>
+<li>
+<p>Timing (N_Bs, N_Cr, STmin, BS)</p>
+<ul>
+<li>Tests: <a href="../docs/namespacetest__timing/">tests/integration/test_timing.py</a></li>
+<li>Docs: <a href="../integration_tests/timing/">integration_tests/timing.md</a></li>
+<li>Scope: N_Bs and N_Cr timeouts, STmin enforcement, BS=1 roundtrip.</li>
+</ul>
+</li>
+</ul>
+<h2 id="implementation-gaps-explicitly-identified">Implementation Gaps (Explicitly Identified)<a class="headerlink" href="#implementation-gaps-explicitly-identified" title="Permanent link">&para;</a></h2>
+<ul>
+<li>N_As, N_Ar, N_Br, N_Cs are not enforced in the core yet (marked as xfail
+  in timing tests). See: <a href="../docs/namespacetest__timing/">tests/integration/test_timing.py</a>
+  and <a href="../integration_tests/timing/">integration_tests/timing.md</a>.</li>
+</ul>
+<h2 id="integration-test-gaps-areas-to-expand">Integration Test Gaps (Areas to Expand)<a class="headerlink" href="#integration-test-gaps-areas-to-expand" title="Permanent link">&para;</a></h2>
+<p>Based on current integration tests, there is no visible coverage for:</p>
+<ul>
+<li><code>isotp_send_with_id</code> (functional addressing) in <a href="../docs/isotp_8h/">isotp.h</a>.</li>
+<li><code>tx_done_cb</code> and <code>rx_done_cb</code> callbacks (when enabled in config)
+  in <a href="../docs/isotp_8h/">isotp.h</a> and <a href="../docs/isotp__config_8h/">inc/isotp_config.h</a>.</li>
+<li>ISO_TP_FRAME_PADDING (padded frames) in <a href="../docs/isotp__config_8h/">inc/isotp_config.h</a>.</li>
+<li><code>ISOTP_RET_NOSPACE</code> scenarios (retry send) in <a href="../docs/isotp__defines_8h/">inc/isotp_defines.h</a>.</li>
+<li>Invalid FlowControl (e.g., invalid FS) and other protocol errors
+  beyond UNEXP_PDU and WRONG_SN in <a href="../docs/isotp__defines_8h/">inc/isotp_defines.h</a>.</li>
+<li>Transfers larger than 4095B (long FF) - no integration tests yet.</li>
+</ul>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Integration tests are executed via Python bindings and CAN/time mocks
+  (see <a href="../docs/pyisotp_8c/">examples/python_api/src</a>).</li>
+<li>This document only covers integration test coverage. Unit tests may cover
+  additional areas.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../examples/python_api/" class="btn btn-neutral float-left" title="Python API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../examples/python_api/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

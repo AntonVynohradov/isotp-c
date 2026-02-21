@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/integration_tests/buffer_limits/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Buffer Limits Integration Tests - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Buffer Limits Integration Tests";
+        var mkdocs_page_input_path = "integration_tests/buffer_limits.md";
+        var mkdocs_page_url = "/isotp-c/integration_tests/buffer_limits/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Buffer Limits Integration Tests</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="buffer-limits-integration-tests">Buffer Limits Integration Tests<a class="headerlink" href="#buffer-limits-integration-tests" title="Permanent link">&para;</a></h1>
+<p>This document describes buffer limit tests for the Python API.
+The suite focuses on overflow handling, truncation, and in-progress status.</p>
+<h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
+<p>The tests in tests/integration/test_buffer_limits.py cover:</p>
+<ul>
+<li>Sending payloads larger than send buffer.</li>
+<li>Receiving into smaller buffers (truncation).</li>
+<li>Calling send while a transfer is already in progress.</li>
+</ul>
+<h2 id="test-cases">Test Cases<a class="headerlink" href="#test-cases" title="Permanent link">&para;</a></h2>
+<h3 id="test_send_overflow_returns_code">test_send_overflow_returns_code<a class="headerlink" href="#test_send_overflow_returns_code" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: link with send buffer size 8.</li>
+<li>Action: send a 9-byte payload.</li>
+<li>Expectation: return code is ISOTP_RET_OVERFLOW.</li>
+</ul>
+<p><img alt="Send overflow return code" src="../../assets/integration_tests/buffer_limits/send_overflow_returns_code.svg" /></p>
+<h3 id="test_receive_truncates_payload">test_receive_truncates_payload<a class="headerlink" href="#test_receive_truncates_payload" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: link with sufficient buffers and a 20-byte payload.</li>
+<li>Action: receive with payload_size 10.</li>
+<li>Expectation: returned payload is truncated to 10 bytes.</li>
+</ul>
+<p><img alt="Receive truncates payload" src="../../assets/integration_tests/buffer_limits/receive_truncates_payload.svg" /></p>
+<h3 id="test_send_in_progress_returns_code">test_send_in_progress_returns_code<a class="headerlink" href="#test_send_in_progress_returns_code" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: multi-frame payload to keep sender busy.</li>
+<li>Action: call send again before completion.</li>
+<li>Expectation: second send returns ISOTP_RET_INPROGRESS.</li>
+</ul>
+<p><img alt="Send in-progress return code" src="../../assets/integration_tests/buffer_limits/send_in_progress_returns_code.svg" /></p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>These tests rely on synchronous polling and mock CAN.</li>
+<li>Update if send/receive return codes change.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

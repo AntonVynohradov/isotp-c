@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/integration_tests/timing/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Timing Tests (ISO-15765-2) - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Timing Tests (ISO-15765-2)";
+        var mkdocs_page_input_path = "integration_tests/timing.md";
+        var mkdocs_page_url = "/isotp-c/integration_tests/timing/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Timing Tests (ISO-15765-2)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="timing-tests-iso-15765-2">Timing Tests (ISO-15765-2)<a class="headerlink" href="#timing-tests-iso-15765-2" title="Permanent link">&para;</a></h1>
+<p>This document describes the timing-related integration tests for the Python API.
+The tests use the mock time source and mock CAN driver to keep results deterministic.</p>
+<h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
+<p>The timing suite in tests/integration/test_timing.py validates these behaviors:</p>
+<ul>
+<li>N_Bs: max wait time for FlowControl after First Frame (FF).</li>
+<li>N_Cr: max wait time for Consecutive Frame (CF).</li>
+<li>STmin: minimum separation time between CFs.</li>
+<li>Block Size (BS): number of CFs allowed before the next FlowControl.</li>
+</ul>
+<p>The following parameters are listed in ISO-15765-2 but are not yet enforced in core,
+so they are tracked as xfail placeholders:</p>
+<ul>
+<li>N_As: max time to send a frame.</li>
+<li>N_Ar: max time to confirm transmission.</li>
+<li>N_Br: max time to send FlowControl.</li>
+<li>N_Cs: max time between CF transmissions.</li>
+</ul>
+<h2 id="parameter-mapping">Parameter Mapping<a class="headerlink" href="#parameter-mapping" title="Permanent link">&para;</a></h2>
+<p>The core uses per-link parameters configured via the Python API:</p>
+<ul>
+<li>pyisotp.set_timeouts(link, n_bs_ms, n_cr_ms) sets N_Bs and N_Cr (milliseconds).</li>
+<li>pyisotp.set_fc_params(link, block_size, st_min_ms) sets BS and STmin.</li>
+</ul>
+<p>These values are stored in the IsoTpLink instance and are used by the protocol
+state machine during polling.</p>
+<h2 id="test-summary">Test Summary<a class="headerlink" href="#test-summary" title="Permanent link">&para;</a></h2>
+<h3 id="test_timeout_n_bs">test_timeout_n_bs<a class="headerlink" href="#test_timeout_n_bs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: set N_Bs to 100 ms, disable FlowControl frames.</li>
+<li>Action: send a multi-frame payload, advance time with poll.</li>
+<li>Expectation: sender protocol result is ISOTP_PROTOCOL_RESULT_TIMEOUT_BS.</li>
+</ul>
+<p><img alt="N_Bs timeout result" src="../../assets/integration_tests/timing/timeout_n_bs.svg" /></p>
+<h3 id="test_timeout_n_cr">test_timeout_n_cr<a class="headerlink" href="#test_timeout_n_cr" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: set N_Cr to 20 ms, enable CAN frame drop to block CF delivery.</li>
+<li>Action: send a multi-frame payload, advance time with poll.</li>
+<li>Expectation: receiver protocol result is ISOTP_PROTOCOL_RESULT_TIMEOUT_CR.</li>
+</ul>
+<p><img alt="N_Cr timeout result" src="../../assets/integration_tests/timing/timeout_n_cr.svg" /></p>
+<h3 id="test_st_min_enforced">test_st_min_enforced<a class="headerlink" href="#test_st_min_enforced" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: set STmin to 10 ms, BS unlimited (0).</li>
+<li>Action: send a multi-frame payload, advance time with poll.</li>
+<li>Expectation: no full receive before 10 ms; payload arrives after STmin passes.</li>
+</ul>
+<p><img alt="STmin enforcement" src="../../assets/integration_tests/timing/st_min_enforced.svg" /></p>
+<h3 id="test_block_size_one_roundtrip">test_block_size_one_roundtrip<a class="headerlink" href="#test_block_size_one_roundtrip" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: set BS to 1, STmin 0.</li>
+<li>Action: send a multi-frame payload, poll until receive completes.</li>
+<li>Expectation: full payload is received.</li>
+</ul>
+<p><img alt="Block size one roundtrip" src="../../assets/integration_tests/timing/block_size_one_roundtrip.svg" /></p>
+<h3 id="xfail-placeholders">xfail placeholders<a class="headerlink" href="#xfail-placeholders" title="Permanent link">&para;</a></h3>
+<p>The following tests are present but expected to fail until core support exists:</p>
+<ul>
+<li>test_timeout_n_as_placeholder</li>
+<li>test_timeout_n_ar_placeholder</li>
+<li>test_timeout_n_br_placeholder</li>
+<li>test_timeout_n_cs_placeholder</li>
+</ul>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>All tests use mock time (pyisotp.time_advance) and do not sleep.</li>
+<li>If you change default timeouts or FlowControl behavior, update this document
+  and the tests together.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

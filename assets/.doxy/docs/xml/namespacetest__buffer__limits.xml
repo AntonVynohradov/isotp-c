@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacetest__buffer__limits" kind="namespace" language="Python">
+    <compoundname>test_buffer_limits</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="test__buffer__limits_8py_1a3c6f2f4a16aff2db92d0ca5e749a9a7f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_buffer_limits._poll_until_receive</definition>
+        <argsstring>(link, payload_size, steps)</argsstring>
+        <name>_poll_until_receive</name>
+        <qualifiedname>test_buffer_limits._poll_until_receive</qualifiedname>
+        <param>
+          <type>link</type>
+          <defname>link</defname>
+        </param>
+        <param>
+          <type>payload_size</type>
+          <defname>payload_size</defname>
+        </param>
+        <param>
+          <type>steps</type>
+          <defname>steps</defname>
+        </param>
+        <briefdescription>
+<para>Poll the link until a response is received or steps are exhausted. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISO-TP link handle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expected payload size for receive. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>steps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of poll iterations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Received payload bytes or None when nothing is received.</para>
+</simplesect>
+Polls the core without advancing time. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_buffer_limits.py" line="55" column="1" bodyfile="tests/integration/test_buffer_limits.py" bodystart="55" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="test__buffer__limits_8py_1a6365714396647bf60eb95b61ba21e40b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_buffer_limits._make_payload</definition>
+        <argsstring>(size)</argsstring>
+        <name>_make_payload</name>
+        <qualifiedname>test_buffer_limits._make_payload</qualifiedname>
+        <param>
+          <type>size</type>
+          <defname>size</defname>
+        </param>
+        <briefdescription>
+<para>Build a deterministic payload of a given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to generate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Payload bytes.</para>
+</simplesect>
+Uses a simple modulo pattern for repeatability. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_buffer_limits.py" line="72" column="1" bodyfile="tests/integration/test_buffer_limits.py" bodystart="72" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="test__buffer__limits_8py_1aec0395e597f5f1cbfcf4072ba2e1305e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_buffer_limits.test_send_overflow_returns_code</definition>
+        <argsstring>()</argsstring>
+        <name>test_send_overflow_returns_code</name>
+        <qualifiedname>test_buffer_limits.test_send_overflow_returns_code</qualifiedname>
+        <briefdescription>
+<para>Verify overflow is reported on send. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Exceeding the send buffer returns ISOTP_RET_OVERFLOW. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_buffer_limits.py" line="86" column="1" bodyfile="tests/integration/test_buffer_limits.py" bodystart="86" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="test__buffer__limits_8py_1acf68bd6beb4415868ce2bf18fcf4843f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_buffer_limits.test_receive_truncates_payload</definition>
+        <argsstring>()</argsstring>
+        <name>test_receive_truncates_payload</name>
+        <qualifiedname>test_buffer_limits.test_receive_truncates_payload</qualifiedname>
+        <briefdescription>
+<para>Verify receive truncates payload to buffer size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The returned payload must be capped to the buffer length. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_buffer_limits.py" line="97" column="1" bodyfile="tests/integration/test_buffer_limits.py" bodystart="97" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="test__buffer__limits_8py_1ae831c38131eb6f1dcc7e37de0a9e4d5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_buffer_limits.test_send_in_progress_returns_code</definition>
+        <argsstring>()</argsstring>
+        <name>test_send_in_progress_returns_code</name>
+        <qualifiedname>test_buffer_limits.test_send_in_progress_returns_code</qualifiedname>
+        <briefdescription>
+<para>Verify in-progress is reported on concurrent send. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Second send while active returns ISOTP_RET_INPROGRESS. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_buffer_limits.py" line="110" column="1" bodyfile="tests/integration/test_buffer_limits.py" bodystart="110" bodyend="122"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/test_buffer_limits.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

@@ -137,9 +137,9 @@ User implemented, print debug message.
 **Parameters:**
 
 
-* `message` The message to print. 
+* `message` The message to print.
 
-
+User implemented, print debug message. 
 
 
         
@@ -179,10 +179,10 @@ User implemented, return a monotonically increasing timebase in microseconds.
 
 **Returns:**
 
-uint32\_t Current time in microseconds 
+uint32\_t Current time in microseconds
 
 
-
+User implemented, return a monotonically increasing timebase in microseconds. 
 
 
         
@@ -236,10 +236,10 @@ User implemented, send CAN message.
 
 **Returns:**
 
-int ISOTP\_RET\_OK on success, ISOTP\_RET\_ERROR on failure. 
+int ISOTP\_RET\_OK on success, ISOTP\_RET\_ERROR on failure.
 
 
-
+User implemented, send CAN message. 
 
 
         

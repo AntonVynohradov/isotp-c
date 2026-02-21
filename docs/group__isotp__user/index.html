@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/group__isotp__user/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Group isotp_user - ISO-TP C Implementation</title>
+    <title>Group isotp_user - ISO-TP (ISO 15765-2)</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -55,9 +55,20 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
               <p class="caption"><span class="caption-text">Examples</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
                   </li>
               </ul>
       </div>
@@ -67,7 +78,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">ISO-TP C Implementation</a>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -133,8 +144,9 @@
 <p>User implemented, print debug message.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>message</code> The message to print. </li>
+<li><code>message</code> The message to print.</li>
 </ul>
+<p>User implemented, print debug message. </p>
 <hr>
 
 <h3 id="function-isotp_user_get_us">function isotp_user_get_us<a class="headerlink" href="#function-isotp_user_get_us" title="Permanent link">&para;</a></h3>
@@ -149,7 +161,8 @@
 <p>Current timebase value in microseconds.</p>
 <p>User implemented, return a monotonically increasing timebase in microseconds.</p>
 <p><strong>Returns:</strong></p>
-<p>uint32_t Current time in microseconds </p>
+<p>uint32_t Current time in microseconds</p>
+<p>User implemented, return a monotonically increasing timebase in microseconds. </p>
 <hr>
 
 <h3 id="function-isotp_user_send_can">function isotp_user_send_can<a class="headerlink" href="#function-isotp_user_send_can" title="Permanent link">&para;</a></h3>
@@ -177,7 +190,8 @@
 <li><code>size</code> Size of the data buffer (max 8 bytes). </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>int ISOTP_RET_OK on success, ISOTP_RET_ERROR on failure. </p>
+<p>int ISOTP_RET_OK on success, ISOTP_RET_ERROR on failure.</p>
+<p>User implemented, send CAN message. </p>
 <hr>
 
 <hr />

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacetest__flow__control" kind="namespace" language="Python">
+    <compoundname>test_flow_control</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="test__flow__control_8py_1a6486a6dce3ecab5ade96b929087daf16" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_flow_control._make_payload</definition>
+        <argsstring>(size)</argsstring>
+        <name>_make_payload</name>
+        <qualifiedname>test_flow_control._make_payload</qualifiedname>
+        <param>
+          <type>size</type>
+          <defname>size</defname>
+        </param>
+        <briefdescription>
+<para>Build a deterministic payload of a given size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to generate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Payload bytes.</para>
+</simplesect>
+Uses a simple modulo pattern for repeatability. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_flow_control.py" line="55" column="1" bodyfile="tests/integration/test_flow_control.py" bodystart="55" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="test__flow__control_8py_1ad3b366f6ea58dc1863e3310ad383a53f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_flow_control._fc_frame</definition>
+        <argsstring>(flow_status, block_size, st_min)</argsstring>
+        <name>_fc_frame</name>
+        <qualifiedname>test_flow_control._fc_frame</qualifiedname>
+        <param>
+          <type>flow_status</type>
+          <defname>flow_status</defname>
+        </param>
+        <param>
+          <type>block_size</type>
+          <defname>block_size</defname>
+        </param>
+        <param>
+          <type>st_min</type>
+          <defname>st_min</defname>
+        </param>
+        <briefdescription>
+<para>Build a Flow Control (FC) frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>flow_status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flow status nibble. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Block size byte. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>st_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>STmin byte. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>CAN frame bytes representing the FC.</para>
+</simplesect>
+Encodes the 0x30 PCI for flow control. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_flow_control.py" line="64" column="1" bodyfile="tests/integration/test_flow_control.py" bodystart="64" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="test__flow__control_8py_1a1bbeac20d0ad63fc58485d142168efb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>test_flow_control.test_flow_control_overflow_sets_protocol_result</definition>
+        <argsstring>()</argsstring>
+        <name>test_flow_control_overflow_sets_protocol_result</name>
+        <qualifiedname>test_flow_control.test_flow_control_overflow_sets_protocol_result</qualifiedname>
+        <briefdescription>
+<para>Verify overflow FC sets protocol result. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Injects PCI_FLOW_STATUS_OVERFLOW and checks protocol state. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="tests/integration/test_flow_control.py" line="84" column="1" bodyfile="tests/integration/test_flow_control.py" bodystart="84" bodyend="98"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="tests/integration/test_flow_control.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

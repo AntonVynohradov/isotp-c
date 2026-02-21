@@ -8,7 +8,7 @@
 
 
 
-_Mock CAN state structure for testing purposes._ 
+_Mock CAN state structure for testing purposes._ [More...](#detailed-description)
 
 * `#include <isotp_test_support.h>`
 
@@ -85,6 +85,13 @@ _Mock CAN state structure for testing purposes._
 
 
 
+## Detailed Description
+
+
+Captures the last transmitted CAN frame and counts calls. 
+
+
+    
 ## Public Attributes Documentation
 
 
@@ -154,5 +161,5 @@ int MockCanState::return_value;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `tests/isotp_test_support.h`
+The documentation for this class was generated from the following file `tests/unit/isotp_test_support.h`
 

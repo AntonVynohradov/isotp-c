@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/integration_tests/api_endpoints/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>API Endpoints Integration Tests - ISO-TP (ISO 15765-2)</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API Endpoints Integration Tests";
+        var mkdocs_page_input_path = "integration_tests/api_endpoints.md";
+        var mkdocs_page_url = "/isotp-c/integration_tests/api_endpoints/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../guide/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">API Endpoints Integration Tests</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="api-endpoints-integration-tests">API Endpoints Integration Tests<a class="headerlink" href="#api-endpoints-integration-tests" title="Permanent link">&para;</a></h1>
+<p>This document describes the API endpoint coverage tests for the Python bindings.
+The suite acts as a targeted smoke test plus edge-case checks not covered in other files.</p>
+<h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
+<p>The tests in tests/integration/test_api_endpoints.py cover:</p>
+<ul>
+<li>Basic API smoke for single-frame traffic.</li>
+<li>Multi-frame smoke roundtrip.</li>
+<li>Return codes for overflow and in-progress send.</li>
+<li>Input validation errors.</li>
+<li>Raw CAN injection error cases (unexpected CF, wrong SN).</li>
+</ul>
+<h2 id="helper-utilities">Helper Utilities<a class="headerlink" href="#helper-utilities" title="Permanent link">&para;</a></h2>
+<p>The test file includes helpers for reuse:</p>
+<ul>
+<li>_poll_until_receive: poll and receive with optional mock time advance.</li>
+<li>_make_payload: deterministic payload generator.</li>
+<li>_ff_frame / _cf_frame: raw FF/CF builders for injection tests.</li>
+</ul>
+<h2 id="test-cases">Test Cases<a class="headerlink" href="#test-cases" title="Permanent link">&para;</a></h2>
+<h3 id="test_api_endpoints_smoke">test_api_endpoints_smoke<a class="headerlink" href="#test_api_endpoints_smoke" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: initialize link and verify protocol constant availability.</li>
+<li>Action: send and receive a single-frame payload; test drop and N_Bs timeout.</li>
+<li>Expectation: payload matches, drop yields None, timeout updates protocol result.</li>
+</ul>
+<p><img alt="Single-frame smoke flow" src="../../assets/integration_tests/api_endpoints/smoke.svg" /></p>
+<h3 id="test_api_endpoints_smoke_multi_frame">test_api_endpoints_smoke_multi_frame<a class="headerlink" href="#test_api_endpoints_smoke_multi_frame" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: initialize link.</li>
+<li>Action: send a 20-byte payload and poll until receive.</li>
+<li>Expectation: payload matches.</li>
+</ul>
+<p><img alt="Multi-frame smoke flow" src="../../assets/integration_tests/api_endpoints/smoke_multi_frame.svg" /></p>
+<h3 id="test_api_endpoints_return_codes">test_api_endpoints_return_codes<a class="headerlink" href="#test_api_endpoints_return_codes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: small send buffer to force overflow.</li>
+<li>Action: send oversized payload; then send twice to hit in-progress case.</li>
+<li>Expectation: returns ISOTP_RET_OVERFLOW and ISOTP_RET_INPROGRESS.</li>
+</ul>
+<p><img alt="Return codes for overflow and in-progress" src="../../assets/integration_tests/api_endpoints/return_codes.svg" /></p>
+<h3 id="test_api_endpoints_validation_errors">test_api_endpoints_validation_errors<a class="headerlink" href="#test_api_endpoints_validation_errors" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: invalid arguments for init, receive, and set_fc_params.</li>
+<li>Action: call endpoints with invalid inputs.</li>
+<li>Expectation: ValueError is raised.</li>
+</ul>
+<p><img alt="Validation errors raise ValueError" src="../../assets/integration_tests/api_endpoints/validation_errors.svg" /></p>
+<h3 id="test_api_endpoints_inject_unexpected_cf">test_api_endpoints_inject_unexpected_cf<a class="headerlink" href="#test_api_endpoints_inject_unexpected_cf" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: initialize link.</li>
+<li>Action: inject a CF without FF.</li>
+<li>Expectation: receiver protocol result is ISOTP_PROTOCOL_RESULT_UNEXP_PDU.</li>
+</ul>
+<p><img alt="Unexpected CF injection result" src="../../assets/integration_tests/api_endpoints/inject_unexpected_cf.svg" /></p>
+<h3 id="test_api_endpoints_inject_wrong_sn">test_api_endpoints_inject_wrong_sn<a class="headerlink" href="#test_api_endpoints_inject_wrong_sn" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Setup: initialize link.</li>
+<li>Action: inject FF then CF with wrong SN.</li>
+<li>Expectation: receiver protocol result is ISOTP_PROTOCOL_RESULT_WRONG_SN.</li>
+</ul>
+<p><img alt="Wrong SN injection result" src="../../assets/integration_tests/api_endpoints/inject_wrong_sn.svg" /></p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Raw CAN injection uses pyisotp.inject_can.</li>
+<li>Timing uses mock time where needed.</li>
+<li>Update this document if API behavior changes.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/AntonVynohradov/isotp-c" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Anton Vynohradov" /><link rel="canonical" href="https://AntonVynohradov.github.io/isotp-c/docs/isotp_8c_source/" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>File isotp.c - ISO-TP C Implementation</title>
+    <title>File isotp.c - ISO-TP (ISO 15765-2)</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> ISO-TP C Implementation
+          <a href="../.." class="icon icon-home"> ISO-TP (ISO 15765-2)
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -55,9 +55,20 @@
                 <li class="toctree-l1"><a class="reference internal" href="../../api/">API Reference</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../LICENSE/">License</a>
+                </li>
+              </ul>
               <p class="caption"><span class="caption-text">Examples</span></p>
               <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../../examples/linux_socket/">Linux SocketCAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/python_api/">Python API</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Integration Tests</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../iso_15765_project_structure/">ISO-15765 Project Structure</a>
                   </li>
               </ul>
       </div>
@@ -67,7 +78,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">ISO-TP C Implementation</a>
+          <a href="../..">ISO-TP (ISO 15765-2)</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -591,7 +602,7 @@
 <span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_st_min_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_wtf_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">();</span>
-<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_bs_us</span><span class="p">;</span>
 <span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_protocol_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_PROTOCOL_RESULT_OK</span><span class="p">;</span>
 <span class="w">            </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_SEND_STATUS_INPROGRESS</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
@@ -670,11 +681,11 @@
 <span class="w">                </span><span class="cm">/* change status */</span>
 <span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISOTP_RECEIVE_STATUS_INPROGRESS</span><span class="p">;</span>
 <span class="w">                </span><span class="cm">/* send fc frame */</span>
-<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_BLOCK_SIZE</span><span class="p">;</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_block_size</span><span class="p">;</span>
 <span class="w">                </span><span class="n">isotp_send_flow_control</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">PCI_FLOW_STATUS_CONTINUE</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="p">,</span>
-<span class="w">                                        </span><span class="n">ISO_TP_DEFAULT_ST_MIN_US</span><span class="p">);</span>
+<span class="w">                                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_st_min_us</span><span class="p">);</span>
 <span class="w">                </span><span class="cm">/* refresh timer cs */</span>
-<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_timer_cr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_timer_cr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_cr_us</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
 
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
@@ -703,7 +714,7 @@
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
 <span class="w">            </span><span class="p">{</span>
 <span class="w">                </span><span class="cm">/* refresh timer cs */</span>
-<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_timer_cr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_timer_cr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_cr_us</span><span class="p">;</span>
 
 <span class="w">                </span><span class="cm">/* receive finished */</span>
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_offset</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="p">)</span>
@@ -713,11 +724,11 @@
 <span class="w">                </span><span class="k">else</span>
 <span class="w">                </span><span class="p">{</span>
 <span class="w">                    </span><span class="cm">/* send fc when bs reaches limit */</span>
-<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">--</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">--</span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="p">)</span>
 <span class="w">                    </span><span class="p">{</span>
-<span class="w">                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_BLOCK_SIZE</span><span class="p">;</span>
+<span class="w">                        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_block_size</span><span class="p">;</span>
 <span class="w">                        </span><span class="n">isotp_send_flow_control</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">PCI_FLOW_STATUS_CONTINUE</span><span class="p">,</span>
-<span class="w">                                                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="p">,</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_ST_MIN_US</span><span class="p">);</span>
+<span class="w">                                                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_bs_count</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_st_min_us</span><span class="p">);</span>
 <span class="w">                    </span><span class="p">}</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">}</span>
@@ -737,7 +748,7 @@
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ISOTP_RET_OK</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span>
 <span class="w">            </span><span class="p">{</span>
 <span class="w">                </span><span class="cm">/* refresh bs timer */</span>
-<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_bs_us</span><span class="p">;</span>
 
 <span class="w">                </span><span class="cm">/* overflow */</span>
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">PCI_FLOW_STATUS_OVERFLOW</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">as</span><span class="p">.</span><span class="n">flow_control</span><span class="p">.</span><span class="n">FS</span><span class="p">)</span>
@@ -838,6 +849,11 @@
 <span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recvbuf</span><span class="p">;</span>
 <span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">receive_buf_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recvbufsize</span><span class="p">;</span>
 
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_bs_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_cr_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_st_min_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_ST_MIN_US</span><span class="p">;</span>
+<span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_block_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_BLOCK_SIZE</span><span class="p">;</span>
+
 <span class="cp">#ifdef ISO_TP_TRANSMIT_COMPLETE_CALLBACK</span>
 <span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
 <span class="w">    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">tx_done_cb_arg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
@@ -873,6 +889,24 @@
 <span class="w">    </span><span class="n">memset</span><span class="p">(</span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="p">));</span>
 <span class="p">}</span>
 
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_set_timeouts</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">n_bs_us</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">n_cr_us</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_bs_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_bs_us</span><span class="p">;</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_cr_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_cr_us</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">isotp_set_fc_params</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">block_size</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">st_min_us</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">link</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_block_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">block_size</span><span class="p">;</span>
+<span class="w">        </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_st_min_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_min_us</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
 <span class="kt">void</span><span class="w"> </span><span class="nf">isotp_poll</span><span class="p">(</span><span class="n">IsoTpLink</span><span class="o">*</span><span class="w"> </span><span class="n">link</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -893,7 +927,7 @@
 <span class="w">                </span><span class="p">{</span>
 <span class="w">                    </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_bs_remain</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">                </span><span class="p">}</span>
-<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US</span><span class="p">;</span>
+<span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">param_n_bs_us</span><span class="p">;</span>
 <span class="w">                </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_timer_st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isotp_user_get_us</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">link</span><span class="o">-&gt;</span><span class="n">send_st_min_us</span><span class="p">;</span>
 
 <span class="w">                </span><span class="cm">/* check if send finish */</span>

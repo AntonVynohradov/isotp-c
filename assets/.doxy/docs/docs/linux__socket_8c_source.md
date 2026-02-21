@@ -2,7 +2,7 @@
 
 # File linux\_socket.c
 
-[**File List**](files.md) **>** [**example**](dir_cfafba98a580ce4b62f8a6fa96d7cbb0.md) **>** [**linux\_socket**](dir_c14c1b0e0eb041fc48b83316cb935ab5.md) **>** [**linux\_socket.c**](linux__socket_8c.md)
+[**File List**](files.md) **>** [**examples**](dir_d28a4824dc47e487b107a5db32ef43c4.md) **>** [**linux\_socket**](dir_7880a7b12136fba6b737e09baa66bc78.md) **>** [**linux\_socket.c**](linux__socket_8c.md)
 
 [Go to the documentation of this file](linux__socket_8c.md)
 
