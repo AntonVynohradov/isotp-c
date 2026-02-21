@@ -55,10 +55,6 @@ set(CMAKE_C_FLAGS_RELEASE "-Wall -Wextra -Wpedantic -O2 -DNDEBUG")
 # PYTHON CONFIGURATION
 # ==============================================================================
 
-if(NOT WIN32)
-    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE _POSIX_C_SOURCE=200809L)
-endif()
-
 find_package(Python3 COMPONENTS
     Interpreter
     Development

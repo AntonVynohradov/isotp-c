@@ -36,6 +36,19 @@
  * SPDX-License-Identifier: MIT
  ******************************************************************************/
 
+
+/* ==============================================================================
+ * DEFINES & MACROS
+ * =============================================================================*/
+
+#ifndef _WIN32
+#define _POSIX_C_SOURCE 200809L
+#endif
+
+#define MOCK_QUEUE_SIZE 256  ///< Size of the internal queue for simulating CAN frames
+
+#define CAN_MAX_DLEN 8  ///< Maximum data length for CAN frames
+
 /* ==============================================================================
  * INCLUDES
  * =============================================================================*/
@@ -49,14 +62,6 @@
 #else
 #include <time.h>
 #endif
-
-/* ==============================================================================
- * DEFINES & MACROS
- * =============================================================================*/
-
-#define MOCK_QUEUE_SIZE 256  ///< Size of the internal queue for simulating CAN frames
-
-#define CAN_MAX_DLEN 8  ///< Maximum data length for CAN frames
 
 /* ==============================================================================
  * PRIVATE TYPE DEFINITIONS
