@@ -43,9 +43,9 @@ project(pyisotp
 # ==============================================================================
 
 # Set C standard
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_C_EXTENSIONS ON)
 
 # Compiler warning flags
 set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -Wpedantic -g")

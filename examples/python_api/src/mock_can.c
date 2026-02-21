@@ -47,7 +47,7 @@
 #ifdef _WIN32
 #include <windows.h>
 #else
-#include <time.h>
+#include <unistd.h>
 #endif
 
 /* ==============================================================================
@@ -128,10 +128,10 @@ static void sleep_ms(int ms)
 #ifdef _WIN32
     Sleep(ms);
 #else
-    struct timespec ts;
-    ts.tv_sec = ms / 1000;
-    ts.tv_nsec = (ms % 1000) * 1000000;
-    nanosleep(&ts, NULL);
+    if (ms > 0)
+    {
+        usleep((unsigned int) ms * 1000);
+    }
 #endif
 }
 
