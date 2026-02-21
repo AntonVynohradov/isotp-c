@@ -157,7 +157,9 @@ static int mock_send(uint32_t id, const uint8_t* data, uint8_t len)
     }
 
     if (delay_ms)
+    {
         sleep_ms(delay_ms);
+    }
 
     queue[tail].id = id;
     memcpy(queue[tail].data, data, len);
@@ -171,7 +173,9 @@ static int mock_send(uint32_t id, const uint8_t* data, uint8_t len)
 static int mock_receive(uint32_t* id, uint8_t* data, uint8_t* len)
 {
     if (head == tail)
+    {
         return -1;  // empty
+    }
 
     *id = queue[head].id;
     *len = queue[head].len;
