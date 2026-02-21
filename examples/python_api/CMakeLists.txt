@@ -55,6 +55,10 @@ set(CMAKE_C_FLAGS_RELEASE "-Wall -Wextra -Wpedantic -O2 -DNDEBUG")
 # PYTHON CONFIGURATION
 # ==============================================================================
 
+if(NOT WIN32)
+    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE _POSIX_C_SOURCE=200809L)
+endif()
+
 find_package(Python3 COMPONENTS
     Interpreter
     Development
@@ -95,10 +99,6 @@ add_library(${CMAKE_PROJECT_NAME} MODULE ${ISOTP_PYTHON_API_SOURCES})
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${ISOTP_PYTHON_API_HEADERS})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE isotp Python3::Python)
-
-if(NOT WIN32)
-    target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE _POSIX_C_SOURCE=200809L)
-endif()
 
 if(WIN32)
     set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".pyd")
