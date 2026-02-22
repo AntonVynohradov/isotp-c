@@ -80,18 +80,21 @@ jobs:
         with:
           output: codeql-report
 
-      - name: Generate HTML report
+      - name: Install SARIF Multitool locally
         run: |
-          mkdir -p codeql-report
+          mkdir -p .sarif-tools
+          dotnet tool install Microsoft.Sarif.Multitool \
+            --tool-path .sarif-tools
 
-          $CODEQL_DIST/codeql database analyze \
-            $CODEQL_EXTRACTOR_CPP_WIP_DATABASE \
-            --format=html \
-            --output=codeql-report/codeql-report.html \
-            cpp-code-scanning.qls
+      - name: Convert SARIF to HTML
+        run: |
+          mkdir -p codeql-report/html
+          .sarif-tools/sarif convert \
+            codeql-report/*.sarif \
+            --output codeql-report/html/codeql-report.html
 
-      - name: Upload CodeQL HTML report
+      - name: Upload CodeQL report
         uses: actions/upload-artifact@v4
         with:
-          name: codeql-html
-          path: codeql-report/codeql-report.html
+          name: codeql-report
+          path: codeql-report
