@@ -91,15 +91,18 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install sarif-tools
+        run: pip install sarif-tools
+
       - name: Convert SARIF to HTML
         run: |
           mkdir -p codeql-report/html
-          for sarif in codeql-report/*.sarif; do
-            name=$(basename "$sarif" .sarif)
-            npx -y sarif-html \
-              --output "codeql-report/html/${name}.html" \
-              "$sarif"
-          done
+          sarif html -o codeql-report/html codeql-report
 
       - name: Upload CodeQL report
         uses: actions/upload-artifact@v4
