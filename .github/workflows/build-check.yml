@@ -80,6 +80,11 @@ jobs:
         with:
           output: codeql-report
 
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
       - name: Install SARIF Multitool locally
         run: |
           mkdir -p .sarif-tools
@@ -89,8 +94,9 @@ jobs:
       - name: Convert SARIF to HTML
         run: |
           mkdir -p codeql-report/html
-          .sarif-tools/sarif convert \
+          .sarif-tools/sarif transform \
             codeql-report/*.sarif \
+            --plugin Html \
             --output codeql-report/html/codeql-report.html
 
       - name: Upload CodeQL report
