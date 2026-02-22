@@ -83,7 +83,7 @@ jobs:
       - name: Install SARIF Multitool locally
         run: |
           mkdir -p .sarif-tools
-          dotnet tool install Microsoft.Sarif.Multitool \
+          dotnet tool install Sarif.Multitool \
             --tool-path .sarif-tools
 
       - name: Convert SARIF to HTML
