@@ -80,21 +80,18 @@ jobs:
         with:
           output: codeql-report
 
-      - name: Setup CodeQL CLI
-        uses: github/codeql-action/get@v3
-        with:
-          version: latest
-
-      - name: Convert SARIF to HTML
+      - name: Generate HTML report
         run: |
-          mkdir -p codeql-report/html
-          codeql interpret-results \
+          mkdir -p codeql-report
+
+          $CODEQL_DIST/codeql database analyze \
+            $CODEQL_EXTRACTOR_CPP_WIP_DATABASE \
             --format=html \
-            --output=codeql-report/html/index.html \
-            codeql-report/codeql-results.sarif
+            --output=codeql-report/codeql-report.html \
+            cpp-code-scanning.qls
 
       - name: Upload CodeQL HTML report
         uses: actions/upload-artifact@v4
         with:
           name: codeql-html
-          path: codeql-report/html
+          path: codeql-report/codeql-report.html
