@@ -46,8 +46,13 @@ jobs:
       - name: Run Cppcheck
         run: |
           mkdir -p cppcheck-report
+          excludes=()
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            excludes+=("--exclude=$line")
+          done < cppcheck-excludes.txt
           cppcheck --enable=all --inconclusive --std=c17 --force \
-            --exclude-list=cppcheck-excludes.txt \
+            "${excludes[@]}" \
             --xml --xml-version=2 . 2> cppcheck-report/cppcheck.xml
           cppcheck-htmlreport --file=cppcheck-report/cppcheck.xml \
             --report-dir=cppcheck-report/html --source-dir=.
@@ -81,26 +86,22 @@ jobs:
         with:
           output: codeql-report
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          dotnet-version: "8.0.x"
+          node-version: "20"
 
-      - name: Install SARIF Multitool locally
-        run: |
-          mkdir -p .sarif-tools
-          dotnet tool install Sarif.Multitool \
-            --tool-path .sarif-tools
+      - name: Install sarif-html
+        run: npm install -g sarif-html
 
       - name: Convert SARIF to HTML
         run: |
           mkdir -p codeql-report/html
           for sarif in codeql-report/*.sarif; do
             name=$(basename "$sarif" .sarif)
-            .sarif-tools/sarif export \
-              --sarif-file "$sarif" \
-              --format Html \
-              --output "codeql-report/html/${name}.html"
+            sarif-html \
+              --output "codeql-report/html/${name}.html" \
+              "$sarif"
           done
 
       - name: Upload CodeQL report
