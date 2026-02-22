@@ -31,6 +31,17 @@ jobs:
           sudo apt-get install -y doxygen graphviz
           pip install mkdocs mkdocs-material mkdoxy mkdocs-autorefs
 
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.GH_PAGES_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Switch remote to SSH
+        run: |
+          git remote set-url origin git@github.com:${{ github.repository }}.git
+
       - name: Configure git
         run: |
           git config --global user.name "github-actions[bot]"
@@ -38,4 +49,4 @@ jobs:
 
       - name: Deploying documentation
         run: |
-          mkdocs gh-deploy
+          mkdocs gh-deploy --force
