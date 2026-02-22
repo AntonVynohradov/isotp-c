@@ -49,7 +49,7 @@ jobs:
           excludes=()
           while IFS= read -r line; do
             [ -z "$line" ] && continue
-            excludes+=("--exclude=$line")
+            excludes+=("-i" "$line")
           done < cppcheck-excludes.txt
           cppcheck --enable=all --inconclusive --std=c17 --force \
             "${excludes[@]}" \
@@ -91,15 +91,12 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install sarif-html
-        run: npm install -g sarif-html
-
       - name: Convert SARIF to HTML
         run: |
           mkdir -p codeql-report/html
           for sarif in codeql-report/*.sarif; do
             name=$(basename "$sarif" .sarif)
-            sarif-html \
+            npx -y sarif-html \
               --output "codeql-report/html/${name}.html" \
               "$sarif"
           done
