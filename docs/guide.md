@@ -90,6 +90,21 @@ See the Linux SocketCAN example for a full working reference:
 
 See [Configuration Guide](configuration.md) for detailed configuration options.
 
+## Static Analysis (Cppcheck)
+
+The project provides a CMake target that runs Cppcheck over the source tree.
+Build the `cppcheck` target from your build directory:
+
+```bash
+cmake --build <build-dir> --target cppcheck
+```
+
+The output is written to `cppcheck.txt` in the build directory and is also
+printed to the console after the run completes.
+
+To exclude paths from analysis, edit `cppcheck-excludes.txt` at the project
+root. List one path per line. Empty lines are ignored.
+
 ## Error Handling
 
 The library returns status codes for common conditions:

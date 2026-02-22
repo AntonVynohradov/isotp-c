@@ -44,7 +44,7 @@ project(ISOTP
 # ==============================================================================
 
 # Set C standard
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
@@ -69,6 +69,40 @@ include(isotp)
 if(ISOTP_UNIT_TESTS)
     # This file contains the configuration for unit tests, including GTest integration and test discovery.
     include( unit_tests)
+endif()
+
+find_program(CPPCHECK_EXECUTABLE cppcheck)
+if(CPPCHECK_EXECUTABLE)
+    set(CPPCHECK_EXCLUDES)
+    if(EXISTS "${CMAKE_SOURCE_DIR}/cppcheck-excludes.txt")
+        file(STRINGS "${CMAKE_SOURCE_DIR}/cppcheck-excludes.txt" CPPCHECK_EXCLUDE_PATHS)
+        foreach(CPPCHECK_EXCLUDE_PATH IN LISTS CPPCHECK_EXCLUDE_PATHS)
+            if(NOT CPPCHECK_EXCLUDE_PATH STREQUAL "")
+                list(APPEND CPPCHECK_EXCLUDES -i "${CPPCHECK_EXCLUDE_PATH}")
+            endif()
+        endforeach()
+    endif()
+
+    add_custom_target(cppcheck
+        COMMAND ${CPPCHECK_EXECUTABLE}
+                --enable=all
+                --check-level=exhaustive
+                --inconclusive
+                --verbose
+                --quiet
+                --std=c17
+                --force
+                --template=gcc
+                ${CPPCHECK_EXCLUDES}
+                --output-file=${CMAKE_BINARY_DIR}/cppcheck.txt
+                ${CMAKE_SOURCE_DIR}
+        COMMAND ${CMAKE_COMMAND} -E cat ${CMAKE_BINARY_DIR}/cppcheck.txt
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Running Cppcheck static analysis..."
+        VERBATIM
+    )
+else()
+    message(WARNING "Cppcheck not found. Static analysis target 'cppcheck' will be unavailable.")
 endif()
 
 # ==============================================================================
