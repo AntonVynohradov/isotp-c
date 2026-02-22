@@ -66,9 +66,6 @@ option(ISOTP_UNIT_TESTS "Enable ISO-TP unit tests" OFF)
 # The static library target is defined in cmake/isotp.cmake
 include(isotp)
 
-# Dedicated build target for CodeQL to avoid recursive invocation of codeql-analyze.
-add_custom_target(codeql-build DEPENDS ${ISOTP_C})
-
 # ==============================================================================
 # UNIT TESTS
 # ==============================================================================
@@ -100,7 +97,7 @@ if(CPPCHECK_EXECUTABLE)
         endforeach()
     endif()
 
-    add_custom_target(cppcheck
+    add_custom_target(cppcheck-analyze
         COMMAND ${CPPCHECK_EXECUTABLE}
                 --enable=all
                 --check-level=exhaustive
@@ -123,7 +120,7 @@ else()
 endif()
 
 # CodeQL analysis target - assumes a CodeQL database has been created with the name 'codeql-db' in the build directory
-# This target runs CodeQL analysis using the cpp-queries suite and outputs an HTML report. It is only available if the CodeQL CLI is found on the system.
+# This target runs CodeQL analysis using the cpp-queries suite and outputs a SARIF report (codeql-report.sarif). It is only available if the CodeQL CLI is found on the system.
 # The CodeQL target is designed to be flexible and can be easily modified to include additional query suites or output formats as needed.
 # It also assumes that the CodeQL database has been properly set up with the necessary source files and build configuration for accurate analysis.
 # To create the CodeQL database, you can use the following command in the build directory:
@@ -132,12 +129,15 @@ endif()
 find_program(CODEQL_EXECUTABLE codeql)
 if(CODEQL_EXECUTABLE)
 
-    if(CMAKE_HOST_WIN32)
+    # Note: This target intentionally builds only the core library by default; examples/tests
+    #are excluded to keep the analysis focused and avoid extra dependencies. Extend if needed.
+
+    if(WIN32)
         set(CODEQL_BUILD_SCRIPT "${CMAKE_BINARY_DIR}/codeql_build.cmd")
-        file(WRITE "${CODEQL_BUILD_SCRIPT}" "\"${CMAKE_COMMAND}\" --build \"${CMAKE_BINARY_DIR}\" --target codeql-build\r\n")
+        file(WRITE "${CODEQL_BUILD_SCRIPT}" "\"${CMAKE_COMMAND}\" --build \"${CMAKE_BINARY_DIR}\" --target isotp\r\n")
         set(CODEQL_BUILD_COMMAND "${CODEQL_BUILD_SCRIPT}")
     else()
-        set(CODEQL_BUILD_COMMAND "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target codeql-build")
+        set(CODEQL_BUILD_COMMAND "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target isotp")
     endif()
 
     add_custom_target(codeql-analyze

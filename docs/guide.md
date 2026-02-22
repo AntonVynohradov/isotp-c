@@ -93,10 +93,10 @@ See [Configuration Guide](configuration.md) for detailed configuration options.
 ## Static Analysis (Cppcheck)
 
 The project provides a CMake target that runs Cppcheck over the source tree.
-Build the `cppcheck` target from your build directory:
+Build the `cppcheck-analyze` target from your build directory:
 
 ```bash
-cmake --build <build-dir> --target cppcheck
+cmake --build <build-dir> --target cppcheck-analyze
 ```
 
 The output is written to `cppcheck.txt` in the build directory and is also

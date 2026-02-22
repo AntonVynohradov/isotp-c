@@ -28,8 +28,12 @@ jobs:
           mkdir -p cppcheck-report
           excludes=()
           while IFS= read -r line; do
-            [ -z "$line" ] && continue
-            excludes+=("-i" "$line")
+            trimmed_line="$(echo "$line" | xargs)"
+            [ -z "$trimmed_line" ] && continue
+            case "$trimmed_line" in
+              \#*) continue ;;
+            esac
+            excludes+=("-i" "$trimmed_line")
           done < cppcheck-excludes.txt
           cppcheck --enable=all --inconclusive --std=c17 --force \
             "${excludes[@]}" \
@@ -53,22 +57,17 @@ jobs:
           fetch-depth: 0
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: c
 
       - name: Perform CodeQL Database Build
-        uses: github/codeql-action/autobuild@v3
+        uses: github/codeql-action/autobuild@v4
 
       - name: Run CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           output: codeql-report
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -81,7 +80,7 @@ jobs:
       - name: Convert SARIF to HTML
         run: |
           mkdir -p codeql-report/html
-          sarif html -o codeql-report/html codeql-report
+          find codeql-report -name '*.sarif' -print0 | xargs -0 sarif html -o codeql-report/html
 
       - name: Upload CodeQL report
         uses: actions/upload-artifact@v4
