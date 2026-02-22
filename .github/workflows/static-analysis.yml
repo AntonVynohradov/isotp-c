@@ -1,0 +1,89 @@
+name: Static Analysis
+
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  cppcheck:
+    name: Cppcheck Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Cppcheck
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
+
+      - name: Run Cppcheck
+        run: |
+          mkdir -p cppcheck-report
+          excludes=()
+          while IFS= read -r line; do
+            trimmed_line="$(echo "$line" | xargs)"
+            [ -z "$trimmed_line" ] && continue
+            case "$trimmed_line" in
+              \#*) continue ;;
+            esac
+            excludes+=("-i" "$trimmed_line")
+          done < cppcheck-excludes.txt
+          cppcheck --enable=all --inconclusive --std=c17 --force \
+            "${excludes[@]}" \
+            --xml --xml-version=2 . 2> cppcheck-report/cppcheck.xml
+          cppcheck-htmlreport --file=cppcheck-report/cppcheck.xml \
+            --report-dir=cppcheck-report/html --source-dir=.
+
+      - name: Upload Cppcheck report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cppcheck-html
+          path: cppcheck-report/html
+
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: c
+
+      - name: Perform CodeQL Database Build
+        uses: github/codeql-action/autobuild@v4
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          output: codeql-report
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install sarif-tools
+        run: pip install sarif-tools
+
+      - name: Convert SARIF to HTML
+        run: |
+          mkdir -p codeql-report/html
+          find codeql-report -name '*.sarif' -print0 | xargs -0 sarif html -o codeql-report/html
+
+      - name: Upload CodeQL report
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeql-report
+          path: codeql-report

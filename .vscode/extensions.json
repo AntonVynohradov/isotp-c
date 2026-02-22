@@ -3,7 +3,6 @@
     "ms-vscode.cpptools",
     "xaver.clang-format",
     "ms-vscode.cmake-tools",
-    "gruntfuggly.auto-snippet",
-    "eamodio.gitlens"     
+    "gruntfuggly.auto-snippet"
   ]
 }
