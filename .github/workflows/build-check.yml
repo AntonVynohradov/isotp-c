@@ -36,7 +36,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Cppcheck
         run: sudo apt-get update && sudo apt-get install -y cppcheck
@@ -50,7 +50,7 @@ jobs:
             --report-dir=cppcheck-report/html --source-dir=.
 
       - name: Upload Cppcheck report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cppcheck-html
           path: cppcheck-report/html
@@ -61,7 +61,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
@@ -79,7 +79,7 @@ jobs:
           output: codeql-report/codeql-report.html
 
       - name: Upload CodeQL report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: codeql-html
           path: codeql-report/codeql-report.html
