@@ -47,6 +47,7 @@ jobs:
         run: |
           mkdir -p cppcheck-report
           cppcheck --enable=all --inconclusive --std=c17 --force \
+            --exclude-list=cppcheck-excludes.txt \
             --xml --xml-version=2 . 2> cppcheck-report/cppcheck.xml
           cppcheck-htmlreport --file=cppcheck-report/cppcheck.xml \
             --report-dir=cppcheck-report/html --source-dir=.
@@ -94,10 +95,13 @@ jobs:
       - name: Convert SARIF to HTML
         run: |
           mkdir -p codeql-report/html
-          .sarif-tools/sarif transform \
-            codeql-report/*.sarif \
-            --plugin Html \
-            --output codeql-report/html/codeql-report.html
+          for sarif in codeql-report/*.sarif; do
+            name=$(basename "$sarif" .sarif)
+            .sarif-tools/sarif export \
+              --sarif-file "$sarif" \
+              --format Html \
+              --output "codeql-report/html/${name}.html"
+          done
 
       - name: Upload CodeQL report
         uses: actions/upload-artifact@v4
