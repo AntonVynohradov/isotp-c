@@ -68,22 +68,28 @@ jobs:
           fetch-depth: 0
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: c
 
       - name: Perform CodeQL Database Build
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v3
 
       - name: Run CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
         with:
-          format: html
-          query-suite: cpp-queries
-          output: codeql-report/codeql-report.html
+          output: codeql-report
 
-      - name: Upload CodeQL report
+      - name: Convert SARIF to HTML
+        run: |
+          mkdir -p codeql-report/html
+          codeql interpret-results \
+            --format=sarif-latest \
+            --output=codeql-report/html/index.html \
+            codeql-report/codeql-results.sarif
+
+      - name: Upload CodeQL HTML report
         uses: actions/upload-artifact@v4
         with:
           name: codeql-html
-          path: codeql-report/codeql-report.html
+          path: codeql-report/html
