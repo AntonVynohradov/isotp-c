@@ -1,0 +1,39 @@
+name: Generate SBOM
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Syft
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b $HOME/.local/bin
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Check Syft version
+        run: syft version
+
+      - name: Generate SBOM (CycloneDX)
+        run: syft . -o cyclonedx-json=sbom.cdx.json
+
+      - name: Generate SBOM (SPDX)
+        run: syft . -o spdx-json=sbom.spdx.json
+
+      - name: Upload SBOM artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: |
+            sbom.cdx.json
+            sbom.spdx.json
