@@ -80,11 +80,16 @@ jobs:
         with:
           output: codeql-report
 
+      - name: Setup CodeQL CLI
+        uses: github/codeql-action/get@v3
+        with:
+          version: latest
+
       - name: Convert SARIF to HTML
         run: |
           mkdir -p codeql-report/html
           codeql interpret-results \
-            --format=sarif-latest \
+            --format=html \
             --output=codeql-report/html/index.html \
             codeql-report/codeql-results.sarif
 
