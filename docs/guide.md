@@ -105,6 +105,28 @@ printed to the console after the run completes.
 To exclude paths from analysis, edit `cppcheck-excludes.txt` at the project
 root. List one path per line. Empty lines are ignored.
 
+## Static Analysis (CodeQL)
+
+The project provides a `codeql-analyze` CMake target that creates a CodeQL
+database and runs the standard C/C++ query pack.
+
+Prerequisites:
+
+- Install the CodeQL CLI and ensure `codeql` is available on your PATH.
+
+Run the analysis from your build directory:
+
+```bash
+cmake --build <build-dir> --target codeql-analyze
+```
+
+What it does:
+
+- Creates a database at `<build-dir>/codeql-db`.
+- Builds the library using the `codeql-build` target to avoid recursive runs.
+- Runs the `codeql/cpp-queries` pack and writes SARIF to
+	`<build-dir>/codeql-report.sarif`.
+
 ## Error Handling
 
 The library returns status codes for common conditions:

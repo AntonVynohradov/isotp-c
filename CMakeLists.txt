@@ -39,6 +39,10 @@ project(ISOTP
     LANGUAGES C
     )
 
+if(CMAKE_HOST_WIN32)
+    set(CMAKE_COLOR_MAKEFILE OFF)
+endif()
+
 # ==============================================================================
 # COMPILER FLAGS & OPTIONS
 # ==============================================================================
@@ -62,6 +66,9 @@ option(ISOTP_UNIT_TESTS "Enable ISO-TP unit tests" OFF)
 # The static library target is defined in cmake/isotp.cmake
 include(isotp)
 
+# Dedicated build target for CodeQL to avoid recursive invocation of codeql-analyze.
+add_custom_target(codeql-build DEPENDS ${ISOTP_C})
+
 # ==============================================================================
 # UNIT TESTS
 # ==============================================================================
@@ -71,8 +78,18 @@ if(ISOTP_UNIT_TESTS)
     include( unit_tests)
 endif()
 
+# ==============================================================================
+# STATIC ANALYSIS TARGETS
+# ==============================================================================
+
+# Cppcheck static analysis target
+# This target runs Cppcheck with a comprehensive set of checks and outputs the results to a file and the console.
+# It also supports excluding specific directories or files by listing them in a 'cppcheck-excludes.txt' file in the project root.
+# The Cppcheck target is only available if Cppcheck is found on the system. If not, a message is printed to the console and the target is not created.
+
 find_program(CPPCHECK_EXECUTABLE cppcheck)
 if(CPPCHECK_EXECUTABLE)
+
     set(CPPCHECK_EXCLUDES)
     if(EXISTS "${CMAKE_SOURCE_DIR}/cppcheck-excludes.txt")
         file(STRINGS "${CMAKE_SOURCE_DIR}/cppcheck-excludes.txt" CPPCHECK_EXCLUDE_PATHS)
@@ -102,7 +119,48 @@ if(CPPCHECK_EXECUTABLE)
         VERBATIM
     )
 else()
-    message(WARNING "Cppcheck not found. Static analysis target 'cppcheck' will be unavailable.")
+    message(STATUS "Cppcheck not found. Static analysis target 'cppcheck' will be unavailable.")
+endif()
+
+# CodeQL analysis target - assumes a CodeQL database has been created with the name 'codeql-db' in the build directory
+# This target runs CodeQL analysis using the cpp-queries suite and outputs an HTML report. It is only available if the CodeQL CLI is found on the system.
+# The CodeQL target is designed to be flexible and can be easily modified to include additional query suites or output formats as needed.
+# It also assumes that the CodeQL database has been properly set up with the necessary source files and build configuration for accurate analysis.
+# To create the CodeQL database, you can use the following command in the build directory:
+#   codeql database create codeql-db --language=c --overwrite --source-root=../ --command "cmake --build . --target codeql-build"
+
+find_program(CODEQL_EXECUTABLE codeql)
+if(CODEQL_EXECUTABLE)
+
+    if(CMAKE_HOST_WIN32)
+        set(CODEQL_BUILD_SCRIPT "${CMAKE_BINARY_DIR}/codeql_build.cmd")
+        file(WRITE "${CODEQL_BUILD_SCRIPT}" "\"${CMAKE_COMMAND}\" --build \"${CMAKE_BINARY_DIR}\" --target codeql-build\r\n")
+        set(CODEQL_BUILD_COMMAND "${CODEQL_BUILD_SCRIPT}")
+    else()
+        set(CODEQL_BUILD_COMMAND "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target codeql-build")
+    endif()
+
+    add_custom_target(codeql-analyze
+        COMMAND ${CODEQL_EXECUTABLE} database create
+            ${CMAKE_BINARY_DIR}/codeql-db
+            --language=c
+            --overwrite
+            --source-root=${CMAKE_SOURCE_DIR}
+            --command "${CODEQL_BUILD_COMMAND}"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMENT "Creating CodeQL database..."
+
+        COMMAND ${CODEQL_EXECUTABLE} database analyze
+                ${CMAKE_BINARY_DIR}/codeql-db
+                codeql/cpp-queries
+                --format=sarif-latest
+                --output=${CMAKE_BINARY_DIR}/codeql-report.sarif
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Running CodeQL analysis..."
+        VERBATIM
+    )
+else()
+    message(STATUS "CodeQL not found. Static analysis target 'codeql-analyze' will be unavailable.")
 endif()
 
 # ==============================================================================
