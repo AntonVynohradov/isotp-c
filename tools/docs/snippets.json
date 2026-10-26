@@ -1,0 +1,12 @@
+{
+  "stubs": "tools/docs/snippet_stubs.h",
+  "include": [".", "inc"],
+  "variants": [[]],
+  "optional": [
+    {
+      "name": "link",
+      "pattern": "^\\s*(static\\s+)?struct isotp_link link\\b",
+      "code": "static struct isotp_link link;"
+    }
+  ]
+}

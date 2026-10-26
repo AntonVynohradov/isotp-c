@@ -1,22 +1,53 @@
-MIT License
+# License
 
-Copyright (c) 2019-2024 Li Shen & Co-Operators
-Copyright (c) 2024 Simon Cahill & Contributors.
+ISOTP-C is free and open-source software, licensed under the
+**[MIT License](https://opensource.org/license/mit)**.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+| Item | Value |
+| --- | --- |
+| Copyright | © 2019-2024 Li Shen & Co-Operators; © 2024 Simon Cahill & Contributors; © 2026 Anton Vynohradov |
+| License | MIT License |
+| SPDX identifier | `MIT` |
+| Applies to | The library (`isotp.h`, `inc/`, `src/`), tests, examples, tools and this documentation |
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+The library keeps the license of the project it was forked from. The documentation
+tooling shared by the SystemFromScratch® protocol libraries is published under the same
+license in this repository.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## What the license allows
+
+In short — the full text below is authoritative:
+
+- **Use** the library in any project, open source or proprietary, commercial or not.
+- **Modify** it, **merge** it into other software, **distribute** and **sublicense** it,
+  in source or binary form, alone or as part of a product, and **sell** copies.
+
+## What it requires
+
+- Include the copyright notices and the permission notice in all copies or substantial
+  portions of the software.
+
+Firmware that links the library in binary form meets this by making the license text and
+the copyright notices available, for example in its documentation or "about" screen.
+
+## What it does not give
+
+- No warranty: the software is provided "as is".
+- No liability of the authors for any claim or damage.
+- No trademark rights: the license does not let you use the names of the authors or of
+  SystemFromScratch® to endorse your product.
+
+## Trademarks
+
+SystemFromScratch® is a registered trademark; the MIT License grants no rights to use the
+name or logo, and they may not be used to endorse or promote products derived from ISOTP-C
+without prior written permission. ISO 15765-2 is a standard of the International
+Organization for Standardization (ISO); the name is used in this documentation only to
+identify the protocol that ISOTP-C implements. ISOTP-C is an independent implementation
+and is not affiliated with or endorsed by ISO.
+
+## Full license text
+
+```text
+--8<-- "LICENSE"
+```

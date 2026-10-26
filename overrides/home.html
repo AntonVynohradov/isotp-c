@@ -1,0 +1,134 @@
+{#-
+  SystemFromScratch® protocol library landing page (MkDocs Material override).
+  Styled like https://systemfromscratch.github.io/ and driven entirely by
+  mkdocs.yml -> extra.landing, so projects edit data, not HTML.
+  docs/index.md (front matter "template: home.html") supplies the Quick start
+  Markdown, rendered after the stats.
+
+  Icons: chip, shield, flask, code, wave, memory, layers, plug, brackets,
+  monitor, document, check, bus, lock, clock, gauge.
+-#}
+{% extends "main.html" %}
+{% set L = config.extra.landing %}
+
+{% macro href(target) -%}
+  {%- if target.startswith('http') or target.startswith('mailto:') -%}{{ target }}{%- else -%}{{ target | url }}{%- endif -%}
+{%- endmacro %}
+
+{% macro arrow() -%}
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+{%- endmacro %}
+
+{% macro icon(name) -%}
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+{%- if name == 'chip' -%}<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>
+{%- elif name == 'shield' -%}<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>
+{%- elif name == 'flask' -%}<path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>
+{%- elif name == 'code' -%}<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/>
+{%- elif name == 'wave' -%}<path d="M2 12h3l2-6 3 12 3-9 2 5 2-2h5"/>
+{%- elif name == 'memory' -%}<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/>
+{%- elif name == 'layers' -%}<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>
+{%- elif name == 'plug' -%}<path d="M9 7V3M15 7V3M6 7h12v4a6 6 0 0 1-12 0zM12 17v4"/>
+{%- elif name == 'brackets' -%}<path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/>
+{%- elif name == 'monitor' -%}<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4M6 13l3-3 3 2 4-5"/>
+{%- elif name == 'document' -%}<path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/>
+{%- elif name == 'check' -%}<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/>
+{%- elif name == 'bus' -%}<path d="M2 12h20M6 12v6M12 12v6M18 12v6"/><rect x="3" y="4" width="6" height="5" rx="1"/>
+{%- elif name == 'lock' -%}<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+{%- elif name == 'clock' -%}<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+{%- elif name == 'gauge' -%}<path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/>
+{%- else -%}<circle cx="12" cy="12" r="8"/>
+{%- endif -%}
+</svg>
+{%- endmacro %}
+
+{% macro card(item, linked) -%}
+{% if linked and item.link %}<a class="sfs-card sfs-card--link" href="{{ href(item.link) }}">{% else %}<article class="sfs-card">{% endif %}
+  <div class="sfs-icon">{{ icon(item.icon) }}</div>
+  <h3>{{ item.title }}</h3>
+  <p>{{ item.text }}</p>
+  {% if item.tags %}<ul class="sfs-tags">{% for tag in item.tags %}<li>{{ tag }}</li>{% endfor %}</ul>{% endif %}
+{% if linked and item.link %}</a>{% else %}</article>{% endif %}
+{%- endmacro %}
+
+{% macro buttons(items) -%}
+<div class="sfs-actions">
+  {% for b in items %}
+  <a class="sfs-btn sfs-btn--{{ b.style | default('primary') }}" href="{{ href(b.link) }}">{{ b.text }} {{ arrow() }}</a>
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% block tabs %}
+{{ super() }}
+<section class="sfs-hero">
+  <div class="sfs-container sfs-hero__grid">
+    <div class="sfs-hero__text">
+      <span class="sfs-eyebrow">{{ L.eyebrow }}</span>
+      <h1>{{ L.title }}<span class="sfs-accent">{{ L.accent }}</span></h1>
+      <div class="sfs-rule"></div>
+      <p class="sfs-lead">{{ L.lead }}</p>
+      {{ buttons(L.buttons) }}
+      <ul class="sfs-features">
+        {% for f in L.features %}
+        <li>{{ icon(f.icon) }}<span>{{ f.line1 }}<br>{{ f.line2 }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="sfs-hero__visual">
+      <img src="{{ L.hero_image | url }}" alt="{{ L.hero_alt }}">
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block site_nav %}{% endblock %}
+
+{% block content %}
+<div class="sfs-home">
+
+  <section class="sfs-section">
+    <span class="sfs-eyebrow">{{ L.problem.eyebrow | default('The problem') }}</span>
+    <h2 class="sfs-title">{{ L.problem.title }}</h2>
+    <p class="sfs-intro">{{ L.problem.intro }}</p>
+    <div class="sfs-grid">
+      {% for item in L.problem.cards %}{{ card(item, false) }}{% endfor %}
+    </div>
+  </section>
+
+  <section class="sfs-section">
+    <span class="sfs-eyebrow">{{ L.offer.eyebrow | default('What you get') }}</span>
+    <h2 class="sfs-title">{{ L.offer.title }}</h2>
+    <p class="sfs-intro">{{ L.offer.intro }}</p>
+    <div class="sfs-grid">
+      {% for item in L.offer.cards %}{{ card(item, true) }}{% endfor %}
+    </div>
+  </section>
+
+  {% if L.stats %}
+  <section class="sfs-section">
+    <div class="sfs-stats">
+      {% for s in L.stats %}<div><strong>{{ s.value }}</strong><span>{{ s.label }}</span></div>{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="sfs-section sfs-markdown md-typeset">
+    {{ page.content }}
+  </section>
+
+  <section class="sfs-section">
+    <div class="sfs-portfolio">
+      <div>
+        <img class="sfs-portfolio__logo" src="{{ 'assets/images/brand/systemfromscratch-logo-on-dark.png' | url }}" alt="SystemFromScratch® logo">
+        <span class="sfs-eyebrow">SystemFromScratch®</span>
+        <h2 class="sfs-title">{{ L.portfolio.title | default('Part of an open-source embedded portfolio') }}</h2>
+        <p class="sfs-intro">{{ L.portfolio.text }}</p>
+      </div>
+      {{ buttons(L.portfolio.buttons) }}
+    </div>
+    <p class="sfs-trademark">{{ L.trademark }}</p>
+  </section>
+
+</div>
+{% endblock %}

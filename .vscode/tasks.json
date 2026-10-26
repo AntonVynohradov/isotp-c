@@ -1,0 +1,318 @@
+{
+  // ISOTP-C tasks. Task menu: Ctrl+Shift+B (no default build task, so VS Code
+  // shows the list) or Terminal > Run Task...
+  // Python tasks use the project virtual environment in .venv; run
+  // "Python: Setup venv" once before the tool, test and documentation tasks.
+  // Works on Windows, Linux and macOS ("windows" blocks override the defaults).
+  // Every task is "type": "process" with explicit args: the default Windows shell
+  // (PowerShell 5.1) has no "&&" and treats the brackets of build/ISOTP[...] as
+  // wildcards. Destructive tasks (Delete venv, Clean) are never dependencies.
+  "version": "2.0.0",
+  "options": {
+    "cwd": "${workspaceFolder}"
+  },
+  "tasks": [
+    // ======================================================================
+    // Python virtual environment
+    // ======================================================================
+    {
+      "label": "Python: Create venv",
+      "hide": true,
+      "detail": "Create the .venv virtual environment",
+      "type": "process",
+      "command": "python3",
+      "args": ["-m", "venv", ".venv"],
+      "windows": {
+        "command": "py",
+        "args": ["-3", "-m", "venv", ".venv"]
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Python: Install requirements",
+      "hide": true,
+      "detail": "pip install -r requirements-dev.txt (tool, pytest, MkDocs)",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+      },
+      "args": ["-m", "pip", "install", "--upgrade", "-r", "requirements-dev.txt"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Python: Setup venv",
+      "group": "build",
+      "detail": "Create .venv and install all development requirements",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Python: Create venv", "Python: Install requirements"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Python: Delete venv",
+      "group": "build",
+      "detail": "Remove the .venv folder",
+      "type": "process",
+      "command": "cmake",
+      "args": ["-E", "rm", "-rf", ".venv"],
+      "problemMatcher": []
+    },
+
+    // ======================================================================
+    // Desktop tool of the project (optional, tools/isotp_<tool>): put its
+    // "<Tool>: ..." tasks here (build the native bridge, run each mode, list
+    // serial ports, clean), process tasks like every other one.
+    // ======================================================================
+
+    // ======================================================================
+    // Library build (CMakePresets.json)
+    // ======================================================================
+    {
+      "label": "Library: Configure (Debug)",
+      "hide": true,
+      "type": "process",
+      "command": "cmake",
+      "args": ["--preset", "ISOTP[Debug]"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Library: Build (Debug)",
+      "group": "build",
+      "detail": "Static library with debug information",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "build/ISOTP[Debug]"],
+      "dependsOn": ["Library: Configure (Debug)"],
+      "problemMatcher": {
+        "base": "$gcc",
+        "fileLocation": "absolute"
+      }
+    },
+    {
+      "label": "Library: Configure (Release)",
+      "hide": true,
+      "type": "process",
+      "command": "cmake",
+      "args": ["--preset", "ISOTP[Release]"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Library: Build (Release)",
+      "group": "build",
+      "detail": "Optimized static library (libisotp.a)",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "build/ISOTP[Release]"],
+      "dependsOn": ["Library: Configure (Release)"],
+      "problemMatcher": {
+        "base": "$gcc",
+        "fileLocation": "absolute"
+      }
+    },
+    {
+      "label": "Library: Clean all builds",
+      "group": "build",
+      "detail": "Remove the build folder of every preset",
+      "type": "process",
+      "command": "cmake",
+      "args": ["-E", "rm", "-rf", "build"],
+      "problemMatcher": []
+    },
+
+    // ======================================================================
+    // Tests
+    // ======================================================================
+    {
+      "label": "Tests: Configure unit tests",
+      "hide": true,
+      "type": "process",
+      "command": "cmake",
+      "args": ["--preset", "ISOTP[UnitTests]"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Tests: Build unit tests",
+      "hide": true,
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "build/ISOTP[UnitTests]"],
+      "dependsOn": ["Tests: Configure unit tests"],
+      "problemMatcher": {
+        "base": "$gcc",
+        "fileLocation": "absolute"
+      }
+    },
+    {
+      "label": "Tests: Run unit tests",
+      "group": "build",
+      "detail": "GoogleTest suite through CTest",
+      "type": "process",
+      "command": "ctest",
+      "args": ["--test-dir", "build/ISOTP[UnitTests]", "-L", "unit", "--output-on-failure"],
+      "dependsOn": ["Tests: Build unit tests"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Tests: Coverage report",
+      "group": "build",
+      "detail": "Unit tests + gcovr report (target 'coverage')",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "build/ISOTP[UnitTests]", "--target", "coverage"],
+      "dependsOn": ["Tests: Configure unit tests"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Tests: Run integration tests",
+      "group": "build",
+      "detail": "pytest suite (Python codec and C/Python cross-check), uses .venv",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+      },
+      "args": ["-m", "pytest", "tests/integration", "-v", "-p", "no:cacheprovider"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Tests: Configure examples",
+      "hide": true,
+      "type": "process",
+      "command": "cmake",
+      "args": ["--preset", "ISOTP[Examples]"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Tests: Build examples",
+      "hide": true,
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "build/ISOTP[Examples]"],
+      "dependsOn": ["Tests: Configure examples"],
+      "problemMatcher": {
+        "base": "$gcc",
+        "fileLocation": "absolute"
+      }
+    },
+    {
+      "label": "Tests: Run examples",
+      "group": "build",
+      "detail": "Build the examples and run the bare-metal example on the simulated bus",
+      "type": "process",
+      "command": "ctest",
+      "args": ["--test-dir", "build/ISOTP[Examples]", "-L", "example", "--output-on-failure"],
+      "dependsOn": ["Tests: Build examples"],
+      "problemMatcher": []
+    },
+
+    // ======================================================================
+    // Static analysis (targets exist when the tools are installed)
+    // ======================================================================
+    {
+      "label": "Analysis: Cppcheck",
+      "group": "build",
+      "detail": "Target 'cppcheck-analyze' (report in build/ISOTP[Debug]/cppcheck.txt)",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "build/ISOTP[Debug]", "--target", "cppcheck-analyze"],
+      "dependsOn": ["Library: Configure (Debug)"],
+      "problemMatcher": {
+        "base": "$gcc",
+        "fileLocation": "absolute"
+      }
+    },
+    {
+      "label": "Analysis: MISRA C:2012",
+      "group": "build",
+      "detail": "Target 'misra-analyze' (report in build/ISOTP[Debug]/misra.txt)",
+      "type": "process",
+      "command": "cmake",
+      "args": ["--build", "build/ISOTP[Debug]", "--target", "misra-analyze"],
+      "dependsOn": ["Library: Configure (Debug)"],
+      "problemMatcher": []
+    },
+
+    // ======================================================================
+    // Documentation (MkDocs + mkdoxy, needs Doxygen in PATH)
+    // ======================================================================
+    {
+      "label": "Docs: Serve on localhost",
+      "group": "build",
+      "detail": "mkdocs serve on http://127.0.0.1:8000 with live reload; opens the browser",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+      },
+      "args": ["-m", "mkdocs", "serve", "--dev-addr", "127.0.0.1:${input:docsPort}", "--open"],
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": {
+        "owner": "mkdocs",
+        "pattern": { "regexp": "^(ERROR|WARNING)\\s+-\\s+(.*)$", "severity": 1, "message": 2 },
+        "background": {
+          "activesBegin": true,
+          "beginsPattern": "Building documentation",
+          "endsPattern": "Serving on"
+        }
+      }
+    },
+    {
+      "label": "Docs: Build site",
+      "group": "build",
+      "detail": "mkdocs build into site/",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+      },
+      "args": ["-m", "mkdocs", "build", "--clean"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docs: Build PDF manual",
+      "group": "build",
+      "detail": "Print-ready A4 user manual (cover, contents, page numbers) into build/manual/; needs WeasyPrint and Pango",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+      },
+      "args": ["tools/docs/build_manual.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docs: Generate diagrams",
+      "group": "build",
+      "detail": "Regenerate the SVG diagrams in docs/assets/images from tools/docs/diagrams.py",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+      },
+      "args": ["tools/docs/diagrams.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docs: Check C snippets",
+      "group": "build",
+      "detail": "Compile every C code block of docs/*.md against the library (needs gcc)",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+      },
+      "args": ["tools/docs/check_snippets.py"],
+      "problemMatcher": []
+    }
+  ],
+
+  "inputs": [
+    {
+      "id": "docsPort",
+      "type": "promptString",
+      "description": "Local documentation port",
+      "default": "8000"
+    }
+  ]
+}

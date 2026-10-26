@@ -1,21 +1,23 @@
 name: Google Unit Tests
 
 on:
-  workflow_run:
-    workflows: ["Check Building Static Library"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    branches:
+      - main
+      - development
 
 jobs:
   unit-tests:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.pull_requests[0].head.sha || github.event.workflow_run.head_sha }}
           fetch-depth: 0
 
       - name: Install Google Test and gcovr
@@ -24,16 +26,16 @@ jobs:
           sudo apt-get install -y libgtest-dev gcovr
 
       - name: Configure (UnitTests preset)
-        run: cmake --preset "ISO-TP[UnitTests]" -B "build/ISO-TP[UnitTests]"
+        run: cmake --preset "ISOTP[UnitTests]" -B "build/ISOTP[UnitTests]"
 
       - name: Build (coverage)
-        run: cmake --build "build/ISO-TP[UnitTests]" --target coverage
+        run: cmake --build "build/ISOTP[UnitTests]" --target coverage
 
       - name: Test
-        run: ctest --test-dir "build/ISO-TP[UnitTests]" --output-on-failure
+        run: ctest --test-dir "build/ISOTP[UnitTests]" --output-on-failure
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: build/ISO-TP\[UnitTests\]/Coverage
+          path: build/ISOTP\[UnitTests\]/Coverage

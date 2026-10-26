@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 470" width="980" height="470" role="img" aria-label="ISO-TP frame types (classical CAN, normal addressing)">
+<title>ISO-TP frame types (classical CAN, normal addressing)</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5A6472"/></marker><marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F8B9A"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E07A00"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32"/></marker></defs>
+<rect x="0" y="0" width="980" height="470" rx="12" fill="#FFFFFF"/>
+<text x="20" y="30" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="bold" fill="#5A6472" text-anchor="start">Byte</text>
+<text x="294.0" y="30" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="normal" fill="#5A6472" text-anchor="middle">0</text>
+<text x="382.0" y="30" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="normal" fill="#5A6472" text-anchor="middle">1</text>
+<text x="470.0" y="30" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="normal" fill="#5A6472" text-anchor="middle">2</text>
+<text x="558.0" y="30" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="normal" fill="#5A6472" text-anchor="middle">3</text>
+<text x="646.0" y="30" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="normal" fill="#5A6472" text-anchor="middle">4</text>
+<text x="734.0" y="30" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="normal" fill="#5A6472" text-anchor="middle">5</text>
+<text x="822.0" y="30" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="normal" fill="#5A6472" text-anchor="middle">6</text>
+<text x="910.0" y="30" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="normal" fill="#5A6472" text-anchor="middle">7</text>
+<text x="20" y="80" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E5AA8" text-anchor="start">Single Frame (SF)</text>
+<rect x="251" y="56" width="86" height="38" rx="5" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="294.0" y="80" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">0 | SF_DL</text>
+<rect x="339" y="56" width="614" height="38" rx="5" fill="#1E5AA8" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="646.0" y="80" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">data, 1..7 bytes</text>
+<text x="250" y="112" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="start">e.g. 02 10 03</text>
+<text x="954" y="112" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="end">2-byte message 10 03</text>
+<text x="20" y="162" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E5AA8" text-anchor="start">First Frame (FF)</text>
+<rect x="251" y="138" width="174" height="38" rx="5" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="338.0" y="162" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">1 | FF_DL 12 bit</text>
+<rect x="427" y="138" width="526" height="38" rx="5" fill="#1E5AA8" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="690.0" y="162" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">first 6 data bytes</text>
+<text x="250" y="194" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="start">e.g. 10 14 00 01 02 03 04 05</text>
+<text x="954" y="194" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="end">20-byte message</text>
+<text x="20" y="244" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E5AA8" text-anchor="start">FF, 32-bit FF_DL</text>
+<rect x="251" y="220" width="174" height="38" rx="5" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="338.0" y="244" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">10 00</text>
+<rect x="427" y="220" width="350" height="38" rx="5" fill="#0F8B9A" stroke="#0F8B9A" stroke-width="1.5"/>
+<text x="602.0" y="244" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">FF_DL, 32 bit BE</text>
+<rect x="779" y="220" width="174" height="38" rx="5" fill="#1E5AA8" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="866.0" y="244" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">2 data</text>
+<text x="250" y="276" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="start">e.g. 10 00 00 00 10 00 AA BB</text>
+<text x="954" y="276" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="end">4096-byte message</text>
+<text x="20" y="326" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="14" font-weight="bold" fill="#0F8B9A" text-anchor="start">Consecutive Frame (CF)</text>
+<rect x="251" y="302" width="86" height="38" rx="5" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="294.0" y="326" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">2 | SN</text>
+<rect x="339" y="302" width="614" height="38" rx="5" fill="#0F8B9A" stroke="#0F8B9A" stroke-width="1.5"/>
+<text x="646.0" y="326" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">next 1..7 data bytes</text>
+<text x="250" y="358" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="start">e.g. 21 06 07 08 09 0A 0B 0C</text>
+<text x="954" y="358" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="end">SN = 1</text>
+<text x="20" y="408" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="14" font-weight="bold" fill="#E07A00" text-anchor="start">Flow Control (FC)</text>
+<rect x="251" y="384" width="86" height="38" rx="5" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="294.0" y="408" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">3 | FS</text>
+<rect x="339" y="384" width="86" height="38" rx="5" fill="#E07A00" stroke="#E07A00" stroke-width="1.5"/>
+<text x="382.0" y="408" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">BS</text>
+<rect x="427" y="384" width="86" height="38" rx="5" fill="#E07A00" stroke="#E07A00" stroke-width="1.5"/>
+<text x="470.0" y="408" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">STmin</text>
+<rect x="515" y="384" width="438" height="38" rx="5" fill="#F2F5FA" stroke="#C9D3E0" stroke-width="1.5"/>
+<text x="734.0" y="408" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#5A6472" text-anchor="middle">not used (padding)</text>
+<text x="250" y="440" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="start">e.g. 30 08 14</text>
+<text x="954" y="440" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="end">CTS, BS 8, STmin 20 ms</text>
+<text x="490" y="462" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#5A6472" text-anchor="middle">N_PCI type in the high nibble of byte 0. FF_DL 0 escapes to a 32-bit length (messages &gt; 4095 bytes).</text>
+</svg>

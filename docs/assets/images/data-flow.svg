@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 990 310" width="990" height="310" role="img" aria-label="Receive and transmit data flow">
+<title>Receive and transmit data flow</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5A6472"/></marker><marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F8B9A"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E07A00"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32"/></marker></defs>
+<rect x="0" y="0" width="990" height="310" rx="12" fill="#FFFFFF"/>
+<text x="20" y="28" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="14" font-weight="bold" fill="#0F8B9A" text-anchor="start">Receive</text>
+<rect x="20" y="40" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#C9D3E0" stroke-width="1.5"/>
+<text x="106" y="68" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">CAN RX ISR</text>
+<text x="106" y="90" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">queue frames</text>
+<line x1="192" y1="72" x2="212" y2="72" stroke="#0F8B9A" stroke-width="2" marker-end="url(#arrow-teal)"/>
+<rect x="214" y="40" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#C9D3E0" stroke-width="1.5"/>
+<text x="300" y="68" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">main loop / task</text>
+<text x="300" y="90" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">filter the CAN ID</text>
+<line x1="386" y1="72" x2="406" y2="72" stroke="#0F8B9A" stroke-width="2" marker-end="url(#arrow-teal)"/>
+<rect x="408" y="40" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#0F8B9A" stroke-width="1.5"/>
+<text x="494" y="68" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">isotp_link_receive()</text>
+<text x="494" y="90" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">one frame, now_us</text>
+<line x1="580" y1="72" x2="600" y2="72" stroke="#0F8B9A" stroke-width="2" marker-end="url(#arrow-teal)"/>
+<rect x="602" y="40" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#0F8B9A" stroke-width="1.5"/>
+<text x="688" y="68" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">isotp_decode()</text>
+<text x="688" y="90" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">validate N_PCI</text>
+<line x1="774" y1="72" x2="794" y2="72" stroke="#0F8B9A" stroke-width="2" marker-end="url(#arrow-teal)"/>
+<rect x="796" y="40" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#C9D3E0" stroke-width="1.5"/>
+<text x="882" y="68" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">on_message()</text>
+<text x="882" y="90" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">your code</text>
+<text x="970" y="158" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="14" font-weight="bold" fill="#E07A00" text-anchor="end">Transmit</text>
+<line x1="882" y1="104" x2="882" y2="168" stroke="#E07A00" stroke-width="2" marker-end="url(#arrow-orange)"/>
+<rect x="796" y="170" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#E07A00" stroke-width="1.5"/>
+<text x="882" y="198" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">isotp_link_send()</text>
+<text x="882" y="220" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">SF now, or FF</text>
+<line x1="796" y1="202" x2="776" y2="202" stroke="#E07A00" stroke-width="2" marker-end="url(#arrow-orange)"/>
+<rect x="602" y="170" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#E07A00" stroke-width="1.5"/>
+<text x="688" y="198" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">isotp_link_poll()</text>
+<text x="688" y="220" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">CFs at STmin</text>
+<line x1="602" y1="202" x2="582" y2="202" stroke="#E07A00" stroke-width="2" marker-end="url(#arrow-orange)"/>
+<rect x="408" y="170" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#C9D3E0" stroke-width="1.5"/>
+<text x="494" y="198" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">write callback</text>
+<text x="494" y="220" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">your CAN driver</text>
+<line x1="408" y1="202" x2="388" y2="202" stroke="#E07A00" stroke-width="2" marker-end="url(#arrow-orange)"/>
+<rect x="214" y="170" width="172" height="64" rx="8" fill="#F2F5FA" stroke="#C9D3E0" stroke-width="1.5"/>
+<text x="300" y="198" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#0B2545" text-anchor="middle">CAN TX mailbox</text>
+<text x="300" y="220" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">frames out</text>
+<text x="20" y="284" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#5A6472" text-anchor="start">on_message() runs inside isotp_link_receive(), in the caller's context; it may answer with isotp_link_send() at once.</text>
+</svg>

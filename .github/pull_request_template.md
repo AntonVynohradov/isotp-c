@@ -23,34 +23,35 @@ Describe the specific changes:
 - Change 3
 
 ## Testing Performed
-- [ ] Unit tests added/updated
-- [ ] Manual testing completed
-- [ ] All existing tests pass
+- [ ] Unit tests added/updated (GoogleTest, `tests/unit/`)
+- [ ] Integration tests pass (pytest, `tests/integration/`, including the C/Python cross-check)
+- [ ] Reference frames still pass (`docs/protocol.md`, `tests/unit/gtest_isotp_decode.cpp`)
 - [ ] No regression detected
 
-## CERT C Compliance Checklist
-- [ ] Code follows CERT C Coding Standard guidelines
-- [ ] All variables properly initialized
-- [ ] No buffer overflows possible
-- [ ] No integer overflow risks
-- [ ] Input validation implemented
-- [ ] Error handling complete
-- [ ] Memory management correct (no leaks)
-- [ ] No unsafe string functions used
+## MISRA C:2012 Compliance Checklist
+- [ ] `misra-analyze` reports no new violations
+- [ ] Every remaining deviation is documented (rule, location, rationale)
+- [ ] No dynamic memory allocation (Rule 21.3)
+- [ ] No recursion (Rule 17.2)
+- [ ] All non-void return values are used or explicitly cast to `void` (Rule 17.7)
+- [ ] Essential type rules respected; no implicit narrowing (Rules 10.x)
+- [ ] All `if ... else if` chains end with `else` (Rule 15.7)
+- [ ] `switch` statements have a `default` clause (Rule 16.4)
 
 ## Code Review Checklist
 - [ ] All Copilot code review comments addressed
-- [ ] Code style is consistent
+- [ ] Code style is consistent (`clang-format` clean)
+- [ ] Builds without warnings with `-Wall -Wextra -Wpedantic -Wconversion`
 - [ ] Comments explain "why", not "what"
-- [ ] Function complexity is acceptable
+- [ ] Public API items have Doxygen comments
 - [ ] Documentation updated if needed
 
 ## Embedded Systems Considerations
-- [ ] Memory footprint optimized
-- [ ] No blocking operations in critical sections
-- [ ] Timing constraints documented
-- [ ] No dynamic allocation in interrupt handlers
-- [ ] Static allocation preferred where possible
+- [ ] Library code includes only `<stddef.h>`, `<stdint.h>`, `<stdbool.h>`, `<string.h>` and ISOTP headers
+- [ ] No OS, driver or hardware dependency added
+- [ ] No global mutable state; all state in caller-owned structures
+- [ ] Stack and RAM footprint impact documented (`docs/configuration.md`)
+- [ ] Behavior matches the ISO 15765-2 (ISO-TP) specification; wire-format changes are a new major version
 
 ## Breaking Changes
 - [ ] This PR introduces breaking changes

@@ -20,8 +20,11 @@
     }
   ],
   "// C/C++ Intellisense": "Configure C code analysis",
-  "C_Cpp.default.cStandard": "c99",
-  "C_Cpp.default.intelliSenseEngine": "Tag Parser",
+  "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}",
+    "${workspaceFolder}/inc"
+  ],
   "[c]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
@@ -29,12 +32,9 @@
     "editor.defaultFormatter": "xaver.clang-format"
   },
   "editor.formatOnSave": true,
-  "extensions.recommendations": [
-    "ms-vscode.cpptools",
-    "xaver.clang-format",
-    "ms-vscode.cmake-tools",
-    "gruntfuggly.auto-snippet"
-  ],
   "editor.trimWhitespaceOnDelete": true,
-  "files.trimTrailingWhitespace": true
+  "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    "*.cmake": "cmake"
+  }
 }

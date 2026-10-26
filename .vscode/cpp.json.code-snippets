@@ -2,14 +2,14 @@
   "isotp_header": {
     "body": [
       "/*******************************************************************************",
-      " * ISO-TP-C: ISO 15765-2 Protocol Implementation",
+      " * ISOTP-C: ISO 15765-2 (ISO-TP) Implementation",
       " *",
-      " * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization",
+      " * Project:     ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library",
       " * Description: ${1:File description - briefly describe purpose of this header}",
       " *",
       " * Author:      Anton Vynohradov",
       " * Email:       avynohradov@systemfromscratch.com",
-      " * ",
+      " *",
       " * License:     MIT License",
       " *",
       " * Copyright (c) 2026 Anton Vynohradov",
@@ -78,19 +78,19 @@
       "#endif /* ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H */",
       ""
     ],
-    "description": "ISO-TP-C Header File Template"
+    "description": "ISOTP-C Header File Template"
   },
   "isotp_source": {
     "body": [
       "/*******************************************************************************",
-      " * ISO-TP-C: ISO 15765-2 Protocol Implementation",
+      " * ISOTP-C: ISO 15765-2 (ISO-TP) Implementation",
       " *",
-      " * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization",
+      " * Project:     ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library",
       " * Description: ${1:File description - briefly describe purpose of this source file}",
       " *",
       " * Author:      Anton Vynohradov",
       " * Email:       avynohradov@systemfromscratch.com",
-      " * ",
+      " *",
       " * License:     MIT License",
       " *",
       " * Copyright (c) 2026 Anton Vynohradov",
@@ -158,7 +158,7 @@
       "/**",
       " * @brief   ${7:Description of private function}",
       " * @param   None",
-      " * @return  ISOTP_RET_OK on success, error code on failure",
+      " * @return  0 on success, error code on failure",
       " */",
       "static int ${6:private_function}(void)",
       "{",
@@ -173,7 +173,7 @@
       "/**",
       " * @brief   ${9:Description of public function}",
       " * @param   ${10:param1} - Parameter description",
-      " * @return  ISOTP_RET_OK on success, error code on failure",
+      " * @return  0 on success, error code on failure",
       " */",
       "int ${11:public_function}(void)",
       "{",
@@ -182,14 +182,14 @@
       "}",
       ""
     ],
-    "description": "ISO-TP-C Source File Template"
+    "description": "ISOTP-C Source File Template"
   },
   "isotp_gtest": {
     "body": [
       "/*******************************************************************************",
-      " * ISO-TP-C: ISO 15765-2 Protocol Implementation",
+      " * ISOTP-C: ISO 15765-2 (ISO-TP) Implementation",
       " *",
-      " * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization",
+      " * Project:     ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library",
       " * Description: ${1:Unit tests for ...}",
       " *",
       " * Author:      Anton Vynohradov",
@@ -271,14 +271,14 @@
       "}",
       ""
     ],
-    "description": "ISO-TP-C GoogleTest C++ Template"
+    "description": "ISOTP-C GoogleTest C++ Template"
   },
   "isotp_cmake": {
     "body": [
       "################################################################################",
-      "# ISO-TP-C: ISO 15765-2 Protocol Implementation",
+      "# ISOTP-C: ISO 15765-2 (ISO-TP) Implementation",
       "#",
-      "# Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization",
+      "# Project:     ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library",
       "# Description: ${1:Brief description of this CMake file purpose}",
       "#",
       "# Author:      Anton Vynohradov",
@@ -287,11 +287,11 @@
       "# Copyright:   (c) 2026 Anton Vynohradov",
       "#",
       "# References:",
-      "#   - ISO 15765-2 Standard (ISO-TP Protocol)",
-      "#   - CERT C Coding Standard: https://wiki.sei.cmu.edu/confluence/display/c/",
+      "#   - ISO 15765-2 (ISO-TP) specification: https://www.iso.org/standard/84211.html",
+      "#   - MISRA C:2012 Guidelines for the use of the C language in critical systems",
       "#   - CMake Documentation: https://cmake.org/documentation/",
       "#",
-      "# Last Updated: February 2026",
+      "# Last Updated: October 2026",
       "# SPDX-License-Identifier: MIT",
       "#",
       "################################################################################",
@@ -306,7 +306,7 @@
       "    LANGUAGES C)",
       "",
       "# Set C standard",
-      "set(CMAKE_C_STANDARD 99)",
+      "set(CMAKE_C_STANDARD 11)",
       "set(CMAKE_C_STANDARD_REQUIRED ON)",
       "set(CMAKE_C_EXTENSIONS OFF)",
       "",
@@ -367,6 +367,6 @@
       "${10:# install(TARGETS ${PROJECT_NAME} ...)}",
       ""
     ],
-    "description": "ISO-TP-C CMake Template"
+    "description": "ISOTP-C CMake Template"
   }
 }
