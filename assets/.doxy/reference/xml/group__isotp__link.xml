@@ -1,0 +1,692 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="group__isotp__link" kind="group">
+    <compoundname>isotp_link</compoundname>
+    <title>Link</title>
+    <innerclass refid="structisotp__link__config" prot="public">isotp_link_config</innerclass>
+    <innerclass refid="structisotp__link" prot="public">isotp_link</innerclass>
+    <sectiondef kind="user-defined">
+      <header>Type definitions</header>
+      <memberdef kind="enum" id="group__isotp__link_1gaedcc04d98e69a7c85b832d2bb251924e" prot="public" static="no" strong="no">
+        <type></type>
+        <name>isotp_tx_state</name>
+        <enumvalue id="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924ea7ee35bceac3c46a79a6170e8a454d6de" prot="public">
+          <name>ISOTP_TX_IDLE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>No transmission. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924eaaf91c8b44a112e9e9b64dac1f8c3cdcd" prot="public">
+          <name>ISOTP_TX_WAIT_FC</name>
+          <briefdescription>
+<para>First Frame or block sent, waiting for Flow Control. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924ead33206e6e86c42540af3071001982cdc" prot="public">
+          <name>ISOTP_TX_SEND_CF</name>
+          <briefdescription>
+<para>Sending Consecutive Frames. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Transmitter state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="142" column="1" bodyfile="inc/isotp_link.h" bodystart="143" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="enum" id="group__isotp__link_1ga7be50a331f713987017afc15561602eb" prot="public" static="no" strong="no">
+        <type></type>
+        <name>isotp_rx_state</name>
+        <enumvalue id="group__isotp__link_1gga7be50a331f713987017afc15561602eba332cf684233753c6f798b54a4ad0130a" prot="public">
+          <name>ISOTP_RX_IDLE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>No reception. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__isotp__link_1gga7be50a331f713987017afc15561602eba48daf846c7827aa432c83ca2078c93b1" prot="public">
+          <name>ISOTP_RX_RECEIVING</name>
+          <briefdescription>
+<para>First Frame received, collecting Consecutive Frames. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Receiver state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="150" column="1" bodyfile="inc/isotp_link.h" bodystart="151" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__isotp__link_1gaca5ac2c2a69d9635bb30e83da20a3b82" prot="public" static="no">
+        <type>int(*</type>
+        <definition>typedef int(* isotp_can_write_fn) (void *context, uint32_t can_id, const uint8_t *data, size_t length)</definition>
+        <argsstring>)(void *context, uint32_t can_id, const uint8_t *data, size_t length)</argsstring>
+        <name>isotp_can_write_fn</name>
+        <briefdescription>
+<para>Write one CAN frame to the bus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of <ref refid="structisotp__link__config_1af9eeae1d1524f31c55e4e621ef43d4a0" kindref="member">isotp_link_config::write_context</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>can_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CAN identifier of the frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame data; valid only during the call. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of data bytes, 1..8. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame queued for transmission. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ISOTP_BUSY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>No space in the transmit queue; the link retries a Consecutive Frame on the next <ref refid="group__isotp__link_1ga9dcb3f75843c4f1c43b16bfca38a0814" kindref="member">isotp_link_poll</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Driver error: the transmission ends with ISOTP_N_ERROR. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="97" column="9" bodyfile="inc/isotp_link.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__isotp__link_1ga935341511653dcc1310e96cc5ac15bde" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* isotp_message_handler_t) (const uint8_t *data, uint32_t length, void *context)</definition>
+        <argsstring>)(const uint8_t *data, uint32_t length, void *context)</argsstring>
+        <name>isotp_message_handler_t</name>
+        <briefdescription>
+<para>Handle one complete received message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data is valid only for the duration of the callback; copy what must be kept. The handler may call <ref refid="group__isotp__link_1ga2883f7405a37500b850b7d45b0367d51" kindref="member">isotp_link_send</ref> on the same link to answer. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message length in bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of <ref refid="structisotp__link__config_1acfcff52da69bf2874f590839dfbe9f36" kindref="member">isotp_link_config::app_context</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="109" column="9" bodyfile="inc/isotp_link.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__isotp__link_1gaceec199e351718c2ec58211e7c56dd6d" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* isotp_result_fn) (int n_result, void *context)</definition>
+        <argsstring>)(int n_result, void *context)</argsstring>
+        <name>isotp_result_fn</name>
+        <briefdescription>
+<para>Report the outcome of a transmission or a failed reception. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n_result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISOTP_N_* code. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of <ref refid="structisotp__link__config_1acfcff52da69bf2874f590839dfbe9f36" kindref="member">isotp_link_config::app_context</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="116" column="9" bodyfile="inc/isotp_link.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Public function declarations</header>
+      <memberdef kind="function" id="group__isotp__link_1gadd4f1f0a9fde1d1b8d2f344bdc4381b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_link_config_default</definition>
+        <argsstring>(struct isotp_link_config *config)</argsstring>
+        <name>isotp_link_config_default</name>
+        <param>
+          <type>struct <ref refid="structisotp__link__config" kindref="compound">isotp_link_config</ref> *</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>Fill a configuration with the defaults of <ref refid="isotp__config_8h" kindref="compound">isotp_config.h</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>CAN ID 0, no writer, no callbacks, no padding (padding value 0xCC), ISOTP_DEFAULT_* flow control and timeouts. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration to fill; nothing happens when NULL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="193" column="6" bodyfile="src/isotp_link.c" bodystart="331" bodyend="350" declfile="inc/isotp_link.h" declline="193" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1ga9e8b1316e9e9aa54335beffb412e6957" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_link_init</definition>
+        <argsstring>(struct isotp_link *link, const struct isotp_link_config *config)</argsstring>
+        <name>isotp_link_init</name>
+        <param>
+          <type>struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structisotp__link__config" kindref="compound">isotp_link_config</ref> *</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>Initialize a link: copy the configuration, clear both directions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Link state to initialize. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration copied into the link. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>ISOTP_OK</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Link ready. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ISOTP_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>NULL argument, no writer, or a value out of range. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="202" column="5" bodyfile="src/isotp_link.c" bodystart="352" bodyend="370" declfile="inc/isotp_link.h" declline="202" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1gaae3f928524c58c8f770c792cfacbb0e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_link_receive</definition>
+        <argsstring>(struct isotp_link *link, const uint8_t *data, size_t length, uint32_t now_us)</argsstring>
+        <name>isotp_link_receive</name>
+        <param>
+          <type>struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>now_us</declname>
+        </param>
+        <briefdescription>
+<para>Process one received CAN frame addressed to this link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Single Frames and the last Consecutive Frame complete a message and call the message handler. A First Frame is answered with a Flow Control frame. Malformed frames are ignored and counted; unexpected Consecutive and Flow Control frames are ignored. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Link state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CAN frame data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CAN data length, 1..8. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>now_us</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current time in microseconds (free-running, wraps at 2^32). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="215" column="6" bodyfile="src/isotp_link.c" bodystart="372" bodyend="401" declfile="inc/isotp_link.h" declline="215" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1ga2883f7405a37500b850b7d45b0367d51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_link_send</definition>
+        <argsstring>(struct isotp_link *link, const uint8_t *payload, uint32_t length, uint32_t now_us)</argsstring>
+        <name>isotp_link_send</name>
+        <param>
+          <type>struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>now_us</declname>
+        </param>
+        <briefdescription>
+<para>Start sending one message to the peer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A message of up to 7 bytes is sent at once as a Single Frame and reported to on_tx_done before the call returns. A longer message is copied into the link, its First Frame is sent, and the rest follows from <ref refid="group__isotp__link_1ga9dcb3f75843c4f1c43b16bfca38a0814" kindref="member">isotp_link_poll</ref> as the receiver&apos;s flow control allows. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Link state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message length, 1..ISOTP_TX_BUFFER_SIZE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>now_us</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current time in microseconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>ISOTP_OK</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message accepted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ISOTP_BUSY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A segmented transmission is in progress, or the writer is busy. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ISOTP_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Invalid argument or message too long. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Error returned by the writer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="233" column="5" bodyfile="src/isotp_link.c" bodystart="403" bodyend="446" declfile="inc/isotp_link.h" declline="233" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1gabf6b948e5e7c28312f610ab1ef0e1219" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_link_send_functional</definition>
+        <argsstring>(const struct isotp_link *link, uint32_t can_id, const uint8_t *payload, uint32_t length)</argsstring>
+        <name>isotp_link_send_functional</name>
+        <param>
+          <type>const struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>can_id</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Send a Single Frame with a functional (broadcast) CAN ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>ISO 15765-2 allows only unsegmented messages with functional addressing. The frame is independent of the link&apos;s transmission state and does not call on_tx_done. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Link state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>can_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Functional CAN ID. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message length, 1..7. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>ISOTP_OK</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame written. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ISOTP_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Invalid argument or message longer than 7 bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Error returned by the writer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="249" column="5" bodyfile="src/isotp_link.c" bodystart="448" bodyend="461" declfile="inc/isotp_link.h" declline="249" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1ga9dcb3f75843c4f1c43b16bfca38a0814" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void isotp_link_poll</definition>
+        <argsstring>(struct isotp_link *link, uint32_t now_us)</argsstring>
+        <name>isotp_link_poll</name>
+        <param>
+          <type>struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>now_us</declname>
+        </param>
+        <briefdescription>
+<para>Advance the timers: send the next Consecutive Frame, detect timeouts. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Sends at most one Consecutive Frame per call, when the separation time has passed. Call it at least as often as the shortest STmin you want to achieve (for example from a 1 ms tick or a loop). <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Link state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>now_us</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current time in microseconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="260" column="6" bodyfile="src/isotp_link.c" bodystart="463" bodyend="490" declfile="inc/isotp_link.h" declline="260" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1gad8b5a8280b3ce9cf2f05dda3c589fdf1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isotp_link_tx_busy</definition>
+        <argsstring>(const struct isotp_link *link)</argsstring>
+        <name>isotp_link_tx_busy</name>
+        <param>
+          <type>const struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>True while a segmented transmission is in progress (false for NULL). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="263" column="6" bodyfile="src/isotp_link.c" bodystart="492" bodyend="495" declfile="inc/isotp_link.h" declline="263" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1gad0b919001194055a4b0f75f70ccc0f0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_link_tx_result</definition>
+        <argsstring>(const struct isotp_link *link)</argsstring>
+        <name>isotp_link_tx_result</name>
+        <param>
+          <type>const struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>N_Result of the last finished transmission (ISOTP_N_ERROR for NULL). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="266" column="5" bodyfile="src/isotp_link.c" bodystart="497" bodyend="500" declfile="inc/isotp_link.h" declline="266" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1ga20e36e89c70a103d43cfa44131b92f95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_link_rx_result</definition>
+        <argsstring>(const struct isotp_link *link)</argsstring>
+        <name>isotp_link_rx_result</name>
+        <param>
+          <type>const struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>N_Result of the last finished or failed reception (ISOTP_N_ERROR for NULL). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="269" column="5" bodyfile="src/isotp_link.c" bodystart="502" bodyend="505" declfile="inc/isotp_link.h" declline="269" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__link_1ga13d7e92afadcec1c4d9cf48b3c760303" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link_invalid_frames</definition>
+        <argsstring>(const struct isotp_link *link)</argsstring>
+        <name>isotp_link_invalid_frames</name>
+        <param>
+          <type>const struct <ref refid="structisotp__link" kindref="compound">isotp_link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>Malformed frames ignored since <ref refid="group__isotp__link_1ga9e8b1316e9e9aa54335beffb412e6957" kindref="member">isotp_link_init</ref> (0 for NULL). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="272" column="10" bodyfile="src/isotp_link.c" bodystart="507" bodyend="510" declfile="inc/isotp_link.h" declline="272" declcolumn="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Transport layer of one ISO-TP connection: segmentation, flow control, timing. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A link connects this node to one peer: it sends with the CAN ID <ref refid="structisotp__link__config_1a5f835b27dee94549fb99e789fad073ee" kindref="member">isotp_link_config::tx_id</ref> and receives the frames the application routes to it (normally the frames with the peer&apos;s CAN ID). The link never reads a clock or touches hardware. The integrator passes every received CAN frame to <ref refid="group__isotp__link_1gaae3f928524c58c8f770c792cfacbb0e1" kindref="member">isotp_link_receive</ref>, provides the frame writer <ref refid="group__isotp__link_1gaca5ac2c2a69d9635bb30e83da20a3b82" kindref="member">isotp_can_write_fn</ref>, and calls <ref refid="group__isotp__link_1ga9dcb3f75843c4f1c43b16bfca38a0814" kindref="member">isotp_link_poll</ref> regularly; the current time in microseconds is an argument of every call.</para>
+<para>Transmission and reception are independent (full duplex). A complete received message is delivered to <ref refid="structisotp__link__config_1aa3c392ddb6b4a31048dd8309c6f8e3d2" kindref="member">isotp_link_config::on_message</ref>; the end of a transmission is reported to <ref refid="structisotp__link__config_1a9cfc2126989afa5f4647514294ffebdc" kindref="member">isotp_link_config::on_tx_done</ref>.</para>
+<para>A link is not thread-safe. Call <ref refid="group__isotp__link_1gaae3f928524c58c8f770c792cfacbb0e1" kindref="member">isotp_link_receive</ref> and <ref refid="group__isotp__link_1ga9dcb3f75843c4f1c43b16bfca38a0814" kindref="member">isotp_link_poll</ref> from one context (for example a CAN task, not an interrupt handler) and serialize <ref refid="group__isotp__link_1ga2883f7405a37500b850b7d45b0367d51" kindref="member">isotp_link_send</ref> with them.</para>
+<para><simplesect kind="par"><title>Public interface includes:</title><para><itemizedlist>
+<listitem><para>Lifecycle: <ref refid="group__isotp__link_1gadd4f1f0a9fde1d1b8d2f344bdc4381b8" kindref="member">isotp_link_config_default</ref>, <ref refid="group__isotp__link_1ga9e8b1316e9e9aa54335beffb412e6957" kindref="member">isotp_link_init</ref>. </para>
+</listitem>
+<listitem><para>Message flow: <ref refid="group__isotp__link_1gaae3f928524c58c8f770c792cfacbb0e1" kindref="member">isotp_link_receive</ref>, <ref refid="group__isotp__link_1ga2883f7405a37500b850b7d45b0367d51" kindref="member">isotp_link_send</ref>, <ref refid="group__isotp__link_1gabf6b948e5e7c28312f610ab1ef0e1219" kindref="member">isotp_link_send_functional</ref>, <ref refid="group__isotp__link_1ga9dcb3f75843c4f1c43b16bfca38a0814" kindref="member">isotp_link_poll</ref>. </para>
+</listitem>
+<listitem><para>Diagnostics: <ref refid="group__isotp__link_1gad8b5a8280b3ce9cf2f05dda3c589fdf1" kindref="member">isotp_link_tx_busy</ref>, <ref refid="group__isotp__link_1gad0b919001194055a4b0f75f70ccc0f0f" kindref="member">isotp_link_tx_result</ref>, <ref refid="group__isotp__link_1ga20e36e89c70a103d43cfa44131b92f95" kindref="member">isotp_link_rx_result</ref>, <ref refid="group__isotp__link_1ga13d7e92afadcec1c4d9cf48b3c760303" kindref="member">isotp_link_invalid_frames</ref>. </para>
+</listitem>
+</itemizedlist>
+</para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="isotp__defs_8h" kind="file" language="C++">
+    <compoundname>isotp_defs.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includedby refid="isotp__protocol_8h" local="yes">inc/isotp_protocol.h</includedby>
+    <includedby refid="isotp_8h" local="yes">isotp.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>inc/isotp_defs.h</label>
+        <link refid="isotp__defs_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>inc/isotp_defs.h</label>
+        <link refid="isotp__defs_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>inc/isotp_link.h</label>
+        <link refid="isotp__link_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>inc/isotp_protocol.h</label>
+        <link refid="isotp__protocol_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+      </node>
+      <node id="5">
+        <label>src/isotp_link.c</label>
+        <link refid="isotp__link_8c"/>
+      </node>
+      <node id="6">
+        <label>src/isotp_protocol.c</label>
+        <link refid="isotp__protocol_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="user-defined">
+      <header>Function return codes</header>
+      <member refid="group__isotp__defs_1gac21e65efb4680b31bf0e6c6da3150c65" kind="define"><name>ISOTP_OK</name></member>
+      <member refid="group__isotp__defs_1ga88c606d0ecf59ce2238ab7a6012e4db3" kind="define"><name>ISOTP_ERROR</name></member>
+      <member refid="group__isotp__defs_1ga6c25746e557b248601846c5e38702814" kind="define"><name>ISOTP_BUSY</name></member>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Frame types (N_PCItype, high nibble of the first byte)</header>
+      <member refid="group__isotp__defs_1ga8ea00390c4d22776acd3423fb448145e" kind="define"><name>ISOTP_PCI_SINGLE_FRAME</name></member>
+      <member refid="group__isotp__defs_1ga9396b53fe5998aee0e843b6c02187f7f" kind="define"><name>ISOTP_PCI_FIRST_FRAME</name></member>
+      <member refid="group__isotp__defs_1gaf9583f4e3708892b27fea331a22f7016" kind="define"><name>ISOTP_PCI_CONSECUTIVE_FRAME</name></member>
+      <member refid="group__isotp__defs_1gaba2e413316a726d29fc37d9192c04d16" kind="define"><name>ISOTP_PCI_FLOW_CONTROL</name></member>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Flow status (FS, low nibble of a Flow Control frame)</header>
+      <member refid="group__isotp__defs_1ga2a2a8422aa58e11f8264dc079f3bcd92" kind="define"><name>ISOTP_FS_CONTINUE</name></member>
+      <member refid="group__isotp__defs_1gaa53a0c8552f87bc6e4e6a18b397a67de" kind="define"><name>ISOTP_FS_WAIT</name></member>
+      <member refid="group__isotp__defs_1gae04edce08528866f0bd0251b7bbe5652" kind="define"><name>ISOTP_FS_OVERFLOW</name></member>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Frame layout (classical CAN, normal addressing)</header>
+      <member refid="group__isotp__defs_1gad0dc89db63f2e992f564bef3ed180f4c" kind="define"><name>ISOTP_CAN_DL</name></member>
+      <member refid="group__isotp__defs_1gab892f980733c79fbd45bd7e07767fca4" kind="define"><name>ISOTP_SF_MAX_DL</name></member>
+      <member refid="group__isotp__defs_1gac2d38e1f58da325708dd74c6dc7f98a1" kind="define"><name>ISOTP_FF_DL_12BIT_MAX</name></member>
+      <member refid="group__isotp__defs_1ga1be2d365a0a74454b36ae6b8bf8a536a" kind="define"><name>ISOTP_FF_SHORT_DATA</name></member>
+      <member refid="group__isotp__defs_1ga0bbb4f7b1959af15ba54aa991bd2e54a" kind="define"><name>ISOTP_FF_LONG_DATA</name></member>
+      <member refid="group__isotp__defs_1gabc578a7c08502d3bd674e40c25fb5f5e" kind="define"><name>ISOTP_CF_MAX_DATA</name></member>
+      <member refid="group__isotp__defs_1ga80e557998deaf17719c61cc93bbd2be3" kind="define"><name>ISOTP_FC_DL</name></member>
+      <member refid="group__isotp__defs_1ga5e5e30856212d41fa3e286319c344afd" kind="define"><name>ISOTP_SN_MASK</name></member>
+      <member refid="group__isotp__defs_1ga9a6ec9a36bc4cdceb2ba11e93193618c" kind="define"><name>ISOTP_FIRST_SN</name></member>
+      <member refid="group__isotp__defs_1gab199db135645afa02ef133893456d2e3" kind="define"><name>ISOTP_ST_MIN_MAX_US</name></member>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>N_Result codes</header>
+      <description><para>Outcome of a transmission or reception, reported by <ref refid="group__isotp__link_1gad0b919001194055a4b0f75f70ccc0f0f" kindref="member">isotp_link_tx_result</ref>, <ref refid="group__isotp__link_1ga20e36e89c70a103d43cfa44131b92f95" kindref="member">isotp_link_rx_result</ref> and the completion callbacks. The names follow ISO 15765-2. </para>
+</description>
+      <member refid="group__isotp__defs_1gab7daaebbc303665beb2946ce077d5312" kind="define"><name>ISOTP_N_OK</name></member>
+      <member refid="group__isotp__defs_1ga8298423e96932f94308f3064755d18fb" kind="define"><name>ISOTP_N_TIMEOUT_A</name></member>
+      <member refid="group__isotp__defs_1ga9e525bb24928a2656e7cd2842b306553" kind="define"><name>ISOTP_N_TIMEOUT_BS</name></member>
+      <member refid="group__isotp__defs_1ga77b802df46c66ed6002f143b57f73b7a" kind="define"><name>ISOTP_N_TIMEOUT_CR</name></member>
+      <member refid="group__isotp__defs_1ga9caa5677a171e1bd0be06ebb6b006046" kind="define"><name>ISOTP_N_WRONG_SN</name></member>
+      <member refid="group__isotp__defs_1ga99312831df8e1822f02b41e3fccc0661" kind="define"><name>ISOTP_N_INVALID_FS</name></member>
+      <member refid="group__isotp__defs_1ga45e3bfdd3948be6ccb3daec5db412b78" kind="define"><name>ISOTP_N_UNEXP_PDU</name></member>
+      <member refid="group__isotp__defs_1gad6bcb7b6fb8ab30da1a4ddeabe3e3178" kind="define"><name>ISOTP_N_WFT_OVRN</name></member>
+      <member refid="group__isotp__defs_1ga2617a5dc4f2a1a3416b0f37f8431cea2" kind="define"><name>ISOTP_N_BUFFER_OVFLW</name></member>
+      <member refid="group__isotp__defs_1ga0805646e65d39a9e2f15e110720887ca" kind="define"><name>ISOTP_N_ERROR</name></member>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Big-endian helpers (the 32-bit FF_DL is sent most significant byte first)</header>
+      <member refid="group__isotp__defs_1gab6ceec020b733b5b3118e1670e8e9f91" kind="function"><name>isotp_get_u32_be</name></member>
+      <member refid="group__isotp__defs_1ga12a295c719118bce1d276f9b27619dac" kind="function"><name>isotp_put_u32_be</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>ISO 15765-2 protocol constants, result codes and big-endian helpers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Project: ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library Author: Anton Vynohradov Email: <ulink url="mailto:avynohradov@systemfromscratch.com">avynohradov@systemfromscratch.com</ulink></para>
+<para><simplesect kind="copyright"><para>Copyright (c) 2026 Anton Vynohradov @license MIT License</para>
+</simplesect>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</para>
+<para>SPDX-License-Identifier: MIT </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_DEFS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_DEFS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="group__isotp__defs_1gac21e65efb4680b31bf0e6c6da3150c65" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_OK<sp/>0<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="group__isotp__defs_1ga88c606d0ecf59ce2238ab7a6012e4db3" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_ERROR<sp/>-1<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="group__isotp__defs_1ga6c25746e557b248601846c5e38702814" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_BUSY<sp/>-2<sp/><sp/></highlight></codeline>
+<codeline lineno="79" refid="group__isotp__defs_1ga8ea00390c4d22776acd3423fb448145e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PCI_SINGLE_FRAME<sp/>0x0U<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="group__isotp__defs_1ga9396b53fe5998aee0e843b6c02187f7f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PCI_FIRST_FRAME<sp/>0x1U<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="group__isotp__defs_1gaf9583f4e3708892b27fea331a22f7016" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PCI_CONSECUTIVE_FRAME<sp/>0x2U<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="group__isotp__defs_1gaba2e413316a726d29fc37d9192c04d16" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PCI_FLOW_CONTROL<sp/>0x3U<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="89" refid="group__isotp__defs_1ga2a2a8422aa58e11f8264dc079f3bcd92" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_FS_CONTINUE<sp/>0x0U<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="group__isotp__defs_1gaa53a0c8552f87bc6e4e6a18b397a67de" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_FS_WAIT<sp/>0x1U<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="group__isotp__defs_1gae04edce08528866f0bd0251b7bbe5652" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_FS_OVERFLOW<sp/>0x2U<sp/></highlight></codeline>
+<codeline lineno="98" refid="group__isotp__defs_1gad0dc89db63f2e992f564bef3ed180f4c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_CAN_DL<sp/>8U<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="group__isotp__defs_1gab892f980733c79fbd45bd7e07767fca4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_SF_MAX_DL<sp/>7U<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="group__isotp__defs_1gac2d38e1f58da325708dd74c6dc7f98a1" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_FF_DL_12BIT_MAX<sp/>4095U<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="group__isotp__defs_1ga1be2d365a0a74454b36ae6b8bf8a536a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_FF_SHORT_DATA<sp/>6U<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="group__isotp__defs_1ga0bbb4f7b1959af15ba54aa991bd2e54a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_FF_LONG_DATA<sp/>2U<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="group__isotp__defs_1gabc578a7c08502d3bd674e40c25fb5f5e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_CF_MAX_DATA<sp/>7U<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="group__isotp__defs_1ga80e557998deaf17719c61cc93bbd2be3" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_FC_DL<sp/>3U<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="group__isotp__defs_1ga5e5e30856212d41fa3e286319c344afd" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_SN_MASK<sp/>0x0FU<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="group__isotp__defs_1ga9a6ec9a36bc4cdceb2ba11e93193618c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_FIRST_SN<sp/>1U<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="group__isotp__defs_1gab199db135645afa02ef133893456d2e3" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_ST_MIN_MAX_US<sp/>127000U<sp/></highlight></codeline>
+<codeline lineno="119" refid="group__isotp__defs_1gab7daaebbc303665beb2946ce077d5312" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_OK<sp/>0<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="group__isotp__defs_1ga8298423e96932f94308f3064755d18fb" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_TIMEOUT_A<sp/>-1<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="group__isotp__defs_1ga9e525bb24928a2656e7cd2842b306553" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_TIMEOUT_BS<sp/>-2<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="group__isotp__defs_1ga77b802df46c66ed6002f143b57f73b7a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_TIMEOUT_CR<sp/>-3<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="group__isotp__defs_1ga9caa5677a171e1bd0be06ebb6b006046" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_WRONG_SN<sp/>-4<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124" refid="group__isotp__defs_1ga99312831df8e1822f02b41e3fccc0661" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_INVALID_FS<sp/>-5<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125" refid="group__isotp__defs_1ga45e3bfdd3948be6ccb3daec5db412b78" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_UNEXP_PDU<sp/>-6<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="group__isotp__defs_1gad6bcb7b6fb8ab30da1a4ddeabe3e3178" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_WFT_OVRN<sp/>-7<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127" refid="group__isotp__defs_1ga2617a5dc4f2a1a3416b0f37f8431cea2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_BUFFER_OVFLW<sp/>-8<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="group__isotp__defs_1ga0805646e65d39a9e2f15e110720887ca" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_N_ERROR<sp/>-9<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="140" refid="group__isotp__defs_1gab6ceec020b733b5b3118e1670e8e9f91" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="group__isotp__defs_1gab6ceec020b733b5b3118e1670e8e9f91" kindref="member">isotp_get_u32_be</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>data)</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(((uint32_t)<sp/>data[0])<sp/>&lt;&lt;<sp/>24U)<sp/>|<sp/>(((uint32_t)<sp/>data[1])<sp/>&lt;&lt;<sp/>16U)</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>(((uint32_t)<sp/>data[2])<sp/>&lt;&lt;<sp/>8U)<sp/>|<sp/>((uint32_t)<sp/>data[3]);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151" refid="group__isotp__defs_1ga12a295c719118bce1d276f9b27619dac" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__isotp__defs_1ga12a295c719118bce1d276f9b27619dac" kindref="member">isotp_put_u32_be</ref>(uint8_t*<sp/>data,<sp/>uint32_t<sp/>value)</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>data[0]<sp/>=<sp/>(uint8_t)<sp/>(value<sp/>&gt;&gt;<sp/>24U);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>data[1]<sp/>=<sp/>(uint8_t)<sp/>(value<sp/>&gt;&gt;<sp/>16U);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>data[2]<sp/>=<sp/>(uint8_t)<sp/>(value<sp/>&gt;&gt;<sp/>8U);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>data[3]<sp/>=<sp/>(uint8_t)<sp/>value;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ISOTP_DEFS_H<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="inc/isotp_defs.h"/>
+  </compounddef>
+</doxygen>

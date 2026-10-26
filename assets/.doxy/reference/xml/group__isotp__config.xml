@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="group__isotp__config" kind="group">
+    <compoundname>isotp_config</compoundname>
+    <title>Configuration</title>
+    <sectiondef kind="user-defined">
+      <header>Defines and macros</header>
+      <memberdef kind="define" id="group__isotp__config_1ga1e9ef1192205306071d1c947546d9882" prot="public" static="no">
+        <name>ISOTP_TX_BUFFER_SIZE</name>
+        <initializer>4095U</initializer>
+        <briefdescription>
+<para>Largest message one link can transmit, in bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The link copies the message into a buffer of this size, so the caller may reuse its own buffer as soon as <ref refid="group__isotp__link_1ga2883f7405a37500b850b7d45b0367d51" kindref="member">isotp_link_send</ref> returns. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="74" column="9" bodyfile="inc/isotp_config.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__config_1gaadb42a273414ec0f18e94c8d1a51394e" prot="public" static="no">
+        <name>ISOTP_RX_BUFFER_SIZE</name>
+        <initializer>4095U</initializer>
+        <briefdescription>
+<para>Largest message one link can receive, in bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A First Frame announcing a longer message is answered with a Flow Control frame with the status Overflow. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="84" column="9" bodyfile="inc/isotp_config.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__config_1ga1a714bbf6b5053ee3163bc73dfc9555d" prot="public" static="no">
+        <name>ISOTP_DEFAULT_BLOCK_SIZE</name>
+        <initializer>8U</initializer>
+        <briefdescription>
+<para>Block size (BS) this receiver requests; 0 means no further Flow Control. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="92" column="9" bodyfile="inc/isotp_config.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__config_1ga16db8b5370cd0d9b5f15357f97486d4b" prot="public" static="no">
+        <name>ISOTP_DEFAULT_ST_MIN_US</name>
+        <initializer>0U</initializer>
+        <briefdescription>
+<para>Minimum separation time (STmin) this receiver requests, in microseconds. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="100" column="9" bodyfile="inc/isotp_config.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__config_1gaa472f989c3be95bbf2105513d2b28ace" prot="public" static="no">
+        <name>ISOTP_DEFAULT_N_BS_TIMEOUT_US</name>
+        <initializer>1000000U</initializer>
+        <briefdescription>
+<para>Sender timeout N_Bs: longest wait for a Flow Control frame, in microseconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>ISO 15765-2 specifies 1000 ms. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="109" column="9" bodyfile="inc/isotp_config.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__config_1ga90a8e2482c7ecefdc27aec57a6722a12" prot="public" static="no">
+        <name>ISOTP_DEFAULT_N_CR_TIMEOUT_US</name>
+        <initializer>1000000U</initializer>
+        <briefdescription>
+<para>Receiver timeout N_Cr: longest wait for the next Consecutive Frame, in microseconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>ISO 15765-2 specifies 1000 ms. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="118" column="9" bodyfile="inc/isotp_config.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__config_1ga95933a9dc7f9da6a7d08c5fb390534c2" prot="public" static="no">
+        <name>ISOTP_DEFAULT_WFT_MAX</name>
+        <initializer>10U</initializer>
+        <briefdescription>
+<para>N_WFTmax: Flow Control frames with the status Wait accepted in a row. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_config.h" line="126" column="9" bodyfile="inc/isotp_config.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Build-time configuration for ISOTP-C. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Every parameter can be overridden by the integrator with a compiler definition (for example <computeroutput>-DISOTP_RX_BUFFER_SIZE=64U</computeroutput>) without editing this file. The buffer sizes are compiled into <ref refid="group__isotp__link" kindref="compound">Link</ref>, so they set the RAM footprint of one link. The protocol defaults are only the values written by <ref refid="group__isotp__link_1gadd4f1f0a9fde1d1b8d2f344bdc4381b8" kindref="member">isotp_link_config_default</ref>; every link can use its own values at run time.</para>
+<para><simplesect kind="par"><title>Configuration elements in this group:</title><para><itemizedlist>
+<listitem><para><ref refid="group__isotp__config_1ga1e9ef1192205306071d1c947546d9882" kindref="member">ISOTP_TX_BUFFER_SIZE</ref>, <ref refid="group__isotp__config_1gaadb42a273414ec0f18e94c8d1a51394e" kindref="member">ISOTP_RX_BUFFER_SIZE</ref> : largest message in each direction. </para>
+</listitem>
+<listitem><para><ref refid="group__isotp__config_1ga1a714bbf6b5053ee3163bc73dfc9555d" kindref="member">ISOTP_DEFAULT_BLOCK_SIZE</ref>, <ref refid="group__isotp__config_1ga16db8b5370cd0d9b5f15357f97486d4b" kindref="member">ISOTP_DEFAULT_ST_MIN_US</ref> : flow control we request. </para>
+</listitem>
+<listitem><para><ref refid="group__isotp__config_1gaa472f989c3be95bbf2105513d2b28ace" kindref="member">ISOTP_DEFAULT_N_BS_TIMEOUT_US</ref>, <ref refid="group__isotp__config_1ga90a8e2482c7ecefdc27aec57a6722a12" kindref="member">ISOTP_DEFAULT_N_CR_TIMEOUT_US</ref> : timeouts. </para>
+</listitem>
+<listitem><para><ref refid="group__isotp__config_1ga95933a9dc7f9da6a7d08c5fb390534c2" kindref="member">ISOTP_DEFAULT_WFT_MAX</ref> : flow-control wait frames we accept. </para>
+</listitem>
+</itemizedlist>
+</para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

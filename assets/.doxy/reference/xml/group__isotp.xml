@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="group__isotp" kind="group">
+    <compoundname>isotp</compoundname>
+    <title>ISOTP API</title>
+    <innergroup refid="group__isotp__config">Configuration</innergroup>
+    <innergroup refid="group__isotp__defs">Definitions</innergroup>
+    <innergroup refid="group__isotp__link">Link</innergroup>
+    <innergroup refid="group__isotp__protocol">Codec</innergroup>
+    <sectiondef kind="user-defined">
+      <header>Library version</header>
+      <description><para>Normally injected by cmake/version.cmake from the Git tag; the values below apply to builds that do not use CMake. </para>
+</description>
+      <memberdef kind="define" id="group__isotp_1ga4bbd5ff44d32574c932bd4176b4fe073" prot="public" static="no">
+        <name>ISOTP_VERSION_MAJOR</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="66" column="9" bodyfile="isotp.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp_1ga322025e3ca7b42f1ef16d3bbc901b7f2" prot="public" static="no">
+        <name>ISOTP_VERSION_MINOR</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="70" column="9" bodyfile="isotp.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp_1ga9362d56cc2ec807f12f0236e44be706b" prot="public" static="no">
+        <name>ISOTP_VERSION_PATCH</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="74" column="9" bodyfile="isotp.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp_1gafb94ed9e4e4e40ca8457d03b54664ddb" prot="public" static="no">
+        <name>ISOTP_VERSION</name>
+        <initializer>&quot;2.0.1&quot;</initializer>
+        <briefdescription>
+<para>Version string &quot;MAJOR.MINOR.PATCH&quot;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="isotp.h" line="79" column="9" bodyfile="isotp.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Public API of the ISO 15765-2 (ISO-TP) library. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This module groups the public interface and its supporting submodules: <ref refid="group__isotp__config" kindref="compound">Configuration</ref>, <ref refid="group__isotp__defs" kindref="compound">Definitions</ref>, <ref refid="group__isotp__protocol" kindref="compound">Codec</ref> and <ref refid="group__isotp__link" kindref="compound">Link</ref>.</para>
+<para>Include this single header to use the library: <itemizedlist>
+<listitem><para><ref refid="isotp__config_8h" kindref="compound">isotp_config.h</ref> build-time configuration (buffer sizes, protocol defaults) </para>
+</listitem>
+<listitem><para><ref refid="isotp__defs_8h" kindref="compound">isotp_defs.h</ref> frame types, flow status, N_Result codes, big-endian helpers </para>
+</listitem>
+<listitem><para><ref refid="isotp__protocol_8h" kindref="compound">isotp_protocol.h</ref> frame codec: decode, encode SF/FF/CF/FC, STmin </para>
+</listitem>
+<listitem><para><ref refid="isotp__link_8h" kindref="compound">isotp_link.h</ref> transport layer of one connection (segmentation, flow control, timing) </para>
+</listitem>
+</itemizedlist>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

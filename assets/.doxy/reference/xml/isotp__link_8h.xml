@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="isotp__link_8h" kind="file" language="C++">
+    <compoundname>isotp_link.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes refid="isotp__config_8h" local="yes">isotp_config.h</includes>
+    <includes refid="isotp__protocol_8h" local="yes">isotp_protocol.h</includes>
+    <includedby refid="isotp_8h" local="yes">isotp.h</includedby>
+    <includedby refid="isotp__link_8c" local="yes">src/isotp_link.c</includedby>
+    <incdepgraph>
+      <node id="5">
+        <label>isotp_config.h</label>
+        <link refid="isotp__config_8h"/>
+      </node>
+      <node id="7">
+        <label>isotp_defs.h</label>
+        <link refid="isotp__defs_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>inc/isotp_link.h</label>
+        <link refid="isotp__link_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>isotp_protocol.h</label>
+        <link refid="isotp__protocol_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+      <node id="4">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>inc/isotp_link.h</label>
+        <link refid="isotp__link_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+      </node>
+      <node id="3">
+        <label>src/isotp_link.c</label>
+        <link refid="isotp__link_8c"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structisotp__link__config" prot="public">isotp_link_config</innerclass>
+    <innerclass refid="structisotp__link" prot="public">isotp_link</innerclass>
+    <sectiondef kind="user-defined">
+      <header>Type definitions</header>
+      <member refid="group__isotp__link_1gaedcc04d98e69a7c85b832d2bb251924e" kind="enum"><name>isotp_tx_state</name></member>
+      <member refid="group__isotp__link_1ga7be50a331f713987017afc15561602eb" kind="enum"><name>isotp_rx_state</name></member>
+      <member refid="group__isotp__link_1gaca5ac2c2a69d9635bb30e83da20a3b82" kind="typedef"><name>isotp_can_write_fn</name></member>
+      <member refid="group__isotp__link_1ga935341511653dcc1310e96cc5ac15bde" kind="typedef"><name>isotp_message_handler_t</name></member>
+      <member refid="group__isotp__link_1gaceec199e351718c2ec58211e7c56dd6d" kind="typedef"><name>isotp_result_fn</name></member>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Public function declarations</header>
+      <member refid="group__isotp__link_1gadd4f1f0a9fde1d1b8d2f344bdc4381b8" kind="function"><name>isotp_link_config_default</name></member>
+      <member refid="group__isotp__link_1ga9e8b1316e9e9aa54335beffb412e6957" kind="function"><name>isotp_link_init</name></member>
+      <member refid="group__isotp__link_1gaae3f928524c58c8f770c792cfacbb0e1" kind="function"><name>isotp_link_receive</name></member>
+      <member refid="group__isotp__link_1ga2883f7405a37500b850b7d45b0367d51" kind="function"><name>isotp_link_send</name></member>
+      <member refid="group__isotp__link_1gabf6b948e5e7c28312f610ab1ef0e1219" kind="function"><name>isotp_link_send_functional</name></member>
+      <member refid="group__isotp__link_1ga9dcb3f75843c4f1c43b16bfca38a0814" kind="function"><name>isotp_link_poll</name></member>
+      <member refid="group__isotp__link_1gad8b5a8280b3ce9cf2f05dda3c589fdf1" kind="function"><name>isotp_link_tx_busy</name></member>
+      <member refid="group__isotp__link_1gad0b919001194055a4b0f75f70ccc0f0f" kind="function"><name>isotp_link_tx_result</name></member>
+      <member refid="group__isotp__link_1ga20e36e89c70a103d43cfa44131b92f95" kind="function"><name>isotp_link_rx_result</name></member>
+      <member refid="group__isotp__link_1ga13d7e92afadcec1c4d9cf48b3c760303" kind="function"><name>isotp_link_invalid_frames</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>Transport-independent ISO-TP link: segmentation, flow control and timing. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Project: ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library Author: Anton Vynohradov Email: <ulink url="mailto:avynohradov@systemfromscratch.com">avynohradov@systemfromscratch.com</ulink></para>
+<para><simplesect kind="copyright"><para>Copyright (c) 2026 Anton Vynohradov @license MIT License</para>
+</simplesect>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</para>
+<para>SPDX-License-Identifier: MIT </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_LINK_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_LINK_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="isotp__config_8h" kindref="compound">isotp_config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="isotp__protocol_8h" kindref="compound">isotp_protocol.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="group__isotp__link_1gaca5ac2c2a69d9635bb30e83da20a3b82" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>int<sp/>(*<ref refid="group__isotp__link_1gaca5ac2c2a69d9635bb30e83da20a3b82" kindref="member">isotp_can_write_fn</ref>)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>context,<sp/>uint32_t<sp/>can_id,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>data,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>length);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109" refid="group__isotp__link_1ga935341511653dcc1310e96cc5ac15bde" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="group__isotp__link_1ga935341511653dcc1310e96cc5ac15bde" kindref="member">isotp_message_handler_t</ref>)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>data,<sp/>uint32_t<sp/>length,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>context);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="group__isotp__link_1gaceec199e351718c2ec58211e7c56dd6d" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="group__isotp__link_1gaceec199e351718c2ec58211e7c56dd6d" kindref="member">isotp_result_fn</ref>)(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n_result,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>context);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="structisotp__link__config" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structisotp__link__config" kindref="compound">isotp_link_config</ref></highlight></codeline>
+<codeline lineno="124"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="125" refid="structisotp__link__config_1a5f835b27dee94549fb99e789fad073ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link__config_1a5f835b27dee94549fb99e789fad073ee" kindref="member">tx_id</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="126" refid="structisotp__link__config_1ae9988fc98700fa573da75b1120d3844b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1gaca5ac2c2a69d9635bb30e83da20a3b82" kindref="member">isotp_can_write_fn</ref><sp/><ref refid="structisotp__link__config_1ae9988fc98700fa573da75b1120d3844b" kindref="member">write</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="127" refid="structisotp__link__config_1af9eeae1d1524f31c55e4e621ef43d4a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="structisotp__link__config_1af9eeae1d1524f31c55e4e621ef43d4a0" kindref="member">write_context</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="128" refid="structisotp__link__config_1aa3c392ddb6b4a31048dd8309c6f8e3d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1ga935341511653dcc1310e96cc5ac15bde" kindref="member">isotp_message_handler_t</ref><sp/><ref refid="structisotp__link__config_1aa3c392ddb6b4a31048dd8309c6f8e3d2" kindref="member">on_message</ref>;<sp/></highlight></codeline>
+<codeline lineno="129" refid="structisotp__link__config_1a9cfc2126989afa5f4647514294ffebdc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1gaceec199e351718c2ec58211e7c56dd6d" kindref="member">isotp_result_fn</ref><sp/><ref refid="structisotp__link__config_1a9cfc2126989afa5f4647514294ffebdc" kindref="member">on_tx_done</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="130" refid="structisotp__link__config_1a371bbc97bea117e615e999c6530f149a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1gaceec199e351718c2ec58211e7c56dd6d" kindref="member">isotp_result_fn</ref><sp/><ref refid="structisotp__link__config_1a371bbc97bea117e615e999c6530f149a" kindref="member">on_rx_error</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="131" refid="structisotp__link__config_1acfcff52da69bf2874f590839dfbe9f36" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="structisotp__link__config_1acfcff52da69bf2874f590839dfbe9f36" kindref="member">app_context</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="132" refid="structisotp__link__config_1aaa38ed2f53821909902c11d3f8c87ba0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link__config_1aaa38ed2f53821909902c11d3f8c87ba0" kindref="member">block_size</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="133" refid="structisotp__link__config_1a01a33c3be6e9285adcbfd05542c4b2db" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link__config_1a01a33c3be6e9285adcbfd05542c4b2db" kindref="member">st_min_us</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="134" refid="structisotp__link__config_1a3f09282eae2a9461b102fdf489532115" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link__config_1a3f09282eae2a9461b102fdf489532115" kindref="member">n_bs_timeout_us</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="135" refid="structisotp__link__config_1a93a51c694885c7a1efcd56da848e8a53" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link__config_1a93a51c694885c7a1efcd56da848e8a53" kindref="member">n_cr_timeout_us</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="136" refid="structisotp__link__config_1ad858b703691649774507ef885f5221c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link__config_1ad858b703691649774507ef885f5221c0" kindref="member">wft_max</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="137" refid="structisotp__link__config_1abbb831a2560c082c4f739ad93f7f9157" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structisotp__link__config_1abbb831a2560c082c4f739ad93f7f9157" kindref="member">padding</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="138" refid="structisotp__link__config_1a5b0799ada7305934b36d288008c0180f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link__config_1a5b0799ada7305934b36d288008c0180f" kindref="member">padding_value</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="139"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="group__isotp__link_1gaedcc04d98e69a7c85b832d2bb251924e" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1gaedcc04d98e69a7c85b832d2bb251924e" kindref="member">isotp_tx_state</ref></highlight></codeline>
+<codeline lineno="143"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="144" refid="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924ea7ee35bceac3c46a79a6170e8a454d6de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924ea7ee35bceac3c46a79a6170e8a454d6de" kindref="member">ISOTP_TX_IDLE</ref><sp/>=<sp/>0,<sp/></highlight></codeline>
+<codeline lineno="145" refid="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924eaaf91c8b44a112e9e9b64dac1f8c3cdcd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924eaaf91c8b44a112e9e9b64dac1f8c3cdcd" kindref="member">ISOTP_TX_WAIT_FC</ref>,<sp/><sp/></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924ead33206e6e86c42540af3071001982cdc" kindref="member">ISOTP_TX_SEND_CF</ref><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="147" refid="group__isotp__link_1ggaedcc04d98e69a7c85b832d2bb251924ead33206e6e86c42540af3071001982cdc" refkind="member"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150" refid="group__isotp__link_1ga7be50a331f713987017afc15561602eb" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1ga7be50a331f713987017afc15561602eb" kindref="member">isotp_rx_state</ref></highlight></codeline>
+<codeline lineno="151"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="152" refid="group__isotp__link_1gga7be50a331f713987017afc15561602eba332cf684233753c6f798b54a4ad0130a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1gga7be50a331f713987017afc15561602eba332cf684233753c6f798b54a4ad0130a" kindref="member">ISOTP_RX_IDLE</ref><sp/>=<sp/>0,<sp/></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__isotp__link_1gga7be50a331f713987017afc15561602eba48daf846c7827aa432c83ca2078c93b1" kindref="member">ISOTP_RX_RECEIVING</ref><sp/></highlight></codeline>
+<codeline lineno="154" refid="group__isotp__link_1gga7be50a331f713987017afc15561602eba48daf846c7827aa432c83ca2078c93b1" refkind="member"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157" refid="structisotp__link" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structisotp__link" kindref="compound">isotp_link</ref></highlight></codeline>
+<codeline lineno="158"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="159" refid="structisotp__link_1acd174f2e772dbf112ea264fd0136d9fa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structisotp__link__config" kindref="compound">isotp_link_config</ref><sp/><ref refid="structisotp__link_1acd174f2e772dbf112ea264fd0136d9fa" kindref="member">config</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="160" refid="structisotp__link_1a39a20c30cb56da230617a8459d7dd8a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link_1a39a20c30cb56da230617a8459d7dd8a7" kindref="member">tx_buffer</ref>[<ref refid="group__isotp__config_1ga1e9ef1192205306071d1c947546d9882" kindref="member">ISOTP_TX_BUFFER_SIZE</ref>];<sp/></highlight></codeline>
+<codeline lineno="161" refid="structisotp__link_1a04e973bcec1f400e044ce379140c26b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link_1a04e973bcec1f400e044ce379140c26b8" kindref="member">tx_size</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="162" refid="structisotp__link_1a9fbcee3e0b80c6dda9b6e9087c72d2ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link_1a9fbcee3e0b80c6dda9b6e9087c72d2ac" kindref="member">tx_offset</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="163" refid="structisotp__link_1a6c798600b018a9c5a4c31f637872d61e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link_1a6c798600b018a9c5a4c31f637872d61e" kindref="member">tx_st_min_us</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="164" refid="structisotp__link_1af3518b4a850dc261a485e3b4cdd7b134" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link_1af3518b4a850dc261a485e3b4cdd7b134" kindref="member">tx_deadline_us</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="165" refid="structisotp__link_1aaad46571872a8b97a04c1a8f018254fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1gaedcc04d98e69a7c85b832d2bb251924e" kindref="member">isotp_tx_state</ref><sp/><ref refid="structisotp__link_1aaad46571872a8b97a04c1a8f018254fd" kindref="member">tx_state</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="166" refid="structisotp__link_1a6041bb765578831ed6e5b0f2346a1009" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structisotp__link_1a6041bb765578831ed6e5b0f2346a1009" kindref="member">tx_result</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="167" refid="structisotp__link_1ad8c4f6d63b67d3fc1208f85236567895" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link_1ad8c4f6d63b67d3fc1208f85236567895" kindref="member">tx_sn</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="168" refid="structisotp__link_1adef3ddc1b37167f35196108030f5dce4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link_1adef3ddc1b37167f35196108030f5dce4" kindref="member">tx_block_remaining</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="169" refid="structisotp__link_1a5444f3d92c056d2806e2c1fce7f3f37e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structisotp__link_1a5444f3d92c056d2806e2c1fce7f3f37e" kindref="member">tx_block_unlimited</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="170" refid="structisotp__link_1a32000a6b997604016119158315e1689b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link_1a32000a6b997604016119158315e1689b" kindref="member">tx_wft_count</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="171" refid="structisotp__link_1a550e80aea2a9aec63f69757146d91e42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link_1a550e80aea2a9aec63f69757146d91e42" kindref="member">rx_buffer</ref>[<ref refid="group__isotp__config_1gaadb42a273414ec0f18e94c8d1a51394e" kindref="member">ISOTP_RX_BUFFER_SIZE</ref>];<sp/></highlight></codeline>
+<codeline lineno="172" refid="structisotp__link_1ad00bcc3eac31de456998de04b0c24bbd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link_1ad00bcc3eac31de456998de04b0c24bbd" kindref="member">rx_size</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="173" refid="structisotp__link_1a4e45d607a1803aba2f3300a45dd9e649" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link_1a4e45d607a1803aba2f3300a45dd9e649" kindref="member">rx_offset</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="174" refid="structisotp__link_1a93f6dd397462b0b990e3a8b3546fff1d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link_1a93f6dd397462b0b990e3a8b3546fff1d" kindref="member">rx_deadline_us</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="175" refid="structisotp__link_1a9ba3db819f94ed4403a0ba7995894b9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1ga7be50a331f713987017afc15561602eb" kindref="member">isotp_rx_state</ref><sp/><ref refid="structisotp__link_1a9ba3db819f94ed4403a0ba7995894b9e" kindref="member">rx_state</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="176" refid="structisotp__link_1a919aa659ea86541cfa975be3c58cc5c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structisotp__link_1a919aa659ea86541cfa975be3c58cc5c4" kindref="member">rx_result</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="177" refid="structisotp__link_1a5dccdc479e833305851c4655533e628b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link_1a5dccdc479e833305851c4655533e628b" kindref="member">rx_sn</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="178" refid="structisotp__link_1a1fa8702e2dff41abfe65537b32fa6f28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__link_1a1fa8702e2dff41abfe65537b32fa6f28" kindref="member">rx_block_count</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="179" refid="structisotp__link_1abce1d92b06e9ba4b95449f2a989d03a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__link_1abce1d92b06e9ba4b95449f2a989d03a8" kindref="member">invalid_frames</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="180"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1gadd4f1f0a9fde1d1b8d2f344bdc4381b8" kindref="member">isotp_link_config_default</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link__config" kindref="compound">isotp_link_config</ref>*<sp/>config);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1ga9e8b1316e9e9aa54335beffb412e6957" kindref="member">isotp_link_init</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link__config" kindref="compound">isotp_link_config</ref>*<sp/>config);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1gaae3f928524c58c8f770c792cfacbb0e1" kindref="member">isotp_link_receive</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>data,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>length,</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>now_us);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1ga2883f7405a37500b850b7d45b0367d51" kindref="member">isotp_link_send</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>payload,<sp/>uint32_t<sp/>length,</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>now_us);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1gabf6b948e5e7c28312f610ab1ef0e1219" kindref="member">isotp_link_send_functional</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link,<sp/>uint32_t<sp/>can_id,</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>payload,<sp/>uint32_t<sp/>length);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1ga9dcb3f75843c4f1c43b16bfca38a0814" kindref="member">isotp_link_poll</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link,<sp/>uint32_t<sp/>now_us);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1gad8b5a8280b3ce9cf2f05dda3c589fdf1" kindref="member">isotp_link_tx_busy</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1gad0b919001194055a4b0f75f70ccc0f0f" kindref="member">isotp_link_tx_result</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__link_1ga20e36e89c70a103d43cfa44131b92f95" kindref="member">isotp_link_rx_result</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal">uint32_t<sp/><ref refid="group__isotp__link_1ga13d7e92afadcec1c4d9cf48b3c760303" kindref="member">isotp_link_invalid_frames</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__link" kindref="compound">isotp_link</ref>*<sp/>link);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ISOTP_LINK_H<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="inc/isotp_link.h"/>
+  </compounddef>
+</doxygen>

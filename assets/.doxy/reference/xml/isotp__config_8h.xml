@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="isotp__config_8h" kind="file" language="C++">
+    <compoundname>isotp_config.h</compoundname>
+    <includedby refid="isotp__link_8h" local="yes">inc/isotp_link.h</includedby>
+    <includedby refid="isotp_8h" local="yes">isotp.h</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>inc/isotp_config.h</label>
+        <link refid="isotp__config_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>inc/isotp_link.h</label>
+        <link refid="isotp__link_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+      </node>
+      <node id="4">
+        <label>src/isotp_link.c</label>
+        <link refid="isotp__link_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="user-defined">
+      <header>Defines and macros</header>
+      <member refid="group__isotp__config_1ga1e9ef1192205306071d1c947546d9882" kind="define"><name>ISOTP_TX_BUFFER_SIZE</name></member>
+      <member refid="group__isotp__config_1gaadb42a273414ec0f18e94c8d1a51394e" kind="define"><name>ISOTP_RX_BUFFER_SIZE</name></member>
+      <member refid="group__isotp__config_1ga1a714bbf6b5053ee3163bc73dfc9555d" kind="define"><name>ISOTP_DEFAULT_BLOCK_SIZE</name></member>
+      <member refid="group__isotp__config_1ga16db8b5370cd0d9b5f15357f97486d4b" kind="define"><name>ISOTP_DEFAULT_ST_MIN_US</name></member>
+      <member refid="group__isotp__config_1gaa472f989c3be95bbf2105513d2b28ace" kind="define"><name>ISOTP_DEFAULT_N_BS_TIMEOUT_US</name></member>
+      <member refid="group__isotp__config_1ga90a8e2482c7ecefdc27aec57a6722a12" kind="define"><name>ISOTP_DEFAULT_N_CR_TIMEOUT_US</name></member>
+      <member refid="group__isotp__config_1ga95933a9dc7f9da6a7d08c5fb390534c2" kind="define"><name>ISOTP_DEFAULT_WFT_MAX</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>Build-time configuration: buffer sizes and protocol defaults. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Project: ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library Author: Anton Vynohradov Email: <ulink url="mailto:avynohradov@systemfromscratch.com">avynohradov@systemfromscratch.com</ulink></para>
+<para><simplesect kind="copyright"><para>Copyright (c) 2026 Anton Vynohradov @license MIT License</para>
+</simplesect>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</para>
+<para>SPDX-License-Identifier: MIT </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_CONFIG_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_CONFIG_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_TX_BUFFER_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="group__isotp__config_1ga1e9ef1192205306071d1c947546d9882" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_TX_BUFFER_SIZE<sp/>4095U</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_RX_BUFFER_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="group__isotp__config_1gaadb42a273414ec0f18e94c8d1a51394e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_RX_BUFFER_SIZE<sp/>4095U</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_DEFAULT_BLOCK_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="group__isotp__config_1ga1a714bbf6b5053ee3163bc73dfc9555d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_DEFAULT_BLOCK_SIZE<sp/>8U</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_DEFAULT_ST_MIN_US</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="group__isotp__config_1ga16db8b5370cd0d9b5f15357f97486d4b" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_DEFAULT_ST_MIN_US<sp/>0U</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_DEFAULT_N_BS_TIMEOUT_US</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109" refid="group__isotp__config_1gaa472f989c3be95bbf2105513d2b28ace" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_DEFAULT_N_BS_TIMEOUT_US<sp/>1000000U</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_DEFAULT_N_CR_TIMEOUT_US</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118" refid="group__isotp__config_1ga90a8e2482c7ecefdc27aec57a6722a12" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_DEFAULT_N_CR_TIMEOUT_US<sp/>1000000U</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_DEFAULT_WFT_MAX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="group__isotp__config_1ga95933a9dc7f9da6a7d08c5fb390534c2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_DEFAULT_WFT_MAX<sp/>10U</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*<sp/>A<sp/>buffer<sp/>holds<sp/>at<sp/>least<sp/>one<sp/>segmented<sp/>message<sp/>(8<sp/>bytes<sp/>is<sp/>the<sp/>smallest)<sp/>and</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/>*<sp/>stays<sp/>below<sp/>2^31,<sp/>so<sp/>every<sp/>size<sp/>and<sp/>offset<sp/>fits<sp/>a<sp/>uint32_t<sp/>with<sp/>headroom.</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(ISOTP_TX_BUFFER_SIZE<sp/>&lt;<sp/>8U)<sp/>||<sp/>(ISOTP_TX_BUFFER_SIZE<sp/>&gt;<sp/>0x7FFFFFFFU)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;ISOTP_TX_BUFFER_SIZE<sp/>must<sp/>be<sp/>in<sp/>the<sp/>range<sp/>8..2147483647&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(ISOTP_RX_BUFFER_SIZE<sp/>&lt;<sp/>8U)<sp/>||<sp/>(ISOTP_RX_BUFFER_SIZE<sp/>&gt;<sp/>0x7FFFFFFFU)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;ISOTP_RX_BUFFER_SIZE<sp/>must<sp/>be<sp/>in<sp/>the<sp/>range<sp/>8..2147483647&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(ISOTP_DEFAULT_BLOCK_SIZE<sp/>&gt;<sp/>255U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;ISOTP_DEFAULT_BLOCK_SIZE<sp/>must<sp/>be<sp/>in<sp/>the<sp/>range<sp/>0..255&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(ISOTP_DEFAULT_ST_MIN_US<sp/>&gt;<sp/>127000U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;ISOTP_DEFAULT_ST_MIN_US<sp/>must<sp/>be<sp/>in<sp/>the<sp/>range<sp/>0..127000&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(ISOTP_DEFAULT_N_BS_TIMEOUT_US<sp/>&lt;<sp/>1U)<sp/>||<sp/>(ISOTP_DEFAULT_N_BS_TIMEOUT_US<sp/>&gt;<sp/>0x7FFFFFFFU)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;ISOTP_DEFAULT_N_BS_TIMEOUT_US<sp/>must<sp/>be<sp/>in<sp/>the<sp/>range<sp/>1..2147483647&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(ISOTP_DEFAULT_N_CR_TIMEOUT_US<sp/>&lt;<sp/>1U)<sp/>||<sp/>(ISOTP_DEFAULT_N_CR_TIMEOUT_US<sp/>&gt;<sp/>0x7FFFFFFFU)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;ISOTP_DEFAULT_N_CR_TIMEOUT_US<sp/>must<sp/>be<sp/>in<sp/>the<sp/>range<sp/>1..2147483647&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(ISOTP_DEFAULT_WFT_MAX<sp/>&gt;<sp/>255U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;ISOTP_DEFAULT_WFT_MAX<sp/>must<sp/>be<sp/>in<sp/>the<sp/>range<sp/>0..255&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ISOTP_CONFIG_H<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="inc/isotp_config.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,511 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="group__isotp__protocol" kind="group">
+    <compoundname>isotp_protocol</compoundname>
+    <title>Codec</title>
+    <innerclass refid="structisotp__pdu" prot="public">isotp_pdu</innerclass>
+    <sectiondef kind="user-defined">
+      <header>Public function declarations</header>
+      <memberdef kind="function" id="group__isotp__protocol_1ga29356e99657bbe884b0a15a5eedfcbce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_decode</definition>
+        <argsstring>(const uint8_t *frame, size_t length, struct isotp_pdu *pdu)</argsstring>
+        <name>isotp_decode</name>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structisotp__pdu" kindref="compound">isotp_pdu</ref> *</type>
+          <declname>pdu</declname>
+        </param>
+        <briefdescription>
+<para>Validate one received CAN frame and describe it. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Rejects frames that ISO 15765-2 tells a receiver to ignore: unknown frame type, SF_DL of 0 or longer than the frame, a First Frame that is not 8 bytes long or announces a message that would fit a Single Frame (or, with the 32-bit FF_DL, fits the 12-bit field), a Consecutive Frame without data, a Flow Control frame shorter than 3 bytes. The flow status is not checked here: an unknown value is an N_INVALID_FS condition the sender has to report. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CAN frame data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CAN data length, 1..8. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pdu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Receives the description. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>ISOTP_OK</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>pdu</computeroutput> describes a valid frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ISOTP_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>NULL argument, invalid length or malformed frame. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="114" column="5" bodyfile="src/isotp_protocol.c" bodystart="156" bodyend="193" declfile="inc/isotp_protocol.h" declline="114" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__protocol_1gac803d6e1a34aa390e7479ad62a76a497" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_encode_single</definition>
+        <argsstring>(uint8_t *frame, size_t capacity, const uint8_t *payload, uint32_t length)</argsstring>
+        <name>isotp_encode_single</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>capacity</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Encode a Single Frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of <computeroutput>frame</computeroutput>, at least <computeroutput>length</computeroutput> + 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message length, 1..7. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Frame length (<computeroutput>length</computeroutput> + 1), or ISOTP_ERROR. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="124" column="5" bodyfile="src/isotp_protocol.c" bodystart="195" bodyend="207" declfile="inc/isotp_protocol.h" declline="124" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__protocol_1ga366f66f9e9f6b1b2e9da2f93605ee8ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_encode_first</definition>
+        <argsstring>(uint8_t *frame, size_t capacity, const uint8_t *payload, uint32_t message_length)</argsstring>
+        <name>isotp_encode_first</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>capacity</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>message_length</declname>
+        </param>
+        <briefdescription>
+<para>Encode a First Frame and its first payload bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Messages up to 4095 bytes use the 12-bit FF_DL and carry 6 payload bytes; longer messages use the escape sequence with a 32-bit FF_DL and carry 2 payload bytes. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of <computeroutput>frame</computeroutput>, at least 8. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Start of the message; at least 6 (or 2) bytes are read. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>message_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the whole message, at least 8. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Frame length (8), or ISOTP_ERROR. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="137" column="5" bodyfile="src/isotp_protocol.c" bodystart="209" bodyend="234" declfile="inc/isotp_protocol.h" declline="137" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__protocol_1gab00b72cee8a6c7d9c63c94d6d279ec71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_encode_consecutive</definition>
+        <argsstring>(uint8_t *frame, size_t capacity, uint8_t sequence_number, const uint8_t *data, uint32_t length)</argsstring>
+        <name>isotp_encode_consecutive</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>capacity</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>sequence_number</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Encode a Consecutive Frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of <computeroutput>frame</computeroutput>, at least <computeroutput>length</computeroutput> + 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sequence_number</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SN, 0..15. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Segment bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Segment length, 1..7. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Frame length (<computeroutput>length</computeroutput> + 1), or ISOTP_ERROR. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="149" column="5" bodyfile="src/isotp_protocol.c" bodystart="236" bodyend="250" declfile="inc/isotp_protocol.h" declline="149" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__protocol_1gaa83fd08cc39152dfec534c289da9a1fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_encode_flow_control</definition>
+        <argsstring>(uint8_t *frame, size_t capacity, uint8_t flow_status, uint8_t block_size, uint8_t st_min)</argsstring>
+        <name>isotp_encode_flow_control</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>capacity</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>flow_status</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>block_size</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>st_min</declname>
+        </param>
+        <briefdescription>
+<para>Encode a Flow Control frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of <computeroutput>frame</computeroutput>, at least 3. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flow_status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISOTP_FS_CONTINUE, ISOTP_FS_WAIT or ISOTP_FS_OVERFLOW. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>BS, 0 = no further Flow Control. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>st_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Raw STmin byte, see <ref refid="group__isotp__protocol_1gad1a866dca4cfd61976f9066ac315707a" kindref="member">isotp_st_min_encode</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Frame length (3), or ISOTP_ERROR. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="161" column="5" bodyfile="src/isotp_protocol.c" bodystart="252" bodyend="266" declfile="inc/isotp_protocol.h" declline="161" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__protocol_1ga088e0db8cacc79d076e9326232f130c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int isotp_frame_pad</definition>
+        <argsstring>(uint8_t *frame, size_t capacity, size_t length, uint8_t value)</argsstring>
+        <name>isotp_frame_pad</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>capacity</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Fill a frame with a padding byte up to 8 data bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame buffer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of <computeroutput>frame</computeroutput>, at least 8. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current frame length, 1..8. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Padding byte. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>New frame length (8), or ISOTP_ERROR. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="172" column="5" bodyfile="src/isotp_protocol.c" bodystart="268" bodyend="279" declfile="inc/isotp_protocol.h" declline="172" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__protocol_1gad1a866dca4cfd61976f9066ac315707a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_st_min_encode</definition>
+        <argsstring>(uint32_t us)</argsstring>
+        <name>isotp_st_min_encode</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>us</declname>
+        </param>
+        <briefdescription>
+<para>Encode a separation time for a Flow Control frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Rounds up, so the sender never sends faster than requested: 0 us gives 0x00, 1..900 us give 0xF1..0xF9 (100 us steps), 901..127000 us give 0x01..0x7F (1 ms steps), larger values 0x7F. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>us</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Separation time in microseconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Raw STmin byte. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="182" column="9" bodyfile="src/isotp_protocol.c" bodystart="281" bodyend="305" declfile="inc/isotp_protocol.h" declline="182" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__protocol_1ga0cf4df17204718dd2d255a328b1c6508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_st_min_decode</definition>
+        <argsstring>(uint8_t st_min)</argsstring>
+        <name>isotp_st_min_decode</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>st_min</declname>
+        </param>
+        <briefdescription>
+<para>Decode a received STmin byte. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>0x00..0x7F are milliseconds, 0xF1..0xF9 are 100..900 us. ISO 15765-2 tells the sender to treat the reserved values as 0x7F (127 ms). <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>st_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Raw STmin byte. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Separation time in microseconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="191" column="10" bodyfile="src/isotp_protocol.c" bodystart="307" bodyend="325" declfile="inc/isotp_protocol.h" declline="191" declcolumn="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Pure functions that translate between CAN frames and ISO-TP PDUs. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The codec holds no state. <ref refid="group__isotp__protocol_1ga29356e99657bbe884b0a15a5eedfcbce" kindref="member">isotp_decode</ref> validates one received CAN frame and describes it in a <ref refid="structisotp__pdu" kindref="compound">isotp_pdu</ref>; the encoders write one frame into a caller buffer and return its length. Frames are classical CAN (up to 8 data bytes) with normal addressing. The encoders produce the shortest frame; <ref refid="group__isotp__protocol_1ga088e0db8cacc79d076e9326232f130c5" kindref="member">isotp_frame_pad</ref> fills it up to 8 bytes when the bus requires padding.</para>
+<para><simplesect kind="par"><title>Public interface includes:</title><para><itemizedlist>
+<listitem><para>Decoding: <ref refid="group__isotp__protocol_1ga29356e99657bbe884b0a15a5eedfcbce" kindref="member">isotp_decode</ref>. </para>
+</listitem>
+<listitem><para>Encoding: <ref refid="group__isotp__protocol_1gac803d6e1a34aa390e7479ad62a76a497" kindref="member">isotp_encode_single</ref>, <ref refid="group__isotp__protocol_1ga366f66f9e9f6b1b2e9da2f93605ee8ec" kindref="member">isotp_encode_first</ref>, <ref refid="group__isotp__protocol_1gab00b72cee8a6c7d9c63c94d6d279ec71" kindref="member">isotp_encode_consecutive</ref>, <ref refid="group__isotp__protocol_1gaa83fd08cc39152dfec534c289da9a1fa" kindref="member">isotp_encode_flow_control</ref>, <ref refid="group__isotp__protocol_1ga088e0db8cacc79d076e9326232f130c5" kindref="member">isotp_frame_pad</ref>. </para>
+</listitem>
+<listitem><para>Separation time: <ref refid="group__isotp__protocol_1gad1a866dca4cfd61976f9066ac315707a" kindref="member">isotp_st_min_encode</ref>, <ref refid="group__isotp__protocol_1ga0cf4df17204718dd2d255a328b1c6508" kindref="member">isotp_st_min_decode</ref>. </para>
+</listitem>
+</itemizedlist>
+</para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

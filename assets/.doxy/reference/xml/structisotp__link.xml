@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structisotp__link" kind="struct" language="C++" prot="public">
+    <compoundname>isotp_link</compoundname>
+    <includes refid="isotp__link_8h" local="no">isotp_link.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structisotp__link_1acd174f2e772dbf112ea264fd0136d9fa" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structisotp__link__config" kindref="compound">isotp_link_config</ref></type>
+        <definition>struct isotp_link_config isotp_link::config</definition>
+        <argsstring></argsstring>
+        <name>config</name>
+        <qualifiedname>isotp_link::config</qualifiedname>
+        <briefdescription>
+<para>Copy of the configuration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="159" column="28" bodyfile="inc/isotp_link.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a39a20c30cb56da230617a8459d7dd8a7" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_link::tx_buffer[ISOTP_TX_BUFFER_SIZE]</definition>
+        <argsstring>[ISOTP_TX_BUFFER_SIZE]</argsstring>
+        <name>tx_buffer</name>
+        <qualifiedname>isotp_link::tx_buffer</qualifiedname>
+        <briefdescription>
+<para>Message being sent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="160" column="13" bodyfile="inc/isotp_link.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a04e973bcec1f400e044ce379140c26b8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link::tx_size</definition>
+        <argsstring></argsstring>
+        <name>tx_size</name>
+        <qualifiedname>isotp_link::tx_size</qualifiedname>
+        <briefdescription>
+<para>Length of the message being sent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="161" column="14" bodyfile="inc/isotp_link.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a9fbcee3e0b80c6dda9b6e9087c72d2ac" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link::tx_offset</definition>
+        <argsstring></argsstring>
+        <name>tx_offset</name>
+        <qualifiedname>isotp_link::tx_offset</qualifiedname>
+        <briefdescription>
+<para>Bytes already sent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="162" column="14" bodyfile="inc/isotp_link.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a6c798600b018a9c5a4c31f637872d61e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link::tx_st_min_us</definition>
+        <argsstring></argsstring>
+        <name>tx_st_min_us</name>
+        <qualifiedname>isotp_link::tx_st_min_us</qualifiedname>
+        <briefdescription>
+<para>STmin granted by the receiver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="163" column="14" bodyfile="inc/isotp_link.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1af3518b4a850dc261a485e3b4cdd7b134" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link::tx_deadline_us</definition>
+        <argsstring></argsstring>
+        <name>tx_deadline_us</name>
+        <qualifiedname>isotp_link::tx_deadline_us</qualifiedname>
+        <briefdescription>
+<para>N_Bs expiry or time of the next CF. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="164" column="14" bodyfile="inc/isotp_link.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1aaad46571872a8b97a04c1a8f018254fd" prot="public" static="no" mutable="no">
+        <type>enum <ref refid="group__isotp__link_1gaedcc04d98e69a7c85b832d2bb251924e" kindref="member">isotp_tx_state</ref></type>
+        <definition>enum isotp_tx_state isotp_link::tx_state</definition>
+        <argsstring></argsstring>
+        <name>tx_state</name>
+        <qualifiedname>isotp_link::tx_state</qualifiedname>
+        <briefdescription>
+<para>Transmitter state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="165" column="24" bodyfile="inc/isotp_link.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a6041bb765578831ed6e5b0f2346a1009" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int isotp_link::tx_result</definition>
+        <argsstring></argsstring>
+        <name>tx_result</name>
+        <qualifiedname>isotp_link::tx_result</qualifiedname>
+        <briefdescription>
+<para>N_Result of the last transmission. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="166" column="9" bodyfile="inc/isotp_link.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1ad8c4f6d63b67d3fc1208f85236567895" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_link::tx_sn</definition>
+        <argsstring></argsstring>
+        <name>tx_sn</name>
+        <qualifiedname>isotp_link::tx_sn</qualifiedname>
+        <briefdescription>
+<para>SN of the next Consecutive Frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="167" column="13" bodyfile="inc/isotp_link.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1adef3ddc1b37167f35196108030f5dce4" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_link::tx_block_remaining</definition>
+        <argsstring></argsstring>
+        <name>tx_block_remaining</name>
+        <qualifiedname>isotp_link::tx_block_remaining</qualifiedname>
+        <briefdescription>
+<para>CFs left in the current block. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="168" column="13" bodyfile="inc/isotp_link.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a5444f3d92c056d2806e2c1fce7f3f37e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool isotp_link::tx_block_unlimited</definition>
+        <argsstring></argsstring>
+        <name>tx_block_unlimited</name>
+        <qualifiedname>isotp_link::tx_block_unlimited</qualifiedname>
+        <briefdescription>
+<para>Receiver granted BS = 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="169" column="10" bodyfile="inc/isotp_link.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a32000a6b997604016119158315e1689b" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_link::tx_wft_count</definition>
+        <argsstring></argsstring>
+        <name>tx_wft_count</name>
+        <qualifiedname>isotp_link::tx_wft_count</qualifiedname>
+        <briefdescription>
+<para>Wait frames received in a row. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="170" column="13" bodyfile="inc/isotp_link.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a550e80aea2a9aec63f69757146d91e42" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_link::rx_buffer[ISOTP_RX_BUFFER_SIZE]</definition>
+        <argsstring>[ISOTP_RX_BUFFER_SIZE]</argsstring>
+        <name>rx_buffer</name>
+        <qualifiedname>isotp_link::rx_buffer</qualifiedname>
+        <briefdescription>
+<para>Message being received. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="171" column="13" bodyfile="inc/isotp_link.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1ad00bcc3eac31de456998de04b0c24bbd" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link::rx_size</definition>
+        <argsstring></argsstring>
+        <name>rx_size</name>
+        <qualifiedname>isotp_link::rx_size</qualifiedname>
+        <briefdescription>
+<para>Announced message length. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="172" column="14" bodyfile="inc/isotp_link.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a4e45d607a1803aba2f3300a45dd9e649" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link::rx_offset</definition>
+        <argsstring></argsstring>
+        <name>rx_offset</name>
+        <qualifiedname>isotp_link::rx_offset</qualifiedname>
+        <briefdescription>
+<para>Bytes already received. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="173" column="14" bodyfile="inc/isotp_link.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a93f6dd397462b0b990e3a8b3546fff1d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link::rx_deadline_us</definition>
+        <argsstring></argsstring>
+        <name>rx_deadline_us</name>
+        <qualifiedname>isotp_link::rx_deadline_us</qualifiedname>
+        <briefdescription>
+<para>N_Cr expiry. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="174" column="14" bodyfile="inc/isotp_link.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a9ba3db819f94ed4403a0ba7995894b9e" prot="public" static="no" mutable="no">
+        <type>enum <ref refid="group__isotp__link_1ga7be50a331f713987017afc15561602eb" kindref="member">isotp_rx_state</ref></type>
+        <definition>enum isotp_rx_state isotp_link::rx_state</definition>
+        <argsstring></argsstring>
+        <name>rx_state</name>
+        <qualifiedname>isotp_link::rx_state</qualifiedname>
+        <briefdescription>
+<para>Receiver state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="175" column="24" bodyfile="inc/isotp_link.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a919aa659ea86541cfa975be3c58cc5c4" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int isotp_link::rx_result</definition>
+        <argsstring></argsstring>
+        <name>rx_result</name>
+        <qualifiedname>isotp_link::rx_result</qualifiedname>
+        <briefdescription>
+<para>N_Result of the last reception. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="176" column="9" bodyfile="inc/isotp_link.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a5dccdc479e833305851c4655533e628b" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_link::rx_sn</definition>
+        <argsstring></argsstring>
+        <name>rx_sn</name>
+        <qualifiedname>isotp_link::rx_sn</qualifiedname>
+        <briefdescription>
+<para>Expected SN. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="177" column="13" bodyfile="inc/isotp_link.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1a1fa8702e2dff41abfe65537b32fa6f28" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_link::rx_block_count</definition>
+        <argsstring></argsstring>
+        <name>rx_block_count</name>
+        <qualifiedname>isotp_link::rx_block_count</qualifiedname>
+        <briefdescription>
+<para>CFs left until the next Flow Control. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="178" column="13" bodyfile="inc/isotp_link.h" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__link_1abce1d92b06e9ba4b95449f2a989d03a8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_link::invalid_frames</definition>
+        <argsstring></argsstring>
+        <name>invalid_frames</name>
+        <qualifiedname>isotp_link::invalid_frames</qualifiedname>
+        <briefdescription>
+<para>Malformed frames ignored. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_link.h" line="179" column="14" bodyfile="inc/isotp_link.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Link state. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Treat the members as private; use the functions below. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>isotp_link</label>
+        <link refid="structisotp__link"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>config</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>isotp_link_config</label>
+        <link refid="structisotp__link__config"/>
+      </node>
+    </collaborationgraph>
+    <location file="inc/isotp_link.h" line="157" column="1" bodyfile="inc/isotp_link.h" bodystart="158" bodyend="180"/>
+    <listofallmembers>
+      <member refid="structisotp__link_1acd174f2e772dbf112ea264fd0136d9fa" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>config</name></member>
+      <member refid="structisotp__link_1abce1d92b06e9ba4b95449f2a989d03a8" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>invalid_frames</name></member>
+      <member refid="structisotp__link_1a1fa8702e2dff41abfe65537b32fa6f28" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>rx_block_count</name></member>
+      <member refid="structisotp__link_1a550e80aea2a9aec63f69757146d91e42" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>rx_buffer</name></member>
+      <member refid="structisotp__link_1a93f6dd397462b0b990e3a8b3546fff1d" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>rx_deadline_us</name></member>
+      <member refid="structisotp__link_1a4e45d607a1803aba2f3300a45dd9e649" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>rx_offset</name></member>
+      <member refid="structisotp__link_1a919aa659ea86541cfa975be3c58cc5c4" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>rx_result</name></member>
+      <member refid="structisotp__link_1ad00bcc3eac31de456998de04b0c24bbd" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>rx_size</name></member>
+      <member refid="structisotp__link_1a5dccdc479e833305851c4655533e628b" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>rx_sn</name></member>
+      <member refid="structisotp__link_1a9ba3db819f94ed4403a0ba7995894b9e" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>rx_state</name></member>
+      <member refid="structisotp__link_1adef3ddc1b37167f35196108030f5dce4" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_block_remaining</name></member>
+      <member refid="structisotp__link_1a5444f3d92c056d2806e2c1fce7f3f37e" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_block_unlimited</name></member>
+      <member refid="structisotp__link_1a39a20c30cb56da230617a8459d7dd8a7" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_buffer</name></member>
+      <member refid="structisotp__link_1af3518b4a850dc261a485e3b4cdd7b134" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_deadline_us</name></member>
+      <member refid="structisotp__link_1a9fbcee3e0b80c6dda9b6e9087c72d2ac" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_offset</name></member>
+      <member refid="structisotp__link_1a6041bb765578831ed6e5b0f2346a1009" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_result</name></member>
+      <member refid="structisotp__link_1a04e973bcec1f400e044ce379140c26b8" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_size</name></member>
+      <member refid="structisotp__link_1ad8c4f6d63b67d3fc1208f85236567895" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_sn</name></member>
+      <member refid="structisotp__link_1a6c798600b018a9c5a4c31f637872d61e" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_st_min_us</name></member>
+      <member refid="structisotp__link_1aaad46571872a8b97a04c1a8f018254fd" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_state</name></member>
+      <member refid="structisotp__link_1a32000a6b997604016119158315e1689b" prot="public" virt="non-virtual"><scope>isotp_link</scope><name>tx_wft_count</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

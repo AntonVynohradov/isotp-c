@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structisotp__pdu" kind="struct" language="C++" prot="public">
+    <compoundname>isotp_pdu</compoundname>
+    <includes refid="isotp__protocol_8h" local="no">isotp_protocol.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structisotp__pdu_1aaddd698415aec48fe818524476105ca4" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_pdu::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>isotp_pdu::type</qualifiedname>
+        <briefdescription>
+<para>ISOTP_PCI_* frame type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="84" column="13" bodyfile="inc/isotp_protocol.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__pdu_1af7db76aa175603e8eff7839225562102" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t isotp_pdu::message_length</definition>
+        <argsstring></argsstring>
+        <name>message_length</name>
+        <qualifiedname>isotp_pdu::message_length</qualifiedname>
+        <briefdescription>
+<para>SF_DL (SF) or FF_DL (FF): length of the whole message. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="85" column="14" bodyfile="inc/isotp_protocol.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__pdu_1ac9555afa57299d10458daa3c7d508a3f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_pdu::data_offset</definition>
+        <argsstring></argsstring>
+        <name>data_offset</name>
+        <qualifiedname>isotp_pdu::data_offset</qualifiedname>
+        <briefdescription>
+<para>Index of the first payload byte in the frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="86" column="13" bodyfile="inc/isotp_protocol.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__pdu_1a5df7874fcea0a5eefcd21bb5f951ec0b" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_pdu::data_length</definition>
+        <argsstring></argsstring>
+        <name>data_length</name>
+        <qualifiedname>isotp_pdu::data_length</qualifiedname>
+        <briefdescription>
+<para>Payload bytes in this frame (SF, FF, CF). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="87" column="13" bodyfile="inc/isotp_protocol.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__pdu_1aacf0c710db8173a0234b6834b2c0ed6b" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_pdu::sequence_number</definition>
+        <argsstring></argsstring>
+        <name>sequence_number</name>
+        <qualifiedname>isotp_pdu::sequence_number</qualifiedname>
+        <briefdescription>
+<para>SN (CF). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="88" column="13" bodyfile="inc/isotp_protocol.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__pdu_1af04f83452f7bc658884088a09f91a4c5" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_pdu::flow_status</definition>
+        <argsstring></argsstring>
+        <name>flow_status</name>
+        <qualifiedname>isotp_pdu::flow_status</qualifiedname>
+        <briefdescription>
+<para>FS (FC), not range-checked: see <ref refid="group__isotp__protocol_1ga29356e99657bbe884b0a15a5eedfcbce" kindref="member">isotp_decode</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="89" column="13" bodyfile="inc/isotp_protocol.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__pdu_1a0c32c9074edb44f3eed51836a850154d" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_pdu::block_size</definition>
+        <argsstring></argsstring>
+        <name>block_size</name>
+        <qualifiedname>isotp_pdu::block_size</qualifiedname>
+        <briefdescription>
+<para>BS (FC). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="90" column="13" bodyfile="inc/isotp_protocol.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structisotp__pdu_1a495329927a7e434325a02487840922b8" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t isotp_pdu::st_min</definition>
+        <argsstring></argsstring>
+        <name>st_min</name>
+        <qualifiedname>isotp_pdu::st_min</qualifiedname>
+        <briefdescription>
+<para>Raw STmin byte (FC); convert with <ref refid="group__isotp__protocol_1ga0cf4df17204718dd2d255a328b1c6508" kindref="member">isotp_st_min_decode</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_protocol.h" line="91" column="13" bodyfile="inc/isotp_protocol.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>One decoded ISO-TP frame (protocol data unit). </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Only the members of the decoded frame type are meaningful; the others are zero. The payload is not copied: it is <computeroutput>frame[data_offset]</computeroutput> .. <computeroutput>frame[data_offset + data_length - 1]</computeroutput> of the frame passed to <ref refid="group__isotp__protocol_1ga29356e99657bbe884b0a15a5eedfcbce" kindref="member">isotp_decode</ref>. </para>
+    </detaileddescription>
+    <location file="inc/isotp_protocol.h" line="82" column="1" bodyfile="inc/isotp_protocol.h" bodystart="83" bodyend="92"/>
+    <listofallmembers>
+      <member refid="structisotp__pdu_1a0c32c9074edb44f3eed51836a850154d" prot="public" virt="non-virtual"><scope>isotp_pdu</scope><name>block_size</name></member>
+      <member refid="structisotp__pdu_1a5df7874fcea0a5eefcd21bb5f951ec0b" prot="public" virt="non-virtual"><scope>isotp_pdu</scope><name>data_length</name></member>
+      <member refid="structisotp__pdu_1ac9555afa57299d10458daa3c7d508a3f" prot="public" virt="non-virtual"><scope>isotp_pdu</scope><name>data_offset</name></member>
+      <member refid="structisotp__pdu_1af04f83452f7bc658884088a09f91a4c5" prot="public" virt="non-virtual"><scope>isotp_pdu</scope><name>flow_status</name></member>
+      <member refid="structisotp__pdu_1af7db76aa175603e8eff7839225562102" prot="public" virt="non-virtual"><scope>isotp_pdu</scope><name>message_length</name></member>
+      <member refid="structisotp__pdu_1aacf0c710db8173a0234b6834b2c0ed6b" prot="public" virt="non-virtual"><scope>isotp_pdu</scope><name>sequence_number</name></member>
+      <member refid="structisotp__pdu_1a495329927a7e434325a02487840922b8" prot="public" virt="non-virtual"><scope>isotp_pdu</scope><name>st_min</name></member>
+      <member refid="structisotp__pdu_1aaddd698415aec48fe818524476105ca4" prot="public" virt="non-virtual"><scope>isotp_pdu</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

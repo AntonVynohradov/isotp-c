@@ -1,0 +1,478 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="group__isotp__defs" kind="group">
+    <compoundname>isotp_defs</compoundname>
+    <title>Definitions</title>
+    <sectiondef kind="user-defined">
+      <header>Big-endian helpers (the 32-bit FF_DL is sent most significant byte first)</header>
+      <memberdef kind="function" id="group__isotp__defs_1gab6ceec020b733b5b3118e1670e8e9f91" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>static uint32_t isotp_get_u32_be</definition>
+        <argsstring>(const uint8_t *data)</argsstring>
+        <name>isotp_get_u32_be</name>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Read a big-endian 32-bit value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>At least four bytes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="140" column="24" bodyfile="inc/isotp_defs.h" bodystart="140" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="group__isotp__defs_1ga12a295c719118bce1d276f9b27619dac" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void isotp_put_u32_be</definition>
+        <argsstring>(uint8_t *data, uint32_t value)</argsstring>
+        <name>isotp_put_u32_be</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Write a 32-bit value in big-endian byte order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>At least four bytes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value to write. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="151" column="20" bodyfile="inc/isotp_defs.h" bodystart="151" bodyend="157"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Function return codes</header>
+      <memberdef kind="define" id="group__isotp__defs_1gac21e65efb4680b31bf0e6c6da3150c65" prot="public" static="no">
+        <name>ISOTP_OK</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Success. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="70" column="9" bodyfile="inc/isotp_defs.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga88c606d0ecf59ce2238ab7a6012e4db3" prot="public" static="no">
+        <name>ISOTP_ERROR</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+<para>Invalid argument, malformed frame or insufficient capacity. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="71" column="9" bodyfile="inc/isotp_defs.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga6c25746e557b248601846c5e38702814" prot="public" static="no">
+        <name>ISOTP_BUSY</name>
+        <initializer>-2</initializer>
+        <briefdescription>
+<para>Try again later: transmission in progress or CAN driver busy. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="72" column="9" bodyfile="inc/isotp_defs.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Frame types (N_PCItype, high nibble of the first byte)</header>
+      <memberdef kind="define" id="group__isotp__defs_1ga8ea00390c4d22776acd3423fb448145e" prot="public" static="no">
+        <name>ISOTP_PCI_SINGLE_FRAME</name>
+        <initializer>0x0U</initializer>
+        <briefdescription>
+<para>SF: complete message of up to 7 bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="79" column="9" bodyfile="inc/isotp_defs.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga9396b53fe5998aee0e843b6c02187f7f" prot="public" static="no">
+        <name>ISOTP_PCI_FIRST_FRAME</name>
+        <initializer>0x1U</initializer>
+        <briefdescription>
+<para>FF: start of a segmented message. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="80" column="9" bodyfile="inc/isotp_defs.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gaf9583f4e3708892b27fea331a22f7016" prot="public" static="no">
+        <name>ISOTP_PCI_CONSECUTIVE_FRAME</name>
+        <initializer>0x2U</initializer>
+        <briefdescription>
+<para>CF: next segment of a message. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="81" column="9" bodyfile="inc/isotp_defs.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gaba2e413316a726d29fc37d9192c04d16" prot="public" static="no">
+        <name>ISOTP_PCI_FLOW_CONTROL</name>
+        <initializer>0x3U</initializer>
+        <briefdescription>
+<para>FC: receiver tells the sender how to continue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="82" column="9" bodyfile="inc/isotp_defs.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Flow status (FS, low nibble of a Flow Control frame)</header>
+      <memberdef kind="define" id="group__isotp__defs_1ga2a2a8422aa58e11f8264dc079f3bcd92" prot="public" static="no">
+        <name>ISOTP_FS_CONTINUE</name>
+        <initializer>0x0U</initializer>
+        <briefdescription>
+<para>CTS: continue to send. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="89" column="9" bodyfile="inc/isotp_defs.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gaa53a0c8552f87bc6e4e6a18b397a67de" prot="public" static="no">
+        <name>ISOTP_FS_WAIT</name>
+        <initializer>0x1U</initializer>
+        <briefdescription>
+<para>WAIT: wait for the next Flow Control frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="90" column="9" bodyfile="inc/isotp_defs.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gae04edce08528866f0bd0251b7bbe5652" prot="public" static="no">
+        <name>ISOTP_FS_OVERFLOW</name>
+        <initializer>0x2U</initializer>
+        <briefdescription>
+<para>OVFLW: message longer than the receiver buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="91" column="9" bodyfile="inc/isotp_defs.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>Frame layout (classical CAN, normal addressing)</header>
+      <memberdef kind="define" id="group__isotp__defs_1gad0dc89db63f2e992f564bef3ed180f4c" prot="public" static="no">
+        <name>ISOTP_CAN_DL</name>
+        <initializer>8U</initializer>
+        <briefdescription>
+<para>Data bytes of a classical CAN frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="98" column="9" bodyfile="inc/isotp_defs.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gab892f980733c79fbd45bd7e07767fca4" prot="public" static="no">
+        <name>ISOTP_SF_MAX_DL</name>
+        <initializer>7U</initializer>
+        <briefdescription>
+<para>Largest Single Frame payload. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="99" column="9" bodyfile="inc/isotp_defs.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gac2d38e1f58da325708dd74c6dc7f98a1" prot="public" static="no">
+        <name>ISOTP_FF_DL_12BIT_MAX</name>
+        <initializer>4095U</initializer>
+        <briefdescription>
+<para>Largest length in the 12-bit FF_DL field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="100" column="9" bodyfile="inc/isotp_defs.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga1be2d365a0a74454b36ae6b8bf8a536a" prot="public" static="no">
+        <name>ISOTP_FF_SHORT_DATA</name>
+        <initializer>6U</initializer>
+        <briefdescription>
+<para>Payload bytes in a First Frame with 12-bit FF_DL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="101" column="9" bodyfile="inc/isotp_defs.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga0bbb4f7b1959af15ba54aa991bd2e54a" prot="public" static="no">
+        <name>ISOTP_FF_LONG_DATA</name>
+        <initializer>2U</initializer>
+        <briefdescription>
+<para>Payload bytes in a First Frame with 32-bit FF_DL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="102" column="9" bodyfile="inc/isotp_defs.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gabc578a7c08502d3bd674e40c25fb5f5e" prot="public" static="no">
+        <name>ISOTP_CF_MAX_DATA</name>
+        <initializer>7U</initializer>
+        <briefdescription>
+<para>Payload bytes in a full Consecutive Frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="103" column="9" bodyfile="inc/isotp_defs.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga80e557998deaf17719c61cc93bbd2be3" prot="public" static="no">
+        <name>ISOTP_FC_DL</name>
+        <initializer>3U</initializer>
+        <briefdescription>
+<para>Bytes of a Flow Control frame without padding. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="104" column="9" bodyfile="inc/isotp_defs.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga5e5e30856212d41fa3e286319c344afd" prot="public" static="no">
+        <name>ISOTP_SN_MASK</name>
+        <initializer>0x0FU</initializer>
+        <briefdescription>
+<para>Sequence numbers count 0..15 and wrap. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="105" column="9" bodyfile="inc/isotp_defs.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga9a6ec9a36bc4cdceb2ba11e93193618c" prot="public" static="no">
+        <name>ISOTP_FIRST_SN</name>
+        <initializer>1U</initializer>
+        <briefdescription>
+<para>SN of the first Consecutive Frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="106" column="9" bodyfile="inc/isotp_defs.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gab199db135645afa02ef133893456d2e3" prot="public" static="no">
+        <name>ISOTP_ST_MIN_MAX_US</name>
+        <initializer>127000U</initializer>
+        <briefdescription>
+<para>Largest STmin, 0x7F = 127 ms. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="107" column="9" bodyfile="inc/isotp_defs.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>N_Result codes</header>
+      <description><para>Outcome of a transmission or reception, reported by <ref refid="group__isotp__link_1gad0b919001194055a4b0f75f70ccc0f0f" kindref="member">isotp_link_tx_result</ref>, <ref refid="group__isotp__link_1ga20e36e89c70a103d43cfa44131b92f95" kindref="member">isotp_link_rx_result</ref> and the completion callbacks. The names follow ISO 15765-2. </para>
+</description>
+      <memberdef kind="define" id="group__isotp__defs_1gab7daaebbc303665beb2946ce077d5312" prot="public" static="no">
+        <name>ISOTP_N_OK</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Completed successfully. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="119" column="9" bodyfile="inc/isotp_defs.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga8298423e96932f94308f3064755d18fb" prot="public" static="no">
+        <name>ISOTP_N_TIMEOUT_A</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+<para>N_As/N_Ar expired (not produced: writes are synchronous). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="120" column="9" bodyfile="inc/isotp_defs.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga9e525bb24928a2656e7cd2842b306553" prot="public" static="no">
+        <name>ISOTP_N_TIMEOUT_BS</name>
+        <initializer>-2</initializer>
+        <briefdescription>
+<para>Sender: no Flow Control within N_Bs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="121" column="9" bodyfile="inc/isotp_defs.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga77b802df46c66ed6002f143b57f73b7a" prot="public" static="no">
+        <name>ISOTP_N_TIMEOUT_CR</name>
+        <initializer>-3</initializer>
+        <briefdescription>
+<para>Receiver: no Consecutive Frame within N_Cr. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="122" column="9" bodyfile="inc/isotp_defs.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga9caa5677a171e1bd0be06ebb6b006046" prot="public" static="no">
+        <name>ISOTP_N_WRONG_SN</name>
+        <initializer>-4</initializer>
+        <briefdescription>
+<para>Receiver: Consecutive Frame with an unexpected SN. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="123" column="9" bodyfile="inc/isotp_defs.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga99312831df8e1822f02b41e3fccc0661" prot="public" static="no">
+        <name>ISOTP_N_INVALID_FS</name>
+        <initializer>-5</initializer>
+        <briefdescription>
+<para>Sender: Flow Control with an unknown flow status. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="124" column="9" bodyfile="inc/isotp_defs.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga45e3bfdd3948be6ccb3daec5db412b78" prot="public" static="no">
+        <name>ISOTP_N_UNEXP_PDU</name>
+        <initializer>-6</initializer>
+        <briefdescription>
+<para>Receiver: new SF/FF interrupted a reception. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="125" column="9" bodyfile="inc/isotp_defs.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1gad6bcb7b6fb8ab30da1a4ddeabe3e3178" prot="public" static="no">
+        <name>ISOTP_N_WFT_OVRN</name>
+        <initializer>-7</initializer>
+        <briefdescription>
+<para>Sender: more than N_WFTmax Wait frames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="126" column="9" bodyfile="inc/isotp_defs.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga2617a5dc4f2a1a3416b0f37f8431cea2" prot="public" static="no">
+        <name>ISOTP_N_BUFFER_OVFLW</name>
+        <initializer>-8</initializer>
+        <briefdescription>
+<para>Message longer than the receiver buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="127" column="9" bodyfile="inc/isotp_defs.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__isotp__defs_1ga0805646e65d39a9e2f15e110720887ca" prot="public" static="no">
+        <name>ISOTP_N_ERROR</name>
+        <initializer>-9</initializer>
+        <briefdescription>
+<para>CAN driver error while sending a frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inc/isotp_defs.h" line="128" column="9" bodyfile="inc/isotp_defs.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Protocol constants of ISO 15765-2 and the library result codes. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Wire values (frame types, flow status, field limits) are taken from ISO 15765-2 for classical CAN (8 data bytes) with normal addressing. The result codes are library values: the standard defines the N_Result names, not their numbers.</para>
+<para><simplesect kind="par"><title>Elements in this group:</title><para><itemizedlist>
+<listitem><para>Function return codes: <ref refid="group__isotp__defs_1gac21e65efb4680b31bf0e6c6da3150c65" kindref="member">ISOTP_OK</ref>, <ref refid="group__isotp__defs_1ga88c606d0ecf59ce2238ab7a6012e4db3" kindref="member">ISOTP_ERROR</ref>, <ref refid="group__isotp__defs_1ga6c25746e557b248601846c5e38702814" kindref="member">ISOTP_BUSY</ref>. </para>
+</listitem>
+<listitem><para>Frame types (N_PCItype) and flow status values. </para>
+</listitem>
+<listitem><para>Frame layout limits: <ref refid="group__isotp__defs_1gad0dc89db63f2e992f564bef3ed180f4c" kindref="member">ISOTP_CAN_DL</ref>, <ref refid="group__isotp__defs_1gab892f980733c79fbd45bd7e07767fca4" kindref="member">ISOTP_SF_MAX_DL</ref>, ... </para>
+</listitem>
+<listitem><para>N_Result codes reported by the link: <ref refid="group__isotp__defs_1gab7daaebbc303665beb2946ce077d5312" kindref="member">ISOTP_N_OK</ref>, ... </para>
+</listitem>
+<listitem><para>Big-endian helpers: <ref refid="group__isotp__defs_1gab6ceec020b733b5b3118e1670e8e9f91" kindref="member">isotp_get_u32_be</ref>, <ref refid="group__isotp__defs_1ga12a295c719118bce1d276f9b27619dac" kindref="member">isotp_put_u32_be</ref>. </para>
+</listitem>
+</itemizedlist>
+</para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

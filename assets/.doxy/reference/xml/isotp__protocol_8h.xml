@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="isotp__protocol_8h" kind="file" language="C++">
+    <compoundname>isotp_protocol.h</compoundname>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes refid="isotp__defs_8h" local="yes">isotp_defs.h</includes>
+    <includedby refid="isotp__link_8h" local="yes">inc/isotp_link.h</includedby>
+    <includedby refid="isotp_8h" local="yes">isotp.h</includedby>
+    <includedby refid="isotp__protocol_8c" local="yes">src/isotp_protocol.c</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>isotp_defs.h</label>
+        <link refid="isotp__defs_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>inc/isotp_protocol.h</label>
+        <link refid="isotp__protocol_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stddef.h</label>
+      </node>
+      <node id="3">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>inc/isotp_link.h</label>
+        <link refid="isotp__link_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>inc/isotp_protocol.h</label>
+        <link refid="isotp__protocol_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>isotp.h</label>
+        <link refid="isotp_8h"/>
+      </node>
+      <node id="4">
+        <label>src/isotp_link.c</label>
+        <link refid="isotp__link_8c"/>
+      </node>
+      <node id="5">
+        <label>src/isotp_protocol.c</label>
+        <link refid="isotp__protocol_8c"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structisotp__pdu" prot="public">isotp_pdu</innerclass>
+    <sectiondef kind="user-defined">
+      <header>Public function declarations</header>
+      <member refid="group__isotp__protocol_1ga29356e99657bbe884b0a15a5eedfcbce" kind="function"><name>isotp_decode</name></member>
+      <member refid="group__isotp__protocol_1gac803d6e1a34aa390e7479ad62a76a497" kind="function"><name>isotp_encode_single</name></member>
+      <member refid="group__isotp__protocol_1ga366f66f9e9f6b1b2e9da2f93605ee8ec" kind="function"><name>isotp_encode_first</name></member>
+      <member refid="group__isotp__protocol_1gab00b72cee8a6c7d9c63c94d6d279ec71" kind="function"><name>isotp_encode_consecutive</name></member>
+      <member refid="group__isotp__protocol_1gaa83fd08cc39152dfec534c289da9a1fa" kind="function"><name>isotp_encode_flow_control</name></member>
+      <member refid="group__isotp__protocol_1ga088e0db8cacc79d076e9326232f130c5" kind="function"><name>isotp_frame_pad</name></member>
+      <member refid="group__isotp__protocol_1gad1a866dca4cfd61976f9066ac315707a" kind="function"><name>isotp_st_min_encode</name></member>
+      <member refid="group__isotp__protocol_1ga0cf4df17204718dd2d255a328b1c6508" kind="function"><name>isotp_st_min_decode</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>ISO-TP frame codec: decode one CAN frame, encode SF/FF/CF/FC, STmin. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Project: ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library Author: Anton Vynohradov Email: <ulink url="mailto:avynohradov@systemfromscratch.com">avynohradov@systemfromscratch.com</ulink></para>
+<para><simplesect kind="copyright"><para>Copyright (c) 2026 Anton Vynohradov @license MIT License</para>
+</simplesect>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</para>
+<para>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</para>
+<para>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</para>
+<para>SPDX-License-Identifier: MIT </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ISOTP_PROTOCOL_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ISOTP_PROTOCOL_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="isotp__defs_8h" kindref="compound">isotp_defs.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="structisotp__pdu" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structisotp__pdu" kindref="compound">isotp_pdu</ref></highlight></codeline>
+<codeline lineno="83"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="84" refid="structisotp__pdu_1aaddd698415aec48fe818524476105ca4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__pdu_1aaddd698415aec48fe818524476105ca4" kindref="member">type</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="85" refid="structisotp__pdu_1af7db76aa175603e8eff7839225562102" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structisotp__pdu_1af7db76aa175603e8eff7839225562102" kindref="member">message_length</ref>;<sp/></highlight></codeline>
+<codeline lineno="86" refid="structisotp__pdu_1ac9555afa57299d10458daa3c7d508a3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__pdu_1ac9555afa57299d10458daa3c7d508a3f" kindref="member">data_offset</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="87" refid="structisotp__pdu_1a5df7874fcea0a5eefcd21bb5f951ec0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__pdu_1a5df7874fcea0a5eefcd21bb5f951ec0b" kindref="member">data_length</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="88" refid="structisotp__pdu_1aacf0c710db8173a0234b6834b2c0ed6b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__pdu_1aacf0c710db8173a0234b6834b2c0ed6b" kindref="member">sequence_number</ref>;<sp/></highlight></codeline>
+<codeline lineno="89" refid="structisotp__pdu_1af04f83452f7bc658884088a09f91a4c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__pdu_1af04f83452f7bc658884088a09f91a4c5" kindref="member">flow_status</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="90" refid="structisotp__pdu_1a0c32c9074edb44f3eed51836a850154d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__pdu_1a0c32c9074edb44f3eed51836a850154d" kindref="member">block_size</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="91" refid="structisotp__pdu_1a495329927a7e434325a02487840922b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structisotp__pdu_1a495329927a7e434325a02487840922b8" kindref="member">st_min</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="92"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__protocol_1ga29356e99657bbe884b0a15a5eedfcbce" kindref="member">isotp_decode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>frame,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>length,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structisotp__pdu" kindref="compound">isotp_pdu</ref>*<sp/>pdu);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__protocol_1gac803d6e1a34aa390e7479ad62a76a497" kindref="member">isotp_encode_single</ref>(uint8_t*<sp/>frame,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>capacity,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>payload,<sp/>uint32_t<sp/>length);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__protocol_1ga366f66f9e9f6b1b2e9da2f93605ee8ec" kindref="member">isotp_encode_first</ref>(uint8_t*<sp/>frame,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>capacity,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>payload,</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>message_length);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__protocol_1gab00b72cee8a6c7d9c63c94d6d279ec71" kindref="member">isotp_encode_consecutive</ref>(uint8_t*<sp/>frame,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>capacity,<sp/>uint8_t<sp/>sequence_number,</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>data,<sp/>uint32_t<sp/>length);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__protocol_1gaa83fd08cc39152dfec534c289da9a1fa" kindref="member">isotp_encode_flow_control</ref>(uint8_t*<sp/>frame,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>capacity,<sp/>uint8_t<sp/>flow_status,</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>block_size,<sp/>uint8_t<sp/>st_min);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__isotp__protocol_1ga088e0db8cacc79d076e9326232f130c5" kindref="member">isotp_frame_pad</ref>(uint8_t*<sp/>frame,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>capacity,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>length,<sp/>uint8_t<sp/>value);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal">uint8_t<sp/><ref refid="group__isotp__protocol_1gad1a866dca4cfd61976f9066ac315707a" kindref="member">isotp_st_min_encode</ref>(uint32_t<sp/>us);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal">uint32_t<sp/><ref refid="group__isotp__protocol_1ga0cf4df17204718dd2d255a328b1c6508" kindref="member">isotp_st_min_decode</ref>(uint8_t<sp/>st_min);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ISOTP_PROTOCOL_H<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="inc/isotp_protocol.h"/>
+  </compounddef>
+</doxygen>
