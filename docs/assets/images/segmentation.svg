@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" role="img" aria-label="Segmented transfer with flow control">
+<title>Segmented transfer with flow control</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5A6472"/></marker><marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F8B9A"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E07A00"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32"/></marker></defs>
+<rect x="0" y="0" width="900" height="560" rx="12" fill="#FFFFFF"/>
+<rect x="90" y="16" width="220" height="56" rx="10" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="200" y="42" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Sender</text>
+<text x="200" y="62" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#C9D6EA" text-anchor="middle">isotp_link_send()</text>
+<line x1="200" y1="72" x2="200" y2="540" stroke="#C9D3E0" stroke-width="2" stroke-dasharray="6 4"/>
+<rect x="590" y="16" width="220" height="56" rx="10" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="700" y="42" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Receiver</text>
+<text x="700" y="62" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#C9D6EA" text-anchor="middle">on_message()</text>
+<line x1="700" y1="72" x2="700" y2="540" stroke="#C9D3E0" stroke-width="2" stroke-dasharray="6 4"/>
+<line x1="200" y1="110" x2="694" y2="110" stroke="#1E5AA8" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="450.0" y="102" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#1E5AA8" text-anchor="middle">FF  10 28 …  (40 bytes, 6 in this frame)</text>
+<line x1="700" y1="155" x2="206" y2="155" stroke="#E07A00" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
+<text x="450.0" y="147" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#E07A00" text-anchor="middle">FC  30 02 0A  (CTS, BS 2, STmin 10 ms)</text>
+<line x1="200" y1="200" x2="694" y2="200" stroke="#0F8B9A" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
+<text x="450.0" y="192" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#0F8B9A" text-anchor="middle">CF  21 …</text>
+<line x1="200" y1="250" x2="694" y2="250" stroke="#0F8B9A" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
+<text x="450.0" y="242" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#0F8B9A" text-anchor="middle">CF  22 …</text>
+<line x1="700" y1="295" x2="206" y2="295" stroke="#E07A00" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
+<text x="450.0" y="287" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#E07A00" text-anchor="middle">FC  30 02 0A  (block of 2 done)</text>
+<line x1="200" y1="340" x2="694" y2="340" stroke="#0F8B9A" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
+<text x="450.0" y="332" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#0F8B9A" text-anchor="middle">CF  23 …</text>
+<line x1="200" y1="390" x2="694" y2="390" stroke="#0F8B9A" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
+<text x="450.0" y="382" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#0F8B9A" text-anchor="middle">CF  24 …</text>
+<line x1="700" y1="435" x2="206" y2="435" stroke="#E07A00" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
+<text x="450.0" y="427" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#E07A00" text-anchor="middle">FC  30 02 0A</text>
+<line x1="200" y1="480" x2="694" y2="480" stroke="#0F8B9A" stroke-width="2.2" marker-end="url(#arrow-teal)"/>
+<text x="450.0" y="472" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="13" font-weight="bold" fill="#0F8B9A" text-anchor="middle">CF  25 …  (last 6 bytes)</text>
+<path d="M180,110 L170,110 L170,155 L180,155" stroke="#C62828" stroke-width="1.6" fill="none"/>
+<text x="162" y="136.5" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#C62828" text-anchor="end">N_Bs</text>
+<path d="M180,200 L170,200 L170,250 L180,250" stroke="#5A6472" stroke-width="1.6" fill="none"/>
+<text x="162" y="229.0" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#5A6472" text-anchor="end">≥ STmin</text>
+<path d="M180,250 L170,250 L170,295 L180,295" stroke="#C62828" stroke-width="1.6" fill="none"/>
+<text x="162" y="276.5" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#C62828" text-anchor="end">N_Bs</text>
+<path d="M720,155 L730,155 L730,200 L720,200" stroke="#C62828" stroke-width="1.6" fill="none"/>
+<text x="738" y="181.5" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#C62828" text-anchor="start">N_Cr</text>
+<path d="M720,435 L730,435 L730,480 L720,480" stroke="#C62828" stroke-width="1.6" fill="none"/>
+<text x="738" y="461.5" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#C62828" text-anchor="start">N_Cr</text>
+<text x="700" y="524" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#2E7D32" text-anchor="middle">40 bytes complete → on_message()</text>
+</svg>

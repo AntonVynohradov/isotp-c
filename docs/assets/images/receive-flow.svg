@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620" width="980" height="620" role="img" aria-label="isotp_link_receive() algorithm">
+<title>isotp_link_receive() algorithm</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5A6472"/></marker><marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F8B9A"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E07A00"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32"/></marker></defs>
+<rect x="0" y="0" width="980" height="620" rx="12" fill="#FFFFFF"/>
+<rect x="160" y="14" width="160" height="36" rx="18" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="240" y="37" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">CAN frame in</text>
+<line x1="240" y1="50" x2="240" y2="72" stroke="#5A6472" stroke-width="1.6" marker-end="url(#arrow)"/>
+<polygon points="240,74.0 400.0,116 240,158.0 80.0,116" fill="#FFF7EC" stroke="#E07A00" stroke-width="1.5"/>
+<text x="240" y="113" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="normal" fill="#0B2545" text-anchor="middle">isotp_decode():</text>
+<text x="240" y="129" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="normal" fill="#0B2545" text-anchor="middle">valid SF / FF / CF / FC?</text>
+<line x1="400" y1="116" x2="520" y2="116" stroke="#5A6472" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="410" y="108" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#5A6472" text-anchor="start">no</text>
+<rect x="522" y="96" width="430" height="40" rx="20" fill="#FFFFFF" stroke="#5A6472" stroke-width="1.5"/>
+<text x="737" y="121" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="bold" fill="#5A6472" text-anchor="middle">invalid_frames++ (ignored)</text>
+<line x1="240" y1="158" x2="240" y2="190" stroke="#5A6472" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="248" y="176" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#5A6472" text-anchor="start">yes</text>
+<rect x="180" y="192" width="120" height="62" rx="8" fill="#1E5AA8" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="240" y="229.0" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF" text-anchor="middle">SF</text>
+<rect x="320" y="192" width="640" height="62" rx="8" fill="#F2F5FA" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="336" y="218" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">reception in progress? → on_rx_error(N_UNEXP_PDU)</text>
+<text x="336" y="238" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">on_message(frame data) at once</text>
+<line x1="300" y1="223.0" x2="318" y2="223.0" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="180" y="276" width="120" height="82" rx="8" fill="#1E5AA8" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="240" y="323.0" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF" text-anchor="middle">FF</text>
+<rect x="320" y="276" width="640" height="82" rx="8" fill="#F2F5FA" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="336" y="302" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">reception in progress? → on_rx_error(N_UNEXP_PDU)</text>
+<text x="336" y="322" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">FF_DL &gt; RX buffer → send FC OVFLW, on_rx_error(N_BUFFER_OVFLW)</text>
+<text x="336" y="342" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">else copy, send FC CTS (BS, STmin), start N_Cr</text>
+<line x1="300" y1="317.0" x2="318" y2="317.0" stroke="#1E5AA8" stroke-width="2"/>
+<rect x="180" y="380" width="120" height="82" rx="8" fill="#0F8B9A" stroke="#0F8B9A" stroke-width="1.5"/>
+<text x="240" y="427.0" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF" text-anchor="middle">CF</text>
+<rect x="320" y="380" width="640" height="82" rx="8" fill="#F2F5FA" stroke="#0F8B9A" stroke-width="1.5"/>
+<text x="336" y="406" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">not receiving → ignore; SN ≠ expected → on_rx_error(N_WRONG_SN)</text>
+<text x="336" y="426" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">too short → invalid_frames++; else copy, restart N_Cr</text>
+<text x="336" y="446" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">last byte → on_message(); BS reached → send FC CTS</text>
+<line x1="300" y1="421.0" x2="318" y2="421.0" stroke="#0F8B9A" stroke-width="2"/>
+<rect x="180" y="484" width="120" height="82" rx="8" fill="#E07A00" stroke="#E07A00" stroke-width="1.5"/>
+<text x="240" y="531.0" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF" text-anchor="middle">FC</text>
+<rect x="320" y="484" width="640" height="82" rx="8" fill="#F2F5FA" stroke="#E07A00" stroke-width="1.5"/>
+<text x="336" y="510" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">not waiting for FC → ignore</text>
+<text x="336" y="530" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">CTS → send CFs (BS, STmin) · WAIT → restart N_Bs (≤ N_WFTmax)</text>
+<text x="336" y="550" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#0B2545" text-anchor="start">OVFLW / other FS → on_tx_done(N_BUFFER_OVFLW / N_INVALID_FS)</text>
+<line x1="300" y1="525.0" x2="318" y2="525.0" stroke="#E07A00" stroke-width="2"/>
+<text x="490" y="606" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#5A6472" text-anchor="middle">Timeouts (N_Bs, N_Cr) and the Consecutive Frames of a transmission are handled by isotp_link_poll(now_us).</text>
+</svg>

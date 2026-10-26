@@ -5,30 +5,45 @@
             "name": "default",
             "hidden": true,
             "generator": "Unix Makefiles",
-            "binaryDir": "${sourceDir}/build/${presetName}"   
-        },       
+            "binaryDir": "${sourceDir}/build/${presetName}"
+        },
         {
-            "name": "ISO-TP[Debug]",
+            "name": "ISOTP[Debug]",
             "inherits": "default",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"               
+                "CMAKE_BUILD_TYPE": "Debug"
             }
         },
         {
-            "name": "ISO-TP[Release]",
+            "name": "ISOTP[Release]",
             "inherits": "default",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"                
+                "CMAKE_BUILD_TYPE": "Release"
             }
         },
         {
-            "name": "ISO-TP[UnitTests]",
+            "name": "ISOTP[UnitTests]",
             "inherits": "default",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "ISOTP_UNIT_TESTS": "ON"
             }
-        }            
-        
+        },
+        {
+            "name": "ISOTP[IntegrationTests]",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "ISOTP_INTEGRATION_TESTS": "ON"
+            }
+        },
+        {
+            "name": "ISOTP[Examples]",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "ISOTP_EXAMPLES": "ON"
+            }
+        }
     ]
 }

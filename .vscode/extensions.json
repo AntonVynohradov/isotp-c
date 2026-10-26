@@ -4,6 +4,6 @@
     "xaver.clang-format",
     "ms-vscode.cmake-tools",
     "gruntfuggly.auto-snippet",
-    "eamodio.gitlens"     
+    "ms-python.python"
   ]
 }

@@ -1,50 +1,242 @@
-site_name: ISO-TP (ISO 15765-2)
-site_description: ISO-TP protocol implementation in C
+# MkDocs configuration of ISOTP-C (sfs-protocol-library template: change data, not structure).
+
+site_name: ISOTP-C
+site_description: >-
+  Hardware-agnostic ISO 15765-2 (ISO-TP) transport protocol for CAN in C for embedded
+  systems: no heap, no RTOS, MISRA C:2012, 100 % test coverage.
 site_author: Anton Vynohradov
+site_url: https://antonvynohradov.github.io/isotp-c/   # GitHub Pages path = repository name
 repo_url: https://github.com/AntonVynohradov/isotp-c
+repo_name: AntonVynohradov/isotp-c
 edit_uri: ""
-site_url: https://AntonVynohradov.github.io/isotp-c/
+copyright: >-
+  Copyright &copy; 2026 Anton Vynohradov ·
+  <a href="https://systemfromscratch.com">SystemFromScratch®</a> ·
+  Licensed under the <a href="https://opensource.org/license/mit">MIT License</a>
 
 nav:
   - Home: index.md
-  - Getting Started: guide.md
-  - Configuration: configuration.md
-  - API Reference: api.md
-  - License: LICENSE.md
-  - Examples:
-      - Linux SocketCAN: examples/linux_socket.md
-      - Python API: examples/python_api.md
-  - Integration Tests:
-      - ISO-15765 Project Structure: iso_15765_project_structure.md
+  - Guide:
+      - Introduction: overview.md
+      - Getting Started: guide.md
+      - How It Works: architecture.md
+      - Using the Library: usage.md
+      - Extending the Library: extending.md
+      - Configuration: configuration.md
+  - Protocol: protocol.md
+  - Integration:
+      - Integration Guide: integration.md
+      - Examples: examples.md
+      # - __TOOL__: gui.md            # only if the project has a desktop tool
+  - Reference:
+      - API Reference: api.md
+      - Doxygen:
+          - Modules: reference/modules.md
+          - Files: reference/files.md
+          - Data Structures: reference/annotated.md
+          - Functions: reference/functions.md
+          - Macros: reference/macros.md
+      - MISRA C:2012: misra.md
+      - Changelog: changelog.md
+  - About:
+      - Author & Company: about.md
+      - License: LICENSE.md
 
 theme:
-  name: readthedocs
+  name: material
+  custom_dir: overrides
+  language: en
+  logo: assets/images/brand/systemfromscratch-logo-on-dark.png
+  favicon: assets/images/brand/systemfromscratch-logo.png
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
   features:
-    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
     - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - navigation.tracking
     - search.suggest
     - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+
+extra:
+  generator: false
+  # Header download button (overrides/partials/header.html); the PDF is built by CI
+  manual_pdf: downloads/ISOTP-C_User_Manual.pdf
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/AntonVynohradov
+      name: Anton Vynohradov on GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/vynohradov
+      name: Anton Vynohradov on LinkedIn
+    - icon: fontawesome/brands/orcid
+      link: https://orcid.org/0009-0005-6965-0911
+      name: Anton Vynohradov on ORCID
+    - icon: material/web
+      link: https://systemfromscratch.com
+      name: SystemFromScratch®
+
+  # ---------------------------------------------------------------- landing page
+  # Rendered by overrides/home.html. Story: hero -> the problem (3 problem->solution
+  # cards) -> what you get (6 linked cards) -> measured stats -> quick start
+  # (docs/index.md) -> SystemFromScratch® portfolio banner. See references/website.md.
+  landing:
+    eyebrow: Open-source embedded library
+    title: ISO 15765-2 (ISO-TP)                      # first hero line (uppercase via CSS)
+    accent: in portable C                    # second hero line, accent color
+    lead: >-
+      ISOTP-C turns 8-byte CAN frames into complete messages of up to 4095 bytes (or more,
+      with the 32-bit length), and your messages back into flow-controlled frames — with no
+      heap, no RTOS and code that passes MISRA C:2012.
+    hero_image: assets/images/hero-3d.svg
+    hero_alt: A long message leaves the ISOTP-C chip as a First Frame, the ECU answers with Flow Control, and the Consecutive Frames follow and are reassembled at the ECU
+    buttons:
+      - {text: Get started, link: guide/, style: primary}
+      - {text: View on GitHub, link: "https://github.com/AntonVynohradov/isotp-c", style: outline}
+    features:
+      - {icon: chip, line1: No heap, line2: No RTOS}
+      - {icon: shield, line1: MISRA C:2012, line2: 0 violations}
+      - {icon: flask, line1: 100 % line &, line2: branch coverage}
+      - {icon: code, line1: MIT License, line2: open source}
+    problem:
+      eyebrow: The problem
+      title: Eight bytes per frame, kilobytes per message
+      intro: >-
+        Diagnostics, calibration and flashing exchange messages of hundreds or thousands of
+        bytes over a bus whose classical frames carry eight. The receiver decides how fast the
+        sender may go, frames can be lost or arrive out of order, and the code runs on an ECU
+        with a few kilobytes of RAM that will be reviewed against MISRA C.
+      cards:
+        - icon: wave
+          title: Messages larger than a frame
+          text: >-
+            Segmentation into First and Consecutive Frames, reassembly with sequence-number
+            checks, the receiver's block size and separation time obeyed, N_Bs and N_Cr
+            timeouts detected.
+          tags: [FF / CF / FC, BS + STmin, N_Bs / N_Cr]
+        - icon: memory
+          title: Tight embedded budgets
+          text: >-
+            104 bytes per link plus the two message buffers you size at build time, at most
+            120 bytes of stack on a Cortex-M4; no allocation, no globals, no clock reads.
+          tags: [Static memory, Bare metal, Zephyr]
+        - icon: shield
+          title: Code you can certify
+          text: >-
+            Zero MISRA C:2012 violations, a documented deviation register, 100 % line
+            and branch coverage and static analysis in CI.
+          tags: [MISRA C, Cppcheck, CodeQL]
+    offer:
+      eyebrow: What you get
+      title: A small library with a clear job
+      intro: >-
+        Two layers and 18 functions: a pure frame codec and a link that does the transport
+        protocol. Time is an argument, the CAN driver is one callback.
+      cards:
+        - {icon: layers, title: Codec and link, text: "Decode and encode SF, FF, CF and FC frames; segment, reassemble and pace whole messages.", tags: [isotp_protocol, isotp_link], link: architecture/}
+        - {icon: plug, title: Any CAN driver, text: "One write callback and one call per received frame: bxCAN, FDCAN, MCP2515, SocketCAN or Zephyr CAN.", tags: [Classical CAN, SocketCAN, Zephyr], link: integration/}
+        - {icon: brackets, title: Working examples, text: "A UDS-style ECU on a simulated bus (run in CI), a SocketCAN request tool and a Zephyr application.", tags: [Bare metal, Zephyr, Linux], link: examples/}
+        - {icon: monitor, title: An independent twin, text: "A Python implementation of the codec cross-checks the C code; the C link is driven against it end to end.", tags: [Python twin, ctypes, pytest], link: protocol/}
+        - {icon: document, title: Complete documentation, text: "Guides, protocol chapter, API reference with every return value, and a printable PDF manual.", tags: [API, Guides, PDF], link: api/}
+        - {icon: check, title: Quality gates in CI, text: "100 % line and branch coverage, MISRA C:2012 gate, Cppcheck, CodeQL and clang-format on every pull request.", tags: [GoogleTest, pytest, Coverage], link: misra/}
+    stats:                                   # measured values only
+      - {value: "18", label: public functions}
+      - {value: "104 B", label: RAM per link + buffers}
+      - {value: "120 B", label: stack on Cortex-M4}
+      - {value: "0", label: MISRA C:2012 violations}
+    portfolio:
+      title: Part of an open-source embedded portfolio
+      text: >-
+        ISOTP-C is developed by Anton Vynohradov under SystemFromScratch® — embedded
+        software and hardware built from the first schematic to certification.
+      buttons:
+        - {text: SystemFromScratch®, link: "https://systemfromscratch.com", style: primary}
+        - {text: About the author, link: about/, style: outline}
+    trademark: >-
+      SystemFromScratch® is a registered trademark. ISO 15765-2 is a standard of the
+      International Organization for Standardization (ISO). ISOTP-C is an independent
+      implementation and is not affiliated with or endorsed by ISO.
+
+  # ---------------------------------------------------------------- PDF manual
+  # Read by tools/docs/build_manual.py. See references/pdf-manual.md.
+  manual:
+    title: ISOTP-C
+    subtitle: ISO 15765-2 (ISO-TP) Library for Embedded Systems
+    version_header: isotp.h
+    version_macro: ISOTP_VERSION
+    output: build/manual/ISOTP-C_User_Manual_v{version}.pdf
+    eyebrow: Open-source embedded library
+    cover_image: assets/images/hero-3d.svg
+    appendices: [changelog.md, LICENSE.md]
+    unnumbered: [about.md]
+    web_only: [index.md, reference/]
+    keywords: ISO 15765-2, ISO-TP, CAN, UDS, embedded, C, MISRA C:2012
+    vendor_trademarks: >-
+      ISO 15765-2 is a standard of the International Organization for Standardization
+      (ISO); the name is used only to identify the protocol that ISOTP-C implements.
+      ISOTP-C is an independent implementation and is not affiliated with or endorsed by ISO.
+
+extra_css:
+  - assets/stylesheets/extra.css
 
 plugins:
   - search
   - autorefs
   - mkdoxy:
       projects:
-        docs:
-          src-dirs: .
+        reference:
+          src-dirs: isotp.h inc src
           full-doc: True
           doxy-cfg:
-            FILE_PATTERNS: "*.c *.h* *.cpp *.py"
+            FILE_PATTERNS: "*.c *.h"
             RECURSIVE: True
+            EXTRACT_STATIC: True
+            JAVADOC_AUTOBRIEF: True
 
 markdown_extensions:
-  - pymdownx.highlight:
-      use_pygments: true
-  - pymdownx.superfences
-  - pymdownx.tasklist
-  - pymdownx.arithmatex:
-      generic: true
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
   - toc:
       permalink: true
-  - admonition
-  - tables
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      use_pygments: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: ["."]
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg

@@ -18,30 +18,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
-          pip install mkdocs mkdocs-material mkdoxy mkdocs-autorefs
+          sudo apt-get install -y doxygen graphviz libpango-1.0-0 libpangoft2-1.0-0
+          pip install mkdocs mkdocs-material mkdoxy mkdocs-autorefs weasyprint
 
-      - name: Setup SSH
+      - name: Build PDF manual
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.GH_PAGES_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          # Published with the site as /downloads/ISOTP-C_User_Manual.pdf
+          python tools/docs/build_manual.py --output docs/downloads/ISOTP-C_User_Manual.pdf
 
-      - name: Switch remote to SSH
-        run: |
-          git remote set-url origin git@github.com:${{ github.repository }}.git
-
+      # actions/checkout leaves an HTTPS remote authenticated with GITHUB_TOKEN
+      # (contents: write), so gh-deploy can push to gh-pages without a deploy key.
       - name: Configure git
         run: |
           git config --global user.name "github-actions[bot]"

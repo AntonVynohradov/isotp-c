@@ -1,0 +1,19 @@
+# Python packages for development: desktop tool, integration tests, documentation, PDF manual.
+# Install into the project virtual environment (VS Code task "Python: Setup venv"):
+#   python -m pip install -r requirements-dev.txt
+# Documentation also needs Doxygen in PATH (used by mkdoxy).
+
+# Desktop tool of the project, if any (tools/isotp_<tool>)
+# -r tools/isotp_<tool>/requirements.txt
+
+# Integration tests (tests/integration)
+pytest>=7.0
+
+# Documentation (mkdocs.yml)
+mkdocs>=1.6
+mkdocs-material
+mkdoxy
+mkdocs-autorefs
+
+# PDF manual (tools/docs/build_manual.py); needs the Pango library, see docs/guide.md
+weasyprint>=62

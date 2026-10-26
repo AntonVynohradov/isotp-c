@@ -19,13 +19,22 @@ jobs:
           fetch-depth: 0
 
       - name: Configure (Debug preset)
-        run: cmake --preset "ISO-TP[Debug]" -B "build/ISO-TP[Debug]"
+        run: cmake --preset "ISOTP[Debug]" -B "build/ISOTP[Debug]"
 
       - name: Build
-        run: cmake --build "build/ISO-TP[Debug]"
+        run: cmake --build "build/ISOTP[Debug]"
 
       - name: Configure (Release preset)
-        run: cmake --preset "ISO-TP[Release]" -B "build/ISO-TP[Release]"
+        run: cmake --preset "ISOTP[Release]" -B "build/ISOTP[Release]"
 
       - name: Build
-        run: cmake --build "build/ISO-TP[Release]"
+        run: cmake --build "build/ISOTP[Release]"
+
+      - name: Configure (Examples preset)
+        run: cmake --preset "ISOTP[Examples]" -B "build/ISOTP[Examples]"
+
+      - name: Build examples
+        run: cmake --build "build/ISOTP[Examples]"
+
+      - name: Run bare-metal example on the simulated board
+        run: ctest --test-dir "build/ISOTP[Examples]" -L example --output-on-failure
