@@ -1,0 +1,114 @@
+#******************************************************************************
+# ISOTP-C: ISO 15765-2 (ISO-TP) Implementation
+#
+# Project:     ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library
+# Description: Release on a vX.Y.Z tag: check the version, run every quality
+#              gate, publish the static library, headers, MISRA report and PDF
+#              user manual as a GitHub Release.
+#
+# Author:      Anton Vynohradov
+# Email:       avynohradov@systemfromscratch.com
+#
+# License:     MIT License
+# Copyright (c) 2026 Anton Vynohradov
+#
+# SPDX-License-Identifier: MIT
+#*****************************************************************************
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check version consistency
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          grep -q "set(ISOTP_DEFAULT_VERSION \"$VERSION\")" cmake/version.cmake \
+            || { echo "cmake/version.cmake: ISOTP_DEFAULT_VERSION is not $VERSION"; exit 1; }
+          grep -q "#define ISOTP_VERSION \"$VERSION\"" isotp.h \
+            || { echo "isotp.h: ISOTP_VERSION is not $VERSION"; exit 1; }
+          grep -q "^## \[$VERSION\]" CHANGELOG.md \
+            || { echo "CHANGELOG.md has no [$VERSION] section"; exit 1; }
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtest-dev gcovr cppcheck libpango-1.0-0 libpangoft2-1.0-0
+          python -m pip install pytest mkdocs-material weasyprint
+
+      - name: Unit tests and coverage gate
+        run: |
+          cmake --preset "ISOTP[UnitTests]" -B "build/ISOTP[UnitTests]"
+          cmake --build "build/ISOTP[UnitTests]" --target coverage
+
+      - name: Integration tests
+        run: |
+          cmake --preset "ISOTP[IntegrationTests]" -B "build/ISOTP[IntegrationTests]" -DPython3_EXECUTABLE="$(which python)"
+          cmake --build "build/ISOTP[IntegrationTests]" --target integration_tests
+
+      - name: MISRA C:2012 gate
+        run: |
+          cmake --preset "ISOTP[Debug]" -B "build/ISOTP[Debug]"
+          cmake --build "build/ISOTP[Debug]" --target misra-analyze
+
+      - name: Examples
+        run: |
+          cmake --preset "ISOTP[Examples]" -B "build/ISOTP[Examples]"
+          cmake --build "build/ISOTP[Examples]"
+          ctest --test-dir "build/ISOTP[Examples]" -L example --output-on-failure
+
+      - name: Build release library
+        run: |
+          cmake --preset "ISOTP[Release]" -B "build/ISOTP[Release]"
+          cmake --build "build/ISOTP[Release]"
+
+      - name: Package
+        run: |
+          PKG="isotp-c-$VERSION-linux-x86_64"
+          mkdir -p "$PKG/lib" "$PKG/include"
+          cp "build/ISOTP[Release]/libisotp.a" "$PKG/lib/"
+          cp isotp.h inc/*.h "$PKG/include/"
+          cp LICENSE README.md CHANGELOG.md "$PKG/"
+          tar -czf "$PKG.tar.gz" "$PKG"
+          cp "build/ISOTP[Debug]/misra.txt" "isotp-c-$VERSION-misra.txt"
+          echo "PKG=$PKG" >> "$GITHUB_ENV"
+
+      - name: PDF manual
+        run: python tools/docs/build_manual.py --output "isotp-c-$VERSION-user-manual.pdf"
+
+      - name: Release notes from CHANGELOG
+        run: |
+          awk -v h="## [$VERSION]" '
+            index($0, h) == 1 { found = 1; next }
+            found && (index($0, "## [") == 1 || index($0, "[Unreleased]:") == 1) { exit }
+            found { print }
+          ' CHANGELOG.md > release-notes.md
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "ISOTP-C $VERSION" \
+            --notes-file release-notes.md \
+            "$PKG.tar.gz" "isotp-c-$VERSION-misra.txt" "isotp-c-$VERSION-user-manual.pdf"

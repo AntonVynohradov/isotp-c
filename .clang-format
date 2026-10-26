@@ -1,5 +1,5 @@
 ---
-# Clang-Format Configuration for ISO-TP-C
+# Clang-Format Configuration for ISOTP-C
 # Based on LLVM style with embedded systems customizations
 
 BasedOnStyle: LLVM

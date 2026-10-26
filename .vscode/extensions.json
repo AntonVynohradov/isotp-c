@@ -3,6 +3,7 @@
     "ms-vscode.cpptools",
     "xaver.clang-format",
     "ms-vscode.cmake-tools",
-    "gruntfuggly.auto-snippet"
+    "gruntfuggly.auto-snippet",
+    "ms-python.python"
   ]
 }

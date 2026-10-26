@@ -35,7 +35,12 @@ jobs:
             esac
             excludes+=("-i" "$trimmed_line")
           done < cppcheck-excludes.txt
-          cppcheck --enable=all --inconclusive --std=c17 --force \
+          # tests/config holds the configuration header of libraries that have one
+          includes=(-I . -I inc)
+          [ -d tests/config ] && includes+=(-I tests/config)
+          cppcheck --enable=all --inconclusive --std=c11 --force \
+            --suppress=missingIncludeSystem --suppress=unusedFunction \
+            "${includes[@]}" \
             "${excludes[@]}" \
             --xml --xml-version=2 . 2> cppcheck-report/cppcheck.xml
           cppcheck-htmlreport --file=cppcheck-report/cppcheck.xml \
@@ -47,9 +52,36 @@ jobs:
           name: cppcheck-html
           path: cppcheck-report/html
 
+  misra:
+    name: MISRA C:2012 Analysis (Cppcheck addon)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Cppcheck
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
+
+      - name: Configure (Debug preset)
+        run: cmake --preset "ISOTP[Debug]" -B "build/ISOTP[Debug]"
+
+      - name: Run MISRA analysis
+        run: cmake --build "build/ISOTP[Debug]" --target misra-analyze
+
+      - name: Upload MISRA report
+        uses: actions/upload-artifact@v4
+        with:
+          name: misra-report
+          path: build/ISOTP\[Debug\]/misra.txt
+
   codeql:
     name: CodeQL Analysis
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

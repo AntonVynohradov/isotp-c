@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use ISOTP-C in your work, please cite it as below."
+type: software
+title: "ISOTP-C"
+abstract: >-
+  Hardware-agnostic implementation of the ISO 15765-2 (ISO-TP) transport protocol
+  for classical CAN in C11 for embedded systems: no heap, no RTOS, MISRA C:2012
+  checked, 100 % line and branch coverage.
+authors:
+  - family-names: Vynohradov
+    given-names: Anton
+    orcid: "https://orcid.org/0009-0005-6965-0911"
+    affiliation: SystemFromScratch
+    website: "https://systemfromscratch.com"
+repository-code: "https://github.com/AntonVynohradov/isotp-c"
+url: "https://antonvynohradov.github.io/isotp-c/"
+license: MIT
+version: "1.6.0"
+date-released: "2025-08-25"
+keywords:
+  - embedded systems
+  - C11
+  - MISRA C
+  - ISO 15765-2 (ISO-TP)

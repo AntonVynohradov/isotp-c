@@ -1,15 +1,13 @@
-/*******************************************************************************
- * ISO-TP-C: ISO 15765-2 Protocol Implementation
+/**
+ * @file isotp_test_mocks.cpp
+ * @brief Test support: implementation of the mocks.
  *
- * Project:     ISO-TP-C - Embedded-Grade Refactoring & Optimization
- * Description: Test doubles for ISO-TP user callbacks.
+ * Project: ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library
+ * Author: Anton Vynohradov
+ * Email: avynohradov@systemfromscratch.com
  *
- * Author:      Anton Vynohradov
- * Email:       avynohradov@systemfromscratch.com
- *
- * License:     MIT License
- *
- * Copyright (c) 2026 Anton Vynohradov
+ * @copyright Copyright (c) 2026 Anton Vynohradov
+ * @license MIT License
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,90 +28,78 @@
  * THE SOFTWARE.
  *
  * SPDX-License-Identifier: MIT
- ******************************************************************************/
-
-/**
- * @file isotp_test_mocks.cpp
- * @brief Test doubles for ISO-TP user callbacks.
- * @details Provides mock time and CAN send implementations.
  */
-
-/* ==============================================================================
- * INCLUDES
- * =============================================================================*/
 
 #include "isotp_test_support.h"
 
-/* ==============================================================================
- * DEFINES & MACROS
- * =============================================================================*/
-
-/* ==============================================================================
- * PRIVATE TYPE DEFINITIONS
- * =============================================================================*/
-
-/* ==============================================================================
- * PUBLIC VARIABLES
- * =============================================================================*/
-
-MockCanState g_can_state = {0};
-uint32_t g_now_us = 0;
-int g_debug_call_count = 0;
-
-/* ==============================================================================
- * PRIVATE FUNCTION DECLARATIONS (static)
- * =============================================================================*/
-
-
-/* ==============================================================================
- * PRIVATE FUNCTION IMPLEMENTATIONS
- * =============================================================================*/
-
-
-/* ==============================================================================
- * PUBLIC FUNCTION IMPLEMENTATIONS
- * =============================================================================*/
-
-/** @brief Reset all mock state to defaults. */
-void reset_mocks()
+int capture_write(void* context, uint32_t can_id, const uint8_t* data, size_t length)
 {
-    std::memset(&g_can_state, 0, sizeof(g_can_state));
-    g_can_state.return_value = ISOTP_RET_OK;
-    g_now_us = 0;
-    g_debug_call_count = 0;
-}
+    Capture* capture = static_cast<Capture*>(context);
+    int result = 0;
 
-extern "C"
-{
-/** @brief Count debug calls without formatting output. */
-void isotp_user_debug(const char* message, ...)
-{
-    (void) message;
-    g_debug_call_count++;
-}
-
-/** @brief Capture last CAN frame data and return configured status. */
-int isotp_user_send_can(const uint32_t arbitration_id, const uint8_t* data, const uint8_t size)
-{
-    g_can_state.last_id = arbitration_id;
-    g_can_state.last_size = size;
-    g_can_state.call_count++;
-    std::memset(g_can_state.last_data, 0, sizeof(g_can_state.last_data));
-    if (data != NULL)
+    if (!capture->write_results.empty())
     {
-        uint8_t copy_len = size;
-        if (copy_len > sizeof(g_can_state.last_data))
-        {
-            copy_len = sizeof(g_can_state.last_data);
-        }
-        std::memcpy(g_can_state.last_data, data, copy_len);
+        result = capture->write_results.front();
+        capture->write_results.erase(capture->write_results.begin());
     }
-    return g_can_state.return_value;
+    if (result == 0)
+    {
+        capture->frames.push_back({can_id, std::vector<uint8_t>(data, data + length)});
+    }
+    return result;
 }
 
-/** @brief Return mock time in microseconds. */
-uint32_t isotp_user_get_us(void)
+void record_message(const uint8_t* data, uint32_t length, void* context)
 {
-    return g_now_us;
+    Capture* capture = static_cast<Capture*>(context);
+
+    capture->messages.emplace_back(data, data + length);
+    if (capture->reply_link != nullptr)
+    {
+        const uint8_t answer[] = {0x50U, 0x01U};
+        capture->reply_result = isotp_link_send(capture->reply_link, answer, sizeof(answer), 0U);
+    }
 }
+
+void record_tx_done(int n_result, void* context)
+{
+    static_cast<Capture*>(context)->tx_done.push_back(n_result);
+}
+
+void record_rx_error(int n_result, void* context)
+{
+    static_cast<Capture*>(context)->rx_errors.push_back(n_result);
+}
+
+struct isotp_link_config make_config(Capture* capture)
+{
+    struct isotp_link_config config;
+
+    isotp_link_config_default(&config);
+    config.tx_id = 0x7E0U;
+    config.write = capture_write;
+    config.write_context = capture;
+    config.on_message = record_message;
+    config.on_tx_done = record_tx_done;
+    config.on_rx_error = record_rx_error;
+    config.app_context = capture;
+    config.block_size = 0U;
+    config.st_min_us = 0U;
+    return config;
+}
+
+std::vector<uint8_t> pattern(size_t length)
+{
+    std::vector<uint8_t> bytes(length);
+
+    for (size_t i = 0; i < length; i++)
+    {
+        bytes[i] = static_cast<uint8_t>(i);
+    }
+    return bytes;
+}
+
+void feed(struct isotp_link* link, std::vector<uint8_t> frame, uint32_t now_us)
+{
+    isotp_link_receive(link, frame.data(), frame.size(), now_us);
 }

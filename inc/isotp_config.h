@@ -1,8 +1,8 @@
 /**
  * @file isotp_config.h
- * @brief ISO-TP configuration parameters and feature toggles.
+ * @brief Build-time configuration: buffer sizes and protocol defaults.
  *
- * Project: ISO-TP-C - Embedded-Grade Refactoring & Optimization
+ * Project: ISOTP-C - Hardware-Agnostic ISO 15765-2 (ISO-TP) Library
  * Author: Anton Vynohradov
  * Email: avynohradov@systemfromscratch.com
  *
@@ -31,133 +31,135 @@
  */
 
 /**
- * @defgroup isotp ISO-TP API
- * @brief Public API for ISO-TP link management and message handling.
+ * @defgroup isotp ISOTP API
+ * @brief Public API of the ISO 15765-2 (ISO-TP) library.
  * @details This module groups the public interface and its supporting
- *          submodules: @ref isotp_config, @ref isotp_defines, and
- *          @ref isotp_user.
+ *          submodules: @ref isotp_config, @ref isotp_defs, @ref isotp_protocol
+ *          and @ref isotp_link.
  */
 
 /**
  * @defgroup isotp_config Configuration
  * @ingroup isotp
- * @brief Build-time configuration for ISO-TP.
+ * @brief Build-time configuration for ISOTP-C.
  *
- * @details Configuration parameters in this group control protocol behavior as exposed by the API
- * in isotp.h and implemented in isotp.c. They cover limits and timing used
- * when sending and receiving single- and multi-frame messages, including
- * block size (BS), minimum separation time (ST_min), and response timeouts.
- * They also enable optional features such as frame padding, an extra argument
- * for isotp_user_send_can, and callbacks for transmit and receive completion.
+ * @details Every parameter can be overridden by the integrator with a compiler
+ *          definition (for example `-DISOTP_RX_BUFFER_SIZE=64U`) without editing
+ *          this file. The buffer sizes are compiled into @ref isotp_link, so they
+ *          set the RAM footprint of one link. The protocol defaults are only the
+ *          values written by @ref isotp_link_config_default; every link can use
+ *          its own values at run time.
  *
  * @par Configuration elements in this group:
- * @li @ref ISO_TP_DEFAULT_BLOCK_SIZE : default receiver block size (BS).
- * @li @ref ISO_TP_DEFAULT_ST_MIN_US : default minimum separation time (ST_min) in us.
- * @li @ref ISO_TP_MAX_WFT_NUMBER : maximum number of FC.Wait frames in a row.
- * @li @ref ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US : response timeout during multi-frame transfer.
- * @li @ref ISO_TP_FRAME_PADDING : enable frame padding for ISO-TP frames.
- * @li @ref ISO_TP_FRAME_PADDING_VALUE : padding byte value when padding is enabled.
- * @li @ref ISO_TP_USER_SEND_CAN_ARG : add a user argument to @ref isotp_user_send_can.
- * @li @ref ISO_TP_TRANSMIT_COMPLETE_CALLBACK : enable transmit complete callback support.
- * @li @ref ISO_TP_RECEIVE_COMPLETE_CALLBACK: enable receive complete callback support.
- * @internal
+ * @li @ref ISOTP_TX_BUFFER_SIZE, @ref ISOTP_RX_BUFFER_SIZE : largest message in each direction.
+ * @li @ref ISOTP_DEFAULT_BLOCK_SIZE, @ref ISOTP_DEFAULT_ST_MIN_US : flow control we request.
+ * @li @ref ISOTP_DEFAULT_N_BS_TIMEOUT_US, @ref ISOTP_DEFAULT_N_CR_TIMEOUT_US : timeouts.
+ * @li @ref ISOTP_DEFAULT_WFT_MAX : flow-control wait frames we accept.
  * @{
  */
 
-#ifndef ISOTPC_CONFIG_H
-#define ISOTPC_CONFIG_H
-
-/** @name Includes */
-/** @{ */
-/** @} */
+#ifndef ISOTP_CONFIG_H
+#define ISOTP_CONFIG_H
 
 /** @name Defines and macros */
 /** @{ */
 
 /**
- * @def ISO_TP_DEFAULT_BLOCK_SIZE
- * @brief Max number of messages the receiver can receive at one time.
- *
- * This value is affected by CAN driver queue length.
+ * @def ISOTP_TX_BUFFER_SIZE
+ * @brief Largest message one link can transmit, in bytes.
+ * @details The link copies the message into a buffer of this size, so the caller
+ *          may reuse its own buffer as soon as @ref isotp_link_send returns.
  */
-#ifndef ISO_TP_DEFAULT_BLOCK_SIZE
-#define ISO_TP_DEFAULT_BLOCK_SIZE (8)
+#ifndef ISOTP_TX_BUFFER_SIZE
+#define ISOTP_TX_BUFFER_SIZE 4095U
 #endif
 
 /**
- * @def ISO_TP_DEFAULT_ST_MIN_US
- * @brief Minimum time gap allowed between consecutive frame N_PDUs.
+ * @def ISOTP_RX_BUFFER_SIZE
+ * @brief Largest message one link can receive, in bytes.
+ * @details A First Frame announcing a longer message is answered with a Flow
+ *          Control frame with the status Overflow.
  */
-#ifndef ISO_TP_DEFAULT_ST_MIN_US
-#define ISO_TP_DEFAULT_ST_MIN_US (0)
+#ifndef ISOTP_RX_BUFFER_SIZE
+#define ISOTP_RX_BUFFER_SIZE 4095U
 #endif
 
 /**
- * @def ISO_TP_MAX_WFT_NUMBER
- * @brief Number of FC N_PDU WTs that can be transmitted by the receiver in a row.
+ * @def ISOTP_DEFAULT_BLOCK_SIZE
+ * @brief Block size (BS) this receiver requests; 0 means no further Flow Control.
  */
-#ifndef ISO_TP_MAX_WFT_NUMBER
-#define ISO_TP_MAX_WFT_NUMBER (1)
+#ifndef ISOTP_DEFAULT_BLOCK_SIZE
+#define ISOTP_DEFAULT_BLOCK_SIZE 8U
 #endif
 
 /**
- * @def ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US
- * @brief Default timeout while waiting for a response during a multi-frame transfer.
- * @internal
+ * @def ISOTP_DEFAULT_ST_MIN_US
+ * @brief Minimum separation time (STmin) this receiver requests, in microseconds.
  */
-#ifndef ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US
-#define ISO_TP_DEFAULT_RESPONSE_TIMEOUT_US (100000)
+#ifndef ISOTP_DEFAULT_ST_MIN_US
+#define ISOTP_DEFAULT_ST_MIN_US 0U
 #endif
 
 /**
- * @def ISO_TP_FRAME_PADDING
- * @brief Enables padding of ISO-TP message frames by default.
- * @internal
+ * @def ISOTP_DEFAULT_N_BS_TIMEOUT_US
+ * @brief Sender timeout N_Bs: longest wait for a Flow Control frame, in microseconds.
+ * @details ISO 15765-2 specifies 1000 ms.
  */
-/* #define ISO_TP_FRAME_PADDING */
-
-/**
- * @def ISO_TP_FRAME_PADDING_VALUE
- * @brief Padding byte value when ISO_TP_FRAME_PADDING is enabled.
- * @internal
- */
-#ifndef ISO_TP_FRAME_PADDING_VALUE
-#define ISO_TP_FRAME_PADDING_VALUE (0xAA)
+#ifndef ISOTP_DEFAULT_N_BS_TIMEOUT_US
+#define ISOTP_DEFAULT_N_BS_TIMEOUT_US 1000000U
 #endif
 
 /**
- * @def ISO_TP_USER_SEND_CAN_ARG
- * @brief Adds an extra argument to `isotp_user_send_can` by default.
- * @internal
+ * @def ISOTP_DEFAULT_N_CR_TIMEOUT_US
+ * @brief Receiver timeout N_Cr: longest wait for the next Consecutive Frame, in microseconds.
+ * @details ISO 15765-2 specifies 1000 ms.
  */
-/* #define ISO_TP_USER_SEND_CAN_ARG */
+#ifndef ISOTP_DEFAULT_N_CR_TIMEOUT_US
+#define ISOTP_DEFAULT_N_CR_TIMEOUT_US 1000000U
+#endif
 
 /**
- * @def ISO_TP_TRANSMIT_COMPLETE_CALLBACK
- * @brief Enables support for transmission complete callback.
+ * @def ISOTP_DEFAULT_WFT_MAX
+ * @brief N_WFTmax: Flow Control frames with the status Wait accepted in a row.
  */
-/* #define ISO_TP_TRANSMIT_COMPLETE_CALLBACK */
+#ifndef ISOTP_DEFAULT_WFT_MAX
+#define ISOTP_DEFAULT_WFT_MAX 10U
+#endif
 
-/**
- * @def ISO_TP_RECEIVE_COMPLETE_CALLBACK
- * @brief Enables support for receive complete callback.
+/*
+ * A buffer holds at least one segmented message (8 bytes is the smallest) and
+ * stays below 2^31, so every size and offset fits a uint32_t with headroom.
  */
-/* #define ISO_TP_RECEIVE_COMPLETE_CALLBACK */
+#if (ISOTP_TX_BUFFER_SIZE < 8U) || (ISOTP_TX_BUFFER_SIZE > 0x7FFFFFFFU)
+#error "ISOTP_TX_BUFFER_SIZE must be in the range 8..2147483647"
+#endif
+
+#if (ISOTP_RX_BUFFER_SIZE < 8U) || (ISOTP_RX_BUFFER_SIZE > 0x7FFFFFFFU)
+#error "ISOTP_RX_BUFFER_SIZE must be in the range 8..2147483647"
+#endif
+
+#if (ISOTP_DEFAULT_BLOCK_SIZE > 255U)
+#error "ISOTP_DEFAULT_BLOCK_SIZE must be in the range 0..255"
+#endif
+
+#if (ISOTP_DEFAULT_ST_MIN_US > 127000U)
+#error "ISOTP_DEFAULT_ST_MIN_US must be in the range 0..127000"
+#endif
+
+#if (ISOTP_DEFAULT_N_BS_TIMEOUT_US < 1U) || (ISOTP_DEFAULT_N_BS_TIMEOUT_US > 0x7FFFFFFFU)
+#error "ISOTP_DEFAULT_N_BS_TIMEOUT_US must be in the range 1..2147483647"
+#endif
+
+#if (ISOTP_DEFAULT_N_CR_TIMEOUT_US < 1U) || (ISOTP_DEFAULT_N_CR_TIMEOUT_US > 0x7FFFFFFFU)
+#error "ISOTP_DEFAULT_N_CR_TIMEOUT_US must be in the range 1..2147483647"
+#endif
+
+#if (ISOTP_DEFAULT_WFT_MAX > 255U)
+#error "ISOTP_DEFAULT_WFT_MAX must be in the range 0..255"
+#endif
 
 /** @} */
 
-/** @name Type definitions */
-/** @{ */
-/** @} */
-
-/** @name Global variables */
-/** @{ */
-/** @} */
-
-/** @name Public function declarations */
-/** @{ */
-/** @} */
+#endif /* ISOTP_CONFIG_H */
 
 /** @} */
-
-#endif /* ISOTPC_CONFIG_H */

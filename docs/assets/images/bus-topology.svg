@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 360" width="980" height="360" role="img" aria-label="ISO-TP on a CAN bus">
+<title>ISO-TP on a CAN bus</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5A6472"/></marker><marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F8B9A"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E07A00"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32"/></marker></defs>
+<rect x="0" y="0" width="980" height="360" rx="12" fill="#FFFFFF"/>
+<rect x="20" y="110" width="200" height="130" rx="12" fill="#0B2545" stroke="#0B2545" stroke-width="1.5"/>
+<text x="120" y="150" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Tester</text>
+<text x="120" y="174" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="normal" fill="#C9D6EA" text-anchor="middle">PC or gateway</text>
+<text x="120" y="196" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="normal" fill="#C9D6EA" text-anchor="middle">ISOTP-C + CAN</text>
+<text x="120" y="218" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="12" font-weight="normal" fill="#C9D6EA" text-anchor="middle">sends on 0x7E0 / 0x7DF</text>
+<line x1="220" y1="150" x2="940" y2="150" stroke="#0F8B9A" stroke-width="3"/>
+<text x="232" y="145" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="10.5" font-weight="normal" fill="#5A6472" text-anchor="start">CAN_H</text>
+<line x1="220" y1="175" x2="940" y2="175" stroke="#1E5AA8" stroke-width="3"/>
+<text x="232" y="170" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="10.5" font-weight="normal" fill="#5A6472" text-anchor="start">CAN_L</text>
+<line x1="400" y1="175" x2="400" y2="250" stroke="#0F8B9A" stroke-width="2"/>
+<rect x="340" y="250" width="120" height="90" rx="10" fill="#F2F5FA" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="400" y="286" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="bold" fill="#0B2545" text-anchor="middle">Engine ECU</text>
+<text x="400" y="310" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">7E0 → 7E8</text>
+<line x1="600" y1="175" x2="600" y2="250" stroke="#0F8B9A" stroke-width="2"/>
+<rect x="540" y="250" width="120" height="90" rx="10" fill="#F2F5FA" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="600" y="286" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="bold" fill="#0B2545" text-anchor="middle">Brake ECU</text>
+<text x="600" y="310" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">7E1 → 7E9</text>
+<line x1="800" y1="175" x2="800" y2="250" stroke="#0F8B9A" stroke-width="2"/>
+<rect x="740" y="250" width="120" height="90" rx="10" fill="#F2F5FA" stroke="#1E5AA8" stroke-width="1.5"/>
+<text x="800" y="286" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="bold" fill="#0B2545" text-anchor="middle">Body ECU</text>
+<text x="800" y="310" font-family="'JetBrains Mono', Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="normal" fill="#5A6472" text-anchor="middle">7E2 → 7EA</text>
+<rect x="270" y="60" width="320" height="38" rx="6" fill="#FFFFFF" stroke="#E07A00" stroke-width="1.5"/>
+<text x="430" y="84" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="bold" fill="#E07A00" text-anchor="middle">Request 7E0: 22 F1 90 (Single Frame)</text>
+<line x1="300" y1="120" x2="560" y2="120" stroke="#E07A00" stroke-width="2.4" marker-end="url(#arrow-orange)"/>
+<rect x="610" y="60" width="340" height="38" rx="6" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.5"/>
+<text x="780" y="84" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13" font-weight="bold" fill="#2E7D32" text-anchor="middle">Response 7E8: 20 bytes (FF + 2 CF)</text>
+<line x1="900" y1="120" x2="620" y2="120" stroke="#2E7D32" stroke-width="2.4"/>
+<path d="M620,120 L630,115 L630,125 z" stroke="#2E7D32" stroke-width="1.6" fill="#2E7D32"/>
+<text x="490" y="30" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" font-size="13.5" font-weight="normal" fill="#5A6472" text-anchor="middle">One link per peer: a pair of CAN IDs. The application routes received frames to the link by CAN ID.</text>
+</svg>

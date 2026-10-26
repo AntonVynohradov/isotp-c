@@ -1,150 +1,76 @@
-# ISO-TP C Implementation
+---
+title: ISOTP-C — ISO 15765-2 (ISO-TP) in C
+description: Hardware-agnostic ISO 15765-2 (ISO-TP) transport protocol for CAN in C11 for embedded systems — no heap, no RTOS, MISRA C:2012, 100 % test coverage.
+template: home.html
+hide:
+  - navigation
+  - toc
+---
 
-[![Build Library](https://github.com/AntonVynohradov/isotp-c/actions/workflows/build-static-lib.yml/badge.svg)](https://github.com/AntonVynohradov/isotp-c/actions/workflows/build-static-lib.yml)
-[![Build and Deploy Documentation](https://github.com/AntonVynohradov/isotp-c/actions/workflows/documentation.yml/badge.svg)](https://github.com/AntonVynohradov/isotp-c/actions/workflows/documentation.yml)
+<span class="sfs-eyebrow">Quick start</span>
 
-ISO-TP (ISO 15765-2) protocol implementation in C for CAN communication.
-This library implements ISO-TP frame fragmentation and reassembly and provides
-a simple interface for sending and receiving messages longer than 8 bytes.
+## A minimal ECU in one file
 
-## Key features
-
-- Full ISO-TP support (Single, First, Consecutive, Flow Control)
-- Configurable timing parameters and buffer sizes
-- Minimal dependencies and easy integration in embedded systems
-- Main-loop (polling) operation, no mandatory OS required
-- Optional callbacks for TX and RX completion
-
-## Intended use
-
-The library is intended for embedded systems and CAN applications where
-deterministic behavior, small memory footprint, and simple integration are required.
-
-## Quick start
-
-### Build (CMake)
-
-This project uses CMake presets. You can build with the default generator or
-use the provided presets for Debug, Release, and Unit Tests.
-
-Quick local build:
-
-```bash
-cmake -B build
-cmake --build build
-```
-
-Build with presets:
-
-```bash
-cmake --preset "ISO-TP[Debug]" -B "build/ISO-TP[Debug]"
-cmake --build "build/ISO-TP[Debug]"
-
-cmake --preset "ISO-TP[Release]" -B "build/ISO-TP[Release]"
-cmake --build "build/ISO-TP[Release]"
-```
-
-Unit tests (requires Google Test):
-
-```bash
-cmake --preset "ISO-TP[UnitTests]" -B "build/ISO-TP[UnitTests]"
-cmake --build "build/ISO-TP[UnitTests]"
-ctest --test-dir "build/ISO-TP[UnitTests]" --output-on-failure
-```
-
-### Integration
-
-Add the header and configure user functions in `isotp_user.h`:
+The library touches the hardware through two things you provide: a function that
+writes one CAN frame, and the received frames you pass in together with the current
+time in microseconds. Everything else — segmentation, flow control, timeouts — happens
+inside `isotp_link_receive()` and `isotp_link_poll()`. This program echoes every
+request it receives on CAN ID 0x7E0 back on 0x7E8, whatever its length:
 
 ```c
 #include "isotp.h"
 
-static uint8_t tx_buffer[4095];
-static uint8_t rx_buffer[4095];
-static IsoTpLink link;
+static struct isotp_link link;
 
-isotp_init_link(&link, 0x7E0, tx_buffer, sizeof(tx_buffer),
-								rx_buffer, sizeof(rx_buffer));
-```
+static int can_write(void* context, uint32_t can_id, const uint8_t* data, size_t length)
+{
+    (void) context;
+    return board_can_write(can_id, data, length);
+}
 
-In the application loop:
+static void on_message(const uint8_t* data, uint32_t length, void* context)
+{
+    (void) context;
+    (void) isotp_link_send(&link, data, length, board_micros()); /* echo */
+}
 
-```c
-isotp_on_can_message(&link, can_data, can_len);
-isotp_poll(&link);
+int main(void)
+{
+    struct isotp_link_config config;
+    uint8_t frame[8];
+    uint32_t can_id;
 
-uint8_t payload[4095];
-uint32_t payload_len = 0;
-if (isotp_receive(&link, payload, sizeof(payload), &payload_len) == ISOTP_RET_OK) {
-		/* process payload */
+    isotp_link_config_default(&config);
+    config.tx_id = 0x7E8U;
+    config.write = can_write;
+    config.on_message = on_message;
+    (void) isotp_link_init(&link, &config);
+
+    for (;;)
+    {
+        size_t length = board_can_read(&can_id, frame); /* 0: no frame waiting */
+        if ((length > 0U) && (can_id == 0x7E0U))
+        {
+            isotp_link_receive(&link, frame, length, board_micros());
+        }
+        isotp_link_poll(&link, board_micros());
+    }
 }
 ```
 
-## Core API
+`board_can_write()`, `board_can_read()` and `board_micros()` stand for your CAN driver
+and a free-running microsecond timer; the [examples](examples.md) implement them for a
+simulated board, Linux SocketCAN and Zephyr.
 
-Key public functions (see [API Reference](api.md)):
+## Find your way
 
-- `isotp_init_link()` - link initialization
-- `isotp_destroy_link()` - release link resources
-- `isotp_send()` / `isotp_send_with_id()` - send ISO-TP messages
-- `isotp_on_can_message()` - handle incoming CAN frames
-- `isotp_poll()` - handle timeouts and send consecutive frames
-- `isotp_receive()` - fetch reassembled payload
-
-## Configuration
-
-Configuration is done statically via files in `inc/`:
-
-- `inc/isotp_config.h` - timing parameters, sizes, enable/disable options
-- `inc/isotp_user.h` - user functions (CAN send, time, debug)
-- `inc/isotp_defines.h` - protocol definitions and error codes
-
-More details in [Configuration Guide](configuration.md).
-
-## Usage model
-
-- The library does not manage the CAN bus; it expects a CAN send function
-	and delivery of received frames via `isotp_on_can_message()`.
-- The `isotp_poll()` function must be called periodically in the main loop
-	(or in a thread/RTOS) at an appropriate frequency.
-
-## Examples
-
-The Linux SocketCAN example is in
-[`example/linux_socket/linux_socket.c`](examples/linux_socket.md).
-
-## Tests
-
-Unit tests are located in the `tests/` directory. Details are in the project
-documentation and the test files.
-
-To run unit tests locally (requires Google Test):
-
-```bash
-cmake --preset "ISO-TP[UnitTests]" -B "build/ISO-TP[UnitTests]"
-cmake --build "build/ISO-TP[UnitTests]"
-ctest --test-dir "build/ISO-TP[UnitTests]" --output-on-failure
-```
-
-Install Google Test on Ubuntu/Debian:
-
-```bash
-sudo apt-get update
-sudo apt-get install -y libgtest-dev
-```
-
-## Limitations and notes
-
-- The maximum payload length depends on configuration and buffers.
-- Provide sufficiently large TX/RX buffers (typically 4095 bytes for full ISO-TP).
-- For realtime systems, adjust timeouts and polling frequency.
-
-## Documentation
-
-- [API Reference](api.md)
-- [Configuration Guide](configuration.md)
-- [Getting Started](guide.md)
-
-## License
-
-Details in [LICENSE](LICENSE.md).
+| If you want to… | Read |
+| --- | --- |
+| Understand what the library does and does not do | [Introduction](overview.md) |
+| Build it, run the tests, add it to your project | [Getting Started](guide.md) |
+| Understand the layers, the state machines and the timers | [How It Works](architecture.md) |
+| Write an ECU or a tester with it | [Using the Library](usage.md) |
+| Add addressing modes, CAN FD or contribute | [Extending the Library](extending.md) |
+| Look up the bytes on the wire | [Protocol](protocol.md) |
+| Look up a function | [API Reference](api.md) |
+| Read everything offline or print it | [PDF user manual](https://antonvynohradov.github.io/isotp-c/downloads/ISOTP-C_User_Manual.pdf) |

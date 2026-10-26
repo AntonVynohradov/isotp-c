@@ -1,0 +1,555 @@
+/*
+ * Protocol library user manual - print stylesheet for WeasyPrint (A4).
+ * {{TITLE}} and {{VERSION}} are replaced by tools/docs/build_manual.py.
+ */
+
+@page {
+  size: A4;
+  margin: 24mm 20mm 22mm 22mm;
+
+  @top-left {
+    width: 50%;
+    content: "{{TITLE}} User Manual";
+    font: 8pt "Inter", "Segoe UI", "DejaVu Sans", Arial, sans-serif;
+    color: #5a6472;
+    vertical-align: bottom;
+    padding-bottom: 3mm;
+    border-bottom: 0.4pt solid #c9d3e0;
+  }
+  @top-right {
+    width: 50%;
+    content: string(chapter-title);
+    font: 8pt "Inter", "Segoe UI", "DejaVu Sans", Arial, sans-serif;
+    color: #5a6472;
+    vertical-align: bottom;
+    padding-bottom: 3mm;
+    border-bottom: 0.4pt solid #c9d3e0;
+  }
+  @bottom-left {
+    content: "Version {{VERSION}} \00B7  Apache License 2.0";
+    font: 8pt "Inter", "Segoe UI", "DejaVu Sans", Arial, sans-serif;
+    color: #5a6472;
+    vertical-align: top;
+    padding-top: 3mm;
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    font: 8pt "Inter", "Segoe UI", "DejaVu Sans", Arial, sans-serif;
+    color: #5a6472;
+    vertical-align: top;
+    padding-top: 3mm;
+  }
+}
+
+@page cover {
+  margin: 0;
+  background: #0b2545;
+  @top-left { content: none; border: none; }
+  @top-center { content: none; border: none; }
+  @top-right { content: none; border: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+@page front {
+  @top-left { content: none; border: none; }
+  @top-center { content: none; border: none; }
+  @top-right { content: none; border: none; }
+}
+
+/* ------------------------------------------------------------------ base */
+
+html {
+  font-family: "Inter", "Segoe UI", "DejaVu Sans", Arial, sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.5;
+  color: #1c2533;
+  hyphens: auto;
+}
+
+body {
+  margin: 0;
+}
+
+p, li, dd {
+  orphans: 3;
+  widows: 3;
+}
+
+a {
+  color: #1e5aa8;
+  text-decoration: none;
+  hyphens: manual;
+}
+
+.link-url {
+  font-size: 7.5pt;
+  color: #5a6472;
+  word-break: break-all;
+}
+
+p a.xref::after,
+li a.xref::after,
+dd a.xref::after {
+  content: " (p. " target-counter(attr(href url), page) ")";
+  font-size: 7.5pt;
+  color: #5a6472;
+}
+
+strong {
+  color: #0b2545;
+}
+
+/* ------------------------------------------------------------------ headings */
+
+h1, h2, h3, h4 {
+  color: #0b2545;
+  line-height: 1.25;
+  break-after: avoid;
+  font-weight: 700;
+}
+
+section.chapter,
+section.appendix {
+  break-before: page;
+}
+
+section.chapter > h1 .title,
+section.appendix > h1 .title {
+  string-set: chapter-title content(text);
+}
+
+section.chapter > h1,
+section.appendix > h1 {
+  font-size: 24pt;
+  margin: 0 0 8mm;
+  padding-bottom: 4mm;
+  border-bottom: 2pt solid #0f8b9a;
+  bookmark-level: 1;
+}
+
+h1 .eyebrow {
+  display: block;
+  font-size: 9pt;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0f8b9a;
+  margin-bottom: 2mm;
+}
+
+h2 {
+  font-size: 14pt;
+  margin: 8mm 0 3mm;
+  bookmark-level: 2;
+}
+
+h2 .num {
+  display: inline-block;
+  min-width: 11mm;
+  color: #0f8b9a;
+}
+
+h3 {
+  font-size: 11pt;
+  margin: 6mm 0 2mm;
+  bookmark-level: none;
+}
+
+h4, h5, h6 {
+  font-size: 10pt;
+  bookmark-level: none;
+}
+
+h1.front {
+  font-size: 22pt;
+  margin: 0 0 8mm;
+  padding-bottom: 4mm;
+  border-bottom: 2pt solid #0f8b9a;
+  bookmark-level: 1;
+}
+
+/* ------------------------------------------------------------------ cover */
+
+/* Same palette as the website hero (extra.css: --sfs-bg, --sfs-accent ...) */
+section.cover {
+  page: cover;
+  position: relative;
+  height: 297mm;
+  box-sizing: border-box;
+  padding: 26mm 22mm 20mm;
+  color: #e6edf7;
+  background:
+    radial-gradient(ellipse 70% 45% at 70% 68%, rgba(26, 111, 224, 0.30), transparent 70%),
+    linear-gradient(180deg, #050b16 0%, #061020 55%, #071122 100%);
+}
+
+.cover-top {
+  display: flex;
+  align-items: center;
+}
+
+section.cover img.cover-logo {
+  display: block;
+  width: 62mm;
+  margin: -6mm 0 0 -5mm;
+  border: none;
+}
+
+section.imprint .imprint-brand {
+  width: 60mm;
+  margin: 0 0 6mm;
+  padding: 2mm 4mm;
+  background: #071122;
+  border-radius: 2mm;
+}
+
+section.imprint .imprint-brand img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: none;
+}
+
+.cover-eyebrow {
+  margin-top: 22mm;
+  font-size: 10.5pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #2f8cff;
+}
+
+.cover-title {
+  margin-top: 4mm;
+  font-size: 58pt;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.cover-subtitle {
+  margin-top: 5mm;
+  font-size: 17pt;
+  color: #9aabc4;
+}
+
+/* Accent rule with a dot, like the line under the website hero title */
+.cover-rule {
+  position: relative;
+  width: 44mm;
+  height: 0.6mm;
+  margin-top: 9mm;
+  background: linear-gradient(90deg, #2f8cff, rgba(47, 140, 255, 0.15));
+}
+
+.cover-rule::after {
+  content: "";
+  position: absolute;
+  left: 18mm;
+  top: -1mm;
+  width: 2.6mm;
+  height: 2.6mm;
+  border-radius: 50%;
+  background: #2f8cff;
+}
+
+.cover-kind {
+  margin-top: 9mm;
+  display: inline-block;
+  padding: 2mm 5mm;
+  font-size: 11pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e6edf7;
+  background: rgba(47, 140, 255, 0.14);
+  border: 0.35mm solid #2f8cff;
+  border-radius: 1.5mm;
+}
+
+/* More specific than the generic img[src$=".svg"] rule, which adds a frame */
+section.cover img.cover-art {
+  position: absolute;
+  right: 4mm;
+  bottom: 30mm;
+  width: 150mm;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.cover-meta {
+  position: absolute;
+  bottom: 20mm;
+  left: 22mm;
+  right: 22mm;
+  padding-top: 4mm;
+  font-size: 10pt;
+  line-height: 1.6;
+  color: #9aabc4;
+  border-top: 0.3mm solid #15294a;
+}
+
+/* ------------------------------------------------------------------ imprint and contents */
+
+section.imprint {
+  page: front;
+  break-before: page;
+  font-size: 8.5pt;
+  hyphens: manual;
+}
+
+section.imprint p {
+  margin: 0 0 4mm;
+}
+
+section.toc {
+  page: front;
+  break-before: page;
+}
+
+section.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+section.toc li a {
+  display: block;
+  color: #1c2533;
+}
+
+section.toc li a::after {
+  content: leader(".") target-counter(attr(href url), page);
+  color: #5a6472;
+}
+
+section.toc li.toc-chapter {
+  margin-top: 3.2mm;
+  font-weight: 700;
+  font-size: 10.5pt;
+}
+
+section.toc li.toc-chapter a::after {
+  color: #0b2545;
+}
+
+section.toc li.toc-section {
+  margin-left: 11mm;
+  font-size: 9pt;
+}
+
+section.toc .num {
+  display: inline-block;
+  min-width: 11mm;
+  color: #0f8b9a;
+}
+
+section.toc .num.wide {
+  min-width: 26mm;
+}
+
+/* ------------------------------------------------------------------ blocks */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p > img,
+img.screenshot {
+  display: block;
+  margin: 4mm auto;
+  break-inside: avoid;
+}
+
+img.screenshot {
+  border: 0.5pt solid #c9d3e0;
+}
+
+img[src$=".svg"] {
+  display: block;
+  margin: 4mm auto;
+  border: 0.5pt solid #e1e7ef;
+  border-radius: 2mm;
+}
+
+pre, code {
+  font-family: "JetBrains Mono", Consolas, "DejaVu Sans Mono", monospace;
+  hyphens: manual;
+}
+
+code {
+  font-size: 8.3pt;
+  padding: 0 0.6mm;
+  background: #f2f5fa;
+  border-radius: 0.8mm;
+}
+
+pre {
+  font-size: 7.6pt;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+}
+
+.highlight {
+  margin: 3mm 0 4mm;
+  padding: 3mm 4mm;
+  background: #f6f8fb;
+  border: 0.5pt solid #e1e7ef;
+  border-left: 2pt solid #0f8b9a;
+  border-radius: 1mm;
+}
+
+.highlight pre {
+  background: none;
+}
+
+table {
+  width: 100%;
+  margin: 3mm 0 5mm;
+  border-collapse: collapse;
+  font-size: 8.3pt;
+  line-height: 1.4;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  break-inside: avoid;
+}
+
+th {
+  text-align: left;
+  color: #0b2545;
+  background: #eef2f8;
+  border-bottom: 1pt solid #0b2545;
+}
+
+th, td {
+  padding: 1.6mm 2.2mm;
+  vertical-align: top;
+}
+
+td {
+  border-bottom: 0.4pt solid #d5dde8;
+}
+
+td code, th code {
+  font-size: 7.6pt;
+  word-break: break-word;
+}
+
+dl dt {
+  font-weight: 700;
+  color: #0b2545;
+  margin-top: 2mm;
+}
+
+dl dd {
+  margin: 0.5mm 0 0 6mm;
+}
+
+.admonition {
+  margin: 4mm 0;
+  padding: 2mm 4mm 2mm 4mm;
+  background: #f2f8fa;
+  border-left: 2.5pt solid #0f8b9a;
+  break-inside: avoid;
+}
+
+.admonition-title {
+  margin: 0 0 1mm;
+  font-weight: 700;
+  color: #0f8b9a;
+}
+
+.admonition p:last-child {
+  margin-bottom: 0;
+}
+
+blockquote {
+  margin: 4mm 0;
+  padding-left: 4mm;
+  border-left: 2pt solid #c9d3e0;
+  color: #5a6472;
+}
+
+hr {
+  border: none;
+  border-top: 0.5pt solid #c9d3e0;
+}
+
+/* Material-only markup used on the website */
+.twemoji svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.12em;
+  fill: currentColor;
+}
+
+.sfs-brand {
+  margin: 0 0 6mm;
+  padding: 6mm;
+  text-align: center;
+  background: #0b2545;
+  border-radius: 2mm;
+  break-inside: avoid;
+}
+
+.sfs-brand p {
+  margin: 0;
+}
+
+.sfs-brand img.sfs-brand__logo {
+  display: inline-block;
+  width: 95mm;
+  margin: 0;
+  border: none;
+}
+
+.sfs-author {
+  margin: 0 0 4mm;
+  padding: 3mm 4mm;
+  border-left: 2pt solid #1a6fe0;
+  background: #f2f5fa;
+  break-inside: avoid;
+}
+
+.sfs-author p {
+  margin: 0.5mm 0;
+}
+
+.sfs-author .sfs-author__name {
+  font-size: 12pt;
+}
+
+.sfs-author .sfs-author__role {
+  color: #1a6fe0;
+  font-weight: 700;
+}
+
+/* The full license text: small, unhighlighted, no side bar. */
+section#license .highlight {
+  border-left: 0.5pt solid #e1e7ef;
+  background: #ffffff;
+}
+
+section#license pre {
+  font-size: 7pt;
+}
+
+.footnote {
+  font-size: 8pt;
+}

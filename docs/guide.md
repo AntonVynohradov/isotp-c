@@ -1,139 +1,124 @@
 # Getting Started
 
-This guide shows how to initialize an ISO-TP link, send and receive payloads,
-and integrate the polling model into your main loop. For full definitions and
-return codes, see the [API Reference](api.md).
+This chapter shows how to get ISOTP-C, add it to your project, and build and test it. The
+library itself is two C files and five headers; everything else in the repository is
+tests, examples, tooling and documentation.
 
-## Initialization
-
-Create a link and provide dedicated TX/RX buffers. The link tracks protocol
-state and owns the buffers you pass in.
-
-```c
-#include "isotp.h"
-
-static uint8_t tx_buffer[4095];
-static uint8_t rx_buffer[4095];
-static IsoTpLink link;
-
-isotp_init_link(&link, 0x7E0, tx_buffer, sizeof(tx_buffer),
-				rx_buffer, sizeof(rx_buffer));
-```
-
-The `sendid` you pass to `isotp_init_link()` is used for transmissions. Make
-sure the receiver expects this ID.
-
-## Sending Data
-
-Single-frame payloads are sent immediately. Multi-frame payloads are queued and
-sent by `isotp_poll()`.
-
-```c
-uint8_t data[] = {0x01, 0x02, 0x03};
-int ret = isotp_send(&link, data, sizeof(data));
-if (ret == ISOTP_RET_OK || ret == ISOTP_RET_INPROGRESS)
-{
-	/* OK: in progress or already sent */
-}
-```
-
-Use `isotp_send_with_id()` for functional addressing or when you need to send
-with a different arbitration ID.
-
-## Receiving Data
-
-Deliver each incoming CAN frame to the ISO-TP handler and poll periodically.
-When a complete payload is available, call `isotp_receive()` to copy it out.
-
-```c
-isotp_on_can_message(&link, can_data, can_len);
-isotp_poll(&link);
-
-uint8_t payload[4095];
-uint32_t payload_len = 0;
-if (isotp_receive(&link, payload, sizeof(payload), &payload_len) == ISOTP_RET_OK)
-{
-	/* process payload */
-}
-```
-
-## Polling Model
-
-ISO-TP timing is managed by `isotp_poll()`. Call it from the main loop or a
-dedicated thread with a consistent period that matches your timing needs. The
-poll function drives consecutive frame sending and timeout handling.
-
-## User Hooks
-
-Implement user hooks in `isotp_user.h` for:
-
-- CAN frame transmission (required)
-- Microsecond time source (required)
-- Optional debug output
-- Optional TX/RX completion callbacks (when enabled in configuration)
-
-## Example Flow (Linux SocketCAN)
-
-The Linux example creates a `PF_CAN`/`SOCK_RAW` socket, binds it to a CAN
-interface, and then runs the ISO-TP loop:
-
-1. Initialize the SocketCAN interface and bind the socket.
-2. Call `isotp_init_link()` with buffers and the transmit ID.
-3. In a loop, read CAN frames, pass them to `isotp_on_can_message()`, and call
-   `isotp_poll()`.
-4. When `isotp_receive()` returns `ISOTP_RET_OK`, the payload is complete.
-
-See the Linux SocketCAN example for a full working reference:
-[example/linux_socket/linux_socket.c](examples/linux_socket.md).
-
-## Configuration
-
-See [Configuration Guide](configuration.md) for detailed configuration options.
-
-## Static Analysis (Cppcheck)
-
-The project provides a CMake target that runs Cppcheck over the source tree.
-Build the `cppcheck-analyze` target from your build directory:
+## Get the library
 
 ```bash
-cmake --build <build-dir> --target cppcheck-analyze
+git clone https://github.com/AntonVynohradov/isotp-c.git
 ```
 
-The output is written to `cppcheck.txt` in the build directory and is also
-printed to the console after the run completes.
+Each [release](https://github.com/AntonVynohradov/isotp-c/releases) provides the source
+code, a prebuilt static library for Linux x86-64 with its headers, the MISRA report and the
+PDF user manual.
 
-To exclude paths from analysis, edit `cppcheck-excludes.txt` at the project
-root. List one path per line. Empty lines are ignored.
+## Add it to your project
 
-## Static Analysis (CodeQL)
+**CMake.**
 
-The project provides a `codeql-analyze` CMake target that creates a CodeQL
-database and runs the standard C/C++ query pack.
+```cmake
+include(path/to/isotp-c/isotp.cmake)
+target_link_libraries(app PRIVATE isotp)
+```
 
-Prerequisites:
+**Any other build system.** Compile `src/*.c` and add the repository root and `inc/` to the
+include path.
 
-- Install the CodeQL CLI and ensure `codeql` is available on your PATH.
+**Prebuilt package.** Link `lib/libisotp.a` and add `include/` to the include path.
 
-Run the analysis from your build directory:
+## Prerequisites for development
+
+- C11 compiler, CMake 3.20+
+- Optional: GoogleTest and gcovr, Python 3 and pytest, Cppcheck, clang-format, MkDocs
+  (requirements-dev.txt), Doxygen, WeasyPrint with Pango
+
+## Build with presets
+
+| Preset | Purpose |
+| --- | --- |
+| `ISOTP[Debug]` | Static library with debug information |
+| `ISOTP[Release]` | Optimized static library |
+| `ISOTP[UnitTests]` | GoogleTest executable with coverage; target `coverage` |
+| `ISOTP[IntegrationTests]` | pytest suite; target `integration_tests` |
+| `ISOTP[Examples]` | Host examples and the bare-metal simulation test |
 
 ```bash
-cmake --build <build-dir> --target codeql-analyze
+cmake --preset "ISOTP[Release]"
+cmake --build "build/ISOTP[Release]"
 ```
 
-What it does:
+## Unit tests and coverage
 
-- Creates a database at `<build-dir>/codeql-db`.
-- Builds the library using the `codeql-build` target to avoid recursive runs.
-- Runs the `codeql/cpp-queries` pack and writes SARIF to
-	`<build-dir>/codeql-report.sarif`.
+```bash
+cmake --preset "ISOTP[UnitTests]"
+cmake --build "build/ISOTP[UnitTests]" --target coverage
+```
 
-## Error Handling
+82 GoogleTest tests in `tests/unit/` cover the codec (every frame type, every rejection,
+every capacity boundary), STmin, and the link (transmitter, receiver, timeouts, flow
+control, errors, callbacks). The unit-test build uses 5000-byte buffers so that the
+32-bit FF_DL paths are reachable. The `coverage` target runs them and fails below
+`ISOTP_COVERAGE_MIN` (100 %) line or branch coverage of `src/`; the HTML report is in
+`build/ISOTP[UnitTests]/Coverage/`.
 
-The library returns status codes for common conditions:
+## Integration tests
 
-- `ISOTP_RET_OK` - Success
-- `ISOTP_RET_INPROGRESS` - Multi-frame transfer in progress
-- `ISOTP_RET_OVERFLOW` - Payload larger than available buffer
-- `ISOTP_RET_NO_DATA` - No complete payload available yet
+```bash
+cmake --preset "ISOTP[IntegrationTests]"
+cmake --build "build/ISOTP[IntegrationTests]" --target integration_tests
+# or directly:
+python -m pytest tests/integration -v
+```
 
-For the full list and detailed meanings, refer to the [API Reference](api.md).
+`tests/integration/isotp/protocol.py` is a second implementation of the frame codec in
+Python, written from the standard and using only the standard library (the *Python
+twin*). The suite
+
+- checks the reference frames and the frames a receiver must ignore on the twin,
+- compiles `src/isotp_protocol.c` with `gcc` and compares it with the twin on 300 random
+  messages per encoder, 2 000 random frames for the decoder and every STmin value,
+- compiles the whole library with `tests/integration/isotp_harness.c` and lets a peer
+  built on the twin exchange messages with the C link on a simulated clock: message sizes
+  from 1 to 4999 bytes, block sizes 1 to 255, four STmin values, timeouts, Wait frames,
+  overflow, wrong sequence numbers, padding, functional addressing, a busy driver and
+  line noise.
+
+The tests that need `gcc` are skipped (and reported as skipped) when it is missing.
+
+## Static analysis
+
+| Target | Tool |
+| --- | --- |
+| `cppcheck-analyze` | Cppcheck, all checks |
+| `misra-analyze` | Cppcheck MISRA C:2012 addon; fails on any violation |
+| `codeql-analyze` | CodeQL `cpp-queries` |
+
+## Formatting
+
+```bash
+clang-format -i src/*.c inc/*.h isotp.h tests/unit/*.cpp examples/*/*.[ch]
+```
+
+## Versioning and releases
+
+The version comes from the latest `vX.Y.Z` Git tag (`cmake/version.cmake`) and is passed to
+the compiler as `ISOTP_VERSION_MAJOR/MINOR/PATCH` and `ISOTP_VERSION`; `isotp.h` has
+fallbacks for builds without CMake. The project follows Semantic Versioning and keeps a
+[changelog](changelog.md).
+
+A release is made from `main` by pushing a tag `vX.Y.Z`. The *Release* workflow checks that
+the tag matches `isotp.h`, `cmake/version.cmake` and `CHANGELOG.md`, runs every quality
+gate, and publishes `isotp-c-X.Y.Z-linux-x86_64.tar.gz` (static library, headers,
+license, readme, changelog), the MISRA report and the PDF manual as a GitHub Release.
+
+## Documentation
+
+| Task | Command | VS Code task |
+| --- | --- | --- |
+| Live preview | `mkdocs serve` | *Docs: Serve on localhost* |
+| Build the website | `mkdocs build` | *Docs: Build site* |
+| Build the PDF manual | `python tools/docs/build_manual.py` | *Docs: Build PDF manual* |
+| Regenerate diagrams | `python tools/docs/diagrams.py` | *Docs: Generate diagrams* |
+| Compile the C snippets of these pages | `python tools/docs/check_snippets.py` | *Docs: Check C snippets* |

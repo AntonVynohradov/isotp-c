@@ -29,14 +29,14 @@ jobs:
       - name: Verify clang-format version
         run: clang-format --version
 
-      - name: Check C/H files formatting
+      - name: Check C/C++ files formatting
         id: format-check
         run: |
           echo "Checking code formatting with clang-format..."
-          FILES=$(find . -type f \( -name "*.c" -o -name "*.h" \) 2>/dev/null || true)
+          FILES=$(find . -path ./build -prune -o -type f \( -name "*.c" -o -name "*.h" -o -name "*.cpp" \) -print 2>/dev/null || true)
 
           if [ -z "$FILES" ]; then
-            echo "No C/H files found"
+            echo "No C/C++ files found"
             exit 0
           fi
 
