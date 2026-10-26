@@ -26,7 +26,7 @@
 
 # Used when the source tree has no Git metadata or no vX.Y.Z tag yet; keep it in
 # sync with the fallback values in isotp.h.
-set(ISOTP_DEFAULT_VERSION "2.0.0")
+set(ISOTP_DEFAULT_VERSION "2.0.1")
 
 # ==============================================================================
 # VERSION EXTRACTION

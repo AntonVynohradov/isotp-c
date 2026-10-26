@@ -6,6 +6,19 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-10-26
+
+Version 2.0.0 was tagged but not published as a GitHub Release, and its tag cannot be
+reused. 2.0.1 is the first published release of version 2: it contains every change
+listed under [2.0.0] and the fixes below. The library code is unchanged.
+
+### Fixed
+
+- The documentation is deployed after the Release workflow of a `vX.Y.Z` tag, from the
+  tagged commit, instead of after every build on `main`.
+- The documentation is pushed to `gh-pages` with the deploy key again; the `gh-pages`
+  ruleset rejects pushes made with `GITHUB_TOKEN`.
+
 ## [2.0.0] - 2026-10-26
 
 Version 2 is a rewrite of the library to the SystemFromScratch® protocol-library
@@ -73,6 +86,7 @@ Versions 1.x of the fork kept the API of isotp-c by Li Shen and Simon Cahill. Se
 [Git history](https://github.com/AntonVynohradov/isotp-c/commits/main) and the
 [releases](https://github.com/AntonVynohradov/isotp-c/releases).
 
-[Unreleased]: https://github.com/AntonVynohradov/isotp-c/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/AntonVynohradov/isotp-c/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/AntonVynohradov/isotp-c/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/AntonVynohradov/isotp-c/compare/v1.6.0...v2.0.0
 [1.6.0]: https://github.com/AntonVynohradov/isotp-c/releases/tag/v1.6.0
