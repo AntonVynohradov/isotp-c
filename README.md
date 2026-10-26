@@ -32,7 +32,7 @@ Simon Cahill. Version 2 is a rewrite with a new, layered API.
 
 ### Project Status
 
-✅ **Version 2.0.0.** The API of `isotp.h` changed against 1.x (see
+✅ **Version 2.0.1.** The API of `isotp.h` changed against 1.x (see
 [CHANGELOG.md](CHANGELOG.md)) and is stable within version 2.
 
 The codec and the link are complete and covered by 82 unit tests at 100 % of lines and
@@ -74,7 +74,7 @@ Frame**. Timeouts on both sides (N_Bs, N_Cr) detect a lost peer.
 - [x] Layered codec and link, explicit time input, 32-bit FF_DL
 - [x] 100 % coverage, MISRA gate, Python twin
 - [x] Examples: bare metal (simulated, in CI), Linux SocketCAN, Zephyr
-- [x] Release 2.0.0
+- [x] Release 2.0.1
 - [ ] Extended and mixed addressing
 - [ ] CAN FD frames (up to 64 bytes)
 

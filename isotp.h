@@ -71,12 +71,12 @@
 #endif
 
 #ifndef ISOTP_VERSION_PATCH
-#define ISOTP_VERSION_PATCH 0
+#define ISOTP_VERSION_PATCH 1
 #endif
 
 /** Version string "MAJOR.MINOR.PATCH". */
 #ifndef ISOTP_VERSION
-#define ISOTP_VERSION "2.0.0"
+#define ISOTP_VERSION "2.0.1"
 #endif
 
 /** @} */
