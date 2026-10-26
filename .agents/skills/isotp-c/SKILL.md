@@ -9,8 +9,8 @@ description: "Use when working on the isotp ISO 15765-2 (ISO-TP) library: the fr
 
 This repository is a portable C11 static library plus a Python twin of the
 codec. The 2.0 API (`struct isotp_link`, explicit time input) replaces the
-1.x API of the upstream fork and is not released yet; after the 2.0.0 release the
-public API in `isotp.h` and `inc/` follows Semantic Versioning. It implements the
+1.x API of the upstream fork; since the 2.0.0 release the public API in `isotp.h`
+and `inc/` follows Semantic Versioning. It implements the
 ISO 15765-2 (ISO-TP) transport protocol for classical CAN with normal addressing
 only: frame codec and a transport-independent link. Diagnostic services (UDS),
 CAN drivers, threads and routing of CAN IDs belong to the applications that use
@@ -37,8 +37,8 @@ it, not here.
 - Keep the public API stable within a major version. Record every user-visible
   change under `[Unreleased]` in `CHANGELOG.md`.
 - The version comes from the `vX.Y.Z` Git tag (`cmake/version.cmake`); the
-  fallbacks `ISOTP_VERSION_*` and `ISOTP_VERSION` in `isotp.h` equal the latest
-  tag (1.6.0) until the 2.0.0 release sets both to 2.0.0.
+  fallbacks `ISOTP_DEFAULT_VERSION` in `cmake/version.cmake` and
+  `ISOTP_VERSION_*` / `ISOTP_VERSION` in `isotp.h` equal the latest release.
 - MISRA C:2012: `misra-analyze` must report 0 violations. An unavoidable
   violation needs an entry in the deviation register in `docs/misra.md`. Library
   functions have a single `return` at the end, parenthesize mixed-operator

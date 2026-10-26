@@ -15,8 +15,8 @@ authors:
 repository-code: "https://github.com/AntonVynohradov/isotp-c"
 url: "https://antonvynohradov.github.io/isotp-c/"
 license: MIT
-version: "1.6.0"
-date-released: "2025-08-25"
+version: "2.0.0"
+date-released: "2026-10-26"
 keywords:
   - embedded systems
   - C11

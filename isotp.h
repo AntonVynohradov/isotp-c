@@ -63,11 +63,11 @@
 /** @{ */
 
 #ifndef ISOTP_VERSION_MAJOR
-#define ISOTP_VERSION_MAJOR 1
+#define ISOTP_VERSION_MAJOR 2
 #endif
 
 #ifndef ISOTP_VERSION_MINOR
-#define ISOTP_VERSION_MINOR 6
+#define ISOTP_VERSION_MINOR 0
 #endif
 
 #ifndef ISOTP_VERSION_PATCH
@@ -76,7 +76,7 @@
 
 /** Version string "MAJOR.MINOR.PATCH". */
 #ifndef ISOTP_VERSION
-#define ISOTP_VERSION "1.6.0"
+#define ISOTP_VERSION "2.0.0"
 #endif
 
 /** @} */

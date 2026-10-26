@@ -6,6 +6,8 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-26
+
 Version 2 is a rewrite of the library to the SystemFromScratch® protocol-library
 standard. The public API changed; the wire format is ISO 15765-2 as before.
 
@@ -71,5 +73,6 @@ Versions 1.x of the fork kept the API of isotp-c by Li Shen and Simon Cahill. Se
 [Git history](https://github.com/AntonVynohradov/isotp-c/commits/main) and the
 [releases](https://github.com/AntonVynohradov/isotp-c/releases).
 
-[Unreleased]: https://github.com/AntonVynohradov/isotp-c/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/AntonVynohradov/isotp-c/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/AntonVynohradov/isotp-c/compare/v1.6.0...v2.0.0
 [1.6.0]: https://github.com/AntonVynohradov/isotp-c/releases/tag/v1.6.0
